@@ -1,0 +1,154 @@
+{{- $toc := .TableOfContents -}}
+{{- if $toc -}}
+    <!-- When the $toc variable is not empty, generate the table of contents for the article -->
+    <div class="post-toc">
+        {{ if and (gt .WordCount 80) (.Params.toc | default true) }}
+            <aside>
+                <button id="tocButton" ><h4 id="contents" style="margin-left: 1vw;color:rgb(96, 134, 180);margin-bottom: 0;">CONTENTS</h4></button>
+                <div id="hide">
+                    {{- $toc := replaceRE `<ul>\n<li>\n<ul>` `<ul>` $toc -}}
+                    {{- safeHTML $toc -}}
+                </div>
+            </aside>
+        {{ end }}
+    </div>
+{{- end -}}
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+        let button = document.getElementById('tocButton');
+        let hide = document.getElementById("hide");
+        let contents=document.getElementById("contents");
+        if (button !== null) {
+            button.addEventListener("click", function() {
+                if (hide.style.display!='block') {
+                    hide.style.display='block'
+                } else {
+                    hide.style.display='none'
+                    contents.style.color='rgb(96, 134, 180)'
+                }
+            });
+        }
+
+        {{/*  let headings = hide.getElementsByTagName('a');
+        for (let i = 0; i < headings.length; i++) {
+            if (headings[i].nextElementSibling !== null) {
+                headings[i].nextElementSibling.style.display = 'none';
+            }
+            headings[i].addEventListener('click', function() {
+                if (headings[i].nextElementSibling !== null) {
+                    let nextElement = this.nextElementSibling;
+                    if (nextElement.style.display !== 'block') {
+                        nextElement.style.display = 'block';
+                    } else {
+                        nextElement.style.display = 'none';
+                    }
+                }
+                
+
+                // 同时找到其他的元素关闭其他的
+                let _headings = hide.getElementsByTagName('a');
+                for (let i = 0; i < _headings.length; i++) {
+                    if (_headings[i].nextElementSibling === null) {
+                        continue;
+                    }
+                    if (_headings[i] == this) {
+                        continue;
+                    }
+                    _headings[i].nextElementSibling.style.display = 'none'
+                }
+            });
+        }  */}}
+        let _headings = 0;
+        if (hide !== null) {
+            _headings = hide.getElementsByTagName('a');
+        }
+        for (let i = 0; i < _headings.length; i++) {
+            if (_headings[i].nextElementSibling === null) {
+                continue;
+            }
+            if (_headings[i] == this) {
+                continue;
+            }
+            _headings[i].nextElementSibling.style.display = 'none'
+        }
+        window.addEventListener('scroll', function() {
+            if (hide === null) {
+                return;
+            }
+            let headings = hide.getElementsByTagName('a')
+            for (let i = 0; i < headings.length; i++) {
+                let id = headings[i].innerText.replace(/\./g, "").toLowerCase().replace(/\//g, "").replace(/\s/g, "-").replace(/[()]/g, '');
+                {{/*  let id = headings[i].innerText.replace(/[^\u4E00-\u9FA5a-zA-Z0-9\s]/g, '').toLowerCase().replace(/\s/g, "-");  */}}
+                let head = document.getElementById(id);
+                let rect = head.getBoundingClientRect();
+                // 获取视口的尺寸信息
+                {{/*  let viewportWidth = window.innerWidth || document.documentElement.clientWidth;  */}}
+                let viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+                // 计算页面中央的坐标值
+                {{/*  let centerX = viewportWidth / 2;  */}}
+                let centerY = viewportHeight / 2;
+
+                // 判断元素是否在页面中央
+                let isCenter = rect.top < centerY && rect.bottom > centerY;
+                if (isCenter) {
+                    // 同时把所有其他元素折叠
+                    let _headings = hide.getElementsByTagName('a');
+                    for (let j = 0; j < _headings.length; j++) {
+                        {{/*  _headings[j].style.color = '#E3E3E3';  */}}
+                        if (_headings[j].nextElementSibling === null) {
+                            continue;
+                        }
+                        if (_headings[j] == headings[i]) {
+                            continue;
+                        }
+                        _headings[j].nextElementSibling.style.display = 'none'    
+                    }
+                    {{/*  headings[i].style.color = '#FAB005';  */}}
+                    
+
+                    if (headings[i].nextElementSibling === null) {
+                        // 二级标题
+                        {{/*  console.log('二级标题')  */}}
+                        headings[i].parentNode.parentNode.style.display = 'block';
+                    } else {
+                        // 一级标题
+                        {{/*  console.log('一级标题')  */}}
+                        headings[i].nextElementSibling.style.display = 'block';
+                    }
+
+                    {{/*  console.log(isCenter, headings[i]);  */}}
+                }
+            }
+
+        })
+
+
+        {{/*  window.addEventListener('scroll', function() {
+            let headings = hide.getElementsByTagName('a');
+            for (let i = 0; i < headings.length; i++) {
+                let headingOffsetTop = headings[i].offsetTop;
+                let scrollPosition = window.scrollY || window.pageYOffset;
+                let nextElement = headings[i].nextElementSibling
+                if (nextElement !== null) {
+                    if (scrollPosition >= headingOffsetTop) {
+                        nextElement.style.display = 'block';
+                    } else {
+                        nextElement.style.display = 'none';
+                    }
+                }
+
+            }
+        });
+        // 默认折叠
+        let headings = hide.getElementsByTagName('a');
+        for (let i = 0; i < headings.length; i++) {
+            if (headings[i].nextElementSibling === null) {
+                continue;
+            }
+            headings[i].nextElementSibling.style.display = 'none';
+        }  */}}
+
+    // });
+
+</script>

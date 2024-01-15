@@ -1,0 +1,80 @@
+blockquote.quote {
+    position: relative !important;
+    margin: 2em auto !important;
+    padding-left: 3em !important;
+    border: none;
+    &::before {
+        position: absolute !important;
+        left: 0 !important;
+        content: '“' !important;
+        color: white !important;
+        font-family: 'JetBrains Mono', 'Amstelvar', 'Noto Serif SC', serif !important;
+        font-size: 3em !important;
+        font-weight: bold !important;
+        line-height: 1 !important;
+    }
+    &.poetry {
+        display: table !important;
+        padding: 0 !important;
+        &::before {
+            left: -1em !important;
+        }
+        p:last-child {
+            margin: 0 !important;
+        }
+    }
+    &.en {
+        p {
+            line-height: 1.618 !important;
+            text-align: left !important;
+            hyphens: auto !important;
+            -webkit-hyphens: auto !important;
+            -moz-hyphens: auto !important;
+        }
+    }
+}
+
+// 文件位置：~/assets/scss/custom/_custom.scss
+
+blockquote.quote-center {
+    position: relative !important;
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-top: white !important;
+    border-bottom: white !important;
+    p{
+        text-align: center !important;
+        margin-top: 1.5em !important;
+        margin-bottom: 1.5em !important;
+    }
+    &::before {
+        position: absolute !important;
+        left: 0 !important;
+        content: '“' !important;
+        color: white !important;
+        font-size: 3em !important;
+        font-weight: bold !important;
+        margin-top: -0.42em !important;
+    }
+    &::after {
+        position: absolute !important;
+        right: 0 !important;
+        content: '”' !important;
+        color: white !important;
+        font-size: 3em !important;
+        font-weight: bold !important;
+        margin-top: -0.7em !important;
+    }
+}
+
+
+@media (max-width: 768px) {
+    blockquote.quote {
+        &.poetry {
+            padding-left: 3em !important;
+            &::before {
+                left: 0 !important;
+            }
+        }
+    }
+}

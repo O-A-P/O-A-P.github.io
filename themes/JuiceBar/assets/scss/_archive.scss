@@ -1,0 +1,67 @@
+@import "variables";
+.archive {
+  margin: auto;
+  padding: 0;
+  // width: 65%;
+  width: 35vw;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  list-style: none;
+  font-size: 1rem;
+  line-height: 1.8em;
+  // font-family: "Noto Serif SC",serif !important;
+  // text-align: left;
+  color: #111;
+  text-align: justify;
+  // line-height: 1.6;
+  text-justify: inter-word;
+  word-break: break-all;
+  // letter-spacing: 1px;
+
+
+  // -webkit-hyphens: auto;
+  // -moz-hyphens: auto;
+  // hyphens:auto;
+  // font-weight: 600;
+  // user-select: none;
+  // cursor: pointer;
+  // float: left;
+}
+
+#comment {
+  width: 35vw;
+  margin: auto;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+.single-container hr {
+  width: 35vw;
+  margin: auto;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.content ol {
+  margin-left: 1.35em;
+}
+
+#scrollToTopButton .icon {
+  color:white !important;
+  background-color: white;
+  border-radius: 24px;
+}
+
+.archive img {
+  border-radius: 10px;
+}
+
+.dark-mode .archive {
+  color: $dark-font;
+}
+
+pre code {
+  font-size: 0.8em;
+}

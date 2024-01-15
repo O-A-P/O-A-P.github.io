@@ -1,0 +1,59 @@
+{{ define "main" }}
+<article>
+    {{- with site.Params}}
+    <div class="is-centered">
+            <div class="title subtitle heading is-6">
+                <div id="home-box" >
+                            {{ with .imageUrl }}
+                            <div class="avatar-container">
+                                <img src="{{.}}" class="author-avatar">
+
+                            </div>
+                            {{ end }}
+
+
+
+                        <h1 id="home-title" class="title is-1 ">{{ .Title }}</h1>
+                    <div class="description column content typewriter-effect">
+                        <div class="text" id="typewriter-text"> {{ .Content }}</div>
+
+                    </div>
+
+                    <script>
+                        const typeWriter = document.getElementById('typewriter-text');
+                        console.log('type', typeWriter.innerHTML.length)
+                        typeWriter.style.setProperty('--characters', typeWriter.innerHTML.length * 5);
+                    </script>
+
+                    <div class="social-icon">
+
+                        {{ range .Social }}
+                        <a href="{{ .url }}" title="{{ .name }}"><span class="change-color icon">
+                                {{ partial "svg.html" . }}
+                            </span></a>
+                        {{ end }}
+
+                    </div>
+
+                </div>
+            </div>
+
+    </div>
+    {{- end -}}
+
+</article>
+<!-- 引入外部库 -->
+<script src="/js/vanilla-tilt.js"></script>
+
+<div class="summary">
+    <!-- 以下就是生成的模板 -->
+    <!-- {{- $paginator := .Paginate  (where (where .Site.RegularPages "Type" "post") ".Params.draft" "!=" true)  }} -->
+    {{- $paginator := .Paginate (where (where .Site.RegularPages "Type" "post") ".Params.draft" "!=" true)  }}
+    {{ range $paginator.Pages }}
+        {{ .Render "summary" }}
+    {{ end }}
+    
+
+</div>
+{{ partial "pagination.html" . }}
+{{ end }}

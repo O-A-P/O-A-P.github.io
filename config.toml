@@ -1,0 +1,102 @@
+baseURL = 'https://o-a-p.github.io/'
+languageCode = 'zh-cn'
+theme = "JuiceBar"
+title = "超级码里奥"
+
+paginate = 3
+
+
+[params]
+enableimgloop = true
+enableCarousel = true
+author = "OAP"
+description = "描述123"
+authorImage = "/img/author/head.jpg"
+
+# 博客title
+Title = "超级码里奥"
+content = "运用之妙，存乎一心"
+# 默认static目录下找
+imageUrl = "/img/author/head.jpg"
+# custom_css = ["./css/_copy_to_clipboard.css"]
+
+
+# 添加新的社交图标
+# 更多社交图标可以在JuiceBar\layouts\partials\svg.html中找到
+[[params.social]]
+name = "Github"
+url = "https://github.com/O-A-P"
+# [[params.social]]
+# name = "telegram"
+# url = "https://t.me/Hotjuice"
+# [[params.social]]
+# name = "twitter"
+# url = "https://twitter.com/hotjuicee"
+[[params.social]]
+name = "email"
+url = "mailto:zhangzihaozzzzzz@gmail.com"
+# [[params.social]]
+# name = "instagram"
+# url = "your_url"
+# [[params.social]]
+# name = "mastodon"
+# url = "your_url"
+# [[params.social]]
+# name = "reddit"
+# url = "your_url"
+# [[params.social]]
+# name = "stackoverflow"
+# url = "your_url"
+
+[taxonomies]
+category = "categories"
+# tag = "tags"
+
+# 添加新的导航链接
+[[menu.main]]
+name = "About"
+url = "/about"
+[[menu.main]]
+name = "Blog"
+url = "/post"
+[[menu.main]]
+name = "Categories"
+url = "/categories"
+
+# 如果使用giscus评论系统
+[params.giscus]
+repo = "O-A-P/O-A-P.github.io"
+repoID = "R_kgDOJEfHWQ"
+category = "Announcements"
+categoryID = "DIC_kwDOJEfHWc4CcDhX"
+mapping = "og:title"
+reactionsEnabled = "1"
+emitMetadata = "0"
+inputPosition = "bottom"
+lang = "en"
+loading = "lazy"
+
+[markup]
+[markup.highlight]
+anchorLineNos = false
+codeFences = true
+guessSyntax = false
+hl_Lines = ''
+hl_inline = false
+lineAnchors = ''
+lineNoStart = 1
+lineNos = true
+lineNumbersInTable = false
+noClasses = true
+noHl = false
+style = 'dracula'
+tabWidth = 4
+[markup.tableOfContents]
+startLevel = 1
+endLevel = 2
+
+[markup.goldmark.renderer]
+unsafe = true # markdown支持html
+#用于输出文档的设置（必须的）
+[outputs]
+home = ["HTML", "RSS", "JSON"]

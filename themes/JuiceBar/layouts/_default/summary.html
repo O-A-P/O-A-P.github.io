@@ -1,0 +1,56 @@
+<!-- <article class="post" onclick="window.location.href='{{ .RelPermalink }}'">
+  <div class="single-container column is-centered">
+    <div class="archive" id="post-container">
+      <header class="post-header">
+        <h1 class="post-title hover-underline-animation"><a class="post-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+      </header>
+      <div class="post-content">
+        <div class="excerpt post-summary">
+          {{ .Summary }}
+        </div>
+        
+        <div class="post-time-container">
+          <span class="post-time"> {{ .Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }} </span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</article> -->
+<!-- <div class="myContainer"> -->
+  <div class="myCard" onclick="window.location.href='{{ .RelPermalink }}'">
+    {{/*  <div class="myPicContainer">
+      <!-- <div class="myPicture" style="background: url('{{ index .Params.tags 0 }}');"></div> -->
+      <div class="myPicture" style="background: url('{{ .Params.heroimage }}');"></div>
+      
+    </div>  */}}
+    <div class="myImgContainer">
+      {{/*  <img src="{{ .Params.heroimage }}" alt="pic" style="border-radius: 10px;">  */}}
+      <img src="{{ index .Params.images 1 }}" alt="pic" style="border-radius: 10px;">
+    </div>
+    <div class="myTitle hover-underline-animation">
+      <div class="myWrapper">
+        {{ .Title }}
+      </div>
+    </div>
+    <div class="myContent">{{ .Summary }}</div>
+    <div class="post-time-container">
+      <span class="post-time"> {{ .Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }} </span>
+    </div>
+  </div>
+<!-- </div> -->
+
+
+<script>
+  VanillaTilt.init(document.querySelectorAll(".myCard"), {
+      max: 25, // 最大倾斜度数
+      speed: 2000, // 倾斜转换速度
+      glare: true,    // 是否开启炫光效果
+      "max-glare": 0.5, // 炫光效果最大不透明度
+      gyroscope: true,
+      "reset-to-start": true,
+  });
+
+  
+  
+</script>
