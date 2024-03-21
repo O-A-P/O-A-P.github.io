@@ -71,6 +71,15 @@
     </item>
     
     <item>
+      <title>GDB命令</title>
+      <link>https://o-a-p.github.io/post/tool/gdb/</link>
+      <pubDate>Sat, 08 Jul 2023 15:27:53 +0800</pubDate>
+      
+      <guid>https://o-a-p.github.io/post/tool/gdb/</guid>
+      <description>按gdb进入GDB</description>
+    </item>
+    
+    <item>
       <title>短代码测试</title>
       <link>https://o-a-p.github.io/post/test/shortcodestest/</link>
       <pubDate>Thu, 01 Jan 1970 21:47:11 +0800</pubDate>
