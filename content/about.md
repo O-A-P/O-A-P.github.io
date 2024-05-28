@@ -5,4 +5,4 @@ author: Hotjuice
 heroimage: /img/author/head.jpg
 layout: about
 ---
-> 一只小狗
+> 一只小狗！
