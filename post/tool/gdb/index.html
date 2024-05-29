@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>GDB命令 | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="按gdb进入GDB"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/post/tool/gdb/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.34ec97534749b4ed7b2f1a98c430ca918660498294509bb835e16c62c2767184.css">
+
+    
+    <meta property="og:title" content="GDB命令" />
+<meta property="og:description" content="按gdb进入GDB" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/post/tool/gdb/" /><meta property="og:image" content="https://o-a-p.github.io/img/Tool/tui.png" /><meta property="og:image" content="https://o-a-p.github.io/img/Tool/gdb.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-07-08T15:27:53+08:00" />
+<meta property="article:modified_time" content="2023-07-08T15:27:53+08:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://o-a-p.github.io/img/Tool/tui.png" /><meta name="twitter:title" content="GDB命令"/>
+<meta name="twitter:description" content="按gdb进入GDB"/>
+
+    
+    
+    
+
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#">
+                <img src="https://o-a-p.github.io/svg/sun.svg" alt="sun icon" class="theme-icon" />
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var burger = document.querySelector('.navbar-burger');
+        burger.addEventListener('click', function() {
+            burger.classList.toggle('is-active');
+            document.querySelector('.navbar-menu').classList.toggle('is-active');
+        });
+    });
+
+    
+    function setTheme(theme) {
+        let body = document.body;
+        let themeIcon = document.querySelector(".theme-icon");
+        if (theme === "dark") {
+            body.classList.add("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/moon.svg";
+            themeIcon.alt = "moon icon";
+        } else {
+            body.classList.remove("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/sun.svg";
+            themeIcon.alt = "sun icon";
+        }
+        
+        localStorage.setItem("theme", theme);
+    }
+
+    
+    let theme = localStorage.getItem("theme") || "light";
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (isDarkMode) {
+        
+        setTheme('dark');
+
+    } else {
+        
+        setTheme('light');
+    }
+    
+    setTheme('dark');
+
+    
+    document.getElementById("theme-toggle").addEventListener("click", function() {
+        if (theme === "light") {
+            theme = "dark";
+        } else {
+            theme = "light";
+        }
+        setTheme(theme);
+    });
+
+
+
+</script>
+
+</header><main>
+<div class="single-container">
+    <div class="archive">
+        
+        <img src="/img/Tool/tui.png" class="myBigPicture" alt="headPic">
+        <h1 class="title is-1">GDB命令</h1>
+        <div class="title subtitle heading is-6">
+            <div class="author-info columns is-vcentered">
+                <div class="column">
+                    <div class="columns is-vcentered is-mobile">
+                        
+                        <div class="column is-narrow">
+                            <img src="/img/author/head.jpg" class="author-image">
+                        </div>
+                        
+                        <div class="column">
+                            <p>OAP</p>
+                            <p><time>July 8, 2023</time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-categories-container">
+                    <a class="hover-underline-animation" href="/categories/tool">Tool</a>, <a class="hover-underline-animation" href="/categories/gdb">GDB</a>, <a class="hover-underline-animation" href="/categories/linux">Linux</a>
+                </div>
+            </div>
+        </div>
+        <div class="content article-content">
+            <div class="toc-container">
+                
+    <div class="post-toc">
+        
+            <aside>
+                <button id="tocButton" ><h4 id="contents" style="margin-left: 1vw;color:rgb(96, 134, 180);margin-bottom: 0;">CONTENTS</h4></button>
+                <div id="hide"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-gdb是什么">1. GDB是什么</a></li>
+    <li><a href="#2-gdb基础指令">2. GDB基础指令</a>
+      <ul>
+        <li><a href="#21-断点设置">2.1 断点设置</a></li>
+        <li><a href="#22-查看变量信息">2.2 查看变量/信息</a></li>
+        <li><a href="#23-单步调试">2.3 单步调试</a></li>
+        <li><a href="#24-多进程调试">2.4 多进程调试</a></li>
+        <li><a href="#25-多线程调试">2.5 多线程调试</a></li>
+        <li><a href="#26-查看源码">2.6 查看源码</a></li>
+        <li><a href="#27-tui界面">2.7 TUI界面</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-杂">3. 杂</a></li>
+    <li><a href="#5-参考网站">5. 参考网站</a></li>
+  </ul>
+</nav></div>
+            </aside>
+        
+    </div><script>
+    
+        let button = document.getElementById('tocButton');
+        let hide = document.getElementById("hide");
+        let contents=document.getElementById("contents");
+        if (button !== null) {
+            button.addEventListener("click", function() {
+                if (hide.style.display!='block') {
+                    hide.style.display='block'
+                } else {
+                    hide.style.display='none'
+                    contents.style.color='rgb(96, 134, 180)'
+                }
+            });
+        }
+
+        
+        let _headings = 0;
+        if (hide !== null) {
+            _headings = hide.getElementsByTagName('a');
+        }
+        for (let i = 0; i < _headings.length; i++) {
+            if (_headings[i].nextElementSibling === null) {
+                continue;
+            }
+            if (_headings[i] == this) {
+                continue;
+            }
+            _headings[i].nextElementSibling.style.display = 'none'
+        }
+        window.addEventListener('scroll', function() {
+            if (hide === null) {
+                return;
+            }
+            let headings = hide.getElementsByTagName('a')
+            for (let i = 0; i < headings.length; i++) {
+                let id = headings[i].innerText.replace(/\./g, "").toLowerCase().replace(/\//g, "").replace(/\s/g, "-").replace(/[()]/g, '');
+                
+                let head = document.getElementById(id);
+                let rect = head.getBoundingClientRect();
+                
+                
+                let viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+                
+                
+                let centerY = viewportHeight / 2;
+
+                
+                let isCenter = rect.top < centerY && rect.bottom > centerY;
+                if (isCenter) {
+                    
+                    let _headings = hide.getElementsByTagName('a');
+                    for (let j = 0; j < _headings.length; j++) {
+                        
+                        if (_headings[j].nextElementSibling === null) {
+                            continue;
+                        }
+                        if (_headings[j] == headings[i]) {
+                            continue;
+                        }
+                        _headings[j].nextElementSibling.style.display = 'none'    
+                    }
+                    
+                    
+
+                    if (headings[i].nextElementSibling === null) {
+                        
+                        
+                        headings[i].parentNode.parentNode.style.display = 'block';
+                    } else {
+                        
+                        
+                        headings[i].nextElementSibling.style.display = 'block';
+                    }
+
+                    
+                }
+            }
+
+        })
+
+
+        
+
+    
+
+</script>
+            </div>
+            <h1 id="1-gdb是什么">1. GDB是什么</h1>
+<p>GDB（GNU Debugger）是GNU项目的调试器，支持Ada、Assembly、C、C++、D、Fortran、Go、Objective-C、OpenCL、Modula-2、Pascal、Rust</p>
+<p>gbdinit和gdb中的python什么的还得了解一下</p>
+<p>可以写个<code>.gdbinit</code>来使得每次使用gdb都自动打开图形模式，可以执行<code>gdb -q</code>来省略开头的提醒信息！</p>
+<p>另外gdb还支持反向调试，具体得先<code>record</code>一下，指令前面要加<code>reverse-</code></p>
+<h1 id="2-gdb基础指令">2. GDB基础指令</h1>
+<h2 id="21-断点设置">2.1 断点设置</h2>
+<p>使用GDB的前提是程序带有调试信息（<code>gcc -g</code>），如果没有调试信息使用gdb则会显示：</p>
+<p>
+  <img src="/img/Tool/noDebuggingSymbols.png" alt="">
+</p>
+<ul>
+<li>如果程序已经运行且还想调试的话，可以采用<code>ps -ef | grep 进程名</code>的方式来找到已运行程序的pid，进而使用<code>attach pid</code>的方式进行调试：<code>gdb a.out -p pid</code></li>
+<li>如果程序已经运行且没有调试信息还想调试的话，可以保持代码不动，生成一版带有调试信息的程序，再进gdb，后使用<code>file 可执行程序名</code>的方式进行读写，然后使用<code>attach pid</code>进行链接调试</li>
+<li>直接<code>gdb 可执行程序</code></li>
+<li>调试<code>core文件</code></li>
+</ul>
+<p>一般来讲第一个命令都可以直接使用首字母，且gdb命令行有自动补全，常见断点命令如下:
+
+  <img src="/img/Tool/breakpoint.png" alt="">
+</p>
+<h2 id="22-查看变量信息">2.2 查看变量/信息</h2>
+<ol>
+<li>主动通过<code>print</code>来查看变量：
+
+  <img src="/img/Tool/print.png" alt="">
+</li>
+<li>如果想查看内存可以通过<code>examine</code>来查看：
+
+  <img src="/img/Tool/examine.png" alt="">
+</li>
+<li>如果希望程序中断时自动显示某个变量的值可以使用<code>display</code>命令，相关命令如下：
+
+  <img src="/img/Tool/display.png" alt="">
+</li>
+<li>堆栈/线程/栈帧/变量设置：
+
+  <img src="/img/Tool/stack.png" alt="">
+</li>
+<li>打印各种信息：
+
+  <img src="/img/Tool/info.png" alt="">
+</li>
+</ol>
+<h2 id="23-单步调试">2.3 单步调试</h2>
+<p>
+  <img src="/img/Tool/step.png" alt="">
+</p>
+<h2 id="24-多进程调试">2.4 多进程调试</h2>
+<p>
+  <img src="/img/Tool/multiProcess.png" alt="">
+</p>
+<h2 id="25-多线程调试">2.5 多线程调试</h2>
+<p>
+  <img src="/img/Tool/multiThread.png" alt="">
+</p>
+<h2 id="26-查看源码">2.6 查看源码</h2>
+<p>
+  <img src="/img/Tool/list.png" alt="">
+</p>
+<h2 id="27-tui界面">2.7 TUI界面</h2>
+<p>
+  <img src="/img/Tool/layout.png" alt="">
+</p>
+
+
+
+<div class="simple-notice simple-notice-info" >
+    <div class="simple-notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon simple-notice-icon" viewBox="0 0 192 512"><path d="M20 424.23h20V279.77H20a20 20 0 01-20-20V212a20 20 0 0120-20h112a20 20 0 0120 20v212.23h20a20 20 0 0120 20V492a20 20 0 01-20 20H20a20 20 0 01-20-20v-47.77a20 20 0 0120-20zM96 0a72 72 0 100 144A72 72 0 0096 0z"/></svg></div><p>Ctrl L可以刷新错位的GDB窗口</p></div>
+
+<h1 id="3-杂">3. 杂</h1>
+<ol>
+<li>coredump</li>
+</ol>
+<p>当进程崩溃时，操作系统会把进程当前的所有内存和寄存器状态信息保存到<code>core dump</code>文件中。Core dump file 是一个二进制文件，需要配合 debug info 来赋予其含义。GDB 可以读取 core dump 文件，协助分析进程崩溃的瞬间发生了什么。</p>
+<p>生成coredump文件必须要设置：<code>ulimit -c unlimited</code></p>
+<p>生成的文件所在目录可以通过：<code>cat /proc/sys/kernel/core_pattern</code>查看</p>
+<p>最终调试还是需要原可执行程序参与：<code>gdb ddd /mnt/wslg/dumps/core.ddd</code></p>
+<p>程序会停在崩溃的前一行！</p>
+<p>参考：<a href="https://senlinzhan.github.io/2017/12/31/coredump/" target="_blank" rel="noopener">1</a></p>
+<ol start="2">
+<li>ABI</li>
+</ol>
+<p>ABI代表应用程序二进制接口（<code>Application Binary Interface</code>）。ABI定义了编译器、链接器和操作系统之间的接口规范，确保不同的软件组件可以相互操作和交互。</p>
+<p>ABI在计算机系统中起到了关键的作用。它规定了二进制程序的格式、函数调用约定、寄存器使用、内存布局等方面的规范。通过遵循共同的ABI，不同的软件模块可以在同一操作系统上运行，并且可以相互调用和交换数据，而不需要关注底层实现的细节。</p>
+<p>不同的操作系统和处理器架构通常有不同的ABI。例如，x86架构的ABI与ARM架构的ABI可能存在差异。同样，不同的操作系统也可以有自己的ABI，如Windows的ABI与Linux的ABI可能有所不同。</p>
+<p>使用一致的ABI有助于跨平台开发、库的兼容性和代码的可移植性。它还为操作系统提供了与应用程序进行交互的标准接口，包括系统调用、异常处理和动态链接等。</p>
+<ol start="3">
+<li>执行外部命令</li>
+</ol>
+<p>在 GDB（GNU 调试器）中，<code>!</code>是一个前缀，用于在GDB命令中执行外部命令。当你在GDB的命令行中输入 ! 后跟一个外部命令，GDB 将会在操作系统的命令行执行该命令，并将其输出显示在 GDB 的命令行界面上。</p>
+<p>这个功能使得你可以在调试过程中方便地执行一些操作系统级别的命令，如查看文件列表、运行其他程序等。通过在 GDB 中执行外部命令，你可以在不离开调试环境的情况下获取更多的信息或执行其他必要的操作。</p>
+<p>例如可以先使用<code>i inferiors</code>查看进程信息，再通过gdb中<code>!pmap pid</code>显示一个进程的内存使用情况，包括代码段、数据段、堆、栈以及共享库等的映射情况。</p>
+<h1 id="5-参考网站">5. 参考网站</h1>
+<ol>
+<li><a href="https://www.yanbinghu.com/2019/04/20/41283.html" target="_blank" rel="noopener">GDB调试指南</a></li>
+<li><a href="https://imageslr.com/2023/gdb#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90" target="_blank" rel="noopener">💻【Linux】GDB 入门笔记</a></li>
+<li><a href="https://sourceware.org/gdb/onlinedocs/gdb/" target="_blank" rel="noopener">GDB手册</a></li>
+<li><a href="https://www.gitbook.com/book/wizardforcel/100-gdb-tips" target="_blank" rel="noopener">GitBook – Knowledge management simplified</a></li>
+<li><a href="https://web.archive.org/web/20220608085231/https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/resources/gdb" target="_blank" rel="noopener">CS107 GDB教程</a></li>
+</ol>
+
+        </div>
+    </div>
+    <a href="#" id="scrollToTopButton">
+        <svg t="1686753152588" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="3988" width="48" height="48">
+            <path
+                d="M518.5 360.3c-3.2-4.4-9.7-4.4-12.9 0l-178 246c-3.8 5.3 0 12.7 6.5 12.7H381c10.2 0 19.9-4.9 25.9-13.2L512 460.4l105.2 145.4c6 8.3 15.6 13.2 25.9 13.2H690c6.5 0 10.3-7.4 6.5-12.7l-178-246z"
+                p-id="3989" fill="#363636"></path>
+            <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                p-id="3990" fill="#363636"></path>
+        </svg>
+    </a><hr style="border-top: 1px solid #EEEEEE;">
+<div id="comment"></div>
+<script>
+    const getStoredTheme = () => localStorage.getItem("theme") === "dark" ? "dark" : "light";
+
+    const setGiscusTheme = () => {
+        const sendMessage = (message) => {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (iframe) {
+                iframe.contentWindow.postMessage({giscus: message}, 'https://giscus.app');
+            }
+        }
+        sendMessage({setConfig: {theme: getStoredTheme()}})
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const giscusAttributes = {
+            "src": "https://giscus.app/client.js",
+            "data-repo": "O-A-P\/O-A-P.github.io",
+            "data-repo-id": "R_kgDOJEfHWQ",
+            "data-category": "Announcements",
+            "data-category-id": "DIC_kwDOJEfHWc4CcDhX",
+            "data-mapping": "og:title",
+            "data-reactions-enabled": "1",
+            "data-emit-metadata": "0",
+            "data-input-position": "bottom",
+            "data-theme": getStoredTheme(),
+            "data-lang": "en",
+            "data-loading": "lazy",
+            "crossorigin": "anonymous",
+        };
+
+        
+        const giscusScript = document.createElement("script");
+        Object.entries(giscusAttributes).forEach(
+            ([key, value]) => giscusScript.setAttribute(key, value));
+        document.getElementById("comment").appendChild(giscusScript);
+
+        
+        const themeToggle = document.querySelector(".theme-toggle");
+        if (themeToggle) {
+            themeToggle.addEventListener("click", setGiscusTheme);
+        }
+    });
+
+</script>
+
+
+<div class="pp-container">
+        <section class="pre-and-post">
+            <div class="has-text-left">
+                
+                <p>Previous post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/test/shortcodestest/">短代码测试</a>
+                
+            </div>
+            <div class="has-text-right ">
+                
+                <p>Next post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/os/6.s081-lab/">6.S081：实验</a>
+                
+            </div>
+        </section>
+    </div>
+
+</div>
+
+        </main><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2024 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img')
+</script>
+
+  </footer></body>
+</html>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>6.S081 on 超级码里奥</title>
+    <link>https://o-a-p.github.io/categories/6.s081/</link>
+    <description>Recent content in 6.S081 on 超级码里奥</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 26 Dec 2023 21:12:07 +0800</lastBuildDate>
+    <atom:link href="https://o-a-p.github.io/categories/6.s081/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>6.S081：xv6 进程调度</title>
+      <link>https://o-a-p.github.io/post/os/6.s081-os-scheduling/</link>
+      <pubDate>Tue, 26 Dec 2023 21:12:07 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/os/6.s081-os-scheduling/</guid>
+      <description>此起彼伏</description>
+    </item>
+    <item>
+      <title>6.S081：xv6 中断与驱动</title>
+      <link>https://o-a-p.github.io/post/os/6.s081-os-interrupt/</link>
+      <pubDate>Mon, 25 Dec 2023 20:43:45 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/os/6.s081-os-interrupt/</guid>
+      <description>各司其职</description>
+    </item>
+    <item>
+      <title>6.S081：xv6 trap过程</title>
+      <link>https://o-a-p.github.io/post/os/6.s081-os-trap/</link>
+      <pubDate>Sat, 23 Dec 2023 19:06:02 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/os/6.s081-os-trap/</guid>
+      <description>陷入内核</description>
+    </item>
+    <item>
+      <title>6.S081：xv6 启动过程</title>
+      <link>https://o-a-p.github.io/post/os/6.s081-os-start/</link>
+      <pubDate>Wed, 20 Dec 2023 20:12:49 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/os/6.s081-os-start/</guid>
+      <description>从启动到Shell进程</description>
+    </item>
+    <item>
+      <title>6.S081：实验</title>
+      <link>https://o-a-p.github.io/post/os/6.s081-lab/</link>
+      <pubDate>Mon, 10 Jul 2023 20:08:56 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/os/6.s081-lab/</guid>
+      <description>实验捏</description>
+    </item>
+  </channel>
+</rss>
