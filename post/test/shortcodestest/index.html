@@ -71,7 +71,11 @@
                 
                 <a href="/post" class="navbar-item">Blog</a>
                 
+                <a href="/books" class="navbar-item">Books</a>
+                
                 <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photos" class="navbar-item">Photos</a>
                 
             </div>
 
@@ -207,6 +211,7 @@
     <li><a href="#10-quote">10. quote</a></li>
     <li><a href="#11-折叠">11. 折叠</a></li>
     <li><a href="#12-图片排版">12. 图片排版</a></li>
+    <li><a href="#13-分割线">13. 分割线</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav></div>
@@ -815,7 +820,7 @@ if(galleryPhotos){
 
 <h1 id="11-折叠">11. 折叠</h1>
 <details>
-    <summary>折叠测试</summary>
+    <summary>折叠测试1</summary>
     <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);<span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;123&#34;</span>);
@@ -823,6 +828,103 @@ if(galleryPhotos){
 </span></span></code></pre></div>
 </details>
 
+
+
+<div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="collapse-arrow">👉</span> <strong>折叠测试2</strong>
+    </div>
+    <div class="collapse-content">
+        <p><del>这是折叠的内容～</del></p>
+<p><em><strong>这是折叠的内容～</strong></em></p>
+<p><strong>同样是MD文档，不受影响</strong></p>
+
+</div>
+
+<style>jiantou
+.collapse-block {
+    margin-top: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.collapse-header {
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: var(--header-text-color);
+    background-color: var(--header-bg-color);
+    border: 1px solid #ccc;  
+    border-radius: 0.5rem;  
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.collapse-header:hover {
+    background-color: var(--header-bg-hover);
+    color: var(--header-text-hover);
+}
+
+.collapse-arrow {
+    float: left;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.collapse-content {
+    padding: 0 8px;
+    height: 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0);  
+    transition: height 0.5s ease-out, padding 0.3s ease-out;
+}
+
+.collapse-content.show {
+    height: auto;
+    padding: 8px;
+    overflow: visible;
+}
+
+ 
+@media (prefers-color-scheme: light) {
+    .collapse-header {
+        color: white;
+        background-color: black;
+    }
+    
+    .collapse-header:hover {
+        background-color: #80808020;  
+    }
+}
+
+ 
+@media (prefers-color-scheme: dark) {
+     
+    
+    .collapse-header:hover {
+        background-color: #80808020;  
+    }
+}
+</style>
+
+<script>
+function toggleCollapse(element) {
+    var content = element.nextElementSibling;
+    var arrow = element.querySelector('.collapse-arrow');
+
+    if (content.classList.contains('show')) {
+        content.style.height = '0';
+        content.classList.remove('show');
+        arrow.style.transform = 'rotate(0deg)';
+    } else {
+        content.style.height = content.scrollHeight + 'px';
+        content.classList.add('show');
+        arrow.style.transform = 'rotate(90deg)';
+    }
+}
+</script>
 <h1 id="12-图片排版">12. 图片排版</h1>
 <p>
   <img src="/img/author/head.jpg" alt="">
@@ -854,6 +956,137 @@ if(galleryPhotos){
 
   <img src="/img/author/head.jpg" alt="">
 </p>
+<h1 id="13-分割线">13. 分割线</h1>
+<p><style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="end">END</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="end">End</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="end">end</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="">描述文字</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="">不是end则显示普通文字</span></div></p>
 <h1 id="参考">参考</h1>
 <p><a href="https://lovir.cn/p/shortcodes/" target="_blank" rel="noopener">老哥1</a></p>
 <p><a href="https://www.sleepymoon.cyou/2023/hugo-shortcodes/" target="_blank" rel="noopener">老哥2</a></p>
@@ -861,6 +1094,7 @@ if(galleryPhotos){
 <p><a href="https://innerso.prvcy.page/posts/shortcode-test/#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90" target="_blank" rel="noopener">老哥4</a></p>
 <p><a href="https://www.sulvblog.cn/posts/blog/shortcodes/#64-%e5%8d%9a%e5%ae%a2%e6%96%87%e7%ab%a0%e5%86%85%e9%93%be" target="_blank" rel="noopener">老哥5</a></p>
 <p><a href="https://immmmm.com/archives/" target="_blank" rel="noopener">老哥6</a></p>
+<p><a href="https://wdh.hk/docs/short-code/" target="_blank" rel="noopener">老哥7</a></p>
 
         </div>
     </div>
