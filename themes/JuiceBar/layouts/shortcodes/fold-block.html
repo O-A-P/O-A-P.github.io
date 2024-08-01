@@ -1,0 +1,97 @@
+{{ $content := .Inner | markdownify }}
+
+<div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="collapse-arrow">👉</span> <strong>{{ .Get 0 }}</strong>
+    </div>
+    <div class="collapse-content">
+        {{ $content }}
+</div>
+
+<style>jiantou
+.collapse-block {
+    margin-top: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.collapse-header {
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: var(--header-text-color);
+    background-color: var(--header-bg-color);
+    border: 1px solid #ccc; /* 灰色边框 */
+    border-radius: 0.5rem; /* 圆角 */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.collapse-header:hover {
+    background-color: var(--header-bg-hover);
+    color: var(--header-text-hover);
+}
+
+.collapse-arrow {
+    float: left;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.collapse-content {
+    padding: 0 8px;
+    height: 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0); /* 半透明浅色背景 */
+    transition: height 0.5s ease-out, padding 0.3s ease-out;
+}
+
+.collapse-content.show {
+    height: auto;
+    padding: 8px;
+    overflow: visible;
+}
+
+/* 明亮模式下的样式 */
+@media (prefers-color-scheme: light) {
+    .collapse-header {
+        color: white;
+        background-color: black;
+    }
+    
+    .collapse-header:hover {
+        background-color: #80808020; /* 更改为暗一点的颜色 */
+    }
+}
+
+/* 暗黑模式下的样式 */
+@media (prefers-color-scheme: dark) {
+    /* .collapse-header {
+        color: black;
+        background-color: white;
+    } */
+    
+    .collapse-header:hover {
+        background-color: #80808020; /* 更改为浅一点的颜色 */
+    }
+}
+</style>
+
+<script>
+function toggleCollapse(element) {
+    var content = element.nextElementSibling;
+    var arrow = element.querySelector('.collapse-arrow');
+
+    if (content.classList.contains('show')) {
+        content.style.height = '0';
+        content.classList.remove('show');
+        arrow.style.transform = 'rotate(0deg)';
+    } else {
+        content.style.height = content.scrollHeight + 'px';
+        content.classList.add('show');
+        arrow.style.transform = 'rotate(90deg)';
+    }
+}
+</script>

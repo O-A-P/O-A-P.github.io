@@ -62,6 +62,12 @@ url = "/post"
 [[menu.main]]
 name = "Categories"
 url = "/categories"
+[[menu.main]]
+name = "Books"
+url = "/books"
+[[menu.main]]
+name = "Photos"
+url = "/photos"
 
 # 如果使用giscus评论系统
 [params.giscus]

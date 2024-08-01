@@ -100,7 +100,7 @@ To see a world in a grain of sand. And a heaven in a wild flower. Hold infinity 
 
 # 11. 折叠
 
-{{< detail "折叠测试" >}}
+{{< detail "折叠测试1" >}}
 ```c
 printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");
 printf("123");
@@ -108,6 +108,16 @@ printf("123");
 printf("123");
 ```
 {{< /detail >}}
+
+{{< fold-block "折叠测试2" >}}
+
+~~这是折叠的内容～~~
+
+***这是折叠的内容～***
+
+**同样是MD文档，不受影响**
+
+{{< /fold-block >}}
 
 # 12. 图片排版
 ![](/img/author/head.jpg)
@@ -127,6 +137,12 @@ printf("123");
 ![](/img/author/head.jpg)
 ![](/img/author/head.jpg)
 
+# 13. 分割线
+{{< divider "END" >}}
+{{< divider "End" >}}
+{{< divider "end" >}}
+{{< divider "描述文字" >}}
+{{< divider "不是end则显示普通文字" >}}
 
 
 # 参考
@@ -141,3 +157,5 @@ printf("123");
 [老哥5](https://www.sulvblog.cn/posts/blog/shortcodes/#64-%e5%8d%9a%e5%ae%a2%e6%96%87%e7%ab%a0%e5%86%85%e9%93%be)
 
 [老哥6](https://immmmm.com/archives/)
+
+[老哥7](https://wdh.hk/docs/short-code/)
