@@ -120,6 +120,7 @@ printf("123");
 {{< /fold-block >}}
 
 # 12. 图片排版
+并列排版
 ![](/img/author/head.jpg)
 
 
@@ -143,6 +144,15 @@ printf("123");
 {{< divider "end" >}}
 {{< divider "描述文字" >}}
 {{< divider "不是end则显示普通文字" >}}
+
+# 14. 表情包
+这玩意感觉和图片一样的
+{{< emoji name="nice2.gif" >}}
+
+# 15. 图片带标题
+{{<figure src="/img/author/head.jpg" title="大" caption="小">}}
+{{<figure src="/img/author/head.jpg" title="大" caption="小">}}
+{{<figure src="/img/author/head.jpg" title="大" caption="小">}}
 
 
 # 参考
