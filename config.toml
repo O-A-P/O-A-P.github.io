@@ -68,6 +68,10 @@ url = "/books"
 [[menu.main]]
 name = "Photos"
 url = "/photos"
+# [[menu.main]]
+# name = "Goods"
+# url = "/goods"
+
 
 # 如果使用giscus评论系统
 [params.giscus]
