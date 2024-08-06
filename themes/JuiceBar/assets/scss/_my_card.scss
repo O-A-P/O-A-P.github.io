@@ -5,6 +5,10 @@
     height: 420px;
     // perspective: 1500px;
 }
+.myCard:hover {
+  /* 鼠标悬停时的阴影效果，可以调整颜色和大小 */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
 .myCard {
     min-width: 300px;
     width: 12vw;
@@ -19,9 +23,9 @@
         // height: 55vh;
     }
     margin: 30px;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+    // box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -30,10 +34,10 @@
     //border-top: 1px solid rgba(255, 255, 255, 0.5);
     //border-left: 1px solid rgba(255, 255, 255, 0.5);
     user-select: none;
-    backdrop-filter: blur(5px);
+    // backdrop-filter: blur(5px);
     cursor: pointer;
 
-    transition: transform 1500ms;
+    transition: transform 1000ms;
     transform-style: preserve-3d;
 }
 
@@ -117,7 +121,7 @@
 }
 
 .myContent {
-    height: 15%;
+    // height: 15%;
     text-align: center;
     // margin-top: 20px !important;
     width: 90%;
