@@ -49,9 +49,9 @@
 }
 
 .myImgContainer {
-    height: 70% !important;   
+    height: 40% !important;   
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     @media (max-width: 768px) {
         height: 55vh;
@@ -100,7 +100,7 @@
 .myTitle {
     min-width: 0;
     max-width: 90%;
-    height: 20%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
