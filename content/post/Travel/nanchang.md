@@ -3,7 +3,7 @@ title: "再会南昌"
 date: 2024-08-06T21:42:01+08:00
 summary: '但不当舔狗'
 categories: ['Travel']
-draft: false
+draft: true
 images: ['/img/Travel/nanchang/梅岭.jpg', '/img/Travel/nanchang/滕王阁.jpg']
 ---
 上次来南昌还是22年毕业后当舔狗来了一回，去了滕王阁和南昌之星，跟朋友分享我的舔狗故事后，旅行地点就被`巧合地`定在了南昌。
