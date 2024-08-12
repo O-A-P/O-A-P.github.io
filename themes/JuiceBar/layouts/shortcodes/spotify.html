@@ -6,10 +6,16 @@ Parameters:
     height - (Optional) height
 -->
 
+    <style type="text/css">
+      iframe {
+        height: 90px;
+      }
+    </style>
+
 {{ if .IsNamedParams }}
 <iframe src="https://open.spotify.com/embed/{{ .Get "type" }}/{{ .Get "id" }}"
     width="{{ default "100%" (.Get "width") }}"
-    height="{{ default "380" (.Get "height") }}"
+    height="{{ default "380" (.Get "height") }} !important"
     frameborder="0"
     allowtransparency="true"
     allow="encrypted-media"></iframe>
