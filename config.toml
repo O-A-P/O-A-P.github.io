@@ -63,11 +63,11 @@ url = "/post"
 name = "Categories"
 url = "/categories"
 [[menu.main]]
-name = "Books"
-url = "/books"
+name = "Book"
+url = "/book"
 [[menu.main]]
-name = "Photos"
-url = "/photos"
+name = "Photo"
+url = "/photo"
 # [[menu.main]]
 # name = "Goods"
 # url = "/goods"
