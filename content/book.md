@@ -5,5 +5,4 @@ author: Hotjuice
 heroimage: /img/author/head.jpg
 layout: book
 ---
-测试
-{{< neodb "https://book.douban.com/subject/36698431/" >}}
+TODO
