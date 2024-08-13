@@ -39,7 +39,7 @@ images: ['/img/Travel/nanchang/梅岭.jpg', '/img/Travel/nanchang/滕王阁.jpg'
 
 ![](/img/Travel/nanchang/打卡照片.jpg)
 
-美术馆有点克苏鲁展品难以评价，可能这就是艺术吧。
+美术馆有些克苏鲁展品难以评价，可能这就是艺术吧。
 
 
 ![](/img/Travel/nanchang/1号奇怪展品.jpg)
