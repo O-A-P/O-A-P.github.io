@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>记两次失败的面试 | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="&ldquo;优势在我&rdquo;"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/post/failure/two-failed-interviews/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.1e557146be24269451da6679c115848c4df06c3653830dbc3b0c197f813dac1b.css">
+
+    
+    <meta property="og:title" content="记两次失败的面试" />
+<meta property="og:description" content="&ldquo;优势在我&rdquo;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/post/failure/two-failed-interviews/" /><meta property="og:image" content="https://o-a-p.github.io/img/Failure/%E4%BC%98%E5%8A%BF%E5%9C%A8%E6%88%91.png" /><meta property="og:image" content="https://o-a-p.github.io/img/Failure/joker0.gif" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-08-27T21:24:59+08:00" />
+<meta property="article:modified_time" content="2024-08-27T21:24:59+08:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://o-a-p.github.io/img/Failure/%E4%BC%98%E5%8A%BF%E5%9C%A8%E6%88%91.png" /><meta name="twitter:title" content="记两次失败的面试"/>
+<meta name="twitter:description" content="&ldquo;优势在我&rdquo;"/>
+
+    
+    
+    
+
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#">
+                <img src="https://o-a-p.github.io/svg/sun.svg" alt="sun icon" class="theme-icon" />
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/book" class="navbar-item">Book</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var burger = document.querySelector('.navbar-burger');
+        burger.addEventListener('click', function() {
+            burger.classList.toggle('is-active');
+            document.querySelector('.navbar-menu').classList.toggle('is-active');
+        });
+    });
+
+    
+    function setTheme(theme) {
+        let body = document.body;
+        let themeIcon = document.querySelector(".theme-icon");
+        if (theme === "dark") {
+            body.classList.add("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/moon.svg";
+            themeIcon.alt = "moon icon";
+        } else {
+            body.classList.remove("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/sun.svg";
+            themeIcon.alt = "sun icon";
+        }
+        
+        localStorage.setItem("theme", theme);
+    }
+
+    
+    let theme = localStorage.getItem("theme") || "light";
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (isDarkMode) {
+        
+        setTheme('dark');
+
+    } else {
+        
+        setTheme('light');
+    }
+    
+    setTheme('dark');
+
+    
+    document.getElementById("theme-toggle").addEventListener("click", function() {
+        if (theme === "light") {
+            theme = "dark";
+        } else {
+            theme = "light";
+        }
+        setTheme(theme);
+    });
+
+
+
+</script>
+
+</header><main>
+<div class="single-container">
+    <div class="archive">
+        
+        <img src="/img/Failure/%e4%bc%98%e5%8a%bf%e5%9c%a8%e6%88%91.png" class="myBigPicture" alt="headPic">
+        <h1 class="title is-1">记两次失败的面试</h1>
+        <div class="title subtitle heading is-6">
+            <div class="author-info columns is-vcentered">
+                <div class="column">
+                    <div class="columns is-vcentered is-mobile">
+                        
+                        <div class="column is-narrow">
+                            <img src="/img/author/head.jpg" class="author-image">
+                        </div>
+                        
+                        <div class="column">
+                            <p>OAP</p>
+                            <p><time>August 27, 2024</time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-categories-container">
+                    <a class="hover-underline-animation" href="/categories/interview">Interview</a>
+                </div>
+            </div>
+        </div>
+        <div class="content article-content">
+            <div class="toc-container">
+                
+    <div class="post-toc">
+        
+            <aside>
+                <button id="tocButton" ><h4 id="contents" style="margin-left: 1vw;color:rgb(96, 134, 180);margin-bottom: 0;">CONTENTS</h4></button>
+                <div id="hide"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-failure-1">1. Failure 1</a></li>
+    <li><a href="#2-failure-2">2. Failure 2</a></li>
+  </ul>
+</nav></div>
+            </aside>
+        
+    </div><script>
+    
+        let button = document.getElementById('tocButton');
+        let hide = document.getElementById("hide");
+        let contents=document.getElementById("contents");
+        if (button !== null) {
+            button.addEventListener("click", function() {
+                if (hide.style.display!='block') {
+                    hide.style.display='block'
+                } else {
+                    hide.style.display='none'
+                    contents.style.color='rgb(96, 134, 180)'
+                }
+            });
+        }
+
+        
+        let _headings = 0;
+        if (hide !== null) {
+            _headings = hide.getElementsByTagName('a');
+        }
+        for (let i = 0; i < _headings.length; i++) {
+            if (_headings[i].nextElementSibling === null) {
+                continue;
+            }
+            if (_headings[i] == this) {
+                continue;
+            }
+            _headings[i].nextElementSibling.style.display = 'none'
+        }
+        window.addEventListener('scroll', function() {
+            if (hide === null) {
+                return;
+            }
+            let headings = hide.getElementsByTagName('a')
+            for (let i = 0; i < headings.length; i++) {
+                let id = headings[i].innerText.replace(/\./g, "").toLowerCase().replace(/\//g, "").replace(/\s/g, "-").replace(/[()]/g, '');
+                
+                let head = document.getElementById(id);
+                let rect = head.getBoundingClientRect();
+                
+                
+                let viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+                
+                
+                let centerY = viewportHeight / 2;
+
+                
+                let isCenter = rect.top < centerY && rect.bottom > centerY;
+                if (isCenter) {
+                    
+                    let _headings = hide.getElementsByTagName('a');
+                    for (let j = 0; j < _headings.length; j++) {
+                        
+                        if (_headings[j].nextElementSibling === null) {
+                            continue;
+                        }
+                        if (_headings[j] == headings[i]) {
+                            continue;
+                        }
+                        _headings[j].nextElementSibling.style.display = 'none'    
+                    }
+                    
+                    
+
+                    if (headings[i].nextElementSibling === null) {
+                        
+                        
+                        headings[i].parentNode.parentNode.style.display = 'block';
+                    } else {
+                        
+                        
+                        headings[i].nextElementSibling.style.display = 'block';
+                    }
+
+                    
+                }
+            }
+
+        })
+
+
+        
+
+    
+
+</script>
+            </div>
+            
+
+
+<div class="notice notice-warning" >
+    <div class="notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon notice-icon" viewBox="0 0 576 512"><path d="M570 440c18 32-5 72-42 72H48c-37 0-60-40-42-72L246 24c19-32 65-32 84 0l240 416zm-282-86a46 46 0 100 92 46 46 0 000-92zm-44-165l8 136c0 6 5 11 12 11h48c7 0 12-5 12-11l8-136c0-7-5-13-12-13h-64c-7 0-12 6-12 13z"/></svg></div><p>记录沉痛的失败</p></div>
+
+<h1 id="1-failure-1">1. Failure 1</h1>
+<p>今年4月找实习的时候被XX捞了，好不容易整到了二面，刁难人的智力题也回答来了，但倒在了手撕上：</p>
+<ol>
+<li>0-1背包问题</li>
+<li>腐烂的橘子</li>
+<li>大数乘法</li>
+<li>二叉树的右视图</li>
+</ol>
+<p>其实在这个时间点已经把hot100刷完了，还另外多刷了七八十道，想着手撕怎么也得<code>优势在我</code>，万万没想到tmd刷错了题单🤡。</p>
+<p>我刷的是所有题目中的题单<code>LeetCode 热题 HOT 100</code>，实际上hot100指的是<a href="https://leetcode.cn/studyplan/top-100-liked/" target="_blank" rel="noopener">LeetCode 热题 100</a>，但这里的2. 4.两道手撕都只在后者里才有。</p>
+<p>到这里已经暴露了两个问题：</p>
+<ol>
+<li>和一起找实习的人交流过少，连leetcode刷错了都不知道</li>
+<li>心理能力太差，二叉树的右视图不过是层序遍历取每一层的最后一个，当时太紧张没反应过来</li>
+</ol>
+<p>但事后还没有仔细反省，整天乐乐呵呵的，于是就导致了第二次惨剧。</p>
+<h1 id="2-failure-2">2. Failure 2</h1>
+<p>就在昨天，已经干到XX三面了，细细想来已经是第8次面XX了，没想到又倒在了手撕上：</p>
+<ol>
+<li>相邻数字合并打印</li>
+<li>快排递归改迭代</li>
+<li>序列化和反序列化N叉树</li>
+<li>大数乘法</li>
+</ol>
+<p>前面两道磕磕绊绊倒是做出来了，第三道实在是不会（结束一查leetcode会员题，草），重点又是这该死的<code>大数乘法</code>。</p>
+<p>人不能在一个地方跌倒两次，自在上一次失败后，我把大数乘法的解法狠狠刻在大脑，没想到这次正好被我碰上了，于是十分钟不到就自信地撕出来了，但面试官一句不能用vector又将我打入深渊&hellip;&hellip;</p>
+<p>大数乘法在leetcode里是叫<code>43. 字符串相乘</code>，题解中官方解法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Solution</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#ff79c6">public</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>    string multiply(string num1, string num2) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>        <span style="color:#ff79c6">if</span> (num1 <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;0&#34;</span> <span style="color:#ff79c6">||</span> num2 <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;0&#34;</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>            <span style="color:#ff79c6">return</span> <span style="color:#f1fa8c">&#34;0&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>        <span style="color:#8be9fd">int</span> m <span style="color:#ff79c6">=</span> num1.size(), n <span style="color:#ff79c6">=</span> num2.size();
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>        <span style="color:#ff79c6">auto</span> ansArr <span style="color:#ff79c6">=</span> vector<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">int</span><span style="color:#ff79c6">&gt;</span>(m <span style="color:#ff79c6">+</span> n);
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>        <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> m <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>; i <span style="color:#ff79c6">&gt;=</span> <span style="color:#bd93f9">0</span>; i<span style="color:#ff79c6">--</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>            <span style="color:#8be9fd">int</span> x <span style="color:#ff79c6">=</span> num1.at(i) <span style="color:#ff79c6">-</span> <span style="color:#f1fa8c">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>            <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> j <span style="color:#ff79c6">=</span> n <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>; j <span style="color:#ff79c6">&gt;=</span> <span style="color:#bd93f9">0</span>; j<span style="color:#ff79c6">--</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>                <span style="color:#8be9fd">int</span> y <span style="color:#ff79c6">=</span> num2.at(j) <span style="color:#ff79c6">-</span> <span style="color:#f1fa8c">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>                ansArr[i <span style="color:#ff79c6">+</span> j <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>] <span style="color:#ff79c6">+=</span> x <span style="color:#ff79c6">*</span> y;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>            }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>        <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> m <span style="color:#ff79c6">+</span> n <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>; i <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span>; i<span style="color:#ff79c6">--</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>            ansArr[i <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>] <span style="color:#ff79c6">+=</span> ansArr[i] <span style="color:#ff79c6">/</span> <span style="color:#bd93f9">10</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>            ansArr[i] <span style="color:#ff79c6">%=</span> <span style="color:#bd93f9">10</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>        <span style="color:#8be9fd">int</span> index <span style="color:#ff79c6">=</span> ansArr[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">?</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">:</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>        string ans;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>        <span style="color:#ff79c6">while</span> (index <span style="color:#ff79c6">&lt;</span> m <span style="color:#ff79c6">+</span> n) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span>            ans.push_back(ansArr[index]);
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span>            index<span style="color:#ff79c6">++</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span>        <span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> <span style="color:#ff79c6">&amp;</span><span style="color:#8be9fd;font-style:italic">c</span>: ans) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27</span><span>            c <span style="color:#ff79c6">+=</span> <span style="color:#f1fa8c">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29</span><span>        <span style="color:#ff79c6">return</span> ans;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30</span><span>    }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31</span><span>};
+</span></span></code></pre></div><p>思路非常清晰：</p>
+<ol>
+<li>从低位到高位依次相乘，将结果存在每一位应该在的位置，这里有个推论：第i位和第j位的乘积是在第i+j+1位</li>
+<li>这里由于是用vector<int>来存，不用在乘法过程中考虑进位，后面专门有个for循环来处理进位</li>
+<li>删除前导0，并收集结果</li>
+</ol>
+<p>如此清晰易懂很难让人不学习，但忽略了<code>使用string也可以达到相同的效果</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Solution</span> {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#ff79c6">public</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>    string multiply(string num1, string num2) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>        <span style="color:#ff79c6">if</span>(num1 <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;0&#34;</span> <span style="color:#ff79c6">||</span> num2 <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;0&#34;</span>) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>            <span style="color:#ff79c6">return</span> <span style="color:#f1fa8c">&#34;0&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>        <span style="color:#8be9fd">int</span> m <span style="color:#ff79c6">=</span> num1.size();
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>        <span style="color:#8be9fd">int</span> n <span style="color:#ff79c6">=</span> num2.size();
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>        
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>        string <span style="color:#50fa7b">res</span>(m <span style="color:#ff79c6">+</span> n, <span style="color:#f1fa8c">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>        <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> m <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>; i <span style="color:#ff79c6">&gt;=</span> <span style="color:#bd93f9">0</span>; <span style="color:#ff79c6">--</span>i) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>            <span style="color:#8be9fd">int</span> n1 <span style="color:#ff79c6">=</span> num1[i] <span style="color:#ff79c6">-</span> <span style="color:#f1fa8c">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>            <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> j <span style="color:#ff79c6">=</span> n <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>; j <span style="color:#ff79c6">&gt;=</span> <span style="color:#bd93f9">0</span>; <span style="color:#ff79c6">--</span>j) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>                <span style="color:#8be9fd">int</span> n2 <span style="color:#ff79c6">=</span> num2[j] <span style="color:#ff79c6">-</span> <span style="color:#f1fa8c">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>                <span style="color:#8be9fd">int</span> n3 <span style="color:#ff79c6">=</span> res[i <span style="color:#ff79c6">+</span> j <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>] <span style="color:#ff79c6">-</span> <span style="color:#f1fa8c">&#39;0&#39;</span> <span style="color:#ff79c6">+</span> n1 <span style="color:#ff79c6">*</span> n2;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>                res[i <span style="color:#ff79c6">+</span> j <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>] <span style="color:#ff79c6">=</span> n3 <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">10</span> <span style="color:#ff79c6">+</span> <span style="color:#f1fa8c">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>                res[i <span style="color:#ff79c6">+</span> j] <span style="color:#ff79c6">+=</span> n3 <span style="color:#ff79c6">/</span> <span style="color:#bd93f9">10</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>            }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span>        <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>; i <span style="color:#ff79c6">&lt;</span> m <span style="color:#ff79c6">+</span> n; <span style="color:#ff79c6">++</span>i) {
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span>            <span style="color:#ff79c6">if</span> (res[i] <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#39;0&#39;</span>) <span style="color:#ff79c6">return</span> res.substr(i);
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span><span>        }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span>        <span style="color:#ff79c6">return</span> <span style="color:#f1fa8c">&#34;0&#34;</span>;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27</span><span>    }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28</span><span>};
+</span></span></code></pre></div><p>这里思路大体相同，这里唯一要注意的是<code>一个char类型本质上也是存的整数，所以可以处理超过10的进位</code>。</p>
+<p>我太蠢了，以前当助教总因为别人不懂怎么把数字和字符相互转换扣别人的分，直到今天我才发现真正应该被扣分的人是我啊🤡。</p>
+<p>出来混，迟早要还，这下不但面试G了，还得泡池子😭，草啊！</p>
+
+        </div>
+    </div>
+    <a href="#" id="scrollToTopButton">
+        <svg t="1686753152588" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="3988" width="48" height="48">
+            <path
+                d="M518.5 360.3c-3.2-4.4-9.7-4.4-12.9 0l-178 246c-3.8 5.3 0 12.7 6.5 12.7H381c10.2 0 19.9-4.9 25.9-13.2L512 460.4l105.2 145.4c6 8.3 15.6 13.2 25.9 13.2H690c6.5 0 10.3-7.4 6.5-12.7l-178-246z"
+                p-id="3989" fill="#363636"></path>
+            <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                p-id="3990" fill="#363636"></path>
+        </svg>
+    </a><hr style="border-top: 1px solid #EEEEEE;">
+<div id="comment"></div>
+<script>
+    const getStoredTheme = () => localStorage.getItem("theme") === "dark" ? "dark" : "light";
+
+    const setGiscusTheme = () => {
+        const sendMessage = (message) => {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (iframe) {
+                iframe.contentWindow.postMessage({giscus: message}, 'https://giscus.app');
+            }
+        }
+        sendMessage({setConfig: {theme: getStoredTheme()}})
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const giscusAttributes = {
+            "src": "https://giscus.app/client.js",
+            "data-repo": "O-A-P\/O-A-P.github.io",
+            "data-repo-id": "R_kgDOJEfHWQ",
+            "data-category": "Announcements",
+            "data-category-id": "DIC_kwDOJEfHWc4CcDhX",
+            "data-mapping": "og:title",
+            "data-reactions-enabled": "1",
+            "data-emit-metadata": "0",
+            "data-input-position": "bottom",
+            "data-theme": getStoredTheme(),
+            "data-lang": "en",
+            "data-loading": "lazy",
+            "crossorigin": "anonymous",
+        };
+
+        
+        const giscusScript = document.createElement("script");
+        Object.entries(giscusAttributes).forEach(
+            ([key, value]) => giscusScript.setAttribute(key, value));
+        document.getElementById("comment").appendChild(giscusScript);
+
+        
+        const themeToggle = document.querySelector(".theme-toggle");
+        if (themeToggle) {
+            themeToggle.addEventListener("click", setGiscusTheme);
+        }
+    });
+
+</script>
+
+
+<div class="pp-container">
+        <section class="pre-and-post">
+            <div class="has-text-left">
+                
+                <p>Previous post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/travel/nanchang/">再会南昌</a>
+                
+            </div>
+            <div class="has-text-right ">
+                
+            </div>
+        </section>
+    </div>
+
+</div>
+
+        </main><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2024 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img')
+</script>
+
+  </footer></body>
+</html>
+
