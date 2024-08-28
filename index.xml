@@ -44,13 +44,6 @@
       <description>各司其职</description>
     </item>
     <item>
-      <title></title>
-      <link>https://o-a-p.github.io/book/</link>
-      <pubDate>Mon, 25 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://o-a-p.github.io/book/</guid>
-      <description>TODO</description>
-    </item>
-    <item>
       <title>About Me</title>
       <link>https://o-a-p.github.io/about/</link>
       <pubDate>Mon, 25 Dec 2023 00:00:00 +0000</pubDate>
@@ -101,10 +94,10 @@
     </item>
     <item>
       <title></title>
-      <link>https://o-a-p.github.io/post/database/mysql/</link>
+      <link>https://o-a-p.github.io/todo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://o-a-p.github.io/post/database/mysql/</guid>
-      <description></description>
+      <guid>https://o-a-p.github.io/todo/</guid>
+      <description> MySQL C++内存序 常用设计模式 去掉博客对外部资源的依赖 </description>
     </item>
     <item>
       <title>我的好东西</title>
