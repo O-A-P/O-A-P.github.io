@@ -85,5 +85,12 @@
       <guid>https://o-a-p.github.io/post/test/syntaxtest/</guid>
       <description>测试</description>
     </item>
+    <item>
+      <title></title>
+      <link>https://o-a-p.github.io/post/database/mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://o-a-p.github.io/post/database/mysql/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
