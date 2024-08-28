@@ -63,8 +63,8 @@ url = "/post"
 name = "Categories"
 url = "/categories"
 [[menu.main]]
-name = "Book"
-url = "/book"
+name = "Todo"
+url = "/todo"
 [[menu.main]]
 name = "Photo"
 url = "/photo"
