@@ -48,7 +48,7 @@
       <link>https://o-a-p.github.io/about/</link>
       <pubDate>Mon, 25 Dec 2023 00:00:00 +0000</pubDate>
       <guid>https://o-a-p.github.io/about/</guid>
-      <description>&amp;ldquo;苦逼找工仔&amp;rdquo;</description>
+      <description>&amp;ldquo;苦逼找工仔&amp;rdquo;&#xA;请各位在黑色主题下阅览此博客，白色太刺眼了，白色的主题适配我根本没做，而且还整出来了一点主题切换的小bug，但也是特性，想让大伙能够锁死在黑色主题上🤗</description>
     </item>
     <item>
       <title>6.S081：xv6 trap过程</title>
