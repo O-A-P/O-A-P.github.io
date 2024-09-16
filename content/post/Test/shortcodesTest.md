@@ -154,7 +154,8 @@ printf("123");
 {{<figure src="/img/author/head.jpg" title="大" caption="小">}}
 {{<figure src="/img/author/head.jpg" title="大" caption="小">}}
 
-
+# 16. Live Photo
+{{<livephoto id="food" photo="/livephoto/IMG_6785.jepg" video="/livephoto/IMG_6785.mov">}}
 # 参考
 [老哥1](https://lovir.cn/p/shortcodes/)
 
@@ -169,3 +170,5 @@ printf("123");
 [老哥6](https://immmmm.com/archives/)
 
 [老哥7](https://wdh.hk/docs/short-code/)
+
+[老哥8](https://ygria.site/hexo2hugo/)
