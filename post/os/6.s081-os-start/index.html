@@ -300,7 +300,7 @@
 <h1 id="1-kernelentrys_entry">1. kernel/entry.S:_entry</h1>
 <p>qemu使用<code>0x80000000</code>作为起始地址，_entry程序的任务是设置栈来使得xv6能够运行C代码（后续的C代码），因为初始没有栈的话即使是操作系统的C代码也不能执行（RISC-V的栈地址向下增长），现在可以运行C代码后，_entry调用kernel/start.c中的start程序。</p>
 <p>
-  <img src="/img/6.S081/callingStack.png" alt="">
+  <img loading="lazy" src="/img/6.S081/callingStack.png" alt="">
 </p>
 <h1 id="2-kernelstartcstart">2. kernel/start.c:start</h1>
 <p>在<code>Machine Mode</code>模式下执行一些特定的寄存器配置，随后待用mret指令从M-Mode进入<code>内核态</code>，并且跳转到内核态的main.c中的<code>main函数</code>。（mret使用前提是上一次系统调用是从内核态到MM的，作用是从MM到内核态，虽然在启动过程没有这个前提，但通过设置一些变量和寄存器可以模拟这样的前提）</p>
