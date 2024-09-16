@@ -214,6 +214,7 @@
     <li><a href="#13-分割线">13. 分割线</a></li>
     <li><a href="#14-表情包">14. 表情包</a></li>
     <li><a href="#15-图片带标题">15. 图片带标题</a></li>
+    <li><a href="#16-live-photo">16. Live Photo</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav></div>
@@ -1124,6 +1125,68 @@ function toggleCollapse(element) {
         </figcaption>
 </figure>
 </p>
+<h1 id="16-live-photo">16. Live Photo</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Photo Example</title>
+    <script src="https://cdn.apple-livephotoskit.com/lpk/1/livephotoskit.js"></script>
+</head>
+<body>
+    <div class="live-photo-container">
+        
+        <live-photo id="food" 
+                    photo-src="/livephoto/IMG_6785.jepg" 
+                    video-src="/livephoto/IMG_6785.mov" 
+                    style="width: 300px; height: 400px;">
+        </live-photo>
+    </div>
+
+    <style>
+    .live-photo-container {
+        text-align: center;  
+    }
+    </style>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            const livePhotoId = "food";
+            const player = LivePhotosKit.Player(document.getElementById(livePhotoId));
+
+            
+            player.photoSrc = "\/livephoto\/IMG_6785.jepg";
+            player.videoSrc = "\/livephoto\/IMG_6785.mov";
+
+            
+            player.addEventListener('canplay', evt => console.log('Player is ready', evt));
+            player.addEventListener('error', evt => console.log('Player load error', evt));
+            player.addEventListener('ended', evt => console.log('Player finished playing through', evt));
+
+            
+            player.playbackStyle = LivePhotosKit.PlaybackStyle.FULL;
+            player.play();
+
+            
+            player.addEventListener('error', (ev) => {
+                if (typeof ev.detail.errorCode === 'number') {
+                    switch (ev.detail.errorCode) {
+                    case LivePhotosKit.Errors.IMAGE_FAILED_TO_LOAD:
+                        console.error('Image failed to load');
+                        break;
+                    case LivePhotosKit.Errors.VIDEO_FAILED_TO_LOAD:
+                        console.error('Video failed to load');
+                        break;
+                    }
+                } else {
+                    console.error('Unexpected error:', ev.detail.error);
+                }
+            });
+        });
+    </script>
+</body>
 <h1 id="参考">参考</h1>
 <p><a href="https://lovir.cn/p/shortcodes/" target="_blank" rel="noopener">老哥1</a></p>
 <p><a href="https://www.sleepymoon.cyou/2023/hugo-shortcodes/" target="_blank" rel="noopener">老哥2</a></p>
@@ -1132,6 +1195,7 @@ function toggleCollapse(element) {
 <p><a href="https://www.sulvblog.cn/posts/blog/shortcodes/#64-%e5%8d%9a%e5%ae%a2%e6%96%87%e7%ab%a0%e5%86%85%e9%93%be" target="_blank" rel="noopener">老哥5</a></p>
 <p><a href="https://immmmm.com/archives/" target="_blank" rel="noopener">老哥6</a></p>
 <p><a href="https://wdh.hk/docs/short-code/" target="_blank" rel="noopener">老哥7</a></p>
+<p><a href="https://ygria.site/hexo2hugo/" target="_blank" rel="noopener">老哥8</a></p>
 
         </div>
     </div>
