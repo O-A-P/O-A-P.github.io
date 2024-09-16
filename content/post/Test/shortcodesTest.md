@@ -172,3 +172,5 @@ printf("123");
 [老哥7](https://wdh.hk/docs/short-code/)
 
 [老哥8](https://ygria.site/hexo2hugo/)
+
+[老哥9](https://blog.dejavu.moe/posts/hugo-shortcodes-word-count-with-books/)
