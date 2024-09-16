@@ -23,7 +23,7 @@ categories: ['Test']
 
 {{< gallery2 "img/6.S081">}}
 # 2. 豆瓣卡片
-支持neodb和原生豆瓣
+支持neodb和原生豆瓣（似乎有问题，依赖第三方api的果然不长久）
 ## 2.1 neodb
 {{< neodb "https://neodb.social/book/5SJvkuHNGL4XhBddW2J4EJ" >}}
 ## 2.2 原生豆瓣
