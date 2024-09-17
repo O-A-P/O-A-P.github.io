@@ -4,7 +4,7 @@ date: 2024-08-27T21:24:59+08:00
 summary: '"优势在我"'
 categories: ['Interview']
 draft: false
-images: ['/img/Failure/优势在我.png', '/img/Failure/joker0.gif']
+images: ['/img/Failure/优势在我.png', '/img/Failure/joker.gif']
 ---
 {{< notice notice-tip >}}
 2024-09-13 update
@@ -140,7 +140,7 @@ public:
 * 偶尔停下来思考也许能省去很多未来的烦恼
 * 失败倒是让人放平心态，面对现实，不再逃避，毕竟哪有事事如意
 
-说来说去好像都是一些细碎的念头，一边写一边遗憾地自娱自乐，不过好在如今都落在文字上也算进步，希望偶尔看到能提醒自己不再踩坑，继续前进。
+说来说去好像都是一些细碎的念头，一边写一边遗憾地自娱自乐，不过好在如今都落在文字上也算进步，希望偶尔再看能提醒自己不再踩坑，继续前进。
 
 
 {{< quote >}}
