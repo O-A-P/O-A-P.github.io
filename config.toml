@@ -99,7 +99,8 @@ lineNos = true
 lineNumbersInTable = false
 noClasses = true
 noHl = false
-style = 'dracula'
+style = 'catppuccin-macchiato'
+# style = 'dracula'
 tabWidth = 4
 [markup.tableOfContents]
 startLevel = 1
