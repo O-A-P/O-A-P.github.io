@@ -80,6 +80,9 @@
                 let id = headings[i].innerText.replace(/\./g, "").toLowerCase().replace(/\//g, "").replace(/\s/g, "-").replace(/[()]/g, '');
                 {{/*  let id = headings[i].innerText.replace(/[^\u4E00-\u9FA5a-zA-Z0-9\s]/g, '').toLowerCase().replace(/\s/g, "-");  */}}
                 let head = document.getElementById(id);
+                if (!head) {
+                    break
+                }
                 let rect = head.getBoundingClientRect();
                 // 获取视口的尺寸信息
                 {{/*  let viewportWidth = window.innerWidth || document.documentElement.clientWidth;  */}}
