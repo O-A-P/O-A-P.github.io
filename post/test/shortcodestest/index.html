@@ -259,6 +259,9 @@
                 let id = headings[i].innerText.replace(/\./g, "").toLowerCase().replace(/\//g, "").replace(/\s/g, "-").replace(/[()]/g, '');
                 
                 let head = document.getElementById(id);
+                if (!head) {
+                    break
+                }
                 let rect = head.getBoundingClientRect();
                 
                 
