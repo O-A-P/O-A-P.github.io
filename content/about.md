@@ -7,7 +7,7 @@ layout: about
 ---
 # 关于我
 ![](/img/author/head.jpg)
-* 人物：`"苦逼找工仔"`
+* 人物：~~`苦逼找工仔`~~，`苦逼打工仔`
 * 技能：C/C++, CMake, Linux, GDB, Git, MySQL, Vue, Java, SpringBoot, Qt, Python
 # 关于本站
 <!-- {{<headmap>}} -->
