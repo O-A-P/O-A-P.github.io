@@ -150,12 +150,23 @@ printf("123");
 {{< emoji name="nice2.gif" >}}
 
 # 15. 图片带标题
+1. 实现方式1
 {{<figure src="/img/author/head.jpg" title="大" caption="小">}}
 {{<figure src="/img/author/head.jpg" title="大" caption="小">}}
 {{<figure src="/img/author/head.jpg" title="大" caption="小">}}
 
+1. 实现方式2
+![](/img/author/head.jpg "head")
+
 # 16. Live Photo
 {{<livephoto id="food" photo="/livephoto/IMG_6785.jepg" video="/livephoto/IMG_6785.mov">}}
+
+# 17. 单行图文混排
+文字
+{{< inline-img "/img/company-logo/momenta-logo.png" >}}
+文字
+<!-- <img src="/img/company-logo/momenta-logo.png" style="display: inline-block; border-radius: 0px; height: 1rem; vertical-align: middle; margin-bottom: 0.15rem;"> -->
+
 # 参考
 [老哥1](https://lovir.cn/p/shortcodes/)
 
