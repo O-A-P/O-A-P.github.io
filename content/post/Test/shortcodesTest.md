@@ -150,7 +150,10 @@ printf("123");
 {{< divider "End" >}}
 {{< divider "end" >}}
 {{< divider "描述文字" >}}
-{{< divider "不是end则显示普通文字" >}}
+{{< divider "不是end或者bye则显示普通文字" >}}
+{{< divider "BYE" >}}
+{{< divider "Bye" >}}
+{{< divider "bye" >}}
 
 # 14. 表情包
 这玩意感觉和图片一样的

@@ -22,9 +22,16 @@
         font-family: 'Playwrite MX', cursive;
         font-size: 16px;
     }
+    .divider span.bye {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
 </style>
 <div class="divider">
     {{- if .Get 0 -}}
-    <span class="{{ if eq (lower (.Get 0)) "end" }}end{{ end }}">{{ .Get 0 }}</span>
+    <span class="{{ if eq (lower (.Get 0)) "end" }}end{{ else if eq (lower (.Get 0)) "bye" }}bye{{ else }}not-end-or-bye{{ end }}">
+  {{ .Get 0 }}
+</span>
+
     {{- end -}}
 </div>
