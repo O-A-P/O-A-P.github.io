@@ -35,9 +35,6 @@ categories: ['Test']
 
 {{< book url="https://book.douban.com/subject/27593007/" image="https://img3.doubanio.com/view/subject/s/public/s29632157.jpg" title="《H庄园的午餐》 [英] 阿加莎·克里斯蒂" rate="9.1" brief="一个英国版的红玫瑰与白玫瑰的故事。年轻美丽的埃莉诺•卡莱尔平静地站在被告席上。她是H庄园女主人韦尔曼太太的侄女，被控谋杀了她的情敌——H庄园门房的女儿玛丽•杰拉德。证据确凿：埃莉诺准备了那份致命午餐，也只有她拥有作案动机和时机。然而，在那个充满敌意的法庭上，只有一个人依然认为埃莉诺直到被证明有罪之前是清白的。赫尔克里•波洛挡在了埃莉诺和绞刑台之间……" tag="book" >}}
 
-{{< timeline date="2024-10-15" title="时间轴" description="这是一个时间轴" tags="标签"  >}}
-{{< timeline date="2024-10-16" title="时间轴" description="这是一个时间轴" tags="标签"  >}}
-
 # 3. spotify
 {{< spotify type="track" id="2D3gvohUyOfXIVX6Mvhqae" height="80px">}}
 # 4. 图片轮播
@@ -173,9 +170,13 @@ printf("123");
 
 # 17. 单行图文混排
 文字
-{{< inline-img "/img/company-logo/momenta-logo.png" >}}
+{{< inline-img "/img/company-logo/momenta_logo_white.svg" >}}
 文字
 <!-- <img src="/img/company-logo/momenta-logo.png" style="display: inline-block; border-radius: 0px; height: 1rem; vertical-align: middle; margin-bottom: 0.15rem;"> -->
+
+# 18. 时间轴
+{{< timeline date="2024-10-15" title="时间轴" description="这是一个时间轴" tags="标签"  >}}
+{{< timeline date="2024-10-16" title="时间轴" description="这是一个时间轴" tags="标签"  >}}
 
 # 参考
 [老哥1](https://lovir.cn/p/shortcodes/)
