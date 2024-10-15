@@ -27,7 +27,17 @@ categories: ['Test']
 ## 2.1 neodb
 {{< neodb "https://neodb.social/book/5SJvkuHNGL4XhBddW2J4EJ" >}}
 ## 2.2 原生豆瓣
+1. 实现方式1，目前已失效
+
 {{< neodb "https://book.douban.com/subject/36328704/" >}}
+
+1. 手动添加信息，目前有用，依赖豆瓣
+
+{{< book url="https://book.douban.com/subject/27593007/" image="https://img3.doubanio.com/view/subject/s/public/s29632157.jpg" title="《H庄园的午餐》 [英] 阿加莎·克里斯蒂" rate="9.1" brief="一个英国版的红玫瑰与白玫瑰的故事。年轻美丽的埃莉诺•卡莱尔平静地站在被告席上。她是H庄园女主人韦尔曼太太的侄女，被控谋杀了她的情敌——H庄园门房的女儿玛丽•杰拉德。证据确凿：埃莉诺准备了那份致命午餐，也只有她拥有作案动机和时机。然而，在那个充满敌意的法庭上，只有一个人依然认为埃莉诺直到被证明有罪之前是清白的。赫尔克里•波洛挡在了埃莉诺和绞刑台之间……" tag="book" >}}
+
+{{< timeline date="2024-10-15" title="时间轴" description="这是一个时间轴" tags="标签"  >}}
+{{< timeline date="2024-10-16" title="时间轴" description="这是一个时间轴" tags="标签"  >}}
+
 # 3. spotify
 {{< spotify type="track" id="2D3gvohUyOfXIVX6Mvhqae" height="80px">}}
 # 4. 图片轮播
