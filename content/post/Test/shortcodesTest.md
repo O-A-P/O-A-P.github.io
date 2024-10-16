@@ -45,7 +45,7 @@ tag="book" >}}
 # 6. ppt/pdf
 {{< ppt src="/pdf/A complete guide to Linux.pdf" >}}
 # 7. bilibili
-{{< bilibili BV1sz4y197L8 >}}
+{{< bilibili BV1i3411d7tL >}}
 # 8. youtube
 {{< youtube ghjOS7Q82s0 >}}
 # 9. 文字排版
