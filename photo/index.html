@@ -401,53 +401,36 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const lazyImages = document.querySelectorAll('img.lazy');
-  const maxConcurrent = 3;  
-  let loadingQueue = [];
-
-  function loadImage(img) {
-    return new Promise((resolve) => {
-      img.src = img.getAttribute('data-src');
-      img.onload = () => {
-        img.classList.remove('lazy');
-        img.parentElement.classList.add('visible');
-        resolve();
-      };
-    });
-  }
-
-  function processQueue() {
-    if (loadingQueue.length > 0) {
-      const img = loadingQueue.shift();
-      loadImage(img).then(() => {
-        waterfall('.gallery-photos');  
-        processQueue();  
-      });
-    }
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+  
+  
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        observer.unobserve(entry.target);
-        loadingQueue.push(entry.target);  
-        if (loadingQueue.length <= maxConcurrent) {
-          processQueue();  
-        }
+        const img = entry.target;
+        img.src = img.getAttribute('data-src');
+        img.onload = () => {
+          img.classList.remove('lazy');
+          img.parentElement.classList.add('visible'); 
+          waterfall('.gallery-photos'); 
+        };
+        observer.unobserve(img);
       }
     });
   });
 
-  lazyImages.forEach((img) => observer.observe(img));
+  lazyImages.forEach(img => observer.observe(img));
 
+  
   window.addEventListener('resize', () => {
     waterfall('.gallery-photos');
   });
 });
 </script>
 
-<script src="https://immmmm.com/waterfall.min.js" defer></script>
-<script src="https://immmmm.com/view-image.js" defer></script>
-<script src="https://immmmm.com/lately.min.js" defer></script>
+<script src="https://immmmm.com/waterfall.min.js"></script>
+<script src="https://immmmm.com/imgStatus.min.js"></script>
+<script src="https://immmmm.com/view-image.js"></script>
+<script src="https://immmmm.com/lately.min.js"></script>
 <script>
   window.Lately && Lately.init({ target: '.photo-time' });
   window.ViewImage && ViewImage.init('.gallery-photo img');
