@@ -5,7 +5,7 @@ summary: "测试"
 # tags: ['/img/test/下载.png']
 # heroimage: '/img/test/下载.png'
 images: ['/img/test/google.png', '/img/test/google.png']
-categories: ['Test']
+categories: ['Test', 'Shortcode']
 ---
 # 1. 画廊效果的两种实现
 ## 1.1 实现1
@@ -20,20 +20,21 @@ categories: ['Test']
 
 {{< /galleries >}}
 ## 1.2 实现2
-
 {{< gallery2 "img/6.S081">}}
 # 2. 豆瓣卡片
-支持neodb和原生豆瓣（似乎有问题，依赖第三方api的果然不长久）
+支持neodb和原生豆瓣（已失效，依赖第三方api的果然不长久）
 ## 2.1 neodb
 {{< neodb "https://neodb.social/book/5SJvkuHNGL4XhBddW2J4EJ" >}}
 ## 2.2 原生豆瓣
-1. 实现方式1，目前已失效
-
 {{< neodb "https://book.douban.com/subject/36328704/" >}}
-
-1. 手动添加信息，目前有用，依赖豆瓣
-
-{{< book url="https://book.douban.com/subject/27593007/" image="https://img3.doubanio.com/view/subject/s/public/s29632157.jpg" title="《H庄园的午餐》 [英] 阿加莎·克里斯蒂" rate="9.1" brief="一个英国版的红玫瑰与白玫瑰的故事。年轻美丽的埃莉诺•卡莱尔平静地站在被告席上。她是H庄园女主人韦尔曼太太的侄女，被控谋杀了她的情敌——H庄园门房的女儿玛丽•杰拉德。证据确凿：埃莉诺准备了那份致命午餐，也只有她拥有作案动机和时机。然而，在那个充满敌意的法庭上，只有一个人依然认为埃莉诺直到被证明有罪之前是清白的。赫尔克里•波洛挡在了埃莉诺和绞刑台之间……" tag="book" >}}
+## 2.3 手动添加信息，目前有用，依赖豆瓣
+{{< book 
+url="https://book.douban.com/subject/27593007/" 
+image="https://img3.doubanio.com/view/subject/s/public/s29632157.jpg" 
+title="H庄园的午餐" 
+rate="9.1" 
+brief="一个英国版的红玫瑰与白玫瑰的故事。年轻美丽的埃莉诺•卡莱尔平静地站在被告席上。她是H庄园女主人韦尔曼太太的侄女，被控谋杀了她的情敌——H庄园门房的女儿玛丽•杰拉德。证据确凿：埃莉诺准备了那份致命午餐，也只有她拥有作案动机和时机。然而，在那个充满敌意的法庭上，只有一个人依然认为埃莉诺直到被证明有罪之前是清白的。赫尔克里•波洛挡在了埃莉诺和绞刑台之间……" 
+tag="book" >}}
 
 # 3. spotify
 {{< spotify type="track" id="2D3gvohUyOfXIVX6Mvhqae" height="80px">}}
@@ -107,7 +108,7 @@ To see a world in a grain of sand. And a heaven in a wild flower. Hold infinity 
 
 # 11. 折叠
 
-{{< detail "折叠测试1" >}}
+{{< detail "折叠方式1" >}}
 ```c
 printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");printf("123");
 printf("123");
@@ -116,7 +117,7 @@ printf("123");
 ```
 {{< /detail >}}
 
-{{< fold-block "折叠测试2" >}}
+{{< fold-block "折叠方式2" >}}
 
 ~~这是折叠的内容～~~
 
