@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://o-a-p.github.io/post/tool/gdb/" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     
-    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.d0c9752f972ea3f425cfae14bc72af2281f9433899919e5794c5086420f4a4c1.css">
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.e8c0bfeb803dda8a2b499201b86ef467129cba52b50c3e68592d1b7ad130e2b1.css">
 
     
     <meta property="og:title" content="GDB命令" />
@@ -308,7 +308,7 @@
 <h2 id="21-断点设置">2.1 断点设置</h2>
 <p>使用GDB的前提是程序带有调试信息（<code>gcc -g</code>），如果没有调试信息使用gdb则会显示：</p>
 <p>
-  <img loading="lazy" src="/img/Tool/noDebuggingSymbols.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/noDebuggingSymbols.png" alt="">
 </p>
 <ul>
 <li>如果程序已经运行且还想调试的话，可以采用<code>ps -ef | grep 进程名</code>的方式来找到已运行程序的pid，进而使用<code>attach pid</code>的方式进行调试：<code>gdb a.out -p pid</code></li>
@@ -318,50 +318,50 @@
 </ul>
 <p>一般来讲第一个命令都可以直接使用首字母，且gdb命令行有自动补全，常见断点命令如下:
 
-  <img loading="lazy" src="/img/Tool/breakpoint.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/breakpoint.png" alt="">
 </p>
 <h2 id="22-查看变量信息">2.2 查看变量/信息</h2>
 <ol>
 <li>主动通过<code>print</code>来查看变量：
 
-  <img loading="lazy" src="/img/Tool/print.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/print.png" alt="">
 </li>
 <li>如果想查看内存可以通过<code>examine</code>来查看：
 
-  <img loading="lazy" src="/img/Tool/examine.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/examine.png" alt="">
 </li>
 <li>如果希望程序中断时自动显示某个变量的值可以使用<code>display</code>命令，相关命令如下：
 
-  <img loading="lazy" src="/img/Tool/display.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/display.png" alt="">
 </li>
 <li>堆栈/线程/栈帧/变量设置：
 
-  <img loading="lazy" src="/img/Tool/stack.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/stack.png" alt="">
 </li>
 <li>打印各种信息：
 
-  <img loading="lazy" src="/img/Tool/info.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/info.png" alt="">
 </li>
 </ol>
 <h2 id="23-单步调试">2.3 单步调试</h2>
 <p>
-  <img loading="lazy" src="/img/Tool/step.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/step.png" alt="">
 </p>
 <h2 id="24-多进程调试">2.4 多进程调试</h2>
 <p>
-  <img loading="lazy" src="/img/Tool/multiProcess.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/multiProcess.png" alt="">
 </p>
 <h2 id="25-多线程调试">2.5 多线程调试</h2>
 <p>
-  <img loading="lazy" src="/img/Tool/multiThread.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/multiThread.png" alt="">
 </p>
 <h2 id="26-查看源码">2.6 查看源码</h2>
 <p>
-  <img loading="lazy" src="/img/Tool/list.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/list.png" alt="">
 </p>
 <h2 id="27-tui界面">2.7 TUI界面</h2>
 <p>
-  <img loading="lazy" src="/img/Tool/layout.png" alt="">
+  <img loading="lazy" decoding="async" src="/img/Tool/layout.png" alt="">
 </p>
 
 
