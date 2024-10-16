@@ -40,53 +40,36 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const lazyImages = document.querySelectorAll('img.lazy');
-  const maxConcurrent = 3;  // 控制并发请求数量
-  let loadingQueue = [];
-
-  function loadImage(img) {
-    return new Promise((resolve) => {
-      img.src = img.getAttribute('data-src');
-      img.onload = () => {
-        img.classList.remove('lazy');
-        img.parentElement.classList.add('visible');
-        resolve();
-      };
-    });
-  }
-
-  function processQueue() {
-    if (loadingQueue.length > 0) {
-      const img = loadingQueue.shift();
-      loadImage(img).then(() => {
-        waterfall('.gallery-photos');  // Recalculate layout
-        processQueue();  // Process next image in the queue
-      });
-    }
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+  
+  // IntersectionObserver to trigger lazy loading
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        observer.unobserve(entry.target);
-        loadingQueue.push(entry.target);  // Add to the queue
-        if (loadingQueue.length <= maxConcurrent) {
-          processQueue();  // Start processing if under the limit
-        }
+        const img = entry.target;
+        img.src = img.getAttribute('data-src');
+        img.onload = () => {
+          img.classList.remove('lazy');
+          img.parentElement.classList.add('visible'); // Show the parent div
+          waterfall('.gallery-photos'); // Recalculate layout
+        };
+        observer.unobserve(img);
       }
     });
   });
 
-  lazyImages.forEach((img) => observer.observe(img));
+  lazyImages.forEach(img => observer.observe(img));
 
+  // Recalculate layout on window resize
   window.addEventListener('resize', () => {
     waterfall('.gallery-photos');
   });
 });
 </script>
 
-<script src="https://immmmm.com/waterfall.min.js" defer></script>
-<script src="https://immmmm.com/view-image.js" defer></script>
-<script src="https://immmmm.com/lately.min.js" defer></script>
+<script src="https://immmmm.com/waterfall.min.js"></script>
+<script src="https://immmmm.com/imgStatus.min.js"></script>
+<script src="https://immmmm.com/view-image.js"></script>
+<script src="https://immmmm.com/lately.min.js"></script>
 <script>
   window.Lately && Lately.init({ target: '.photo-time' });
   window.ViewImage && ViewImage.init('.gallery-photo img');
