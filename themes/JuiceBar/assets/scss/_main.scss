@@ -85,6 +85,10 @@ input {
   padding-left: 1rem;
 }
 
+input[type="checkbox"] {
+  width: auto;
+}
+
 input:focus {
   outline: none;
   border: 2px solid;

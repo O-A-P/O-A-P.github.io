@@ -130,6 +130,9 @@ Tables aren’t part of the core Markdown spec, but Hugo supports supports them 
   - Milk
   - Cheese
 
+## 单词解释
+term
+: definition
 ## 图片
 ![图标](/img/author/head.jpg)
 
