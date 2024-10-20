@@ -9,4 +9,47 @@
     </div>
    
 </div>
+
+<style>
+
+li::marker {
+    content: ''; /* 隐藏标记 */
+}
+
+input[type="checkbox"] {
+    appearance: none; /* 移除默认样式 */
+    width: 1.2rem;      /* 自定义宽度 */
+    height: 1.2rem;     /* 自定义高度 */
+    border: 2px solid #000000; /* 边框颜色 */
+    border-radius: 5px; /* 圆角 */
+    background-color: transparent; /* 默认背景 */
+    position: relative; /* 用于放置勾选标记 */
+}
+
+.dark-mode input[type="checkbox"] {
+    border: 2px solid #FFFFFF; /* 边框颜色 */
+}
+
+input[type="checkbox"]:checked {
+    background-color: green; /* 选中时背景为绿色 */
+}
+
+input[type=checkbox]{
+    vertical-align: text-bottom;
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    width: 5px; /* 勾的宽度 */
+    height: 10px; /* 勾的高度 */
+    border: solid white; /* 勾的颜色为白色 */
+    border-width: 0 2px 2px 0; /* 勾的样式 */
+    transform: rotate(45deg); /* 旋转成勾的形状 */
+    left: 40%;
+    top: 16%;
+}
+
+
+</style>
 {{ end }}
