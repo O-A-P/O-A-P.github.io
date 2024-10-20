@@ -3,7 +3,7 @@ title: "CSAPP：bomb lab"
 date: 2024-02-20T20:48:54+08:00
 summary: '开始你的炸弹秀'
 categories: ['x86-asm', 'CSAPP']
-images: ['/img/CSAPP/bomb.png', '/img/CSAPP/lbw.jfif']
+images: ['/img/CSAPP/bomb.png', '/img/CSAPP/lbw.jpg']
 ---
 {{< simple-notice simple-notice-note >}}
 题意很简单，题目给出一个二进制可执行文件，要求通过反汇编等一系列破解六个密码。
