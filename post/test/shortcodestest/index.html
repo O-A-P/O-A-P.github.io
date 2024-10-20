@@ -888,12 +888,16 @@ if(galleryPhotos){
     transition: background-color 0.3s ease;
     color: var(--header-text-color);
     background-color: var(--header-bg-color);
-    border: 1px solid #ccc;  
+    border: 1px solid #000000;  
     border-radius: 0.5rem;  
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+}
+
+.dark-mode .collapse-header {
+    border: 1px solid #FFFFFF;
 }
 
 .collapse-header:hover {
@@ -908,7 +912,7 @@ if(galleryPhotos){
 }
 
 .collapse-content {
-    padding: 0 8px;
+    padding: 0px;
     height: 0;
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0);  
@@ -917,7 +921,7 @@ if(galleryPhotos){
 
 .collapse-content.show {
     height: auto;
-    padding: 8px;
+    padding: 0px;
     overflow: visible;
 }
 
@@ -953,7 +957,7 @@ function toggleCollapse(element) {
         content.classList.remove('show');
         arrow.style.transform = 'rotate(0deg)';
     } else {
-        content.style.height = content.scrollHeight + 'px';
+        content.style.height = content.scrollHeight + 10 + 'px';
         content.classList.add('show');
         arrow.style.transform = 'rotate(90deg)';
     }

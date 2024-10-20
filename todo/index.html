@@ -8,7 +8,7 @@
     
     <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
     <meta name="description"
-        content=" MySQL优化相关 C&#43;&#43;内存序 常用设计模式 去掉博客对外部资源的依赖 增加livephoto短代码 增加分割线对bye的支持 增加单行图文混排短代码 修复豆瓣图文api失效问题 修复主页卡片在浅色模式不可见问题 "> 
+        content=" MySQL优化相关 常用设计模式 去掉博客对外部资源的依赖 👉 DoneC&#43;&#43;内存序 增加livephoto短代码 增加分割线对bye的支持 增加单行图文混排短代码 修复豆瓣图文api失效问题 修复主页卡片在浅色模式不可见问题 优化主页卡片样式 优化Todo页面checkbox样式 "> 
 
     <link rel="canonical" href="https://o-a-p.github.io/todo/" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
@@ -17,7 +17,7 @@
 
     
     <meta property="og:title" content="" />
-<meta property="og:description" content=" MySQL优化相关 C&#43;&#43;内存序 常用设计模式 去掉博客对外部资源的依赖 增加livephoto短代码 增加分割线对bye的支持 增加单行图文混排短代码 修复豆瓣图文api失效问题 修复主页卡片在浅色模式不可见问题 " />
+<meta property="og:description" content=" MySQL优化相关 常用设计模式 去掉博客对外部资源的依赖 👉 DoneC&#43;&#43;内存序 增加livephoto短代码 增加分割线对bye的支持 增加单行图文混排短代码 修复豆瓣图文api失效问题 修复主页卡片在浅色模式不可见问题 优化主页卡片样式 优化Todo页面checkbox样式 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://o-a-p.github.io/todo/" /><meta property="article:section" content="" />
 
@@ -25,7 +25,7 @@
 
 
     <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
-<meta name="twitter:description" content=" MySQL优化相关 C&#43;&#43;内存序 常用设计模式 去掉博客对外部资源的依赖 增加livephoto短代码 增加分割线对bye的支持 增加单行图文混排短代码 修复豆瓣图文api失效问题 修复主页卡片在浅色模式不可见问题 "/>
+<meta name="twitter:description" content=" MySQL优化相关 常用设计模式 去掉博客对外部资源的依赖 👉 DoneC&#43;&#43;内存序 增加livephoto短代码 增加分割线对bye的支持 增加单行图文混排短代码 修复豆瓣图文api失效问题 修复主页卡片在浅色模式不可见问题 优化主页卡片样式 优化Todo页面checkbox样式 "/>
 
     
     
@@ -159,20 +159,165 @@
         <div class="content about-content">
             <ul>
 <li><input disabled="" type="checkbox"> MySQL优化相关</li>
-<li><input checked="" disabled="" type="checkbox"> C++内存序</li>
 <li><input disabled="" type="checkbox"> 常用设计模式</li>
 <li><input disabled="" type="checkbox"> 去掉博客对外部资源的依赖</li>
+</ul>
+
+
+<div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="collapse-arrow">👉</span> <strong>Done</strong>
+    </div>
+    <div class="collapse-content">
+        <ul>
+<li><input checked="" disabled="" type="checkbox"> C++内存序</li>
 <li><input checked="" disabled="" type="checkbox"> 增加livephoto短代码</li>
 <li><input checked="" disabled="" type="checkbox"> 增加分割线对bye的支持</li>
 <li><input checked="" disabled="" type="checkbox"> 增加单行图文混排短代码</li>
 <li><input checked="" disabled="" type="checkbox"> 修复豆瓣图文api失效问题</li>
 <li><input checked="" disabled="" type="checkbox"> 修复主页卡片在浅色模式不可见问题</li>
+<li><input checked="" disabled="" type="checkbox"> 优化主页卡片样式</li>
+<li><input checked="" disabled="" type="checkbox"> 优化Todo页面checkbox样式</li>
 </ul>
+
+</div>
+
+<style>
+.collapse-block {
+    margin-top: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.collapse-header {
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: var(--header-text-color);
+    background-color: var(--header-bg-color);
+    border: 1px solid #000000;  
+    border-radius: 0.5rem;  
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.dark-mode .collapse-header {
+    border: 1px solid #FFFFFF;
+}
+
+.collapse-header:hover {
+    background-color: var(--header-bg-hover);
+    color: var(--header-text-hover);
+}
+
+.collapse-arrow {
+    float: left;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.collapse-content {
+    padding: 0px;
+    height: 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0);  
+    transition: height 0.5s ease-out, padding 0.3s ease-out;
+}
+
+.collapse-content.show {
+    height: auto;
+    padding: 0px;
+    overflow: visible;
+}
+
+ 
+@media (prefers-color-scheme: light) {
+    .collapse-header {
+        color: white;
+        background-color: black;
+    }
+    
+    .collapse-header:hover {
+        background-color: #80808020;  
+    }
+}
+
+ 
+@media (prefers-color-scheme: dark) {
+     
+    
+    .collapse-header:hover {
+        background-color: #80808020;  
+    }
+}
+</style>
+
+<script>
+function toggleCollapse(element) {
+    var content = element.nextElementSibling;
+    var arrow = element.querySelector('.collapse-arrow');
+
+    if (content.classList.contains('show')) {
+        content.style.height = '0';
+        content.classList.remove('show');
+        arrow.style.transform = 'rotate(0deg)';
+    } else {
+        content.style.height = content.scrollHeight + 10 + 'px';
+        content.classList.add('show');
+        arrow.style.transform = 'rotate(90deg)';
+    }
+}
+</script>
 
         </div>
     </div>
    
 </div>
+
+<style>
+
+li::marker {
+    content: '';  
+}
+
+input[type="checkbox"] {
+    appearance: none;  
+    width: 1.2rem;       
+    height: 1.2rem;      
+    border: 2px solid #000000;  
+    border-radius: 5px;  
+    background-color: transparent;  
+    position: relative;  
+}
+
+.dark-mode input[type="checkbox"] {
+    border: 2px solid #FFFFFF;  
+}
+
+input[type="checkbox"]:checked {
+    background-color: green;  
+}
+
+input[type=checkbox]{
+    vertical-align: text-bottom;
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    width: 5px;  
+    height: 10px;  
+    border: solid white;  
+    border-width: 0 2px 2px 0;  
+    transform: rotate(45deg);  
+    left: 40%;
+    top: 16%;
+}
+
+
+</style>
 
         </main><footer class="footer">
     <div class="content has-text-centered">
