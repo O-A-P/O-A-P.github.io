@@ -15,6 +15,36 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
 
+
+.div-hover {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: #000000;
+  cursor: pointer;
+}
+
+.dark-mode .div-hover  {
+  color: #FFFFFF;
+}
+ 
+.div-hover::before {
+  content: '';
+  position: absolute;
+  left: -140%;
+  width: 100%;
+  height: 100%;
+  transform: skew(-30deg);
+  background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transition: all 0.5s;
+}
+ 
+.div-hover:hover::before {
+  left: 110%;
+}
+
 .myCard {
     min-width: 300px;
     width: 12vw;
