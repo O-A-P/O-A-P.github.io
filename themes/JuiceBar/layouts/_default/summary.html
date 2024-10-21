@@ -26,10 +26,10 @@
     </div>  */}}
     <div class="myImgContainer">
       {{/*  <img src="{{ .Params.heroimage }}" alt="pic" style="border-radius: 10px;">  */}}
-      <img src="{{ index .Params.images 1 }}" alt="pic" style="border-radius: 10px;">
+      <img src="{{ index .Params.images 1 }}" alt="pic" style="border-radius: 10px; margin-top: 10%; max-width: 100%; max-height: 100%">
     </div>
-    <div class="myTitle hover-underline-animation">
-      <div class="myWrapper">
+    <div class="myTitle">
+      <div class="myWrapper hover-underline-animation">
         {{ .Title }}
       </div>
     </div>
@@ -43,14 +43,16 @@
 
 <script>
   VanillaTilt.init(document.querySelectorAll(".myCard"), {
-      max: 25, // 最大倾斜度数
+      max: 30, // 最大倾斜度数
       speed: 2000, // 倾斜转换速度
       glare: true,    // 是否开启炫光效果
-      "max-glare": 0.01, // 炫光效果最大不透明度
+      "max-glare": 0.1, // 炫光效果最大不透明度
       gyroscope: true,
+      gyroscopeMinAngleX: -45,
+      gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45,
+      gyroscopeMaxAngleY: 45,
       "reset-to-start": true,
-      "disableOnMobile": true,
-      "disableOnTouchDevices": true,
       "preventClick": true,
   });
 
