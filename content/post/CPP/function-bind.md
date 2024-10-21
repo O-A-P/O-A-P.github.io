@@ -94,9 +94,9 @@ foo foo1;
 auto f3 = bind(&foo::add, foo1, 10, 20);
 cout << f3() << endl; // 30
 ```
-第一个参数仍然是函数地址，但不同的是多一个取地址符号，第二个参数则是实例对象。
+第一个参数仍然是函数地址，但不同的是多一个取地址符号，类成员函数通过&来标明这是一个成员函数，第二个参数则是实例对象。
 foo1如果要以引用的方式传递的时候，或者说要更改foo1内部数据的时候，要以引用`(std::ref)`的方式传递。
-类成员函数通过&来标明这是一个成员函数。
+
 
 ## 2.3 类静态函数
 static函数属于类，所以无需对象也可调用，因此不用添加&。
@@ -148,17 +148,16 @@ int main() {
     Foo foo(10);
 
     // 创建一个 std::function 对象 f_num，它可以接受 Foo 类型的引用并返回 int 类型的值
-    // 这里 &Foo::num_ 是指向 Foo 类数据成员 num_ 的指针
-    std::function<int(Foo const&)> f_num = &Foo::num_;
+    std::function<int(const Foo&)> f_num = &Foo::num_;
 
     // 通过传入 foo 对象的引用，使用 f_num 来获取 foo 对象的 num_ 成员变量的值
-    std::cout << "num_: " << f_num(foo) << '\n'; // 输出：num_: 10
+    std::cout << "num_: " << f_num(foo) << '\n'; // num_: 10
 
     return 0;
 }
 
 ```
-没想到居然还能访问数据成员。
+没想到居然还能访问数据成员，倒是一种用法。
 # 3. 参考
 1. https://www.bilibili.com/video/BV1bm41197XV/?spm_id_from=333.788&vd_source=71ee144274d993f1c946fc98badf272d
 1. https://www.cnblogs.com/Philip-Tell-Truth/p/5814213.html
