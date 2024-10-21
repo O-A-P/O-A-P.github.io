@@ -131,7 +131,7 @@ function<bool(const int &)> f1 = [](const int &a) { return a; };
 // 仿函数，这里的foo()是创建临时对象，而非调用函数
 function<bool(const int &)> f2 = foo();
 ```
-# 2.4 访问类的成员
+## 2.4 访问类的成员
 例子来自cpp reference，感觉很奇怪：
 ```c++
 #include <iostream>
