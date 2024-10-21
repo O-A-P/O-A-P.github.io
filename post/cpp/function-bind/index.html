@@ -195,9 +195,9 @@
         <li><a href="#21-普通函数">2.1 普通函数</a></li>
         <li><a href="#22-类成员函数">2.2 类成员函数</a></li>
         <li><a href="#23-类静态函数">2.3 类静态函数</a></li>
+        <li><a href="#24-访问类的成员">2.4 访问类的成员</a></li>
       </ul>
     </li>
-    <li><a href="#24-访问类的成员">2.4 访问类的成员</a></li>
     <li><a href="#3-参考">3. 参考</a></li>
   </ul>
 </nav></div>
@@ -498,7 +498,7 @@ foo1如果要以引用的方式传递的时候，或者说要更改foo1内部数
 </span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8087a2">2</span><span><span style="color:#6e738d;font-style:italic"></span>function<span style="color:#91d7e3;font-weight:bold">&lt;</span><span style="color:#ed8796">bool</span>(<span style="color:#c6a0f6">const</span> <span style="color:#ed8796">int</span> <span style="color:#91d7e3;font-weight:bold">&amp;</span>)<span style="color:#91d7e3;font-weight:bold">&gt;</span> f1 <span style="color:#91d7e3;font-weight:bold">=</span> [](<span style="color:#c6a0f6">const</span> <span style="color:#ed8796">int</span> <span style="color:#91d7e3;font-weight:bold">&amp;</span>a) { <span style="color:#c6a0f6">return</span> a; };
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8087a2">3</span><span><span style="color:#6e738d;font-style:italic">// 仿函数，这里的foo()是创建临时对象，而非调用函数
 </span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8087a2">4</span><span><span style="color:#6e738d;font-style:italic"></span>function<span style="color:#91d7e3;font-weight:bold">&lt;</span><span style="color:#ed8796">bool</span>(<span style="color:#c6a0f6">const</span> <span style="color:#ed8796">int</span> <span style="color:#91d7e3;font-weight:bold">&amp;</span>)<span style="color:#91d7e3;font-weight:bold">&gt;</span> f2 <span style="color:#91d7e3;font-weight:bold">=</span> foo();
-</span></span></code></pre></div><h1 id="24-访问类的成员">2.4 访问类的成员</h1>
+</span></span></code></pre></div><h2 id="24-访问类的成员">2.4 访问类的成员</h2>
 <p>例子来自cpp reference，感觉很奇怪：</p>
 <div class="highlight"><pre tabindex="0" style="color:#cad3f5;background-color:#24273a;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8087a2"> 1</span><span><span style="color:#6e738d;font-style:italic">#include</span> <span style="color:#6e738d;font-weight:bold;font-style:italic">&lt;iostream&gt;</span><span style="color:#6e738d;font-style:italic">
 </span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8087a2"> 2</span><span><span style="color:#6e738d;font-style:italic">#include</span> <span style="color:#6e738d;font-weight:bold;font-style:italic">&lt;functional&gt;</span><span style="color:#6e738d;font-style:italic">
