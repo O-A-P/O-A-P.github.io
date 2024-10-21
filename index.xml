@@ -55,7 +55,7 @@
       <link>https://o-a-p.github.io/about/</link>
       <pubDate>Mon, 25 Dec 2023 00:00:00 +0000</pubDate>
       <guid>https://o-a-p.github.io/about/</guid>
-      <description>关于我 人物：苦逼找工仔，苦逼打工仔 技能：C/C++, CMake, Linux, GDB, Git, MySQL, Vue, Java, SpringBoot, Qt, Python 关于本站 请各位在深色主题下阅览此博客，浅色太刺眼了，所以浅色主题适配只做了一点点，而且还整出来了一点主题切换的小bug，但也是特性，让大伙能够锁死在深色主题上🤗 相册懒加载不好使，加上本来就是白嫖github，所以Photo加载会有点慢，理解万岁🙂 所有文章加起来约 13,268 字&#xD;相当于一本 《断魂枪》&#xD;</description>
+      <description>关于我 人物：苦逼找工仔，苦逼打工仔 技能：C/C++, CMake, Linux, GDB, Git, MySQL, Vue, Java, SpringBoot, Qt, Python 关于本站 请各位在深色主题下阅览此博客，浅色太刺眼了，所以浅色主题适配只做了一点点，而且还整出来了一点主题切换的小bug，但也是特性，让大伙能够锁死在深色主题上🤗 相册懒加载不好使，加上本来就是白嫖github，所以Photo加载会有点慢，理解万岁🙂 所有文章加起来约 13,258 字&#xD;相当于一本 《断魂枪》&#xD;</description>
     </item>
     <item>
       <title>6.S081：xv6 trap过程</title>
