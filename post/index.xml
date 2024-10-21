@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 超级码里奥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 27 Aug 2024 21:24:59 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 21 Oct 2024 14:55:00 +0800</lastBuildDate>
     <atom:link href="https://o-a-p.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;: functional</title>
+      <link>https://o-a-p.github.io/post/cpp/function-bind/</link>
+      <pubDate>Mon, 21 Oct 2024 14:55:00 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/cpp/function-bind/</guid>
+      <description>function &amp;amp; bind</description>
+    </item>
     <item>
       <title>记两次失败的面试</title>
       <link>https://o-a-p.github.io/post/failure/two-failed-interviews/</link>
