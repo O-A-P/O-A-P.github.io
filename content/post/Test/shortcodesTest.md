@@ -171,7 +171,7 @@ printf("123");
 ![](/img/author/head.jpg "head")
 
 # 16. Live Photo
-{{<livephoto id="food" photo="/livephoto/IMG_6785.jepg" video="/livephoto/IMG_6785.mov">}}
+{{<livephoto id="food" path="/livephoto/树">}}
 
 # 17. 单行图文混排
 文字
