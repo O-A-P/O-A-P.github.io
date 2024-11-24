@@ -24,10 +24,6 @@ categories: ['Test', 'Shortcode']
 # 2. 豆瓣卡片
 ## 2.1 neodb
 支持neodb和原生豆瓣（已失效，依赖第三方api的果然不长久）
-1. neodb link
-{{< neodb "https://neodb.social/book/5SJvkuHNGL4XhBddW2J4EJ" >}}
-2. douban link
-{{< neodb "https://book.douban.com/subject/36328704/" >}}
 ## 2.2 手动添加信息，目前有用，依赖豆瓣
 {{< book 
 url="https://book.douban.com/subject/27593007/" 
