@@ -1,6 +1,6 @@
 {{ $scratch := newScratch }}
 {{ if eq (.Get 0) "posts" }}
-  {{ range (where .Site.RegularPages "Type" "in" "posts") }}
+  {{ range (where .Site.RegularPages "Type" "in" "post") }}
     {{ $scratch.Add "wordcount" .WordCount }}
   {{ end }}
 {{ else if eq (.Get 0) "weekly" }}
