@@ -62,9 +62,10 @@ url = "/post"
 [[menu.main]]
 name = "Categories"
 url = "/categories"
-[[menu.main]]
-name = "Todo"
-url = "/todo"
+# 暂时去掉todo页面
+# [[menu.main]]
+# name = "Todo"
+# url = "/todo"
 [[menu.main]]
 name = "Photo"
 url = "/photo"
