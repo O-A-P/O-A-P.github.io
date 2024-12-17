@@ -20,12 +20,7 @@ layout: about
 * `所有文章`加起来约 {{< wordCount "posts" >}}
 
 # 友链
-* [Mike](https://maisblog.cn/)
+* Mike - [麦的视界](https://maisblog.cn/)
+* ynj23 - [nj](https://ynj23.github.io/Blog/)
 
 
-<style>
-li a {
-    color: #92c3eb !important;
-    border-bottom: 1px solid;
-}
-</style>
