@@ -4,6 +4,7 @@ theme = "JuiceBar"
 title = "超级码里奥"
 
 paginate = 3
+hasCJKLanguage = true
 
 
 [params]

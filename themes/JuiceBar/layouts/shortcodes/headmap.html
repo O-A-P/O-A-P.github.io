@@ -1,6 +1,5 @@
 <div id="heatmap" style="
-  max-width: 1900px;
-  height: 180px;
+  height: 200px;
   padding: 2px;
   text-align: center;
   "
@@ -27,7 +26,6 @@
     var wordCount = {{ .WordCount }};
     var link = {{ .RelPermalink}};
     var title = {{ .Title }};
-    
     // multiple posts in same day
     if (value == null) {
       dataMap.set(key, [{wordCount, link, title}]);
@@ -88,7 +86,11 @@
     title: {
         top: 0,
         left: 'center',
-        text: '博客热力图'
+        text: '博客热力图',
+        textStyle: { // Add textStyle to change title color
+          color: '#e3e3e3',
+          fontFamily: 'lxgw wenkai screen'
+        }
     },
     tooltip: {
       hideDelay: 1000,
@@ -102,7 +104,7 @@
             var link = post.link;
             var title = post.title;
             var wordCount = (post.wordCount / 1000).toFixed(1);
-            content += `<a href="${link}" target="_blank">${title} | ${wordCount} k</a>`
+            content += `<a style="color: black; font-family: lxgw wenkai screen;" href="${link}" target="_blank">${title} | ${wordCount} k</a>`
         }
         return content;
       }
@@ -113,14 +115,19 @@
         type: 'piecewise',
         orient: 'horizontal',
         left: 'center',
-        top: 30,
-        
+        top: 30,  
         inRange: {   
           //  [floor color, ceiling color]
-          color: ['#7aa8744c', '#7AA874' ] 
+          color: ['#0E4429', '#39D353' ] 
         },
         splitNumber: 4,
         text: ['千字', ''],
+        textStyle: {
+          color: '#e3e3e3',
+          fontFamily: 'lxgw wenkai screen',
+          borderJoin: 'round',
+          borderCap: 'round',
+        },
         showLabel: true,
         itemGap: 20,
     },
@@ -128,12 +135,19 @@
         top: 80,
         left: 20,
         right: 4,
-        cellSize: ['auto', 13],
+        cellSize: ['auto', 'auto'],
         range: getRangeArr(),
         itemStyle: {
-            color: '#F1F1F1',
+            color: '#161B22',
             borderWidth: 1.5,
-            borderColor: '#fff',
+            borderColor: '#000',
+        },
+        dayLabel: {
+          color: '#e3e3e3',
+          // fontStyle: 'oblique',
+          // fontWeight: 'bold',
+          fontFamily: 'lxgw wenkai screen',
+          nameMap: ['', '一', '', '三', '', '五', ''],
         },
         yearLabel: { show: false },
         // the splitline between months. set to transparent for now.
