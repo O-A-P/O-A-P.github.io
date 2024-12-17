@@ -111,8 +111,8 @@
     },
     visualMap: {
         min: 0,
-        max: 10,
-        type: 'piecewise',
+        max: 15,
+        type: 'continuous',
         orient: 'horizontal',
         left: 'center',
         top: 30,  
@@ -120,14 +120,16 @@
           //  [floor color, ceiling color]
           color: ['#0E4429', '#39D353' ] 
         },
-        splitNumber: 4,
-        text: ['千字', ''],
+        splitNumber: 10,
+        text: ['More', 'Less'],
         textStyle: {
           color: '#e3e3e3',
           fontFamily: 'lxgw wenkai screen',
           borderJoin: 'round',
           borderCap: 'round',
         },
+        itemWidth: 10,
+        itemHeight: 200,
         showLabel: true,
         itemGap: 20,
     },
