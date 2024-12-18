@@ -182,6 +182,11 @@ printf("123");
 # 19. 热力图
 {{<headmap2>}}
 
+# 20. 友链
+{{< friend name="OAP" url="https://o-a-p.github.io/" logo="https://o-a-p.github.io/img/author/head.jpg" word="我自己" >}}
+
+
+
 # 参考
 [老哥1](https://lovir.cn/p/shortcodes/)
 
@@ -208,3 +213,5 @@ printf("123");
 [老哥12](https://blog.douchi.space/hugo-blog-heatmap/?ref=cms.1900.live#gsc.tab=0)
 
 [老哥13](https://www.eallion.com/blog-heatmap/)
+
+[老哥14](https://blog.233so.com/2020/04/friend-link-shortcodes-for-hugo-loveit/)

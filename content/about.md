@@ -20,7 +20,7 @@ layout: about
 * `所有文章`加起来约 {{< wordCount "posts" >}}
 
 # 友链
-* Mike - [麦的视界](https://maisblog.cn/)
-* ynj23 - [nj](https://ynj23.github.io/Blog/)
+{{< friend name="Mike" url="https://maisblog.cn/" logo="https://www.maisblog.cn/usr/themes/handsome/assets/img/avatar.jpg" word="麦的视界" >}}
+{{< friend name="nj" url="https://ynj23.github.io/Blog/" logo="https://ynj23.github.io/Blog/img/avatar_hu5009685387467227868.png" word="nj" >}}
 
 
