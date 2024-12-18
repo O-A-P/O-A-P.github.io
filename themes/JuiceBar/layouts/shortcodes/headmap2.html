@@ -91,7 +91,9 @@
                 // 标签的位置
                 position: 'right',
                 // 我这里不想让他显示标签所以设置的null（但是不起作用，最后我通过css隐藏的）
-                text: null
+                text: null,
+                // 这一行取消就是英文
+                // label: { text: 'M月', textAlign: 'middle', position: 'bottom' },
             },
             // 设置子数据
             subDomain: {
@@ -111,7 +113,9 @@
                 // 从合适开始展示数据，我们之前定义的startDate为2个月
                 start: startDate,
                 // 开始时间设置为周一
-                locale: { weekStart: 1 },
+                locale: { 
+                    weekStart: 1
+                },
             },
             // 设置数据部分
             data: {
