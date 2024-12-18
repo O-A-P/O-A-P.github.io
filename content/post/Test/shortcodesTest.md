@@ -179,6 +179,9 @@ printf("123");
 {{< timeline date="2024-10-15" title="时间轴" description="这是一个时间轴" tags="标签"  >}}
 {{< timeline date="2024-10-16" title="时间轴" description="这是一个时间轴" tags="标签"  >}}
 
+# 19. 热力图
+{{<headmap2>}}
+
 # 参考
 [老哥1](https://lovir.cn/p/shortcodes/)
 
@@ -199,3 +202,9 @@ printf("123");
 [老哥9](https://blog.dejavu.moe/posts/hugo-shortcodes-word-count-with-books/)
 
 [老哥10](https://www.xalaok.top/post/blog-modify/)
+
+[老哥11](https://1900.live/bo-ke-geng-xin-re-li-tu/)
+
+[老哥12](https://blog.douchi.space/hugo-blog-heatmap/?ref=cms.1900.live#gsc.tab=0)
+
+[老哥13](https://www.eallion.com/blog-heatmap/)
