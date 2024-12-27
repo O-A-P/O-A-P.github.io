@@ -215,3 +215,5 @@ printf("123");
 [老哥13](https://www.eallion.com/blog-heatmap/)
 
 [老哥14](https://blog.233so.com/2020/04/friend-link-shortcodes-for-hugo-loveit/)
+
+[老哥15](https://yelleis.top/p/hugo-theme-stack-beautification/)
