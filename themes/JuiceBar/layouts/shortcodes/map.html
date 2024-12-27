@@ -8,7 +8,10 @@
         height: 500px !important;
         border-radius: 20px !important;
     }
-    #mapDiv > div > div.gm-style > div:nth-child(15) > div > img {
-        display: none !important;    
+
+    @media (max-width: 767px) {
+    iframe {
+            height: 350px !important; /* 手机端的高度，或者你可以根据需要调整 */
+        }
     }
 </style>
