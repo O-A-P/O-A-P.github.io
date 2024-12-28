@@ -192,7 +192,7 @@ printf("123");
 
 [老哥2](https://www.sleepymoon.cyou/2023/hugo-shortcodes/)
 
-[老哥3](https://ponder.lol/2023/hugo-shortcuts/)
+[老哥3](https://yelleis.top/p/hugo-theme-stack-beautification/)
 
 [老哥4](https://innerso.prvcy.page/posts/shortcode-test/#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90)
 
@@ -215,5 +215,3 @@ printf("123");
 [老哥13](https://www.eallion.com/blog-heatmap/)
 
 [老哥14](https://blog.233so.com/2020/04/friend-link-shortcodes-for-hugo-loveit/)
-
-[老哥15](https://yelleis.top/p/hugo-theme-stack-beautification/)
