@@ -12,7 +12,7 @@ hugo --cleanDestinationDir
 REM 执行 git add、git commit 和 git push
 git add .
 git commit -m "backup!"
-git push -f origin master:master
+git push origin master:master
 
 cd ./public
 git add .
