@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta name="generator" content="Hugo 0.121.2">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="描述123"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.615fc25b4089d39f5daa81b0f85c58b457be1ebea119d3df72100d4d0bacc412.css">
+
+    
+    <meta property="og:title" content="超级码里奥" />
+<meta property="og:description" content="描述123" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://o-a-p.github.io/" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="超级码里奥"/>
+<meta name="twitter:description" content="描述123"/>
+
+    
+    
+    
+
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#">
+                <img src="https://o-a-p.github.io/svg/sun.svg" alt="sun icon" class="theme-icon" />
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var burger = document.querySelector('.navbar-burger');
+        burger.addEventListener('click', function() {
+            burger.classList.toggle('is-active');
+            document.querySelector('.navbar-menu').classList.toggle('is-active');
+        });
+    });
+
+    
+    function setTheme(theme) {
+        let body = document.body;
+        let themeIcon = document.querySelector(".theme-icon");
+        if (theme === "dark") {
+            body.classList.add("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/moon.svg";
+            themeIcon.alt = "moon icon";
+        } else {
+            body.classList.remove("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/sun.svg";
+            themeIcon.alt = "sun icon";
+        }
+        
+        localStorage.setItem("theme", theme);
+    }
+
+    
+    let theme = localStorage.getItem("theme") || "light";
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (isDarkMode) {
+        
+        setTheme('dark');
+
+    } else {
+        
+        setTheme('light');
+    }
+    
+    setTheme('dark');
+
+    
+    document.getElementById("theme-toggle").addEventListener("click", function() {
+        if (theme === "light") {
+            theme = "dark";
+        } else {
+            theme = "light";
+        }
+        setTheme(theme);
+    });
+
+
+
+</script>
+
+</header><main>
+<article>
+    <div class="is-centered">
+            <div class="title subtitle heading is-6">
+                <div id="home-box" >
+                            
+                            <div class="avatar-container">
+                                <img src="/img/author/head.jpg" class="author-avatar">
+
+                            </div>
+                            
+
+
+                        <h1 id="home-title" class="title is-1 ">超级码里奥</h1>
+                    <div class="description column content typewriter-effect">
+                        <div class="text" id="typewriter-text"> 运用之妙，存乎一心</div>
+
+                    </div>
+
+                    <script>
+                        const typeWriter = document.getElementById('typewriter-text');
+                        
+                        typeWriter.style.setProperty('--characters', typeWriter.innerHTML.length * 5);
+                    </script>
+
+                    <div class="social-icon">
+
+                        
+                        <a href="https://github.com/O-A-P" title="Github"><span class="change-color icon">
+                                <svg height="32px" width="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+                            </span></a>
+                        
+                        <a href="mailto:zhangzihaozzzzzz@gmail.com" title="email"><span class="change-color icon">
+                                <svg height="32px" width="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>
+</svg>
+                            </span></a>
+                        
+
+                    </div>
+
+                </div>
+            </div>
+
+    </div></article>
+
+<script src="/js/vanilla-tilt.js"></script>
+
+<div class="summary">
+    
+    
+    
+        
+
+  <div class="myCard div-hover" onclick="window.location.href='\/post\/os\/6.s081-lab\/'">
+    
+    <div class="myImgContainer">
+      
+      <img src="/img/6.S081/mit.png" alt="pic" style="border-radius: 10px; margin-top: 10%; max-width: 100%; max-height: 100%">
+    </div>
+    <div class="myTitle">
+      <div class="myWrapper hover-underline-animation">
+        6.S081：实验
+      </div>
+    </div>
+    <div class="myContent">实验捏</div>
+    <div class="post-time-container">
+      <span class="post-time"> 2023-07-10 </span>
+    </div>
+  </div>
+
+
+
+<script>
+  VanillaTilt.init(document.querySelectorAll(".myCard"), {
+      max: 30, 
+      speed: 2000, 
+      glare: true,    
+      "max-glare": 0.1, 
+      gyroscope: true,
+      gyroscopeMinAngleX: -45,
+      gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45,
+      gyroscopeMaxAngleY: 45,
+      "reset-to-start": true,
+      "preventClick": true,
+      reset: true,
+      scale: 1
+  });
+  
+  
+</script>
+    
+        
+
+  <div class="myCard div-hover" onclick="window.location.href='\/post\/tool\/gdb\/'">
+    
+    <div class="myImgContainer">
+      
+      <img src="/img/Tool/gdb.png" alt="pic" style="border-radius: 10px; margin-top: 10%; max-width: 100%; max-height: 100%">
+    </div>
+    <div class="myTitle">
+      <div class="myWrapper hover-underline-animation">
+        GDB命令
+      </div>
+    </div>
+    <div class="myContent">按gdb进入GDB</div>
+    <div class="post-time-container">
+      <span class="post-time"> 2023-07-08 </span>
+    </div>
+  </div>
+
+
+
+<script>
+  VanillaTilt.init(document.querySelectorAll(".myCard"), {
+      max: 30, 
+      speed: 2000, 
+      glare: true,    
+      "max-glare": 0.1, 
+      gyroscope: true,
+      gyroscopeMinAngleX: -45,
+      gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45,
+      gyroscopeMaxAngleY: 45,
+      "reset-to-start": true,
+      "preventClick": true,
+      reset: true,
+      scale: 1
+  });
+  
+  
+</script>
+    
+        
+
+  <div class="myCard div-hover" onclick="window.location.href='\/post\/test\/shortcodestest\/'">
+    
+    <div class="myImgContainer">
+      
+      <img src="/img/test/google.png" alt="pic" style="border-radius: 10px; margin-top: 10%; max-width: 100%; max-height: 100%">
+    </div>
+    <div class="myTitle">
+      <div class="myWrapper hover-underline-animation">
+        短代码测试
+      </div>
+    </div>
+    <div class="myContent">测试</div>
+    <div class="post-time-container">
+      <span class="post-time"> 1970-01-01 </span>
+    </div>
+  </div>
+
+
+
+<script>
+  VanillaTilt.init(document.querySelectorAll(".myCard"), {
+      max: 30, 
+      speed: 2000, 
+      glare: true,    
+      "max-glare": 0.1, 
+      gyroscope: true,
+      gyroscopeMinAngleX: -45,
+      gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45,
+      gyroscopeMaxAngleY: 45,
+      "reset-to-start": true,
+      "preventClick": true,
+      reset: true,
+      scale: 1
+  });
+  
+  
+</script>
+    
+</div>
+<hr>
+<section class="pagination" >
+    
+
+    <button class="button " onclick="window.location.href=&#34;/page/3/&#34;">
+        <a href="/page/3/" class="pag-link"> Prev </a>
+    </button>
+    
+    <label class="pag-link">Page 4 of 5</label>
+    
+    <button class="button"  onclick="window.location.href=&#34;/page/5/&#34;">
+        <a href="/page/5/" class="pag-link"> Next </a>
+    </button>
+    
+</section>
+
+        </main><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2025 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img')
+</script>
+
+  </footer></body>
+</html>
+
