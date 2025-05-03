@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; on 超级码里奥</title>
+    <link>https://o-a-p.github.io/categories/c&#43;&#43;/</link>
+    <description>Recent content in C&#43;&#43; on 超级码里奥</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 21 Oct 2024 14:55:00 +0800</lastBuildDate>
+    <atom:link href="https://o-a-p.github.io/categories/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;: functional</title>
+      <link>https://o-a-p.github.io/post/cpp/function-bind/</link>
+      <pubDate>Mon, 21 Oct 2024 14:55:00 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/cpp/function-bind/</guid>
+      <description>function &amp;amp; bind</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,2091 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>短代码测试 | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="测试"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/post/test/shortcodestest/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.615fc25b4089d39f5daa81b0f85c58b457be1ebea119d3df72100d4d0bacc412.css">
+
+    
+    <meta property="og:title" content="短代码测试" />
+<meta property="og:description" content="测试" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/post/test/shortcodestest/" /><meta property="og:image" content="https://o-a-p.github.io/img/test/google.png" /><meta property="og:image" content="https://o-a-p.github.io/img/test/google.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="1970-01-01T21:47:11+08:00" />
+<meta property="article:modified_time" content="1970-01-01T21:47:11+08:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://o-a-p.github.io/img/test/google.png" /><meta name="twitter:title" content="短代码测试"/>
+<meta name="twitter:description" content="测试"/>
+
+    
+    
+    
+
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#">
+                <img src="https://o-a-p.github.io/svg/sun.svg" alt="sun icon" class="theme-icon" />
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var burger = document.querySelector('.navbar-burger');
+        burger.addEventListener('click', function() {
+            burger.classList.toggle('is-active');
+            document.querySelector('.navbar-menu').classList.toggle('is-active');
+        });
+    });
+
+    
+    function setTheme(theme) {
+        let body = document.body;
+        let themeIcon = document.querySelector(".theme-icon");
+        if (theme === "dark") {
+            body.classList.add("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/moon.svg";
+            themeIcon.alt = "moon icon";
+        } else {
+            body.classList.remove("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/sun.svg";
+            themeIcon.alt = "sun icon";
+        }
+        
+        localStorage.setItem("theme", theme);
+    }
+
+    
+    let theme = localStorage.getItem("theme") || "light";
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (isDarkMode) {
+        
+        setTheme('dark');
+
+    } else {
+        
+        setTheme('light');
+    }
+    
+    setTheme('dark');
+
+    
+    document.getElementById("theme-toggle").addEventListener("click", function() {
+        if (theme === "light") {
+            theme = "dark";
+        } else {
+            theme = "light";
+        }
+        setTheme(theme);
+    });
+
+
+
+</script>
+
+</header><main>
+<div class="single-container">
+    <div class="archive">
+        
+        <img src="/img/test/google.png" class="myBigPicture" alt="headPic">
+        <h1 class="title is-1">短代码测试</h1>
+        <div class="title subtitle heading is-6">
+            <div class="author-info columns is-vcentered">
+                <div class="column">
+                    <div class="columns is-vcentered is-mobile">
+                        
+                        <div class="column is-narrow">
+                            <img src="/img/author/head.jpg" class="author-image">
+                        </div>
+                        
+                        <div class="column">
+                            <p>OAP</p>
+                            <p><time>January 1, 1970</time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-categories-container">
+                    <a class="hover-underline-animation" href="/categories/test">Test</a>, <a class="hover-underline-animation" href="/categories/shortcode">Shortcode</a>
+                </div>
+            </div>
+        </div>
+        <div class="content article-content">
+            <div class="toc-container">
+                
+    <div class="post-toc">
+        
+            <aside>
+                <button id="tocButton" ><h4 id="contents" style="margin-left: 1vw;color:rgb(96, 134, 180);margin-bottom: 0;">CONTENTS</h4></button>
+                <div id="hide"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-画廊效果的两种实现">1. 画廊效果的两种实现</a>
+      <ul>
+        <li><a href="#11-实现1">1.1 实现1</a></li>
+        <li><a href="#12-实现2">1.2 实现2</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-豆瓣卡片">2. 豆瓣卡片</a>
+      <ul>
+        <li><a href="#21-neodb">2.1 neodb</a></li>
+        <li><a href="#22-手动添加信息目前有用依赖豆瓣">2.2 手动添加信息，目前有用，依赖豆瓣</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-spotify">3. spotify</a></li>
+    <li><a href="#4-图片轮播">4. 图片轮播</a></li>
+    <li><a href="#5-站内链接">5. 站内链接</a></li>
+    <li><a href="#6-pptpdf">6. ppt/pdf</a></li>
+    <li><a href="#7-bilibili">7. bilibili</a></li>
+    <li><a href="#8-youtube">8. youtube</a></li>
+    <li><a href="#9-文字排版">9. 文字排版</a></li>
+    <li><a href="#10-quote">10. quote</a></li>
+    <li><a href="#11-折叠">11. 折叠</a></li>
+    <li><a href="#12-图片排版">12. 图片排版</a></li>
+    <li><a href="#13-分割线">13. 分割线</a></li>
+    <li><a href="#14-表情包">14. 表情包</a></li>
+    <li><a href="#15-图片带标题">15. 图片带标题</a></li>
+    <li><a href="#16-live-photo">16. Live Photo</a></li>
+    <li><a href="#17-单行图文混排">17. 单行图文混排</a></li>
+    <li><a href="#18-时间轴">18. 时间轴</a></li>
+    <li><a href="#19-热力图">19. 热力图</a></li>
+    <li><a href="#20-友链">20. 友链</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav></div>
+            </aside>
+        
+    </div><script>
+    
+        let button = document.getElementById('tocButton');
+        let hide = document.getElementById("hide");
+        let contents=document.getElementById("contents");
+        if (button !== null) {
+            button.addEventListener("click", function() {
+                if (hide.style.display!='block') {
+                    hide.style.display='block'
+                } else {
+                    hide.style.display='none'
+                    contents.style.color='rgb(96, 134, 180)'
+                }
+            });
+        }
+
+        
+        let _headings = 0;
+        if (hide !== null) {
+            _headings = hide.getElementsByTagName('a');
+        }
+        for (let i = 0; i < _headings.length; i++) {
+            if (_headings[i].nextElementSibling === null) {
+                continue;
+            }
+            if (_headings[i] == this) {
+                continue;
+            }
+            _headings[i].nextElementSibling.style.display = 'none'
+        }
+        window.addEventListener('scroll', function() {
+            if (hide === null) {
+                return;
+            }
+            let headings = hide.getElementsByTagName('a')
+            for (let i = 0; i < headings.length; i++) {
+                let id = headings[i].innerText.replace(/\./g, "").toLowerCase().replace(/\//g, "").replace(/\s/g, "-").replace(/[()]/g, '');
+                
+                let head = document.getElementById(id);
+                if (!head) {
+                    break
+                }
+                let rect = head.getBoundingClientRect();
+                
+                
+                let viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+                
+                
+                let centerY = viewportHeight / 2;
+
+                
+                let isCenter = rect.top < centerY && rect.bottom > centerY;
+                if (isCenter) {
+                    
+                    let _headings = hide.getElementsByTagName('a');
+                    for (let j = 0; j < _headings.length; j++) {
+                        
+                        if (_headings[j].nextElementSibling === null) {
+                            continue;
+                        }
+                        if (_headings[j] == headings[i]) {
+                            continue;
+                        }
+                        _headings[j].nextElementSibling.style.display = 'none'    
+                    }
+                    
+                    
+
+                    if (headings[i].nextElementSibling === null) {
+                        
+                        
+                        headings[i].parentNode.parentNode.style.display = 'block';
+                    } else {
+                        
+                        
+                        headings[i].nextElementSibling.style.display = 'block';
+                    }
+
+                    
+                }
+            }
+
+        })
+
+
+        
+
+    
+
+</script>
+            </div>
+            <h1 id="1-画廊效果的两种实现">1. 画廊效果的两种实现</h1>
+<h2 id="11-实现1">1.1 实现1</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nanogallery2@3.0.5/dist/css/nanogallery2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/nanogallery2@3.0.5/dist/jquery.nanogallery2.min.js"></script>
+    
+
+</head>
+<body>
+
+<div id="myimg" data-nanogallery2='{
+	 "thumbnailDisplayTransition":          "none",
+    "thumbnailHeight":  "200",
+    "thumbnailWidth":   "200",
+    "galleryMosaic" :   [
+      { "c": 1, "r": 1, "w": 2, "h": 2 },
+      { "c": 3, "r": 1, "w": 1, "h": 1 },
+      { "c": 3, "r": 2, "w": 1, "h": 1 },
+      { "c": 4, "r": 1, "w": 1, "h": 1 },
+      { "c": 4, "r": 2, "w": 1, "h": 1 },
+      { "c": 1, "r": 3, "w": 2, "h": 1 },
+      { "c": 3, "r": 3, "w": 2, "h": 1 },
+      { "c": 1, "r": 4, "w": 1, "h": 1 }
+    ],
+     "thumbnailDisplayTransitionDuration":  500,
+     "thumbnailDisplayInterval":            30,
+     "galleryDisplayTransition":            "none",
+     "galleryDisplayTransitionDuration":    500,
+     "galleryDisplayMode": "rows",
+     "thumbnailDisplayOutsideScreen": "false",
+     "eventsDebounceDelay": 10,
+     "thumbnailL1BorderHorizontal": 0,
+     "thumbnailL1BorderVertical": 0,
+     "thumbnailLabel": {
+        "titleFontSize": "0.6em"
+     },
+     "thumbnailHoverEffect2": "image_scale_1.00_1.10|label_backgroundColor_rgba(0,0,0,0)_rgba(255,255,255,0)",
+     "galleryTheme": {
+        "thumbnail": {
+            "borderRadius": "5px"
+        }
+     },
+     "thumbnailToolbarImage": {
+        "topLeft": "",
+        "topRight": "",
+        "bottomLeft": "",
+        "bottomRight": ""
+     },
+     "viewerToolbar":   {
+        "display": true,
+        "standard": "label"
+     },
+     "viewerTools":     {
+        "topLeft":    "pageCounter, playPauseButton",
+        "topRight":   "downloadButton, rotateLeft, zoomButton, fullscreenButton, closeButton"
+     },
+     "viewerGalleryTWidth": 40,
+     "viewerGalleryTHeight": 40
+}'>
+    
+
+<a href="/img/test/google.png" data-ngThumb="/img/test/google.png">Google</a>
+
+<a href="/img/6.S081/kmemmap.png" data-ngThumb="/img/6.S081/kmemmap.png"></a>
+
+<a href="/img/6.S081/6.S081.png" data-ngThumb="/img/6.S081/6.S081.png"></a>
+
+<a href="/img/6.S081/mit.png" data-ngThumb="/img/6.S081/mit.png"></a>
+
+<a href="/img/6.S081/pagetable.png" data-ngThumb="/img/6.S081/pagetable.png"></a>
+
+<a href="/img/6.S081/syscall.png" data-ngThumb="/img/6.S081/syscall.png"></a>
+
+
+
+</div>
+</body>
+</html>
+
+
+
+<h2 id="12-实现2">1.2 实现2</h2>
+
+<div class="gallery-photos">
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/6.S081.png" alt="6.S081.png" />
+      <span class="photo-title">6</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/callingConvention.png" alt="callingConvention.png" />
+      <span class="photo-title">callingConvention</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/callingStack.png" alt="callingStack.png" />
+      <span class="photo-title">callingStack</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/ecall.png" alt="ecall.png" />
+      <span class="photo-title">ecall</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/interrupt.png" alt="interrupt.png" />
+      <span class="photo-title">interrupt</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/kmemmap.png" alt="kmemmap.png" />
+      <span class="photo-title">kmemmap</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/mit.png" alt="mit.png" />
+      <span class="photo-title">mit</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/pagetable.png" alt="pagetable.png" />
+      <span class="photo-title">pagetable</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/scheduling.png" alt="scheduling.png" />
+      <span class="photo-title">scheduling</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/syscall.png" alt="syscall.png" />
+      <span class="photo-title">syscall</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/threadConcurrent.png" alt="threadConcurrent.png" />
+      <span class="photo-title">threadConcurrent</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/userspace.png" alt="userspace.png" />
+      <span class="photo-title">userspace</span>
+    </div>
+    <div class="gallery-photo">
+      <img class="photo-img" loading='lazy' decoding="async" src="https://o-a-p.github.io//img/6.S081/xargs.png" alt="xargs.png" />
+      <span class="photo-title">xargs</span>
+    </div>
+</div>
+
+<style>
+.gallery-photos{width:100%;}
+.gallery-photo{width:24.9%;position: relative;visibility: hidden;overflow: hidden;}
+.gallery-photo.visible{visibility: visible;animation: fadeIn 2s;}
+.gallery-photo img{display: block;width:100%;border-radius:5px;padding:4px;animation: fadeIn 1s;cursor: pointer;transition: all .4s ease-in-out;}
+.gallery-photo span.photo-title,.gallery-photo span.photo-time{background: rgba(0, 0, 0, 0.3);padding:0px 8px;font-size:0.9rem;color: #fff;display:none;animation: fadeIn 1s;}
+.gallery-photo span.photo-title{position:absolute;bottom:4px;left:4px;}
+.gallery-photo span.photo-time{position:absolute;top:4px;left:4px;font-size:0.8rem;}
+.gallery-photo:hover span.photo-title{display:block;}
+.gallery-photo:hover img{transform: scale(1.1);}
+@media screen and (max-width: 1280px) {
+	.gallery-photo{width:33.3%;}
+}
+@media screen and (max-width: 860px) {
+	.gallery-photo{width:49.9%;}
+}
+@media (max-width: 683px){
+	.photo-time{display: none;}
+}
+@keyframes fadeIn{
+	0% {opacity: 0;}
+   100% {opacity: 1;}
+}
+</style>
+
+<script src="https://immmmm.com/waterfall.min.js"></script>
+<script src="https://immmmm.com/imgStatus.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+let galleryPhotos = document.querySelectorAll('.gallery-photos') || ''
+if(galleryPhotos){
+  imgStatus.watch('.gallery-photo img', function(imgs) {
+    if(imgs.isDone()){
+      for(var i=0;i < galleryPhotos.length;i++){
+        waterfall(galleryPhotos[i]);
+        let pagePhoto = galleryPhotos[i].querySelectorAll('.gallery-photo');
+        for(var j=0;j < pagePhoto.length;j++){pagePhoto[j].className += " visible"};
+      }
+    }
+  });
+  window.addEventListener('resize', function () {
+    for(var i=0;i < galleryPhotos.length;i++){
+      waterfall(galleryPhotos[i]);
+    }
+  });
+}
+});
+</script>
+
+
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img')
+</script>
+<h1 id="2-豆瓣卡片">2. 豆瓣卡片</h1>
+<h2 id="21-neodb">2.1 neodb</h2>
+<p>支持neodb和原生豆瓣（已失效，依赖第三方api的果然不长久）</p>
+<h2 id="22-手动添加信息目前有用依赖豆瓣">2.2 手动添加信息，目前有用，依赖豆瓣</h2>
+<div class="db-card">
+    <div class="db-card-subject">
+        <div class="db-card-post"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://img3.doubanio.com/view/subject/s/public/s29632157.jpg"></div>
+        <div class="db-card-content">
+            <div class="db-card-title"><a href="https://book.douban.com/subject/27593007/" class="cute" target="_blank" rel="noreferrer">H庄园的午餐</a></div>
+            <div class="rating">
+                <span class="allstardark">
+                    <span class="allstarlight" style="width:91.00%">
+                    </span>
+                </span>
+                
+                <span class="rating_nums">9.1</span>
+            </div>
+            <div class="db-card-abstract">一个英国版的红玫瑰与白玫瑰的故事。年轻美丽的埃莉诺•卡莱尔平静地站在被告席上。她是H庄园女主人韦尔曼太太的侄女，被控谋杀了她的情敌——H庄园门房的女儿玛丽•杰拉德。证据确凿：埃莉诺准备了那份致命午餐，也只有她拥有作案动机和时机。然而，在那个充满敌意的法庭上，只有一个人依然认为埃莉诺直到被证明有罪之前是清白的。赫尔克里•波洛挡在了埃莉诺和绞刑台之间……</div>
+        </div>
+        <div class="db-card-cate">book</div>
+    </div>
+</div>
+
+<h1 id="3-spotify">3. spotify</h1>
+
+
+    <style type="text/css">
+      iframe {
+        height: 90px;
+      }
+    </style>
+
+
+<iframe src="https://open.spotify.com/embed/track/2D3gvohUyOfXIVX6Mvhqae"
+    width="100%"
+    height="80px !important"
+    frameborder="0"
+    allowtransparency="true"
+    allow="encrypted-media"></iframe>
+
+<h1 id="4-图片轮播">4. 图片轮播</h1>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
+    
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            
+            
+            <div class="swiper-slide">
+                <img src="/img/6.S081/kmemmap.png" alt="">
+            </div>
+            
+            <div class="swiper-slide">
+                <img src="/img/6.S081/kmemmap.png" alt="">
+            </div>
+            
+            <div class="swiper-slide">
+                <img src="/img/6.S081/kmemmap.png" alt="">
+            </div>
+            
+        </div>
+        
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
+     
+     <script>
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+        
+        autoHeight: true,
+        
+        keyboardControl : true,
+        
+        mousewheelControl : true,
+        
+        
+        
+        lazyLoading : true,
+		lazyLoadingInPrevNext : true,
+		
+		loop : true,
+        });
+        </script>
+
+
+<h1 id="5-站内链接">5. 站内链接</h1>
+<div class="innerlink" style="height: 200px;margin: 1em auto;position: relative;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 25%), 0 0 2px rgb(0 0 0 / 25%);
+        border-radius: 15px;padding: 23px;max-width: 780px;background: white;">
+    
+    
+    <div style="font-size: 22px; font-weight: 600">
+        <a target="_blank" href="https://o-a-p.github.io/post/os/6.s081-lab/" style="box-shadow: none">6.S081：实验</a>
+    </div>
+    <span style="font-size: 14px; color: #999">
+        日期: 2023-07-10
+        &nbsp;
+        标签:
+        
+            #OS&nbsp;
+        
+            #6.S081&nbsp;
+        
+    </span>
+    <div style="font-size: 14px; line-height: 1.825;max-height: 75px; overflow: hidden;margin-top: 5px;">
+        实验捏
+    </div>
+    
+    
+</div>
+
+<h1 id="6-pptpdf">6. ppt/pdf</h1>
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <style type="text/css">
+        #googleslides_shortcodes {
+            padding-bottom: 66%;
+            position: relative;
+            display: block;
+            width: 100%;
+            border-bottom: 5px solid;
+        }
+        #googleslides_shortcodes iframe {
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+<div id="googleslides_shortcodes">
+    <iframe id="googleSlideIframe"
+            width="100%"
+            height="100%"
+            src="/pdf/A%20complete%20guide%20to%20Linux.pdf"
+            frameborder="0"
+            allowfullscreen="" >
+    </iframe>
+</div>
+</body>
+</html>
+
+<h1 id="7-bilibili">7. bilibili</h1>
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+    
+    <style type="text/css">
+      .aspect-ratio {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 75%;
+      }
+
+      .aspect-ratio iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="aspect-ratio">
+      <iframe
+              src="https://player.bilibili.com/player.html?bvid=BV1i3411d7tL&page=1&high_quality=1&danmaku=0&autoplay=0"
+              scrolling="no" 
+              border="0" 
+              frameborder="no" 
+              framespacing="0"
+              allowfullscreen="true"
+              sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"
+              >
+      </iframe>
+      
+      
+    </div>
+  </body>
+
+</html>
+<h1 id="8-youtube">8. youtube</h1>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/ghjOS7Q82s0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h1 id="9-文字排版">9. 文字排版</h1>
+
+
+<p style="text-align:left; font-size: 1.1rem">文字居左</p>
+
+
+
+<p style="text-align:center; font-size: 1.1rem">文字居中</p>
+
+
+
+<p style="text-align:right; font-size: 1.1rem">文字居右</p>
+
+<h1 id="10-quote">10. quote</h1>
+
+
+
+<div class="notice notice-warning" >
+    <div class="notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon notice-icon" viewBox="0 0 576 512"><path d="M570 440c18 32-5 72-42 72H48c-37 0-60-40-42-72L246 24c19-32 65-32 84 0l240 416zm-282-86a46 46 0 100 92 46 46 0 000-92zm-44-165l8 136c0 6 5 11 12 11h48c7 0 12-5 12-11l8-136c0-7-5-13-12-13h-64c-7 0-12 6-12 13z"/></svg></div><p>十里青山远，潮平路带沙。数声啼鸟怨年华。又是凄凉时候，在天涯。白露收残月，清风散晓霞。绿杨堤畔问荷花。记得年时沽酒，那人家。</p></div>
+
+
+
+
+<div class="notice notice-info" >
+    <div class="notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon notice-icon" viewBox="0 0 512 512"><path d="M256 8a248 248 0 100 496 248 248 0 000-496zm0 110a42 42 0 110 84 42 42 0 010-84zm56 254c0 7-5 12-12 12h-88c-7 0-12-5-12-12v-24c0-7 5-12 12-12h12v-64h-12c-7 0-12-5-12-12v-24c0-7 5-12 12-12h64c7 0 12 5 12 12v100h12c7 0 12 5 12 12v24z"/></svg></div><p>十里青山远，潮平路带沙。数声啼鸟怨年华。又是凄凉时候，在天涯。白露收残月，清风散晓霞。绿杨堤畔问荷花。记得年时沽酒，那人家。</p></div>
+
+
+
+
+<div class="notice notice-note" >
+    <div class="notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon notice-icon" viewBox="0 0 512 512"><path d="M504 256a248 248 0 11-496 0 248 248 0 01496 0zm-248 50a46 46 0 100 92 46 46 0 000-92zm-44-165l8 136c0 6 5 11 12 11h48c7 0 12-5 12-11l8-136c0-7-5-13-12-13h-64c-7 0-12 6-12 13z"/></svg></div><p>十里青山远，潮平路带沙。数声啼鸟怨年华。又是凄凉时候，在天涯。白露收残月，清风散晓霞。绿杨堤畔问荷花。记得年时沽酒，那人家。</p></div>
+
+
+
+
+<div class="notice notice-tip" >
+    <div class="notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon notice-icon" viewBox="0 0 512 512"><path d="M504 256a248 248 0 11-496 0 248 248 0 01496 0zM227 387l184-184c7-6 7-16 0-22l-22-23c-7-6-17-6-23 0L216 308l-70-70c-6-6-16-6-23 0l-22 23c-7 6-7 16 0 22l104 104c6 7 16 7 22 0z"/></svg></div><p>十里青山远，潮平路带沙。数声啼鸟怨年华。又是凄凉时候，在天涯。白露收残月，清风散晓霞。绿杨堤畔问荷花。记得年时沽酒，那人家。</p></div>
+
+
+
+
+<div class="simple-notice simple-notice-warning" >
+    <div class="simple-notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon simple-notice-icon" viewBox="0 0 512 512"><path d="M114.57 76.07a45.71 45.71 0 00-67.51-6.41c-17.58 16.18-19 43.52-4.75 62.77l91.78 123-92.33 124.15c-14.23 19.25-13.11 46.59 4.74 62.77a45.71 45.71 0 0067.5-6.41L242.89 262.7a12.14 12.14 0 000-14.23zm355.67 303.51l-92.33-124.13 91.78-123c14.22-19.25 12.83-46.59-4.75-62.77a45.71 45.71 0 00-67.51 6.41l-128 172.12a12.14 12.14 0 000 14.23L398 435.94a45.71 45.71 0 0067.51 6.41c17.84-16.18 18.96-43.52 4.73-62.77z"/></svg></div><p>十里青山远，潮平路带沙。数声啼鸟怨年华。又是凄凉时候，在天涯。白露收残月，清风散晓霞。绿杨堤畔问荷花。记得年时沽酒，那人家。</p></div>
+
+
+
+
+<div class="simple-notice simple-notice-info" >
+    <div class="simple-notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon simple-notice-icon" viewBox="0 0 192 512"><path d="M20 424.23h20V279.77H20a20 20 0 01-20-20V212a20 20 0 0120-20h112a20 20 0 0120 20v212.23h20a20 20 0 0120 20V492a20 20 0 01-20 20H20a20 20 0 01-20-20v-47.77a20 20 0 0120-20zM96 0a72 72 0 100 144A72 72 0 0096 0z"/></svg></div><p>十里青山远，潮平路带沙。数声啼鸟怨年华。又是凄凉时候，在天涯。白露收残月，清风散晓霞。绿杨堤畔问荷花。记得年时沽酒，那人家。</p></div>
+
+
+
+
+<div class="simple-notice simple-notice-note" >
+    <div class="simple-notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon simple-notice-icon" viewBox="0 0 192 512"><path d="M176 432c0 44.11-35.89 80-80 80s-80-35.89-80-80 35.89-80 80-80 80 35.89 80 80zM25.26 25.2l13.6 272A24 24 0 0062.83 320h66.34a24 24 0 0023.97-22.8l13.6-272A24 24 0 00142.77 0H49.23a24 24 0 00-23.97 25.2z"/></svg></div><p>十里青山远，潮平路带沙。数声啼鸟怨年华。又是凄凉时候，在天涯。白露收残月，清风散晓霞。绿杨堤畔问荷花。记得年时沽酒，那人家。</p></div>
+
+
+
+
+<div class="simple-notice simple-notice-tip" >
+    <div class="simple-notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon simple-notice-icon" viewBox="0 0 512 512"><path d="M173.9 439.4L7.5 273c-10-10-10-26.2 0-36.2l36.2-36.2c10-10 26.2-10 36.2 0L192 312.69l240.1-240.1c10-10 26.2-10 36.2 0l36.2 36.21c10 10 10 26.2 0 36.2L210.1 439.4c-10 10-26.2 10-36.2 0z"/></svg></div><p>十里青山远，潮平路带沙。数声啼鸟怨年华。又是凄凉时候，在天涯。白露收残月，清风散晓霞。绿杨堤畔问荷花。记得年时沽酒，那人家。</p></div>
+
+<p>😂😎🎨🥪🛴💥</p>
+
+
+<blockquote class="quote">
+        <p>十里青山远，潮平路带沙。数声啼鸟怨年华。又是凄凉时候，在天涯。白露收残月，清风散晓霞。绿杨堤畔问荷花。记得年时沽酒，那人家。</p></blockquote> 
+
+
+
+<blockquote class="quote en">
+        <p>To see a world in a grain of sand. And a heaven in a wild flower. Hold infinity in the palm of your hand. And eternity in an hour.</p></blockquote> 
+
+
+
+<blockquote class="quote-center">
+        <p>十里青山远，潮平路带沙<br>数声啼鸟怨年华<br>又是凄凉时候，在天涯<br>白露收残月，清风散晓霞<br>绿杨堤畔问荷花<br>记得年时沽酒，那人家</p></blockquote> 
+
+<h1 id="11-折叠">11. 折叠</h1>
+<details>
+    <summary>折叠方式1</summary>
+    <div class="highlight"><pre tabindex="0" style="color:#cad3f5;background-color:#24273a;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8087a2">1</span><span><span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);<span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8087a2">2</span><span><span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8087a2">3</span><span><span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#8087a2">4</span><span><span style="color:#8aadf4">printf</span>(<span style="color:#a6da95">&#34;123&#34;</span>);
+</span></span></code></pre></div>
+</details>
+
+
+
+<div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="collapse-arrow">👉</span> <strong>折叠方式2</strong>
+    </div>
+    <div class="collapse-content">
+        <p><del>这是折叠的内容～</del></p>
+<p><em><strong>这是折叠的内容～</strong></em></p>
+<p><strong>同样是MD文档，不受影响</strong></p>
+
+</div>
+
+<style>
+.collapse-block {
+    margin-top: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.collapse-header {
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: var(--header-text-color);
+    background-color: var(--header-bg-color);
+    border: 1px solid #000000;  
+    border-radius: 0.5rem;  
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.dark-mode .collapse-header {
+    border: 1px solid #FFFFFF;
+}
+
+.collapse-header:hover {
+    background-color: var(--header-bg-hover);
+    color: var(--header-text-hover);
+}
+
+.collapse-arrow {
+    float: left;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.collapse-content {
+    padding: 0px;
+    height: 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0);  
+    transition: height 0.5s ease-out, padding 0.3s ease-out;
+}
+
+.collapse-content.show {
+    height: auto;
+    padding: 0px;
+    overflow: visible;
+}
+
+ 
+@media (prefers-color-scheme: light) {
+    .collapse-header {
+        color: white;
+        background-color: black;
+    }
+    
+    .collapse-header:hover {
+        background-color: #80808020;  
+    }
+}
+
+ 
+@media (prefers-color-scheme: dark) {
+     
+    
+    .collapse-header:hover {
+        background-color: #80808020;  
+    }
+}
+</style>
+
+<script>
+function toggleCollapse(element) {
+    var content = element.nextElementSibling;
+    var arrow = element.querySelector('.collapse-arrow');
+
+    if (content.classList.contains('show')) {
+        content.style.height = '0';
+        content.classList.remove('show');
+        arrow.style.transform = 'rotate(0deg)';
+    } else {
+        content.style.height = content.scrollHeight + 10 + 'px';
+        content.classList.add('show');
+        arrow.style.transform = 'rotate(90deg)';
+    }
+}
+</script>
+<h1 id="12-图片排版">12. 图片排版</h1>
+<p>并列排版
+
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+</p>
+<p>
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+
+
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+</p>
+<p>
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+
+
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+
+
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+</p>
+<p>
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+
+
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+
+
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+
+
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+</p>
+<h1 id="13-分割线">13. 分割线</h1>
+<p><style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+    .divider span.bye {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="end">
+  END
+</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+    .divider span.bye {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="end">
+  End
+</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+    .divider span.bye {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="end">
+  end
+</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+    .divider span.bye {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="not-end-or-bye">
+  描述文字
+</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+    .divider span.bye {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="not-end-or-bye">
+  不是end或者bye则显示普通文字
+</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+    .divider span.bye {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="bye">
+  BYE
+</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+    .divider span.bye {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="bye">
+  Bye
+</span></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap');
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+        font-size: 12px;
+    }
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #333;
+    }
+    .divider::before {
+        margin-right: 10px;
+    }
+    .divider::after {
+        margin-left: 10px;
+    }
+    .divider span.end {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+    .divider span.bye {
+        font-family: 'Playwrite MX', cursive;
+        font-size: 16px;
+    }
+</style>
+<div class="divider"><span class="bye">
+  bye
+</span></div></p>
+<h1 id="14-表情包">14. 表情包</h1>
+<p>这玩意感觉和图片一样的
+
+<img
+    src="/img/emoji/nice2.gif"
+    title="nice2.gif"
+    alt="nice2.gif"
+    
+    
+/></p>
+<h1 id="15-图片带标题">15. 图片带标题</h1>
+<ol>
+<li>
+<p>实现方式1
+<figure><img src="/img/author/head.jpg"
+         alt="小"/><figcaption>
+            <h4>大</h4><p>小</p>
+        </figcaption>
+</figure>
+
+<figure><img src="/img/author/head.jpg"
+         alt="小"/><figcaption>
+            <h4>大</h4><p>小</p>
+        </figcaption>
+</figure>
+
+<figure><img src="/img/author/head.jpg"
+         alt="小"/><figcaption>
+            <h4>大</h4><p>小</p>
+        </figcaption>
+</figure>
+</p>
+</li>
+<li>
+<p>实现方式2
+
+  <figure>
+    <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+    <figcaption>head</figcaption>
+  </figure>
+</p>
+</li>
+</ol>
+<h1 id="16-live-photo">16. Live Photo</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Photo Example</title>
+    <script src="https://cdn.apple-livephotoskit.com/lpk/1/livephotoskit.js"></script>
+</head>
+<body>
+    <div class="live-photo-container">
+        
+        <live-photo id="food" 
+                    photo-src="/livephoto/%e6%a0%91.jpeg" 
+                    video-src="/livephoto/%e6%a0%91.mov" 
+                    style="width: 300px; height: 400px;">
+        </live-photo>
+    </div>
+
+    <style>
+    .live-photo-container {
+        text-align: center;  
+    }
+    .lpk-live-photo-renderer {
+        border-radius: 5px;
+    }
+    </style>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            const livePhotoId = "food";
+            const player = LivePhotosKit.Player(document.getElementById(livePhotoId));
+
+            
+            player.photoSrc = "\/livephoto\/树.jpeg";
+            player.videoSrc = "\/livephoto\/树.mov";
+
+            
+            player.addEventListener('canplay', evt => console.log('Player is ready', evt));
+            player.addEventListener('error', evt => console.log('Player load error', evt));
+            player.addEventListener('ended', evt => console.log('Player finished playing through', evt));
+
+            
+            player.playbackStyle = LivePhotosKit.PlaybackStyle.FULL;
+            player.play();
+
+            
+            player.addEventListener('error', (ev) => {
+                if (typeof ev.detail.errorCode === 'number') {
+                    switch (ev.detail.errorCode) {
+                    case LivePhotosKit.Errors.IMAGE_FAILED_TO_LOAD:
+                        console.error('Image failed to load');
+                        break;
+                    case LivePhotosKit.Errors.VIDEO_FAILED_TO_LOAD:
+                        console.error('Video failed to load');
+                        break;
+                    }
+                } else {
+                    console.error('Unexpected error:', ev.detail.error);
+                }
+            });
+        });
+    </script>
+</body>
+<h1 id="17-单行图文混排">17. 单行图文混排</h1>
+<p>文字
+<img src="/img/company-logo/momenta_logo_white.svg" style="display: inline-block; border-radius: 0px; height: 1rem; vertical-align: middle; margin-bottom: 0.15rem;">
+文字</p>
+<!-- <img src="/img/company-logo/momenta-logo.png" style="display: inline-block; border-radius: 0px; height: 1rem; vertical-align: middle; margin-bottom: 0.15rem;"> -->
+<h1 id="18-时间轴">18. 时间轴</h1>
+<p><div class="timeline__row">
+    <div class="timeline__time">
+        <div class="timeline__time">2024-10-15</div>
+        <div class="timeline__split-line"></div>
+    </div>
+    <div class="timeline__content">
+        <div class="timeline__tags">
+            <span class="timeline__tag">标签</span>
+        </div>
+            <div class="timeline__title">时间轴</div>
+        <div class="timeline__description">
+            这是一个时间轴
+        </div>
+    </div>
+</div>
+
+<style>
+    .timeline {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .timeline__row {
+        display: flex;
+        height: 90px;
+    }
+    
+    .timeline__time {
+        flex: 0 0 110px;
+        font-size: 17px;
+        text-transform: uppercase;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem 0;
+    }
+    
+    .timeline__time-text {
+        margin: 0;
+    }
+    
+    .timeline__split-line {
+        position: absolute;
+        top: 0.5rem;
+        right: -20px;
+        height: 100%;
+        width: 2px;
+        background-color: #84c4e240;
+        z-index: 0;
+    }
+    
+    .timeline__split-line:before {
+        content: "";
+        position: absolute;
+        top: 24%;
+        right: -4px;
+        transform: translateY(-50%);
+        width: 10px;
+        height: 10px;
+        background-color: #c9e5f2;
+        box-shadow: 0 0 0 4px var(--theme);
+        border-radius: 50%;
+        border: 0px solid #84c4e2;
+        z-index: -1;
+    }
+    
+    .timeline__content {
+        flex: 1;
+        margin-left: 2rem;
+        padding: 0.5rem 0 1.2rem 0;
+    }
+    
+    .timeline__title {
+        margin: 0;
+        margin-bottom: 2px;
+        padding-top: 3px;
+        margin-left: 0.5rem;
+        color: var(--content);
+        font-family: var(--font-family-teshu);
+        font-size: 19px;
+        font-weight: 600;
+        width: fit-content;
+        display: inline-block;
+        vertical-align: middle;
+         
+    }
+    
+    .timeline__tags {
+        display: inline-block;
+        padding: 0;
+        margin-left: 0.3rem;
+        align-items: center;
+        gap: 0.3rem;
+    }
+    
+    .timeline__tag {
+        display: inline-block;
+        color: #b1d6f5;
+        border: 1.5px solid #92C3EB;
+        border-radius: 999px;
+        padding: 0rem 0.5rem;
+        font-size: 12px;
+        white-space: nowrap;
+        line-height: 1.4rem;
+        opacity: 0.8;
+        vertical-align: middle;
+         
+    }
+    
+    .timeline__description {
+        font-size: 15px;
+        line-height: 1.6;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0.5rem 0 0.4rem 1rem;
+         
+    }
+     
+    
+    .timeline__tag-style {
+        background-color: #c581da;
+         
+        border-color: #c581da;
+         
+        color: #FFFFFF;
+         
+    }
+     
+    
+    .timeline__tag-article {
+        background-color: #92d392;
+         
+        border-color: #92d392;
+         
+        color: #000000;
+         
+    }
+     
+    
+    .timeline__tag-page {
+        background-color: #707070;
+         
+        border-color: #707070;
+         
+        color: #FFFFFF;
+         
+    }
+    
+    @media screen and (max-width: 768px) {
+        .timeline__time {
+            font-size: 14px;
+             
+        }
+        .timeline__title {
+            font-size: 16px;
+             
+        }
+        .timeline__description {
+            font-size: 14px;
+             
+        }
+    }
+</style>
+
+<div class="timeline__row">
+    <div class="timeline__time">
+        <div class="timeline__time">2024-10-16</div>
+        <div class="timeline__split-line"></div>
+    </div>
+    <div class="timeline__content">
+        <div class="timeline__tags">
+            <span class="timeline__tag">标签</span>
+        </div>
+            <div class="timeline__title">时间轴</div>
+        <div class="timeline__description">
+            这是一个时间轴
+        </div>
+    </div>
+</div>
+
+<style>
+    .timeline {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .timeline__row {
+        display: flex;
+        height: 90px;
+    }
+    
+    .timeline__time {
+        flex: 0 0 110px;
+        font-size: 17px;
+        text-transform: uppercase;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem 0;
+    }
+    
+    .timeline__time-text {
+        margin: 0;
+    }
+    
+    .timeline__split-line {
+        position: absolute;
+        top: 0.5rem;
+        right: -20px;
+        height: 100%;
+        width: 2px;
+        background-color: #84c4e240;
+        z-index: 0;
+    }
+    
+    .timeline__split-line:before {
+        content: "";
+        position: absolute;
+        top: 24%;
+        right: -4px;
+        transform: translateY(-50%);
+        width: 10px;
+        height: 10px;
+        background-color: #c9e5f2;
+        box-shadow: 0 0 0 4px var(--theme);
+        border-radius: 50%;
+        border: 0px solid #84c4e2;
+        z-index: -1;
+    }
+    
+    .timeline__content {
+        flex: 1;
+        margin-left: 2rem;
+        padding: 0.5rem 0 1.2rem 0;
+    }
+    
+    .timeline__title {
+        margin: 0;
+        margin-bottom: 2px;
+        padding-top: 3px;
+        margin-left: 0.5rem;
+        color: var(--content);
+        font-family: var(--font-family-teshu);
+        font-size: 19px;
+        font-weight: 600;
+        width: fit-content;
+        display: inline-block;
+        vertical-align: middle;
+         
+    }
+    
+    .timeline__tags {
+        display: inline-block;
+        padding: 0;
+        margin-left: 0.3rem;
+        align-items: center;
+        gap: 0.3rem;
+    }
+    
+    .timeline__tag {
+        display: inline-block;
+        color: #b1d6f5;
+        border: 1.5px solid #92C3EB;
+        border-radius: 999px;
+        padding: 0rem 0.5rem;
+        font-size: 12px;
+        white-space: nowrap;
+        line-height: 1.4rem;
+        opacity: 0.8;
+        vertical-align: middle;
+         
+    }
+    
+    .timeline__description {
+        font-size: 15px;
+        line-height: 1.6;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0.5rem 0 0.4rem 1rem;
+         
+    }
+     
+    
+    .timeline__tag-style {
+        background-color: #c581da;
+         
+        border-color: #c581da;
+         
+        color: #FFFFFF;
+         
+    }
+     
+    
+    .timeline__tag-article {
+        background-color: #92d392;
+         
+        border-color: #92d392;
+         
+        color: #000000;
+         
+    }
+     
+    
+    .timeline__tag-page {
+        background-color: #707070;
+         
+        border-color: #707070;
+         
+        color: #FFFFFF;
+         
+    }
+    
+    @media screen and (max-width: 768px) {
+        .timeline__time {
+            font-size: 14px;
+             
+        }
+        .timeline__title {
+            font-size: 16px;
+             
+        }
+        .timeline__description {
+            font-size: 14px;
+             
+        }
+    }
+</style>
+</p>
+<h1 id="19-热力图">19. 热力图</h1>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css">
+
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"></script>
+
+<script src="https://unpkg.com/cal-heatmap/dist/plugins/CalendarLabel.min.js"></script>
+
+<div id="cal-heatmap" style="text-align: center !important"></div>
+
+<script type="text/javascript">
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    var data = {
+        "pages": [
+            
+                {
+                    "title": "再会南昌",
+                    "date": "2024-08-06",
+                    "year": "2024",
+                    "month": "08",
+                    "day": "06",
+                    "word_count": "834",
+                    "link": "\/post\/travel\/nanchang\/"
+                },
+                
+                {
+                    "title": "记两次失败的面试",
+                    "date": "2024-08-27",
+                    "year": "2024",
+                    "month": "08",
+                    "day": "27",
+                    "word_count": "1649",
+                    "link": "\/post\/failure\/two-failed-interviews\/"
+                },
+                
+                {
+                    "title": "C\u002b\u002b: functional",
+                    "date": "2024-10-21",
+                    "year": "2024",
+                    "month": "10",
+                    "day": "21",
+                    "word_count": "1429",
+                    "link": "\/post\/cpp\/function-bind\/"
+                },
+                
+                {
+                    "title": "2024 拥抱变化",
+                    "date": "2024-12-10",
+                    "year": "2024",
+                    "month": "12",
+                    "day": "10",
+                    "word_count": "4987",
+                    "link": "\/post\/year\/2024\/"
+                }
+                
+        ]
+    };
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        let months = 11;
+        
+        const cal = new CalHeatmap();
+        
+        const today = new Date();
+        
+        let blogInfo = data;
+        
+        let startDate = new Date(today.setMonth(today.getMonth() - months));
+
+        
+        cal.on('click', (event, timestamp, value) => {
+            
+            var date = new Date(timestamp).toISOString().substring(0, 10);
+            const selectedPost = blogInfo.pages.find(page => {
+                
+                const pageDate = page.date.substring(0, 10); 
+                return pageDate === date;
+            });
+            
+            
+            if (selectedPost) {
+                window.location.href = selectedPost.link;
+            }
+            return
+
+        });
+
+        
+        cal.paint({
+            
+            theme: 'dark',
+            
+            range: months + 1,
+            
+            scale: {
+                color: {
+                    type: 'threshold',
+                    
+                    range: ['#0e4429', '#006D32', '#26a641', '#39d353'],
+                    domain: [1000, 2000, 4000, 8000],
+                },
+            },
+            
+            domain: {
+                
+                type: 'month',
+                
+                gutter: 5,
+                
+                position: 'right',
+                
+                text: null,
+                
+                
+            },
+            
+            subDomain: {
+                
+                
+                type: 'ghDay',
+                
+                radius: 5,
+                
+                width: 18,
+                height: 18,
+                
+                gutter: 5,
+            },
+            
+            date: {
+                
+                start: startDate,
+                
+                locale: { 
+                    weekStart: 1
+                },
+            },
+            
+            data: {
+                
+                source: blogInfo.pages, x: "date", y: item => {
+                    return parseInt(item.word_count);
+                }, groupY: 'sum'
+            },
+        },
+            
+            [[
+                
+                Tooltip,
+                {
+                    
+                    text: function (date, value, dayjsDate) {
+                        const currentPost = blogInfo.pages.filter(page => page.date === dayjsDate.format('YYYY-MM-DD'));
+                        const postTitle = currentPost.length > 0 ? currentPost[0].title : '';  
+                        const wordCount = currentPost.length > 0 ? currentPost[0].word_count : 0;  
+                        if (postTitle === '') {
+                            return dayjsDate.format('YYYY-MM-DD');
+                        }
+                        return (
+                            postTitle +
+                            ' | ' +
+                            (wordCount > 0 ? `${wordCount} 字` : '') +
+                            ' ' +
+                            dayjsDate.format('YYYY-MM-DD')
+                        );
+                    }
+                },
+            ],
+            [
+                
+                CalendarLabel,
+                {
+                    
+                    position: 'left',
+                    
+                    text: () => ["一", "", "三", "", "五", "", "日"],
+                    
+                    textAlign: 'middle',
+                    
+                    radius: 5
+                },
+            ],
+
+            ]);
+    });
+
+
+</script>
+
+<style>
+    .ch-container {
+        display: inline-block;
+    }
+
+    #cal-heatmap {
+        overflow-x: auto;
+        white-space: nowrap;
+        scroll-behavior: smooth;
+         
+
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+
+        -webkit-text-size-adjust: 100%;
+
+         
+        &::-webkit-scrollbar {
+            width: 11px;
+            height: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: rgba(255, 255, 255, 0.87);
+            border-radius: 2em !important;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #999999;
+            border-radius: 2em;
+        }
+
+        &::-webkit-scrollbar-corner {
+            background-color: transparent;
+        }
+    }
+    @media (max-width: 1023px) {
+    #cal-heatmap {
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+</style>
+
+<h1 id="20-友链">20. 友链</h1>
+
+<a target="_blank" href=https://o-a-p.github.io/ title=OAP class="friendurl">
+    <div class="frienddiv">
+        <div class="frienddivleft">
+            <img class="myfriend" src=https://o-a-p.github.io/img/author/head.jpg />
+        </div>
+        <div class="frienddivright">
+            <div class="friendname">OAP</div>
+            <div class="friendinfo">我自己</div>
+        </div>
+    </div>
+</a>
+
+
+<style>
+.friendurl {
+ text-decoration: none !important;
+ width: -10px;
+ color: black;
+}
+
+.myfriend {
+ width: 56px !important;
+ height: 56px !important;
+ border-radius: 50%;
+ border: 1px solid #ddd;
+ padding: 2px;
+ box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+ margin-top: 14px !important;
+ margin-left: 14px !important;
+ background-color: #fff;
+}
+
+.frienddiv {
+ height: 92px;
+ margin-top: 10px;
+ width: 100%;
+ display: inline-block !important;
+ border-radius: 10px;
+ background: #16191d;
+}
+
+.frienddiv:hover {
+ background: #2d333b;
+}
+
+.frienddiv:hover .frienddivleft img {
+ transition: 0.9s !important;
+ -webkit-transition: 0.9s !important;
+ -moz-transition: 0.9s !important;
+ -o-transition: 0.9s !important;
+ -ms-transition: 0.9s !important;
+ transform: rotate(360deg) !important;
+ -webkit-transform: rotate(360deg) !important;
+ -moz-transform: rotate(360deg) !important;
+ -o-transform: rotate(360deg) !important;
+ -ms-transform: rotate(360deg) !important;
+}
+
+.frienddivleft {
+ width: 92px;
+ float: left;
+}
+
+.frienddivleft {
+ margin-right: 2px;
+}
+
+.frienddivright {
+ margin-top: 18px;
+ margin-right: 18px;
+}
+
+.friendname {
+ text-overflow: ellipsis;
+ overflow: hidden;
+ white-space: nowrap;
+}
+
+.friendinfo {
+ text-overflow: ellipsis;
+ overflow: hidden;
+ white-space: nowrap;
+}
+
+
+}
+</style>
+<h1 id="参考">参考</h1>
+<p><a href="https://lovir.cn/p/shortcodes/" target="_blank" rel="noopener">老哥1</a></p>
+<p><a href="https://www.sleepymoon.cyou/2023/hugo-shortcodes/" target="_blank" rel="noopener">老哥2</a></p>
+<p><a href="https://yelleis.top/p/hugo-theme-stack-beautification/" target="_blank" rel="noopener">老哥3</a></p>
+<p><a href="https://innerso.prvcy.page/posts/shortcode-test/#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90" target="_blank" rel="noopener">老哥4</a></p>
+<p><a href="https://www.sulvblog.cn/posts/blog/shortcodes/#64-%e5%8d%9a%e5%ae%a2%e6%96%87%e7%ab%a0%e5%86%85%e9%93%be" target="_blank" rel="noopener">老哥5</a></p>
+<p><a href="https://immmmm.com/archives/" target="_blank" rel="noopener">老哥6</a></p>
+<p><a href="https://wdh.hk/docs/short-code/" target="_blank" rel="noopener">老哥7</a></p>
+<p><a href="https://ygria.site/hexo2hugo/" target="_blank" rel="noopener">老哥8</a></p>
+<p><a href="https://blog.dejavu.moe/posts/hugo-shortcodes-word-count-with-books/" target="_blank" rel="noopener">老哥9</a></p>
+<p><a href="https://www.xalaok.top/post/blog-modify/" target="_blank" rel="noopener">老哥10</a></p>
+<p><a href="https://1900.live/bo-ke-geng-xin-re-li-tu/" target="_blank" rel="noopener">老哥11</a></p>
+<p><a href="https://blog.douchi.space/hugo-blog-heatmap/?ref=cms.1900.live#gsc.tab=0" target="_blank" rel="noopener">老哥12</a></p>
+<p><a href="https://www.eallion.com/blog-heatmap/" target="_blank" rel="noopener">老哥13</a></p>
+<p><a href="https://blog.233so.com/2020/04/friend-link-shortcodes-for-hugo-loveit/" target="_blank" rel="noopener">老哥14</a></p>
+
+        </div>
+    </div>
+    <a href="#" id="scrollToTopButton">
+        <svg t="1686753152588" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="3988" width="48" height="48">
+            <path
+                d="M518.5 360.3c-3.2-4.4-9.7-4.4-12.9 0l-178 246c-3.8 5.3 0 12.7 6.5 12.7H381c10.2 0 19.9-4.9 25.9-13.2L512 460.4l105.2 145.4c6 8.3 15.6 13.2 25.9 13.2H690c6.5 0 10.3-7.4 6.5-12.7l-178-246z"
+                p-id="3989" fill="#363636"></path>
+            <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                p-id="3990" fill="#363636"></path>
+        </svg>
+    </a><hr style="border-top: 1px solid #EEEEEE;">
+<div id="comment"></div>
+<script>
+    const getStoredTheme = () => localStorage.getItem("theme") === "dark" ? "dark" : "light";
+
+    const setGiscusTheme = () => {
+        const sendMessage = (message) => {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (iframe) {
+                iframe.contentWindow.postMessage({giscus: message}, 'https://giscus.app');
+            }
+        }
+        sendMessage({setConfig: {theme: getStoredTheme()}})
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const giscusAttributes = {
+            "src": "https://giscus.app/client.js",
+            "data-repo": "O-A-P\/O-A-P.github.io",
+            "data-repo-id": "R_kgDOJEfHWQ",
+            "data-category": "Announcements",
+            "data-category-id": "DIC_kwDOJEfHWc4CcDhX",
+            "data-mapping": "og:title",
+            "data-reactions-enabled": "1",
+            "data-emit-metadata": "0",
+            "data-input-position": "bottom",
+            "data-theme": getStoredTheme(),
+            "data-lang": "en",
+            "data-loading": "lazy",
+            "crossorigin": "anonymous",
+        };
+
+        
+        const giscusScript = document.createElement("script");
+        Object.entries(giscusAttributes).forEach(
+            ([key, value]) => giscusScript.setAttribute(key, value));
+        document.getElementById("comment").appendChild(giscusScript);
+
+        
+        const themeToggle = document.querySelector(".theme-toggle");
+        if (themeToggle) {
+            themeToggle.addEventListener("click", setGiscusTheme);
+        }
+    });
+
+</script>
+
+
+<div class="pp-container">
+        <section class="pre-and-post">
+            <div class="has-text-left">
+                
+                <p>Previous post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/test/syntaxtest/">Markdown Syntax Guide</a>
+                
+            </div>
+            <div class="has-text-right ">
+                
+                <p>Next post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/tool/gdb/">GDB命令</a>
+                
+            </div>
+        </section>
+    </div>
+
+</div>
+
+        </main><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2025 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img')
+</script>
+
+  </footer></body>
+</html>
+

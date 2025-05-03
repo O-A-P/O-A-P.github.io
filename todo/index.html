@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="MySQL优化相关 常用设计模式 去掉博客对外部资源的依赖 👉 Done C&#43;&#43;内存序 增加livephoto短代码 增加分割线对bye的支持 增加单行图文混排短"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/todo/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.615fc25b4089d39f5daa81b0f85c58b457be1ebea119d3df72100d4d0bacc412.css">
+
+    
+    <meta property="og:title" content="" />
+<meta property="og:description" content="MySQL优化相关 常用设计模式 去掉博客对外部资源的依赖 👉 Done C&#43;&#43;内存序 增加livephoto短代码 增加分割线对bye的支持 增加单行图文混排短" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/todo/" /><meta property="article:section" content="" />
+
+<meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="MySQL优化相关 常用设计模式 去掉博客对外部资源的依赖 👉 Done C&#43;&#43;内存序 增加livephoto短代码 增加分割线对bye的支持 增加单行图文混排短"/>
+
+    
+    
+    
+
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#">
+                <img src="https://o-a-p.github.io/svg/sun.svg" alt="sun icon" class="theme-icon" />
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var burger = document.querySelector('.navbar-burger');
+        burger.addEventListener('click', function() {
+            burger.classList.toggle('is-active');
+            document.querySelector('.navbar-menu').classList.toggle('is-active');
+        });
+    });
+
+    
+    function setTheme(theme) {
+        let body = document.body;
+        let themeIcon = document.querySelector(".theme-icon");
+        if (theme === "dark") {
+            body.classList.add("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/moon.svg";
+            themeIcon.alt = "moon icon";
+        } else {
+            body.classList.remove("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/sun.svg";
+            themeIcon.alt = "sun icon";
+        }
+        
+        localStorage.setItem("theme", theme);
+    }
+
+    
+    let theme = localStorage.getItem("theme") || "light";
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (isDarkMode) {
+        
+        setTheme('dark');
+
+    } else {
+        
+        setTheme('light');
+    }
+    
+    setTheme('dark');
+
+    
+    document.getElementById("theme-toggle").addEventListener("click", function() {
+        if (theme === "light") {
+            theme = "dark";
+        } else {
+            theme = "light";
+        }
+        setTheme(theme);
+    });
+
+
+
+</script>
+
+</header><main>
+<div class="single-container  is-centered">
+    <div class="archive">
+        
+        <div class="content about-content">
+            <ul>
+<li><input disabled="" type="checkbox"> MySQL优化相关</li>
+<li><input disabled="" type="checkbox"> 常用设计模式</li>
+<li><input disabled="" type="checkbox"> 去掉博客对外部资源的依赖</li>
+</ul>
+
+
+<div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="collapse-arrow">👉</span> <strong>Done</strong>
+    </div>
+    <div class="collapse-content">
+        <ul>
+<li><input checked="" disabled="" type="checkbox"> C++内存序</li>
+<li><input checked="" disabled="" type="checkbox"> 增加livephoto短代码</li>
+<li><input checked="" disabled="" type="checkbox"> 增加分割线对bye的支持</li>
+<li><input checked="" disabled="" type="checkbox"> 增加单行图文混排短代码</li>
+<li><input checked="" disabled="" type="checkbox"> 修复豆瓣图文api失效问题</li>
+<li><input checked="" disabled="" type="checkbox"> 修复主页卡片在浅色模式不可见问题</li>
+<li><input checked="" disabled="" type="checkbox"> 优化主页卡片样式</li>
+<li><input checked="" disabled="" type="checkbox"> 优化Todo页面checkbox样式</li>
+</ul>
+
+</div>
+
+<style>
+.collapse-block {
+    margin-top: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.collapse-header {
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: var(--header-text-color);
+    background-color: var(--header-bg-color);
+    border: 1px solid #000000;  
+    border-radius: 0.5rem;  
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.dark-mode .collapse-header {
+    border: 1px solid #FFFFFF;
+}
+
+.collapse-header:hover {
+    background-color: var(--header-bg-hover);
+    color: var(--header-text-hover);
+}
+
+.collapse-arrow {
+    float: left;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.collapse-content {
+    padding: 0px;
+    height: 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0);  
+    transition: height 0.5s ease-out, padding 0.3s ease-out;
+}
+
+.collapse-content.show {
+    height: auto;
+    padding: 0px;
+    overflow: visible;
+}
+
+ 
+@media (prefers-color-scheme: light) {
+    .collapse-header {
+        color: white;
+        background-color: black;
+    }
+    
+    .collapse-header:hover {
+        background-color: #80808020;  
+    }
+}
+
+ 
+@media (prefers-color-scheme: dark) {
+     
+    
+    .collapse-header:hover {
+        background-color: #80808020;  
+    }
+}
+</style>
+
+<script>
+function toggleCollapse(element) {
+    var content = element.nextElementSibling;
+    var arrow = element.querySelector('.collapse-arrow');
+
+    if (content.classList.contains('show')) {
+        content.style.height = '0';
+        content.classList.remove('show');
+        arrow.style.transform = 'rotate(0deg)';
+    } else {
+        content.style.height = content.scrollHeight + 10 + 'px';
+        content.classList.add('show');
+        arrow.style.transform = 'rotate(90deg)';
+    }
+}
+</script>
+
+        </div>
+    </div>
+   
+</div>
+
+<style>
+
+li::marker {
+    content: '';  
+}
+
+input[type="checkbox"] {
+    appearance: none;  
+    width: 1.2rem;       
+    height: 1.2rem;      
+    border: 2px solid #000000;  
+    border-radius: 5px;  
+    background-color: transparent;  
+    position: relative;  
+}
+
+.dark-mode input[type="checkbox"] {
+    border: 2px solid #FFFFFF;  
+}
+
+input[type="checkbox"]:checked {
+    background-color: green;  
+}
+
+input[type=checkbox]{
+    vertical-align: text-bottom;
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    width: 5px;  
+    height: 10px;  
+    border: solid white;  
+    border-width: 0 2px 2px 0;  
+    transform: rotate(45deg);  
+    left: 40%;
+    top: 16%;
+}
+
+
+</style>
+
+        </main><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2025 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img')
+</script>
+
+  </footer></body>
+</html>
+

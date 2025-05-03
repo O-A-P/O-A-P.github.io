@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 超级码里奥</title>
+    <link>https://o-a-p.github.io/categories/</link>
+    <description>Recent content in Categories on 超级码里奥</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 10 Dec 2024 15:29:29 +0800</lastBuildDate>
+    <atom:link href="https://o-a-p.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Life</title>
+      <link>https://o-a-p.github.io/categories/life/</link>
+      <pubDate>Tue, 10 Dec 2024 15:29:29 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/life/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Summary</title>
+      <link>https://o-a-p.github.io/categories/summary/</link>
+      <pubDate>Tue, 10 Dec 2024 15:29:29 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/summary/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>C&#43;&#43;</title>
+      <link>https://o-a-p.github.io/categories/c&#43;&#43;/</link>
+      <pubDate>Mon, 21 Oct 2024 14:55:00 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Interview</title>
+      <link>https://o-a-p.github.io/categories/interview/</link>
+      <pubDate>Tue, 27 Aug 2024 21:24:59 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/interview/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Travel</title>
+      <link>https://o-a-p.github.io/categories/travel/</link>
+      <pubDate>Tue, 06 Aug 2024 21:42:01 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/travel/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CSAPP</title>
+      <link>https://o-a-p.github.io/categories/csapp/</link>
+      <pubDate>Tue, 20 Feb 2024 20:48:54 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/csapp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>x86-asm</title>
+      <link>https://o-a-p.github.io/categories/x86-asm/</link>
+      <pubDate>Tue, 20 Feb 2024 20:48:54 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/x86-asm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>6.S081</title>
+      <link>https://o-a-p.github.io/categories/6.s081/</link>
+      <pubDate>Tue, 26 Dec 2023 21:12:07 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/6.s081/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>OS</title>
+      <link>https://o-a-p.github.io/categories/os/</link>
+      <pubDate>Tue, 26 Dec 2023 21:12:07 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/os/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GDB</title>
+      <link>https://o-a-p.github.io/categories/gdb/</link>
+      <pubDate>Sat, 08 Jul 2023 15:27:53 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/gdb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://o-a-p.github.io/categories/linux/</link>
+      <pubDate>Sat, 08 Jul 2023 15:27:53 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tool</title>
+      <link>https://o-a-p.github.io/categories/tool/</link>
+      <pubDate>Sat, 08 Jul 2023 15:27:53 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/tool/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Shortcode</title>
+      <link>https://o-a-p.github.io/categories/shortcode/</link>
+      <pubDate>Thu, 01 Jan 1970 21:47:11 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/shortcode/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Test</title>
+      <link>https://o-a-p.github.io/categories/test/</link>
+      <pubDate>Thu, 01 Jan 1970 21:47:11 +0800</pubDate>
+      <guid>https://o-a-p.github.io/categories/test/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

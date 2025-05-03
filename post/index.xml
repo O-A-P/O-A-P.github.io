@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 超级码里奥</title>
+    <link>https://o-a-p.github.io/post/</link>
+    <description>Recent content in Posts on 超级码里奥</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 10 Dec 2024 15:29:29 +0800</lastBuildDate>
+    <atom:link href="https://o-a-p.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2024 拥抱变化</title>
+      <link>https://o-a-p.github.io/post/year/2024/</link>
+      <pubDate>Tue, 10 Dec 2024 15:29:29 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/year/2024/</guid>
+      <description>主动寻求改变</description>
+    </item>
+    <item>
+      <title>C&#43;&#43;: functional</title>
+      <link>https://o-a-p.github.io/post/cpp/function-bind/</link>
+      <pubDate>Mon, 21 Oct 2024 14:55:00 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/cpp/function-bind/</guid>
+      <description>function &amp;amp; bind</description>
+    </item>
+    <item>
+      <title>记两次失败的面试</title>
+      <link>https://o-a-p.github.io/post/failure/two-failed-interviews/</link>
+      <pubDate>Tue, 27 Aug 2024 21:24:59 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/failure/two-failed-interviews/</guid>
+      <description>&amp;ldquo;优势在我&amp;rdquo;</description>
+    </item>
+    <item>
+      <title>再会南昌</title>
+      <link>https://o-a-p.github.io/post/travel/nanchang/</link>
+      <pubDate>Tue, 06 Aug 2024 21:42:01 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/travel/nanchang/</guid>
+      <description>但不当舔狗</description>
+    </item>
+    <item>
+      <title>CSAPP：bomb lab</title>
+      <link>https://o-a-p.github.io/post/csapp/bomb/</link>
+      <pubDate>Tue, 20 Feb 2024 20:48:54 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/csapp/bomb/</guid>
+      <description>开始你的炸弹秀</description>
+    </item>
+    <item>
+      <title>6.S081：xv6 进程调度</title>
+      <link>https://o-a-p.github.io/post/os/6.s081-os-scheduling/</link>
+      <pubDate>Tue, 26 Dec 2023 21:12:07 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/os/6.s081-os-scheduling/</guid>
+      <description>此起彼伏</description>
+    </item>
+    <item>
+      <title>6.S081：xv6 中断与驱动</title>
+      <link>https://o-a-p.github.io/post/os/6.s081-os-interrupt/</link>
+      <pubDate>Mon, 25 Dec 2023 20:43:45 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/os/6.s081-os-interrupt/</guid>
+      <description>各司其职</description>
+    </item>
+    <item>
+      <title>6.S081：xv6 trap过程</title>
+      <link>https://o-a-p.github.io/post/os/6.s081-os-trap/</link>
+      <pubDate>Sat, 23 Dec 2023 19:06:02 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/os/6.s081-os-trap/</guid>
+      <description>陷入内核</description>
+    </item>
+    <item>
+      <title>6.S081：xv6 启动过程</title>
+      <link>https://o-a-p.github.io/post/os/6.s081-os-start/</link>
+      <pubDate>Wed, 20 Dec 2023 20:12:49 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/os/6.s081-os-start/</guid>
+      <description>从启动到Shell进程</description>
+    </item>
+    <item>
+      <title>6.S081：实验</title>
+      <link>https://o-a-p.github.io/post/os/6.s081-lab/</link>
+      <pubDate>Mon, 10 Jul 2023 20:08:56 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/os/6.s081-lab/</guid>
+      <description>实验捏</description>
+    </item>
+    <item>
+      <title>GDB命令</title>
+      <link>https://o-a-p.github.io/post/tool/gdb/</link>
+      <pubDate>Sat, 08 Jul 2023 15:27:53 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/tool/gdb/</guid>
+      <description>按gdb进入GDB</description>
+    </item>
+    <item>
+      <title>短代码测试</title>
+      <link>https://o-a-p.github.io/post/test/shortcodestest/</link>
+      <pubDate>Thu, 01 Jan 1970 21:47:11 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/test/shortcodestest/</guid>
+      <description>测试</description>
+    </item>
+    <item>
+      <title>Markdown Syntax Guide</title>
+      <link>https://o-a-p.github.io/post/test/syntaxtest/</link>
+      <pubDate>Thu, 01 Jan 1970 18:58:11 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/test/syntaxtest/</guid>
+      <description>测试</description>
+    </item>
+  </channel>
+</rss>

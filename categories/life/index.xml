@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Life on 超级码里奥</title>
+    <link>https://o-a-p.github.io/categories/life/</link>
+    <description>Recent content in Life on 超级码里奥</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 10 Dec 2024 15:29:29 +0800</lastBuildDate>
+    <atom:link href="https://o-a-p.github.io/categories/life/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2024 拥抱变化</title>
+      <link>https://o-a-p.github.io/post/year/2024/</link>
+      <pubDate>Tue, 10 Dec 2024 15:29:29 +0800</pubDate>
+      <guid>https://o-a-p.github.io/post/year/2024/</guid>
+      <description>主动寻求改变</description>
+    </item>
+  </channel>
+</rss>

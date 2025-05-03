@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>我的相册 | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="描述123"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/photo/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.615fc25b4089d39f5daa81b0f85c58b457be1ebea119d3df72100d4d0bacc412.css">
+
+    
+    <meta property="og:title" content="我的相册" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/photo/" /><meta property="article:section" content="" />
+
+<meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="我的相册"/>
+<meta name="twitter:description" content=""/>
+
+    
+    
+    
+
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#">
+                <img src="https://o-a-p.github.io/svg/sun.svg" alt="sun icon" class="theme-icon" />
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var burger = document.querySelector('.navbar-burger');
+        burger.addEventListener('click', function() {
+            burger.classList.toggle('is-active');
+            document.querySelector('.navbar-menu').classList.toggle('is-active');
+        });
+    });
+
+    
+    function setTheme(theme) {
+        let body = document.body;
+        let themeIcon = document.querySelector(".theme-icon");
+        if (theme === "dark") {
+            body.classList.add("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/moon.svg";
+            themeIcon.alt = "moon icon";
+        } else {
+            body.classList.remove("dark-mode");
+            themeIcon.src = "https:\/\/o-a-p.github.io\/svg/sun.svg";
+            themeIcon.alt = "sun icon";
+        }
+        
+        localStorage.setItem("theme", theme);
+    }
+
+    
+    let theme = localStorage.getItem("theme") || "light";
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (isDarkMode) {
+        
+        setTheme('dark');
+
+    } else {
+        
+        setTheme('light');
+    }
+    
+    setTheme('dark');
+
+    
+    document.getElementById("theme-toggle").addEventListener("click", function() {
+        if (theme === "light") {
+            theme = "dark";
+        } else {
+            theme = "light";
+        }
+        setTheme(theme);
+    });
+
+
+
+</script>
+
+</header><main>
+<div class="gallery-photos page">
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2025-01-11%20%e8%8a%b1.jpg" 
+           alt="2025-01-11 花.jpg" decoding="async" />
+      <span class="photo-title">花</span>
+      <span class="photo-time">2025-01-11</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-11-30%20%e6%9f%b4.jpg" 
+           alt="2024-11-30 柴.jpg" decoding="async" />
+      <span class="photo-title">柴</span>
+      <span class="photo-time">2024-11-30</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-11-03%20%e9%9d%92%e5%b2%9b%e6%95%99%e5%a0%82.jpg" 
+           alt="2024-11-03 青岛教堂.jpg" decoding="async" />
+      <span class="photo-title">青岛教堂</span>
+      <span class="photo-time">2024-11-03</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-11-03%20%e9%9d%92%e5%b2%9b%e4%b8%8d%e7%9f%a5%e5%90%8d%e5%bb%ba%e7%ad%91.jpg" 
+           alt="2024-11-03 青岛不知名建筑.jpg" decoding="async" />
+      <span class="photo-title">青岛不知名建筑</span>
+      <span class="photo-time">2024-11-03</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-11-03%20%e4%bf%a1%e5%8f%b7%e5%b1%b1%e5%85%ac%e5%9b%ad%e6%97%a5%e8%90%bd.jpg" 
+           alt="2024-11-03 信号山公园日落.jpg" decoding="async" />
+      <span class="photo-title">信号山公园日落</span>
+      <span class="photo-time">2024-11-03</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-11-02%20%e5%8f%b0%e4%b8%9c.jpg" 
+           alt="2024-11-02 台东.jpg" decoding="async" />
+      <span class="photo-title">台东</span>
+      <span class="photo-time">2024-11-02</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-09-27%20%e7%83%88%e7%81%ab%e7%83%a7%e7%83%a4.jpg" 
+           alt="2024-09-27 烈火烧烤.jpg" decoding="async" />
+      <span class="photo-title">烈火烧烤</span>
+      <span class="photo-time">2024-09-27</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-08-11%20%e6%b7%b1%e5%9c%b3%e4%ba%ba%e6%89%8d%e5%85%ac%e5%9b%ad.jpg" 
+           alt="2024-08-11 深圳人才公园.jpg" decoding="async" />
+      <span class="photo-title">深圳人才公园</span>
+      <span class="photo-time">2024-08-11</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-08-11%20%e6%98%a5%e7%ac%8b%e5%a4%a7%e5%8e%a6%e4%b8%8e%e9%a3%9e%e6%9c%ba.jpg" 
+           alt="2024-08-11 春笋大厦与飞机.jpg" decoding="async" />
+      <span class="photo-title">春笋大厦与飞机</span>
+      <span class="photo-time">2024-08-11</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-08-11%202024Robomaster%e6%80%bb%e5%86%b3%e8%b5%9b.jpg" 
+           alt="2024-08-11 2024Robomaster总决赛.jpg" decoding="async" />
+      <span class="photo-title">Robomaster总决赛</span>
+      <span class="photo-time">2024-08-11</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-08-04%20%e6%b1%9f%e8%a5%bf%e7%be%8e%e6%9c%af%e9%a6%86%e4%b8%8d%e7%9f%a5%e5%90%8d%e8%89%ba%e6%9c%af%e5%93%81.jpg" 
+           alt="2024-08-04 江西美术馆不知名艺术品.jpg" decoding="async" />
+      <span class="photo-title">江西美术馆不知名艺术品</span>
+      <span class="photo-time">2024-08-04</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-07-21%20%e5%b1%b1%e5%a7%86%e5%a4%9a%e8%82%89%e4%b9%90%e9%ab%98.jpg" 
+           alt="2024-07-21 山姆多肉乐高.jpg" decoding="async" />
+      <span class="photo-title">山姆多肉乐高</span>
+      <span class="photo-time">2024-07-21</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-07-12%20%e4%ba%8c%e5%85%ab%e5%a4%a7%e6%9d%a0%e7%83%a7%e7%83%a4.jpg" 
+           alt="2024-07-12 二八大杠烧烤.jpg" decoding="async" />
+      <span class="photo-title">二八大杠烧烤</span>
+      <span class="photo-time">2024-07-12</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-05-08%20%e5%ae%9c%e5%ae%b6%e9%b2%a8%e9%b1%bc.jpg" 
+           alt="2024-05-08 宜家鲨鱼.jpg" decoding="async" />
+      <span class="photo-title">宜家鲨鱼</span>
+      <span class="photo-time">2024-05-08</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-05-07%20%e6%b7%b1%e5%9c%b3%e5%bd%93%e4%bb%a3%e8%89%ba%e6%9c%af%e4%b8%8e%e5%9f%8e%e5%b8%82%e8%a7%84%e5%88%92%e9%a6%86.jpg" 
+           alt="2024-05-07 深圳当代艺术与城市规划馆.jpg" decoding="async" />
+      <span class="photo-title">深圳当代艺术与城市规划馆</span>
+      <span class="photo-time">2024-05-07</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-05-07%20%e5%a6%82%e5%9b%be.jpg" 
+           alt="2024-05-07 如图.jpg" decoding="async" />
+      <span class="photo-title">如图</span>
+      <span class="photo-time">2024-05-07</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-05-06%20%e5%ae%9c%e5%ae%b6%e4%b8%ad%e6%8c%87.jpg" 
+           alt="2024-05-06 宜家中指.jpg" decoding="async" />
+      <span class="photo-title">宜家中指</span>
+      <span class="photo-time">2024-05-06</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-05-06%20%e5%a4%a7%e8%8a%ac%e6%b2%b9%e7%94%bb%e6%9d%91%e8%b5%b5%e5%b0%8f%e5%8b%87%e5%b7%a5%e4%bd%9c%e5%ae%a4.jpg" 
+           alt="2024-05-06 大芬油画村赵小勇工作室.jpg" decoding="async" />
+      <span class="photo-title">大芬油画村赵小勇工作室</span>
+      <span class="photo-time">2024-05-06</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2024-04-26%20%e5%ad%a6%e9%99%a2%e9%97%a8%e5%8f%a3%e7%8b%b8%e8%8a%b1%e9%aa%9a%e7%8c%ab.jpg" 
+           alt="2024-04-26 学院门口狸花骚猫.jpg" decoding="async" />
+      <span class="photo-title">学院门口狸花骚猫</span>
+      <span class="photo-time">2024-04-26</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-12-08%20%e9%bb%84%e9%b9%a4%e6%a5%bc.jpg" 
+           alt="2023-12-08 黄鹤楼.jpg" decoding="async" />
+      <span class="photo-title">黄鹤楼</span>
+      <span class="photo-time">2023-12-08</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-12-07%20%e5%ae%9d%e9%80%9a%e5%af%ba.jpg" 
+           alt="2023-12-07 宝通寺.jpg" decoding="async" />
+      <span class="photo-title">宝通寺</span>
+      <span class="photo-time">2023-12-07</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-10-29%20%e6%b1%9f%e6%b1%89%e8%b7%af%e4%b8%ad%e5%9b%bd%e9%bb%84%e9%87%91.jpg" 
+           alt="2023-10-29 江汉路中国黄金.jpg" decoding="async" />
+      <span class="photo-title">江汉路中国黄金</span>
+      <span class="photo-time">2023-10-29</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-10-15%20%e6%ad%a6%e6%b1%89%e4%b8%8d%e7%9f%a5%e5%90%8d%e5%b1%b1%e7%9b%98%e5%b1%b1%e5%85%ac%e8%b7%af.jpg" 
+           alt="2023-10-15 武汉不知名山盘山公路.jpg" decoding="async" />
+      <span class="photo-title">武汉不知名山盘山公路</span>
+      <span class="photo-time">2023-10-15</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-08-24%20%e7%a5%9e%e5%86%9c%e6%9e%b6%e5%9b%9e%e5%ae%b6%e5%85%ac%e5%af%93%e4%b8%8d%e7%9f%a5%e5%90%8d%e5%b0%8f%e6%b2%b3.jpg" 
+           alt="2023-08-24 神农架回家公寓不知名小河.jpg" decoding="async" />
+      <span class="photo-title">神农架回家公寓不知名小河</span>
+      <span class="photo-time">2023-08-24</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-04-29%20%e6%a9%98%e6%a1%91%e5%9c%a8%e4%bf%a1%e6%81%af%e6%a5%bc.jpg" 
+           alt="2023-04-29 橘桑在信息楼.jpg" decoding="async" />
+      <span class="photo-title">橘桑在信息楼</span>
+      <span class="photo-time">2023-04-29</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-04-01%20%e9%95%bf%e6%98%a5%e8%a7%82%e5%86%85%e4%b8%80%e8%a7%92.jpg" 
+           alt="2023-04-01 长春观内一角.jpg" decoding="async" />
+      <span class="photo-title">长春观内一角</span>
+      <span class="photo-time">2023-04-01</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-04-01%20%e9%95%bf%e6%98%a5%e8%a7%82.jpg" 
+           alt="2023-04-01 长春观.jpg" decoding="async" />
+      <span class="photo-title">长春观</span>
+      <span class="photo-time">2023-04-01</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-03-25%20%e4%b8%9c%e6%b9%96%e5%a5%87%e5%a6%99%e5%a4%9c.jpg" 
+           alt="2023-03-25 东湖奇妙夜.jpg" decoding="async" />
+      <span class="photo-title">东湖奇妙夜</span>
+      <span class="photo-time">2023-03-25</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-03-25%20%e4%b8%9c%e6%b9%96%e4%b8%91%e4%b8%9c%e8%a5%bf.jpg" 
+           alt="2023-03-25 东湖丑东西.jpg" decoding="async" />
+      <span class="photo-title">东湖丑东西</span>
+      <span class="photo-time">2023-03-25</span>
+    </div>
+    
+  
+    
+    <div class="gallery-photo">
+      <img class="photo-img lazy" data-src="/photos/2023-03-10%20%e6%b9%96%e5%8c%97%e7%9c%81%e5%8d%9a%e7%89%a9%e9%a6%86.jpg" 
+           alt="2023-03-10 湖北省博物馆.jpg" decoding="async" />
+      <span class="photo-title">湖北省博物馆</span>
+      <span class="photo-time">2023-03-10</span>
+    </div>
+    
+  
+</div>
+
+<style>
+.gallery-photos{width:100%;}
+.gallery-photo{width:24.9%;position: relative;visibility: hidden;overflow: hidden;}
+.gallery-photo.visible{visibility: visible;animation: fadeIn 2s;}
+.gallery-photo img{display: block;width:100%;border-radius:0;padding:4px;animation: fadeIn 1s;cursor: pointer;transition: all .4s ease-in-out;}
+.gallery-photo span.photo-title,.gallery-photo span.photo-time{background: rgba(0, 0, 0, 0.3);padding:0px 8px;font-size:0.9rem;color: #fff;display:block;animation: fadeIn 1s;}
+.gallery-photo span.photo-title{position:absolute;bottom:4px;left:4px;}
+.gallery-photo span.photo-time{position:absolute;top:4px;left:4px;font-size:0.8rem;}
+.gallery-photo:hover span.photo-title{display:block;}
+.gallery-photo:hover img{transform: scale(1.1);}
+@media screen and (max-width: 1280px) {
+	.gallery-photo{width:33.3%;}
+}
+@media screen and (max-width: 860px) {
+	.gallery-photo{width:49.9%;}
+}
+@media (max-width: 683px){
+	.photo-time{display: none;}
+}
+@keyframes fadeIn{
+	0% {opacity: 0;}
+   100% {opacity: 1;}
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const lazyImages = document.querySelectorAll('img.lazy');
+  
+  
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.getAttribute('data-src');
+        img.onload = () => {
+          img.classList.remove('lazy');
+          img.parentElement.classList.add('visible'); 
+          waterfall('.gallery-photos'); 
+        };
+        observer.unobserve(img);
+      }
+    });
+  });
+
+  lazyImages.forEach(img => observer.observe(img));
+
+  
+  window.addEventListener('resize', () => {
+    waterfall('.gallery-photos');
+  });
+});
+</script>
+
+<script src="https://immmmm.com/waterfall.min.js"></script>
+<script src="https://immmmm.com/imgStatus.min.js"></script>
+<script src="https://immmmm.com/view-image.js"></script>
+<script src="https://immmmm.com/lately.min.js"></script>
+<script>
+  window.Lately && Lately.init({ target: '.photo-time' });
+  window.ViewImage && ViewImage.init('.gallery-photo img');
+</script>
+
+        </main><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2025 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img')
+</script>
+
+  </footer></body>
+</html>
+
