@@ -185,6 +185,9 @@ printf("123");
 # 20. 友链
 {{< friend name="OAP" url="https://o-a-p.github.io/" logo="https://o-a-p.github.io/img/author/head.jpg" word="我自己" >}}
 
+# 21. mermaid
+{{<mermaid>}}
+
 
 
 # 参考
