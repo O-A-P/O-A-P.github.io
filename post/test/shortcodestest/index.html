@@ -217,6 +217,7 @@
     <li><a href="#18-时间轴">18. 时间轴</a></li>
     <li><a href="#19-热力图">19. 热力图</a></li>
     <li><a href="#20-友链">20. 友链</a></li>
+    <li><a href="#21-mermaid">21. mermaid</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav></div>
@@ -1658,6 +1659,8 @@ function toggleCollapse(element) {
     
     
     
+    
+    
 
     var data = {
         "pages": [
@@ -1698,8 +1701,18 @@ function toggleCollapse(element) {
                     "year": "2024",
                     "month": "12",
                     "day": "10",
-                    "word_count": "4987",
+                    "word_count": "4988",
                     "link": "\/post\/year\/2024\/"
+                },
+                
+                {
+                    "title": "读研往事",
+                    "date": "2025-05-19",
+                    "year": "2025",
+                    "month": "05",
+                    "day": "19",
+                    "word_count": "4561",
+                    "link": "\/post\/year\/2025-mid\/"
                 }
                 
         ]
@@ -1970,6 +1983,19 @@ function toggleCollapse(element) {
 
 }
 </style>
+<h1 id="21-mermaid">21. mermaid</h1>
+<div class="mermaid" style="text-align: center;">
+    graph LR
+    A[Square Rect] -- Link text --> B((Circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+</div>
+
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+</script>
 <h1 id="参考">参考</h1>
 <p><a href="https://lovir.cn/p/shortcodes/" target="_blank" rel="noopener">老哥1</a></p>
 <p><a href="https://www.sleepymoon.cyou/2023/hugo-shortcodes/" target="_blank" rel="noopener">老哥2</a></p>
