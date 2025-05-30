@@ -206,6 +206,17 @@
   
   var dataMap = new Map();
   
+    var key = "2025-05-31";
+    var value = dataMap.get(key);
+    var wordCount =  5063 ;
+    var link = "/post/year/2025-mid/";
+    var title = "读研往事";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
     var key = "2024-12-10";
     var value = dataMap.get(key);
     var wordCount =  4988 ;
@@ -523,6 +534,8 @@
     
     
     
+    
+    
 
     var data = {
         "pages": [
@@ -565,6 +578,16 @@
                     "day": "10",
                     "word_count": "4988",
                     "link": "\/post\/year\/2024\/"
+                },
+                
+                {
+                    "title": "读研往事",
+                    "date": "2025-05-31",
+                    "year": "2025",
+                    "month": "05",
+                    "day": "31",
+                    "word_count": "5063",
+                    "link": "\/post\/year\/2025-mid\/"
                 }
                 
         ]
@@ -778,9 +801,11 @@
   
     
   
+    
+  
 
 
-53,719 字
+58,782 字
 
 
  
