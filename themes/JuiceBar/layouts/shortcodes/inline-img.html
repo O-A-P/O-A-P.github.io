@@ -1,1 +1,9 @@
-<img src="{{.Get 0}}" style="display: inline-block; border-radius: 0px; height: 1rem; vertical-align: middle; margin-bottom: 0.15rem;">
+{{/* <img src="{{.Get 0}}"
+    style="display: inline-block; border-radius: 0px; height: 1rem; vertical-align: middle; margin-bottom: 0.4rem;">
+*/}}
+{{ $src := .Get 0 }}
+{{ $height := printf "%srem" (.Get 1 | default "1") }}
+{{ $mb := printf "%srem" (.Get 2 | default "0.4") }}
+
+<img src="{{ $src }}"
+    style="display: inline-block; border-radius: 0px; height: {{ $height }}; vertical-align: middle; margin-bottom: {{ $mb }};">
