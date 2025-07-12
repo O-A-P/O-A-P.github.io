@@ -11,13 +11,13 @@ layout: about
 * 技能：C/C++, CMake, Linux, GDB, Git, MySQL, Vue, Java, SpringBoot, Qt, Python
 * 头像：[https://pixel-me.tokyo/en/](https://pixel-me.tokyo/en/)
 
-## 工作经历
+<!-- ## 工作经历 -->
 <!-- {{< align center "Tencent" >}} -->
-2025.01 - Now
-{{< inline-img "/img/company-logo/Tencent_Standard-Logo.png" "1" "0.2" >}} 沉淀！用C++写游戏后台
+<!-- 2025.01 - Now
+{{< inline-img "/img/company-logo/Tencent_Standard-Logo.png" "1" "0.2" >}} 沉淀！用C++写游戏后台 -->
 <!-- {{< align center "Momenta" >}} -->
-2024.05 - 2024.11 
-{{< inline-img "/img/company-logo/momenta-logo.png" "1" "0.4" >}} C++系统研发实习，量产项目自动驾驶系统功能逻辑层（Momenta Function Framework，MFF）开发，为表现层提供可靠数据，并控制自驾行车功能状态切换
+<!-- 2024.05 - 2024.11 
+{{< inline-img "/img/company-logo/momenta-logo.png" "1" "0.4" >}} C++系统研发实习，量产项目自动驾驶系统功能逻辑层（Momenta Function Framework，MFF）开发，为表现层提供可靠数据，并控制自驾行车功能状态切换 -->
 
 ## 我偶尔会在这里刷新
 {{<map src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d471638.01329154905!2d113.43004159423616!3d22.553957262878995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f408d0e15291%3A0xfdee550db79280c9!2z5Lit5Zu95bm_5Lic55yB5rex5Zyz5biC!5e0!3m2!1szh-CN!2sus!4v1751646488491!5m2!1szh-CN!2sus">}}
