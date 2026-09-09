@@ -1,0 +1,1055 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Markdown Syntax Guide | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="测试"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/post/test/syntaxtest/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.15f1383c93bee016a21e6324ae71b77bea3c4a9185e333144641ec5df722db89.css">
+
+    
+    <meta property="og:title" content="Markdown Syntax Guide" />
+<meta property="og:description" content="测试" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/post/test/syntaxtest/" /><meta property="og:image" content="https://o-a-p.github.io/img/test/google.png" /><meta property="og:image" content="https://o-a-p.github.io/img/test/google.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="1970-01-01T18:58:11+08:00" />
+<meta property="article:modified_time" content="1970-01-01T18:58:11+08:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://o-a-p.github.io/img/test/google.png" /><meta name="twitter:title" content="Markdown Syntax Guide"/>
+<meta name="twitter:description" content="测试"/>
+
+    
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body class="dark-mode"><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#" aria-label="Switch color theme">
+                <svg class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path class="theme-icon__moon" fill="currentColor"
+                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <g class="theme-icon__sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.querySelector('.navbar');
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        if (!navbar || !burger || !menu) return;
+
+        var animating = false;
+        var opened = false;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var MOBILE_QUERY = '(max-width: 1087px)';
+
+        function isMobileMenu() {
+            return window.matchMedia(MOBILE_QUERY).matches;
+        }
+
+        function clearMenuInlineStyle() {
+            menu.style.height = '';
+            menu.style.opacity = '';
+            menu.style.transform = '';
+            menu.style.overflow = '';
+            menu.style.transition = '';
+        }
+
+        function resetToDesktop() {
+            animating = false;
+            opened = false;
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+            clearMenuInlineStyle();
+        }
+
+        function openMenu() {
+            if (animating || opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = true;
+            animating = true;
+            burger.classList.add('is-active');
+            menu.classList.add('is-active');
+            burger.setAttribute('aria-expanded', 'true');
+
+            if (reduceMotion) {
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+            menu.offsetHeight;
+
+            var targetHeight = menu.scrollHeight;
+            menu.style.transition = 'height 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms ease';
+            menu.style.height = targetHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+
+            window.setTimeout(function() {
+                menu.style.height = 'auto';
+                menu.style.overflow = 'visible';
+                animating = false;
+            }, 280);
+        }
+
+        function closeMenu() {
+            if (animating || !opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = false;
+            animating = true;
+            burger.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+
+            if (reduceMotion) {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = menu.scrollHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+            menu.offsetHeight;
+
+            menu.style.transition = 'height 230ms cubic-bezier(0.4, 0, 1, 1), opacity 160ms ease, transform 180ms ease';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function() {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+            }, 240);
+        }
+
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (opened) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!isMobileMenu() || !opened) return;
+            if (navbar.contains(e.target)) return;
+            closeMenu();
+        });
+
+        menu.addEventListener('click', function(e) {
+            var link = e.target.closest('.navbar-item');
+            if (!link || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isMobileMenu()) {
+                resetToDesktop();
+            }
+        });
+    });
+
+    
+    
+    
+    (function() {
+        "use strict";
+
+        var root = document.documentElement;
+        var body = document.body;
+        var themeToggle = document.getElementById("theme-toggle");
+        var isTransitioning = false;
+        var effectsPaused = false;
+        var currentTheme = readStoredTheme();
+
+        if (themeToggle === null) return;
+
+        function readStoredTheme() {
+            try {
+                var storedTheme = localStorage.getItem("theme");
+                if (storedTheme === "dark" || storedTheme === "light") {
+                    return storedTheme;
+                }
+            } catch (error) {
+                
+            }
+            return "dark";
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (error) {
+                
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            body.classList.toggle("dark-mode", theme === "dark");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            );
+            storeTheme(theme);
+            window.dispatchEvent(new CustomEvent("theme-change", {
+                detail: { theme: theme }
+            }));
+        }
+
+        function getRevealOrigin(event) {
+            var bounds = themeToggle.getBoundingClientRect();
+            var origin = {
+                x: bounds.left + bounds.width / 2,
+                y: bounds.top + bounds.height / 2
+            };
+
+            
+            
+            if (event.clientX !== 0 || event.clientY !== 0) {
+                origin.x = event.clientX;
+                origin.y = event.clientY;
+            }
+            return origin;
+        }
+
+        function getRevealGeometry(origin) {
+            var farthestX = Math.max(origin.x, window.innerWidth - origin.x);
+            var farthestY = Math.max(origin.y, window.innerHeight - origin.y);
+            var radius = Math.hypot(farthestX, farthestY);
+
+            return {
+                radius: radius,
+                
+                duration: Math.max(650, Math.min(1100, radius / 1.5))
+            };
+        }
+
+        function setToggleBusy(active) {
+            isTransitioning = active;
+            if (active) {
+                themeToggle.setAttribute("aria-disabled", "true");
+            } else {
+                themeToggle.removeAttribute("aria-disabled");
+            }
+        }
+
+        function setEffectsPaused(paused) {
+            if (effectsPaused === paused) return;
+            effectsPaused = paused;
+            window.dispatchEvent(new CustomEvent(
+                paused ? "theme-transition-start" : "theme-transition-end"
+            ));
+        }
+
+        function finishTransition() {
+            if (!isTransitioning) return;
+            root.classList.remove("theme-transition-active");
+            setEffectsPaused(false);
+            setToggleBusy(false);
+        }
+
+        function startThemeTransition(nextTheme, event) {
+            var origin = getRevealOrigin(event);
+            var geometry = getRevealGeometry(origin);
+            var fromClip = "circle(0px at " + origin.x + "px " + origin.y + "px)";
+            var toClip = "circle(" + geometry.radius + "px at "
+                + origin.x + "px " + origin.y + "px)";
+            var preflightClip = "circle(" + Math.max(geometry.radius - 1, 0) + "px at "
+                + origin.x + "px " + origin.y + "px)";
+
+            setEffectsPaused(true);
+            root.classList.add("theme-transition-active");
+
+            var transition;
+            try {
+                transition = document.startViewTransition(function() {
+                    applyTheme(nextTheme);
+                });
+            } catch (error) {
+                applyTheme(nextTheme);
+                finishTransition();
+                return;
+            }
+
+            transition.ready.then(function() {
+                try {
+                    root.animate(
+                        [
+                            {
+                                opacity: 0.001,
+                                clipPath: toClip
+                            },
+                            {
+                                opacity: 0.001,
+                                clipPath: preflightClip
+                            }
+                        ],
+                        {
+                            duration: 34,
+                            easing: "linear",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+
+                    root.animate(
+                        {
+                            opacity: [1, 1],
+                            clipPath: [fromClip, toClip]
+                        },
+                        {
+                            delay: 34,
+                            duration: geometry.duration,
+                            easing: "linear",
+                            fill: "forwards",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+                } catch (error) {
+                    if (typeof transition.skipTransition === "function") {
+                        transition.skipTransition();
+                    }
+                }
+            }, finishTransition);
+
+            transition.finished.then(finishTransition, finishTransition);
+        }
+
+        function switchTheme(nextTheme, event) {
+            var reduceMotion = window.matchMedia
+                && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (isTransitioning) return;
+            if (typeof document.startViewTransition !== "function" || reduceMotion) {
+                applyTheme(nextTheme);
+                return;
+            }
+
+            setToggleBusy(true);
+            startThemeTransition(nextTheme, event);
+        }
+
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            switchTheme(currentTheme === "light" ? "dark" : "light", event);
+        });
+    })();
+
+
+
+</script>
+
+</header>
+<main>
+<div class="single-container page-enter">
+    <div class="archive">
+        
+        <img src="/img/test/google.png" class="myBigPicture" alt="headPic">
+        <h1 class="title is-1">Markdown Syntax Guide</h1>
+        <div class="title subtitle heading is-6">
+            <div class="author-info columns is-vcentered">
+                <div class="column">
+                    <div class="columns is-vcentered is-mobile">
+                        
+                        <div class="column is-narrow">
+                            <img src="/img/author/head.jpg" class="author-image">
+                        </div>
+                        
+                        <div class="column">
+                            <p>OAP</p>
+                            <p><time>January 1, 1970</time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-categories-container">
+                    <a class="hover-underline-animation" href="/categories/test">Test</a>
+                </div>
+            </div>
+        </div>
+        <div class="content article-content">
+            
+            <div class="toc-container">
+                
+    <div class="post-toc">
+        
+            <aside>
+                <button id="tocButton" type="button" aria-expanded="false" aria-controls="hide"><span id="contents">CONTENT</span></button>
+                <div id="hide"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#h1">H1</a>
+      <ul>
+        <li><a href="#h2">H2</a>
+          <ul>
+            <li><a href="#h3">H3</a></li>
+          </ul>
+        </li>
+        <li><a href="#headings">Headings</a></li>
+        <li><a href="#paragraph">Paragraph</a></li>
+        <li><a href="#blockquotes">Blockquotes</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#tables">Tables</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#code-blocks">Code Blocks</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#list-types">List Types</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#单词解释">单词解释</a></li>
+        <li><a href="#图片">图片</a></li>
+        <li><a href="#other-elements--abbr-sub-sup-kbd-mark">Other Elements — abbr, sub, sup, kbd, mark</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </aside>
+        
+    </div><script>
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('tocButton');
+    const tocBody = document.getElementById('hide');
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!tocBody) return;
+
+    if (button) {
+        const mobile = window.matchMedia("(max-width: 768px)");
+        function syncExpandedState() {
+            button.setAttribute("aria-expanded", String(window.getComputedStyle(tocBody).display !== "none"));
+        }
+        syncExpandedState();
+        mobile.addEventListener("change", syncExpandedState);
+        button.addEventListener('click', function() {
+            const container = tocBody.closest(".toc-container");
+            if (!container) return;
+            const isOpen = window.getComputedStyle(tocBody).display === "none";
+            container.classList.toggle("is-expanded", isOpen);
+            container.classList.toggle("is-collapsed", !isOpen);
+            button.setAttribute("aria-expanded", String(isOpen));
+        });
+    }
+
+    const tocLinks = Array.from(tocBody.querySelectorAll('a[href^="#"]'));
+    tocLinks.forEach(link => {
+        if (!link.title) {
+            link.title = link.textContent.trim();
+        }
+    });
+    const headingTargets = tocLinks
+        .map(link => {
+            const id = decodeURIComponent(link.getAttribute('href').slice(1));
+            const el = document.getElementById(id);
+            return el ? { link, el } : null;
+        })
+        .filter(Boolean);
+    let lastActiveLink = null;
+    let currentActiveLinks = [];
+    let isProgrammaticScroll = false;
+    let scrollSettleTimer = null;
+    const SCROLL_SETTLE_MS = 180;
+
+    function getScrollOffset() {
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+        return Math.max(72, Math.round(navbarHeight + 16));
+    }
+
+    function keepTocLinkVisible(link) {
+        const scroller = link.closest('.toc-container');
+        if (!scroller || window.getComputedStyle(scroller).position === "static") return;
+        const linkRect = link.getBoundingClientRect();
+        const boxRect = scroller.getBoundingClientRect();
+        const topGap = linkRect.top - boxRect.top;
+        const bottomGap = boxRect.bottom - linkRect.bottom;
+        if (topGap < 8) {
+            scroller.scrollBy({
+                top: topGap - 12,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        } else if (bottomGap < 8) {
+            scroller.scrollBy({
+                top: 12 - bottomGap,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        }
+    }
+
+    function setActiveLinks(links) {
+        if (links.length === currentActiveLinks.length && links.every((link, index) => link === currentActiveLinks[index])) return;
+        tocLinks.forEach(link => {
+            link.classList.remove("toc-active", "toc-active-parent");
+            link.removeAttribute("aria-current");
+        });
+        links.forEach(link => {
+            link.classList.add("toc-active");
+        });
+        const first = links[0];
+        if (first) {
+            first.setAttribute("aria-current", "location");
+            if (lastActiveLink !== first) keepTocLinkVisible(first);
+        }
+        lastActiveLink = first;
+        currentActiveLinks = links;
+    }
+
+    function updateActive(forceUpdate) {
+        if (isProgrammaticScroll && !forceUpdate) return;
+        if (!headingTargets.length) return;
+        const top = getScrollOffset();
+        const bottom = window.innerHeight;
+        const body = document.querySelector(".article-body");
+        const articleEnd = body ? body.getBoundingClientRect().bottom : Infinity;
+        
+        
+        const positions = headingTargets.map(target => target.el.getBoundingClientRect().top);
+        const links = headingTargets.filter((target, index) => {
+            const end = index + 1 < positions.length ? positions[index + 1] : articleEnd;
+            return positions[index] < bottom && end > top;
+        }).map(target => target.link);
+        setActiveLinks(links);
+    }
+
+    function armScrollSettleTimer() {
+        if (!isProgrammaticScroll) return;
+        if (scrollSettleTimer) {
+            clearTimeout(scrollSettleTimer);
+        }
+        scrollSettleTimer = setTimeout(function() {
+            isProgrammaticScroll = false;
+            scrollSettleTimer = null;
+            updateActive(true);
+        }, SCROLL_SETTLE_MS);
+    }
+
+    updateActive(true);
+
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+            const id = decodeURIComponent(href.slice(1));
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            const offset = getScrollOffset();
+            const top = window.pageYOffset + target.getBoundingClientRect().top - offset;
+            isProgrammaticScroll = !prefersReducedMotion;
+            if (scrollSettleTimer) {
+                clearTimeout(scrollSettleTimer);
+                scrollSettleTimer = null;
+            }
+            window.scrollTo({
+                top: Math.max(0, top),
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+            if (history.pushState) {
+                history.pushState(null, '', href);
+            } else {
+                window.location.hash = href;
+            }
+            setActiveLinks([link]);
+            armScrollSettleTimer();
+        });
+    });
+
+    window.addEventListener("resize", function() { updateActive(); });
+    window.addEventListener("load", function() { updateActive(); });
+    if (document.fonts) document.fonts.ready.then(function() { updateActive(); });
+
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (isProgrammaticScroll) {
+            armScrollSettleTimer();
+            return;
+        }
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            updateActive(true);
+            ticking = false;
+        });
+    });
+});
+</script>
+
+            </div>
+            
+            <div class="article-body">
+                <h1 id="h1">H1</h1>
+<h2 id="h2">H2</h2>
+<h3 id="h3">H3</h3>
+<h4 id="h4">H4</h4>
+<h5 id="h5">H5</h5>
+<h6 id="h6">H6</h6>
+<p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.</p>
+<h2 id="headings">Headings</h2>
+<p>The following HTML <code>&lt;h1&gt;</code>—<code>&lt;h6&gt;</code> elements represent six levels of section headings. <code>&lt;h1&gt;</code> is the highest section level while <code>&lt;h6&gt;</code> is the lowest.</p>
+<h2 id="paragraph">Paragraph</h2>
+<p>Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.</p>
+<p>Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.</p>
+<h2 id="blockquotes">Blockquotes</h2>
+<p>The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a <code>footer</code> or <code>cite</code> element, and optionally with in-line changes such as annotations and abbreviations.</p>
+<h4 id="blockquote-without-attribution">Blockquote without attribution</h4>
+<blockquote>
+<p>Tiam, ad mint andaepu dandae nostion secatur sequo quae. <strong>Note</strong> that you can use <em>Markdown syntax</em> within a blockquote.</p>
+</blockquote>
+<h4 id="blockquote-with-attribution">Blockquote with attribution</h4>
+<blockquote>
+<p>Don’t communicate by sharing memory, share memory by communicating.
+— Rob Pike<a href="https://hugo-paper.vercel.app/post/markdown-syntax/#fn:1" target="_blank" rel="noopener">1</a></p>
+</blockquote>
+<h2 id="tables">Tables</h2>
+<p>Tables aren’t part of the core Markdown spec, but Hugo supports supports them out-of-the-box.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bob</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Alice</td>
+<td>23</td>
+</tr>
+</tbody>
+</table>
+<h4 id="inline-markdown-within-tables">Inline Markdown within tables</h4>
+<table>
+<thead>
+<tr>
+<th>Italics</th>
+<th>Bold</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>italics</em></td>
+<td><strong>bold</strong></td>
+<td><code>code</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="code-blocks">Code Blocks</h2>
+<h4 id="code-block-with-backticks">Code block with backticks</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Example HTML5 Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Test<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h4 id="code-block-indented-with-four-spaces">Code block indented with four spaces</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="cp">&lt;!doctype html&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Example HTML5 Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Test<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h4 id="code-block-with-hugos-internal-highlight-shortcode">Code block with Hugo’s internal highlight shortcode</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="cp">&lt;!doctype html&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Example HTML5 Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Test<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h2 id="list-types">List Types</h2>
+<h4 id="ordered-list">Ordered List</h4>
+<ol>
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
+</ol>
+<h4 id="unordered-list">Unordered List</h4>
+<ul>
+<li>List item</li>
+<li>Another item</li>
+<li>And another item</li>
+</ul>
+<h4 id="nested-list">Nested list</h4>
+<ul>
+<li>Fruit
+<ul>
+<li>Apple</li>
+<li>Orange</li>
+<li>Banana</li>
+</ul>
+</li>
+<li>Dairy
+<ul>
+<li>Milk</li>
+<li>Cheese</li>
+</ul>
+</li>
+</ul>
+<h2 id="单词解释">单词解释</h2>
+<dl>
+<dt>term</dt>
+<dd>definition</dd>
+</dl>
+<h2 id="图片">图片</h2>
+<p>
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="图标">
+</p>
+<h2 id="other-elements--abbr-sub-sup-kbd-mark">Other Elements — abbr, sub, sup, kbd, mark</h2>
+<p>GIF is a bitmap image format.</p>
+<p>H2O</p>
+<p>Xn + Yn = Zn</p>
+<p>Press CTRL+ALT+Delete to end the session.</p>
+<p>Most salamanders are nocturnal, and hunt for insects, worms, and other small creatures.</p>
+<p>The above quote is excerpted from Rob Pike’s talk during Gopherfest, November 18, 2015.</p>
+
+            </div>
+        </div>
+    </div>
+    <a href="#" id="scrollToTopButton">
+        <svg t="1686753152588" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="3988" width="48" height="48">
+            <path
+                d="M518.5 360.3c-3.2-4.4-9.7-4.4-12.9 0l-178 246c-3.8 5.3 0 12.7 6.5 12.7H381c10.2 0 19.9-4.9 25.9-13.2L512 460.4l105.2 145.4c6 8.3 15.6 13.2 25.9 13.2H690c6.5 0 10.3-7.4 6.5-12.7l-178-246z"
+                p-id="3989" fill="#363636"></path>
+            <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                p-id="3990" fill="#363636"></path>
+        </svg>
+    </a><hr style="border-top: 1px solid #EEEEEE;">
+<div id="comment"></div>
+<script>
+    (function() {
+        "use strict";
+
+        var activeTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        var giscusScript = null;
+        var readyFrame = null;
+        var giscusOrigin = "https://giscus.app";
+
+        function sendGiscusTheme(theme) {
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || iframe !== readyFrame || iframe.contentWindow === null) {
+                return;
+            }
+            iframe.contentWindow.postMessage({
+                giscus: {
+                    setConfig: {
+                        theme: theme
+                    }
+                }
+            }, giscusOrigin);
+        }
+
+        
+        
+        window.addEventListener("message", function(event) {
+            if (event.origin !== giscusOrigin || !event.data || !event.data.giscus) return;
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || event.source !== iframe.contentWindow || readyFrame === iframe) return;
+            readyFrame = iframe;
+            sendGiscusTheme(activeTheme);
+        });
+
+        function updateGiscusTheme(theme) {
+            activeTheme = theme === "light" ? "light" : "dark";
+            if (giscusScript !== null) {
+                giscusScript.setAttribute("data-theme", activeTheme);
+            }
+            sendGiscusTheme(activeTheme);
+        }
+
+        window.addEventListener("theme-change", function(event) {
+            var theme = event.detail && event.detail.theme;
+            updateGiscusTheme(theme);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var comment = document.getElementById("comment");
+            if (comment === null) {
+                return;
+            }
+
+            var giscusAttributes = {
+                "src": "https://giscus.app/client.js",
+                "data-repo": "O-A-P\/O-A-P.github.io",
+                "data-repo-id": "R_kgDOJEfHWQ",
+                "data-category": "Announcements",
+                "data-category-id": "DIC_kwDOJEfHWc4CcDhX",
+                "data-mapping": "og:title",
+                "data-reactions-enabled": "1",
+                "data-emit-metadata": "0",
+                "data-input-position": "bottom",
+                "data-theme": activeTheme,
+                "data-lang": "en",
+                "data-loading": "lazy",
+                "crossorigin": "anonymous"
+            };
+
+            giscusScript = document.createElement("script");
+            Object.entries(giscusAttributes).forEach(function(attribute) {
+                giscusScript.setAttribute(attribute[0], attribute[1]);
+            });
+            comment.appendChild(giscusScript);
+        });
+    })();
+
+</script>
+
+<div class="pp-container">
+        <section class="pre-and-post">
+            <div class="has-text-left">
+                
+            </div>
+            <div class="has-text-right ">
+                
+                <p>Next post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/test/shortcodestest/">短代码测试</a>
+                
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<style>
+.page-enter {
+    animation: page-fade-in 0.6s ease-out both;
+}
+@keyframes page-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+</style>
+
+        </main>
+    
+    <aside class="article-minimap" hidden aria-label="文章缩略导航">
+    <div class="article-minimap__track" role="slider" tabindex="0" aria-label="阅读位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-orientation="vertical">
+        <div class="article-minimap__preview single-container" aria-hidden="true" inert></div>
+        <div class="article-minimap__embeds" aria-hidden="true" inert></div>
+        <div class="article-minimap__viewport" aria-hidden="true"></div>
+    </div>
+</aside>
+<script src="/js/article-minimap.js" defer></script>
+
+
+        <div id="card-transition-overlay" class="card-transition-overlay"></div><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2026 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img');
+
+  (function() {
+    const overlay = document.getElementById("card-transition-overlay");
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isNavigating = false;
+
+    function shouldHandleLink(link, event) {
+      if (!link || !overlay) return false;
+      if (isNavigating || event.defaultPrevented) return false;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+      if (link.closest(".myCard")) return false;
+      if (link.closest("[data-no-page-transition]")) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+
+      const href = link.getAttribute("href");
+      if (!href) return false;
+      if (href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+
+      let targetUrl = null;
+      try {
+        targetUrl = new URL(href, window.location.href);
+      } catch (err) {
+        return false;
+      }
+
+      if (targetUrl.origin !== window.location.origin) return false;
+      if (targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search &&
+          targetUrl.hash.length > 0) return false;
+      if (targetUrl.href === window.location.href) return false;
+
+      return true;
+    }
+
+    function navigateWithOverlay(href) {
+      if (isNavigating) return;
+      isNavigating = true;
+      document.body.style.pointerEvents = "none";
+      overlay.classList.add("card-transition-overlay--active");
+      const delay = prefersReducedMotion ? 0 : 360;
+      window.setTimeout(function() {
+        window.location.href = href;
+      }, delay);
+    }
+
+    document.addEventListener("click", function(event) {
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      navigateWithOverlay(link.href);
+    }, true);
+
+    window.addEventListener("pageshow", function() {
+      isNavigating = false;
+      document.body.style.pointerEvents = "";
+      if (overlay) overlay.classList.remove("card-transition-overlay--active");
+    });
+  })();
+</script>
+
+  </footer>
+</body>
+</html>

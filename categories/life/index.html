@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Life | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="描述123"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/categories/life/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.15f1383c93bee016a21e6324ae71b77bea3c4a9185e333144641ec5df722db89.css">
+
+    
+    <meta property="og:title" content="Life" />
+<meta property="og:description" content="描述123" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://o-a-p.github.io/categories/life/" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Life"/>
+<meta name="twitter:description" content="描述123"/>
+
+    
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body class="dark-mode"><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#" aria-label="Switch color theme">
+                <svg class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path class="theme-icon__moon" fill="currentColor"
+                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <g class="theme-icon__sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.querySelector('.navbar');
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        if (!navbar || !burger || !menu) return;
+
+        var animating = false;
+        var opened = false;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var MOBILE_QUERY = '(max-width: 1087px)';
+
+        function isMobileMenu() {
+            return window.matchMedia(MOBILE_QUERY).matches;
+        }
+
+        function clearMenuInlineStyle() {
+            menu.style.height = '';
+            menu.style.opacity = '';
+            menu.style.transform = '';
+            menu.style.overflow = '';
+            menu.style.transition = '';
+        }
+
+        function resetToDesktop() {
+            animating = false;
+            opened = false;
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+            clearMenuInlineStyle();
+        }
+
+        function openMenu() {
+            if (animating || opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = true;
+            animating = true;
+            burger.classList.add('is-active');
+            menu.classList.add('is-active');
+            burger.setAttribute('aria-expanded', 'true');
+
+            if (reduceMotion) {
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+            menu.offsetHeight;
+
+            var targetHeight = menu.scrollHeight;
+            menu.style.transition = 'height 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms ease';
+            menu.style.height = targetHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+
+            window.setTimeout(function() {
+                menu.style.height = 'auto';
+                menu.style.overflow = 'visible';
+                animating = false;
+            }, 280);
+        }
+
+        function closeMenu() {
+            if (animating || !opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = false;
+            animating = true;
+            burger.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+
+            if (reduceMotion) {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = menu.scrollHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+            menu.offsetHeight;
+
+            menu.style.transition = 'height 230ms cubic-bezier(0.4, 0, 1, 1), opacity 160ms ease, transform 180ms ease';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function() {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+            }, 240);
+        }
+
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (opened) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!isMobileMenu() || !opened) return;
+            if (navbar.contains(e.target)) return;
+            closeMenu();
+        });
+
+        menu.addEventListener('click', function(e) {
+            var link = e.target.closest('.navbar-item');
+            if (!link || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isMobileMenu()) {
+                resetToDesktop();
+            }
+        });
+    });
+
+    
+    
+    
+    (function() {
+        "use strict";
+
+        var root = document.documentElement;
+        var body = document.body;
+        var themeToggle = document.getElementById("theme-toggle");
+        var isTransitioning = false;
+        var effectsPaused = false;
+        var currentTheme = readStoredTheme();
+
+        if (themeToggle === null) return;
+
+        function readStoredTheme() {
+            try {
+                var storedTheme = localStorage.getItem("theme");
+                if (storedTheme === "dark" || storedTheme === "light") {
+                    return storedTheme;
+                }
+            } catch (error) {
+                
+            }
+            return "dark";
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (error) {
+                
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            body.classList.toggle("dark-mode", theme === "dark");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            );
+            storeTheme(theme);
+            window.dispatchEvent(new CustomEvent("theme-change", {
+                detail: { theme: theme }
+            }));
+        }
+
+        function getRevealOrigin(event) {
+            var bounds = themeToggle.getBoundingClientRect();
+            var origin = {
+                x: bounds.left + bounds.width / 2,
+                y: bounds.top + bounds.height / 2
+            };
+
+            
+            
+            if (event.clientX !== 0 || event.clientY !== 0) {
+                origin.x = event.clientX;
+                origin.y = event.clientY;
+            }
+            return origin;
+        }
+
+        function getRevealGeometry(origin) {
+            var farthestX = Math.max(origin.x, window.innerWidth - origin.x);
+            var farthestY = Math.max(origin.y, window.innerHeight - origin.y);
+            var radius = Math.hypot(farthestX, farthestY);
+
+            return {
+                radius: radius,
+                
+                duration: Math.max(650, Math.min(1100, radius / 1.5))
+            };
+        }
+
+        function setToggleBusy(active) {
+            isTransitioning = active;
+            if (active) {
+                themeToggle.setAttribute("aria-disabled", "true");
+            } else {
+                themeToggle.removeAttribute("aria-disabled");
+            }
+        }
+
+        function setEffectsPaused(paused) {
+            if (effectsPaused === paused) return;
+            effectsPaused = paused;
+            window.dispatchEvent(new CustomEvent(
+                paused ? "theme-transition-start" : "theme-transition-end"
+            ));
+        }
+
+        function finishTransition() {
+            if (!isTransitioning) return;
+            root.classList.remove("theme-transition-active");
+            setEffectsPaused(false);
+            setToggleBusy(false);
+        }
+
+        function startThemeTransition(nextTheme, event) {
+            var origin = getRevealOrigin(event);
+            var geometry = getRevealGeometry(origin);
+            var fromClip = "circle(0px at " + origin.x + "px " + origin.y + "px)";
+            var toClip = "circle(" + geometry.radius + "px at "
+                + origin.x + "px " + origin.y + "px)";
+            var preflightClip = "circle(" + Math.max(geometry.radius - 1, 0) + "px at "
+                + origin.x + "px " + origin.y + "px)";
+
+            setEffectsPaused(true);
+            root.classList.add("theme-transition-active");
+
+            var transition;
+            try {
+                transition = document.startViewTransition(function() {
+                    applyTheme(nextTheme);
+                });
+            } catch (error) {
+                applyTheme(nextTheme);
+                finishTransition();
+                return;
+            }
+
+            transition.ready.then(function() {
+                try {
+                    root.animate(
+                        [
+                            {
+                                opacity: 0.001,
+                                clipPath: toClip
+                            },
+                            {
+                                opacity: 0.001,
+                                clipPath: preflightClip
+                            }
+                        ],
+                        {
+                            duration: 34,
+                            easing: "linear",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+
+                    root.animate(
+                        {
+                            opacity: [1, 1],
+                            clipPath: [fromClip, toClip]
+                        },
+                        {
+                            delay: 34,
+                            duration: geometry.duration,
+                            easing: "linear",
+                            fill: "forwards",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+                } catch (error) {
+                    if (typeof transition.skipTransition === "function") {
+                        transition.skipTransition();
+                    }
+                }
+            }, finishTransition);
+
+            transition.finished.then(finishTransition, finishTransition);
+        }
+
+        function switchTheme(nextTheme, event) {
+            var reduceMotion = window.matchMedia
+                && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (isTransitioning) return;
+            if (typeof document.startViewTransition !== "function" || reduceMotion) {
+                applyTheme(nextTheme);
+                return;
+            }
+
+            setToggleBusy(true);
+            startThemeTransition(nextTheme, event);
+        }
+
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            switchTheme(currentTheme === "light" ? "dark" : "light", event);
+        });
+    })();
+
+
+
+</script>
+
+</header>
+<main>
+<div class="container">
+    <div class="section">
+        <h2 class="archive-title">Category: Life</h2>
+</div>
+</div>
+<div class="each-category column is-centered">
+
+
+    
+
+        <article class="archive-item">
+            <a href="https://o-a-p.github.io/post/year/2025/" class="archive-item-link hover-underline-animation">2025 总在路上</a>
+            <span class="archive-item-date">
+                January 1, 2026
+            </span>
+
+        </article>
+
+    
+
+        <article class="archive-item">
+            <a href="https://o-a-p.github.io/post/year/2025-mid/" class="archive-item-link hover-underline-animation">读研往事</a>
+            <span class="archive-item-date">
+                June 30, 2025
+            </span>
+
+        </article>
+
+    
+
+        <article class="archive-item">
+            <a href="https://o-a-p.github.io/post/year/2024/" class="archive-item-link hover-underline-animation">2024 拥抱变化</a>
+            <span class="archive-item-date">
+                December 10, 2024
+            </span>
+
+        </article>
+
+    
+
+</div>
+
+        </main>
+        <div id="card-transition-overlay" class="card-transition-overlay"></div><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2026 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img');
+
+  (function() {
+    const overlay = document.getElementById("card-transition-overlay");
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isNavigating = false;
+
+    function shouldHandleLink(link, event) {
+      if (!link || !overlay) return false;
+      if (isNavigating || event.defaultPrevented) return false;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+      if (link.closest(".myCard")) return false;
+      if (link.closest("[data-no-page-transition]")) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+
+      const href = link.getAttribute("href");
+      if (!href) return false;
+      if (href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+
+      let targetUrl = null;
+      try {
+        targetUrl = new URL(href, window.location.href);
+      } catch (err) {
+        return false;
+      }
+
+      if (targetUrl.origin !== window.location.origin) return false;
+      if (targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search &&
+          targetUrl.hash.length > 0) return false;
+      if (targetUrl.href === window.location.href) return false;
+
+      return true;
+    }
+
+    function navigateWithOverlay(href) {
+      if (isNavigating) return;
+      isNavigating = true;
+      document.body.style.pointerEvents = "none";
+      overlay.classList.add("card-transition-overlay--active");
+      const delay = prefersReducedMotion ? 0 : 360;
+      window.setTimeout(function() {
+        window.location.href = href;
+      }, delay);
+    }
+
+    document.addEventListener("click", function(event) {
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      navigateWithOverlay(link.href);
+    }, true);
+
+    window.addEventListener("pageshow", function() {
+      isNavigating = false;
+      document.body.style.pointerEvents = "";
+      if (overlay) overlay.classList.remove("card-transition-overlay--active");
+    });
+  })();
+</script>
+
+  </footer>
+</body>
+</html>

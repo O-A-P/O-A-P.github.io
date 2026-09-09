@@ -1,0 +1,939 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta name="generator" content="Hugo 0.121.2">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="描述123"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.15f1383c93bee016a21e6324ae71b77bea3c4a9185e333144641ec5df722db89.css">
+
+    
+    <meta property="og:title" content="超级码里奥" />
+<meta property="og:description" content="描述123" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://o-a-p.github.io/" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="超级码里奥"/>
+<meta name="twitter:description" content="描述123"/>
+
+    
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body class="dark-mode"><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#" aria-label="Switch color theme">
+                <svg class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path class="theme-icon__moon" fill="currentColor"
+                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <g class="theme-icon__sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.querySelector('.navbar');
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        if (!navbar || !burger || !menu) return;
+
+        var animating = false;
+        var opened = false;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var MOBILE_QUERY = '(max-width: 1087px)';
+
+        function isMobileMenu() {
+            return window.matchMedia(MOBILE_QUERY).matches;
+        }
+
+        function clearMenuInlineStyle() {
+            menu.style.height = '';
+            menu.style.opacity = '';
+            menu.style.transform = '';
+            menu.style.overflow = '';
+            menu.style.transition = '';
+        }
+
+        function resetToDesktop() {
+            animating = false;
+            opened = false;
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+            clearMenuInlineStyle();
+        }
+
+        function openMenu() {
+            if (animating || opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = true;
+            animating = true;
+            burger.classList.add('is-active');
+            menu.classList.add('is-active');
+            burger.setAttribute('aria-expanded', 'true');
+
+            if (reduceMotion) {
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+            menu.offsetHeight;
+
+            var targetHeight = menu.scrollHeight;
+            menu.style.transition = 'height 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms ease';
+            menu.style.height = targetHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+
+            window.setTimeout(function() {
+                menu.style.height = 'auto';
+                menu.style.overflow = 'visible';
+                animating = false;
+            }, 280);
+        }
+
+        function closeMenu() {
+            if (animating || !opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = false;
+            animating = true;
+            burger.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+
+            if (reduceMotion) {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = menu.scrollHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+            menu.offsetHeight;
+
+            menu.style.transition = 'height 230ms cubic-bezier(0.4, 0, 1, 1), opacity 160ms ease, transform 180ms ease';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function() {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+            }, 240);
+        }
+
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (opened) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!isMobileMenu() || !opened) return;
+            if (navbar.contains(e.target)) return;
+            closeMenu();
+        });
+
+        menu.addEventListener('click', function(e) {
+            var link = e.target.closest('.navbar-item');
+            if (!link || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isMobileMenu()) {
+                resetToDesktop();
+            }
+        });
+    });
+
+    
+    
+    
+    (function() {
+        "use strict";
+
+        var root = document.documentElement;
+        var body = document.body;
+        var themeToggle = document.getElementById("theme-toggle");
+        var isTransitioning = false;
+        var effectsPaused = false;
+        var currentTheme = readStoredTheme();
+
+        if (themeToggle === null) return;
+
+        function readStoredTheme() {
+            try {
+                var storedTheme = localStorage.getItem("theme");
+                if (storedTheme === "dark" || storedTheme === "light") {
+                    return storedTheme;
+                }
+            } catch (error) {
+                
+            }
+            return "dark";
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (error) {
+                
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            body.classList.toggle("dark-mode", theme === "dark");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            );
+            storeTheme(theme);
+            window.dispatchEvent(new CustomEvent("theme-change", {
+                detail: { theme: theme }
+            }));
+        }
+
+        function getRevealOrigin(event) {
+            var bounds = themeToggle.getBoundingClientRect();
+            var origin = {
+                x: bounds.left + bounds.width / 2,
+                y: bounds.top + bounds.height / 2
+            };
+
+            
+            
+            if (event.clientX !== 0 || event.clientY !== 0) {
+                origin.x = event.clientX;
+                origin.y = event.clientY;
+            }
+            return origin;
+        }
+
+        function getRevealGeometry(origin) {
+            var farthestX = Math.max(origin.x, window.innerWidth - origin.x);
+            var farthestY = Math.max(origin.y, window.innerHeight - origin.y);
+            var radius = Math.hypot(farthestX, farthestY);
+
+            return {
+                radius: radius,
+                
+                duration: Math.max(650, Math.min(1100, radius / 1.5))
+            };
+        }
+
+        function setToggleBusy(active) {
+            isTransitioning = active;
+            if (active) {
+                themeToggle.setAttribute("aria-disabled", "true");
+            } else {
+                themeToggle.removeAttribute("aria-disabled");
+            }
+        }
+
+        function setEffectsPaused(paused) {
+            if (effectsPaused === paused) return;
+            effectsPaused = paused;
+            window.dispatchEvent(new CustomEvent(
+                paused ? "theme-transition-start" : "theme-transition-end"
+            ));
+        }
+
+        function finishTransition() {
+            if (!isTransitioning) return;
+            root.classList.remove("theme-transition-active");
+            setEffectsPaused(false);
+            setToggleBusy(false);
+        }
+
+        function startThemeTransition(nextTheme, event) {
+            var origin = getRevealOrigin(event);
+            var geometry = getRevealGeometry(origin);
+            var fromClip = "circle(0px at " + origin.x + "px " + origin.y + "px)";
+            var toClip = "circle(" + geometry.radius + "px at "
+                + origin.x + "px " + origin.y + "px)";
+            var preflightClip = "circle(" + Math.max(geometry.radius - 1, 0) + "px at "
+                + origin.x + "px " + origin.y + "px)";
+
+            setEffectsPaused(true);
+            root.classList.add("theme-transition-active");
+
+            var transition;
+            try {
+                transition = document.startViewTransition(function() {
+                    applyTheme(nextTheme);
+                });
+            } catch (error) {
+                applyTheme(nextTheme);
+                finishTransition();
+                return;
+            }
+
+            transition.ready.then(function() {
+                try {
+                    root.animate(
+                        [
+                            {
+                                opacity: 0.001,
+                                clipPath: toClip
+                            },
+                            {
+                                opacity: 0.001,
+                                clipPath: preflightClip
+                            }
+                        ],
+                        {
+                            duration: 34,
+                            easing: "linear",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+
+                    root.animate(
+                        {
+                            opacity: [1, 1],
+                            clipPath: [fromClip, toClip]
+                        },
+                        {
+                            delay: 34,
+                            duration: geometry.duration,
+                            easing: "linear",
+                            fill: "forwards",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+                } catch (error) {
+                    if (typeof transition.skipTransition === "function") {
+                        transition.skipTransition();
+                    }
+                }
+            }, finishTransition);
+
+            transition.finished.then(finishTransition, finishTransition);
+        }
+
+        function switchTheme(nextTheme, event) {
+            var reduceMotion = window.matchMedia
+                && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (isTransitioning) return;
+            if (typeof document.startViewTransition !== "function" || reduceMotion) {
+                applyTheme(nextTheme);
+                return;
+            }
+
+            setToggleBusy(true);
+            startThemeTransition(nextTheme, event);
+        }
+
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            switchTheme(currentTheme === "light" ? "dark" : "light", event);
+        });
+    })();
+
+
+
+</script>
+
+</header>
+<main>
+
+
+
+
+
+<article>
+    <div class="is-centered">
+            <div class="title subtitle heading is-6">
+                <div id="home-box" >
+                            
+                            <div class="avatar-container">
+                                <img src="/img/author/head.jpg" class="author-avatar">
+
+                            </div>
+                            
+
+                        <h1 id="home-title" class="title is-1 home-title-placeholder" aria-hidden="true">超级码里奥</h1>
+                    <div class="description column content typewriter-effect">
+                        <div class="text" id="typewriter-text"> 运用之妙，存乎一心</div>
+
+                    </div>
+
+                    <script>
+                        const typeWriter = document.getElementById('typewriter-text');
+                        
+                        typeWriter.style.setProperty('--characters', typeWriter.innerHTML.length * 5);
+                    </script>
+
+                    <div class="social-icon">
+
+                        
+                        <a href="https://github.com/O-A-P" title="Github"><span class="change-color icon">
+                                <svg height="32px" width="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+                            </span></a>
+                        
+                        <a href="mailto:zhangzihaozzzzzz@gmail.com" title="email"><span class="change-color icon">
+                                <svg height="32px" width="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>
+</svg>
+                            </span></a>
+                        
+
+                    </div>
+
+                </div>
+            </div>
+
+    </div></article>
+<div class="summary">
+    
+    
+    
+        
+
+  <div class="myCard div-hover" data-href="/post/failure/two-failed-interviews/" onclick="handleCardClick(this, '\/post\/failure\/two-failed-interviews\/')">
+    
+    <div class="myImgContainer">
+      
+      <img class="myCardImage" src="/img/Failure/joker.gif" alt="记两次失败的面试">
+    </div>
+    <div class="myTitle">
+      <div class="myWrapper hover-underline-animation">
+        记两次失败的面试
+      </div>
+    </div>
+    <div class="myContent">&ldquo;优势在我&rdquo;</div>
+    <div class="post-time-container">
+      <span class="post-time"> 2024-08-27 </span>
+    </div>
+  </div>
+
+
+
+    
+        
+
+  <div class="myCard div-hover" data-href="/post/travel/nanchang/" onclick="handleCardClick(this, '\/post\/travel\/nanchang\/')">
+    
+    <div class="myImgContainer">
+      
+      <img class="myCardImage" src="/img/Travel/nanchang/%e6%bb%95%e7%8e%8b%e9%98%81.jpg" alt="再会南昌">
+    </div>
+    <div class="myTitle">
+      <div class="myWrapper hover-underline-animation">
+        再会南昌
+      </div>
+    </div>
+    <div class="myContent">但不当舔狗</div>
+    <div class="post-time-container">
+      <span class="post-time"> 2024-08-06 </span>
+    </div>
+  </div>
+
+
+
+    
+        
+
+  <div class="myCard div-hover" data-href="/post/csapp/bomb/" onclick="handleCardClick(this, '\/post\/csapp\/bomb\/')">
+    
+    <div class="myImgContainer">
+      
+      <img class="myCardImage" src="/img/CSAPP/lbw.jpg" alt="CSAPP：bomb lab">
+    </div>
+    <div class="myTitle">
+      <div class="myWrapper hover-underline-animation">
+        CSAPP：bomb lab
+      </div>
+    </div>
+    <div class="myContent">开始你的炸弹秀</div>
+    <div class="post-time-container">
+      <span class="post-time"> 2024-02-20 </span>
+    </div>
+  </div>
+
+
+
+    
+</div>
+<hr>
+<section class="pagination" >
+    
+    <button class="button " onclick="window.location.href=&#34;/page/2/&#34;">
+        <a href="/page/2/" class="pag-link"> Prev </a>
+    </button>
+    
+    <label class="pag-link">Page 3 of 6</label>
+    
+    <button class="button"  onclick="window.location.href=&#34;/page/4/&#34;">
+        <a href="/page/4/" class="pag-link"> Next </a>
+    </button>
+    
+</section>
+
+
+<script>
+const hasGsap = typeof window.gsap !== "undefined";
+let peekingCard = null;
+let peekTimer = null;
+let restoreFlatTimer = null;
+let activeCardTl = null;
+const PEEK_DURATION = 3000;
+const PEEK_RETURN_DURATION = 380;
+const PEEK_SIDE_TILT = 3;
+
+function isMobileStacked() {
+  return window.innerWidth <= 900;
+}
+
+function killCardAnimation(target) {
+  if (!hasGsap || !target) return;
+  window.gsap.killTweensOf(target);
+}
+
+function restoreSiblingState(parent, activeCard) {
+  if (!parent) return;
+  parent.querySelectorAll(".myCard").forEach(c => {
+    if (c !== activeCard) c.style.left = "";
+    if (c.dataset.prevZIndex !== undefined) {
+      c.style.zIndex = c.dataset.prevZIndex;
+      delete c.dataset.prevZIndex;
+    }
+    if (c.dataset.prevTransform !== undefined) {
+      c.style.transform = c.dataset.prevTransform;
+      delete c.dataset.prevTransform;
+    } else if (c !== activeCard) {
+      c.style.transform = "";
+    }
+  });
+}
+
+function dismissPeek(immediate) {
+  if (peekTimer) { clearTimeout(peekTimer); peekTimer = null; }
+  if (restoreFlatTimer) { clearTimeout(restoreFlatTimer); restoreFlatTimer = null; }
+  if (!peekingCard) return;
+
+  const card = peekingCard;
+  const parent = card.parentElement;
+  card.classList.remove("card--peeking");
+
+  if (hasGsap) {
+    killCardAnimation(card);
+    if (parent) {
+      parent.querySelectorAll(".myCard").forEach(c => {
+        if (c !== card) killCardAnimation(c);
+      });
+    }
+    window.gsap.set(card, { clearProps: "x,y,z,rotationX,rotationY,rotationZ,scale" });
+  }
+  card.style.transform = "";
+  card.style.zIndex = "";
+  card.style.left = "";
+  card.style.top = "";
+
+  restoreSiblingState(parent, card);
+
+  if (parent) {
+    restoreFlatTimer = setTimeout(() => {
+      parent.style.transformStyle = "";
+      restoreFlatTimer = null;
+    }, PEEK_RETURN_DURATION);
+  }
+
+  peekingCard = null;
+}
+
+function handleCardClick(cardEl, href) {
+  if (!isMobileStacked()) {
+    cardTransition(cardEl, href);
+    return;
+  }
+
+  if (peekingCard === cardEl) {
+    cardTransition(cardEl, href, true);
+    return;
+  }
+
+  dismissPeek(true);
+  if (restoreFlatTimer) { clearTimeout(restoreFlatTimer); restoreFlatTimer = null; }
+
+  peekingCard = cardEl;
+  cardEl.classList.add("card--peeking");
+
+  const summaryEl = cardEl.parentElement;
+  if (summaryEl) summaryEl.style.transformStyle = "flat";
+  cardEl.style.transformStyle = "flat";
+  cardEl.style.zIndex = "100";
+  cardEl.style.left = "0px";
+  cardEl.style.top = "0px";
+
+  if (hasGsap) {
+    killCardAnimation(cardEl);
+    window.gsap.set(cardEl, { x: 0, y: 0, z: 0, rotationZ: 0, scale: 1.08, overwrite: true });
+  } else {
+    cardEl.style.transform = "translate3d(0, 0, 0) rotateZ(0deg) scale(1.08)";
+  }
+
+  const siblings = Array.from(cardEl.parentElement.querySelectorAll(".myCard"));
+  const idx = siblings.indexOf(cardEl);
+  const posInGroup = idx % 3;
+  const groupStart = idx - posInGroup;
+
+  for (let i = 0; i < 3; i++) {
+    const sibling = siblings[groupStart + i];
+    if (!sibling || sibling === cardEl) continue;
+    sibling.dataset.prevZIndex = sibling.style.zIndex || "";
+    sibling.dataset.prevTransform = sibling.style.transform || "";
+
+    if (posInGroup === 0) {
+      sibling.style.left = (i === 1 ? "55px" : "110px");
+      sibling.style.zIndex = (i === 1 ? "3" : "2");
+      if (i === 1) {
+        if (hasGsap) {
+          window.gsap.set(sibling, { z: 0.1, rotationZ: PEEK_SIDE_TILT, overwrite: true });
+        } else {
+          sibling.style.transform = `translate3d(0, 0, 0.1px) rotateZ(${PEEK_SIDE_TILT}deg)`;
+        }
+      }
+    } else if (posInGroup === 2) {
+      sibling.style.left = (i === 0 ? "-110px" : "-55px");
+      sibling.style.zIndex = (i === 0 ? "2" : "3");
+      if (i === 1) {
+        if (hasGsap) {
+          window.gsap.set(sibling, { z: 0.1, rotationZ: -PEEK_SIDE_TILT, overwrite: true });
+        } else {
+          sibling.style.transform = `translate3d(0, 0, 0.1px) rotateZ(-${PEEK_SIDE_TILT}deg)`;
+        }
+      }
+    } else {
+      sibling.style.left = (i === 0 ? "-70px" : "70px");
+      sibling.style.zIndex = "2";
+    }
+  }
+
+  peekTimer = setTimeout(() => {
+    dismissPeek();
+  }, PEEK_DURATION);
+}
+
+function cardTransition(cardEl, href, fromPeek) {
+  if (cardEl.classList.contains("card--transitioning")) return;
+  if (window.getSelection) window.getSelection().removeAllRanges();
+  if (activeCardTl) activeCardTl.kill();
+
+  if (!hasGsap) {
+    window.location.href = href;
+    return;
+  }
+
+  cardEl.classList.add("card--transitioning");
+  const overlay = document.getElementById("card-transition-overlay");
+  window.scrollTo({ left: 0 });
+  const viewW = document.documentElement.clientWidth;
+  const viewH = window.innerHeight;
+
+  if (fromPeek) {
+    if (peekTimer) { clearTimeout(peekTimer); peekTimer = null; }
+    cardEl.classList.remove("card--peeking");
+    peekingCard = null;
+    restoreSiblingState(cardEl.parentElement, cardEl);
+  } else {
+    killCardAnimation(cardEl);
+    window.gsap.set(cardEl, { clearProps: "x,y,z,rotationZ,rotationY,scale" });
+  }
+
+  const rect = cardEl.getBoundingClientRect();
+  cardEl.classList.add("card--popover");
+  cardEl.style.zIndex = "9999";
+
+  const targetX = (viewW / 2) - (rect.left + rect.width / 2);
+  const targetY = (viewH / 2) - (rect.top + rect.height / 2);
+  const scaleW = (viewW / rect.width) * 0.9;
+  const scaleH = (viewH / rect.height) * 0.9;
+  const targetScale = Math.min(scaleW, scaleH, 1.75);
+
+  const summaryEl = cardEl.parentElement;
+  if (summaryEl) summaryEl.style.transformStyle = "flat";
+  cardEl.style.transformStyle = "flat";
+
+  if (summaryEl) {
+    summaryEl.querySelectorAll(".myCard").forEach(c => {
+      if (c === cardEl) return;
+      c.dataset.prevZIndex = c.style.zIndex || "";
+      c.style.zIndex = "0";
+    });
+  }
+
+  document.body.style.pointerEvents = "none";
+  cardEl.style.pointerEvents = "none";
+
+  window.gsap.set(cardEl, { transformOrigin: "center center" });
+  activeCardTl = window.gsap.timeline({ defaults: { ease: "expo.out" } });
+  activeCardTl.to(cardEl, {
+    duration: 1.05,
+    x: targetX,
+    y: targetY,
+    scale: targetScale,
+    rotationY: 360
+  }, 0);
+  activeCardTl.call(() => {
+    if (overlay) overlay.classList.add("card-transition-overlay--active");
+  }, null, 0.55);
+  activeCardTl.call(() => {
+    window.location.href = href;
+  }, null, 1.02);
+}
+
+function cleanupTransitionState() {
+  if (activeCardTl) {
+    activeCardTl.kill();
+    activeCardTl = null;
+  }
+  if (restoreFlatTimer) { clearTimeout(restoreFlatTimer); restoreFlatTimer = null; }
+  if (peekTimer) { clearTimeout(peekTimer); peekTimer = null; }
+
+  const summary = document.querySelector(".summary");
+  if (summary) summary.style.transformStyle = "";
+  document.body.style.pointerEvents = "";
+
+  const overlay = document.getElementById("card-transition-overlay");
+  if (overlay) overlay.classList.remove("card-transition-overlay--active");
+
+  document.querySelectorAll(".myCard").forEach(card => {
+    if (hasGsap) {
+      killCardAnimation(card);
+      window.gsap.set(card, { clearProps: "x,y,z,rotationX,rotationY,rotationZ,scale" });
+    }
+    card.classList.remove("card--transitioning", "card--popover", "card--peeking");
+    card.style.transform = "";
+    card.style.zIndex = "";
+    card.style.transformStyle = "";
+    card.style.pointerEvents = "";
+    card.style.left = "";
+    card.style.top = "";
+    delete card.dataset.prevZIndex;
+    delete card.dataset.prevTransform;
+  });
+
+  peekingCard = null;
+}
+
+window.addEventListener("pageshow", cleanupTransitionState);
+
+document.addEventListener("DOMContentLoaded", function() {
+  cleanupTransitionState();
+  document.addEventListener("click", function(e) {
+    if (!isMobileStacked() || !peekingCard) return;
+    if (e.target.closest(".myCard")) return;
+    dismissPeek(true);
+    e.preventDefault();
+    e.stopPropagation();
+  }, true);
+});
+</script>
+
+
+
+        </main>
+        <div id="card-transition-overlay" class="card-transition-overlay"></div><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2026 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img');
+
+  (function() {
+    const overlay = document.getElementById("card-transition-overlay");
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isNavigating = false;
+
+    function shouldHandleLink(link, event) {
+      if (!link || !overlay) return false;
+      if (isNavigating || event.defaultPrevented) return false;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+      if (link.closest(".myCard")) return false;
+      if (link.closest("[data-no-page-transition]")) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+
+      const href = link.getAttribute("href");
+      if (!href) return false;
+      if (href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+
+      let targetUrl = null;
+      try {
+        targetUrl = new URL(href, window.location.href);
+      } catch (err) {
+        return false;
+      }
+
+      if (targetUrl.origin !== window.location.origin) return false;
+      if (targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search &&
+          targetUrl.hash.length > 0) return false;
+      if (targetUrl.href === window.location.href) return false;
+
+      return true;
+    }
+
+    function navigateWithOverlay(href) {
+      if (isNavigating) return;
+      isNavigating = true;
+      document.body.style.pointerEvents = "none";
+      overlay.classList.add("card-transition-overlay--active");
+      const delay = prefersReducedMotion ? 0 : 360;
+      window.setTimeout(function() {
+        window.location.href = href;
+      }, delay);
+    }
+
+    document.addEventListener("click", function(event) {
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      navigateWithOverlay(link.href);
+    }, true);
+
+    window.addEventListener("pageshow", function() {
+      isNavigating = false;
+      document.body.style.pointerEvents = "";
+      if (overlay) overlay.classList.remove("card-transition-overlay--active");
+    });
+  })();
+</script>
+
+  </footer>
+</body>
+</html>

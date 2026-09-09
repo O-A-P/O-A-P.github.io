@@ -1,0 +1,1645 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="关于我 人物：苦逼找工仔，苦逼打工仔 技能：C/C&#43;&#43;, CMake, Linux, GDB, Git, MySQL, Vue, Java, SpringBoot, Qt, Python 头像：https://pixel-me.tokyo/en/ 心跳： -- 我"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/about/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.15f1383c93bee016a21e6324ae71b77bea3c4a9185e333144641ec5df722db89.css">
+
+    
+    <meta property="og:title" content="" />
+<meta property="og:description" content="关于我 人物：苦逼找工仔，苦逼打工仔 技能：C/C&#43;&#43;, CMake, Linux, GDB, Git, MySQL, Vue, Java, SpringBoot, Qt, Python 头像：https://pixel-me.tokyo/en/ 心跳： -- 我" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/about/" /><meta property="article:section" content="" />
+<meta property="article:published_time" content="2023-12-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-12-25T00:00:00+00:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="关于我 人物：苦逼找工仔，苦逼打工仔 技能：C/C&#43;&#43;, CMake, Linux, GDB, Git, MySQL, Vue, Java, SpringBoot, Qt, Python 头像：https://pixel-me.tokyo/en/ 心跳： -- 我"/>
+
+    
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body class="dark-mode"><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#" aria-label="Switch color theme">
+                <svg class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path class="theme-icon__moon" fill="currentColor"
+                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <g class="theme-icon__sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.querySelector('.navbar');
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        if (!navbar || !burger || !menu) return;
+
+        var animating = false;
+        var opened = false;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var MOBILE_QUERY = '(max-width: 1087px)';
+
+        function isMobileMenu() {
+            return window.matchMedia(MOBILE_QUERY).matches;
+        }
+
+        function clearMenuInlineStyle() {
+            menu.style.height = '';
+            menu.style.opacity = '';
+            menu.style.transform = '';
+            menu.style.overflow = '';
+            menu.style.transition = '';
+        }
+
+        function resetToDesktop() {
+            animating = false;
+            opened = false;
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+            clearMenuInlineStyle();
+        }
+
+        function openMenu() {
+            if (animating || opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = true;
+            animating = true;
+            burger.classList.add('is-active');
+            menu.classList.add('is-active');
+            burger.setAttribute('aria-expanded', 'true');
+
+            if (reduceMotion) {
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+            menu.offsetHeight;
+
+            var targetHeight = menu.scrollHeight;
+            menu.style.transition = 'height 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms ease';
+            menu.style.height = targetHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+
+            window.setTimeout(function() {
+                menu.style.height = 'auto';
+                menu.style.overflow = 'visible';
+                animating = false;
+            }, 280);
+        }
+
+        function closeMenu() {
+            if (animating || !opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = false;
+            animating = true;
+            burger.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+
+            if (reduceMotion) {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = menu.scrollHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+            menu.offsetHeight;
+
+            menu.style.transition = 'height 230ms cubic-bezier(0.4, 0, 1, 1), opacity 160ms ease, transform 180ms ease';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function() {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+            }, 240);
+        }
+
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (opened) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!isMobileMenu() || !opened) return;
+            if (navbar.contains(e.target)) return;
+            closeMenu();
+        });
+
+        menu.addEventListener('click', function(e) {
+            var link = e.target.closest('.navbar-item');
+            if (!link || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isMobileMenu()) {
+                resetToDesktop();
+            }
+        });
+    });
+
+    
+    
+    
+    (function() {
+        "use strict";
+
+        var root = document.documentElement;
+        var body = document.body;
+        var themeToggle = document.getElementById("theme-toggle");
+        var isTransitioning = false;
+        var effectsPaused = false;
+        var currentTheme = readStoredTheme();
+
+        if (themeToggle === null) return;
+
+        function readStoredTheme() {
+            try {
+                var storedTheme = localStorage.getItem("theme");
+                if (storedTheme === "dark" || storedTheme === "light") {
+                    return storedTheme;
+                }
+            } catch (error) {
+                
+            }
+            return "dark";
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (error) {
+                
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            body.classList.toggle("dark-mode", theme === "dark");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            );
+            storeTheme(theme);
+            window.dispatchEvent(new CustomEvent("theme-change", {
+                detail: { theme: theme }
+            }));
+        }
+
+        function getRevealOrigin(event) {
+            var bounds = themeToggle.getBoundingClientRect();
+            var origin = {
+                x: bounds.left + bounds.width / 2,
+                y: bounds.top + bounds.height / 2
+            };
+
+            
+            
+            if (event.clientX !== 0 || event.clientY !== 0) {
+                origin.x = event.clientX;
+                origin.y = event.clientY;
+            }
+            return origin;
+        }
+
+        function getRevealGeometry(origin) {
+            var farthestX = Math.max(origin.x, window.innerWidth - origin.x);
+            var farthestY = Math.max(origin.y, window.innerHeight - origin.y);
+            var radius = Math.hypot(farthestX, farthestY);
+
+            return {
+                radius: radius,
+                
+                duration: Math.max(650, Math.min(1100, radius / 1.5))
+            };
+        }
+
+        function setToggleBusy(active) {
+            isTransitioning = active;
+            if (active) {
+                themeToggle.setAttribute("aria-disabled", "true");
+            } else {
+                themeToggle.removeAttribute("aria-disabled");
+            }
+        }
+
+        function setEffectsPaused(paused) {
+            if (effectsPaused === paused) return;
+            effectsPaused = paused;
+            window.dispatchEvent(new CustomEvent(
+                paused ? "theme-transition-start" : "theme-transition-end"
+            ));
+        }
+
+        function finishTransition() {
+            if (!isTransitioning) return;
+            root.classList.remove("theme-transition-active");
+            setEffectsPaused(false);
+            setToggleBusy(false);
+        }
+
+        function startThemeTransition(nextTheme, event) {
+            var origin = getRevealOrigin(event);
+            var geometry = getRevealGeometry(origin);
+            var fromClip = "circle(0px at " + origin.x + "px " + origin.y + "px)";
+            var toClip = "circle(" + geometry.radius + "px at "
+                + origin.x + "px " + origin.y + "px)";
+            var preflightClip = "circle(" + Math.max(geometry.radius - 1, 0) + "px at "
+                + origin.x + "px " + origin.y + "px)";
+
+            setEffectsPaused(true);
+            root.classList.add("theme-transition-active");
+
+            var transition;
+            try {
+                transition = document.startViewTransition(function() {
+                    applyTheme(nextTheme);
+                });
+            } catch (error) {
+                applyTheme(nextTheme);
+                finishTransition();
+                return;
+            }
+
+            transition.ready.then(function() {
+                try {
+                    root.animate(
+                        [
+                            {
+                                opacity: 0.001,
+                                clipPath: toClip
+                            },
+                            {
+                                opacity: 0.001,
+                                clipPath: preflightClip
+                            }
+                        ],
+                        {
+                            duration: 34,
+                            easing: "linear",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+
+                    root.animate(
+                        {
+                            opacity: [1, 1],
+                            clipPath: [fromClip, toClip]
+                        },
+                        {
+                            delay: 34,
+                            duration: geometry.duration,
+                            easing: "linear",
+                            fill: "forwards",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+                } catch (error) {
+                    if (typeof transition.skipTransition === "function") {
+                        transition.skipTransition();
+                    }
+                }
+            }, finishTransition);
+
+            transition.finished.then(finishTransition, finishTransition);
+        }
+
+        function switchTheme(nextTheme, event) {
+            var reduceMotion = window.matchMedia
+                && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (isTransitioning) return;
+            if (typeof document.startViewTransition !== "function" || reduceMotion) {
+                applyTheme(nextTheme);
+                return;
+            }
+
+            setToggleBusy(true);
+            startThemeTransition(nextTheme, event);
+        }
+
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            switchTheme(currentTheme === "light" ? "dark" : "light", event);
+        });
+    })();
+
+
+
+</script>
+
+</header>
+<main>
+<div class="single-container  is-centered">
+    <div class="archive">
+        <h1 class="title is-1"></h1>
+        <div class="content about-content">
+            <h1 id="关于我">关于我</h1>
+<p>
+  <img loading="lazy" decoding="async" src="/img/author/head.jpg" alt="">
+</p>
+<ul>
+<li>人物：<del><code>苦逼找工仔</code></del>，<code>苦逼打工仔</code></li>
+<li>技能：C/C++, CMake, Linux, GDB, Git, MySQL, Vue, Java, SpringBoot, Qt, Python</li>
+<li>头像：<a href="https://pixel-me.tokyo/en/" target="_blank" rel="noopener">https://pixel-me.tokyo/en/</a></li>
+<li>心跳：</li>
+</ul>
+<div class="heartbeat-card" id="heartbeat-card" data-endpoint="https://blog.zifeipao.com/api/heartbeat/public">
+    <div class="heartbeat-card__heart" aria-label="heartbeat">
+        <span id="heartbeat-bpm">--</span>
+    </div>
+</div>
+<!-- ## 工作经历 -->
+<!-- 
+
+<p style="text-align:center; font-size: 1.1rem">Tencent</p>
+ -->
+<!-- 2025.01 - Now
+
+
+
+
+
+<img src="/img/company-logo/Tencent_Standard-Logo.png"
+    style="display: inline-block; border-radius: 0px; height: 1rem; vertical-align: middle; margin-bottom: 0.2rem;"> 沉淀！用C++写游戏后台 -->
+<!-- 
+
+<p style="text-align:center; font-size: 1.1rem">Momenta</p>
+ -->
+<!-- 2024.05 - 2024.11 
+
+
+
+
+
+<img src="/img/company-logo/momenta-logo.png"
+    style="display: inline-block; border-radius: 0px; height: 1rem; vertical-align: middle; margin-bottom: 0.4rem;"> C++系统研发实习，量产项目自动驾驶系统功能逻辑层（Momenta Function Framework，MFF）开发，为表现层提供可靠数据，并控制自驾行车功能状态切换 -->
+<h2 id="我偶尔会在这里刷新">我偶尔会在这里刷新</h2>
+<iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d471638.01329154905!2d113.43004159423616!3d22.553957262878995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f408d0e15291%3A0xfdee550db79280c9!2z5Lit5Zu95bm_5Lic55yB5rex5Zyz5biC!5e0!3m2!1szh-CN!2sus!4v1751646488491!5m2!1szh-CN!2sus"
+    width="100%" style="border:5px;" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+<style>
+    iframe {
+        height: 500px !important;
+        border-radius: 20px !important;
+    }
+
+    @media (max-width: 767px) {
+    iframe {
+            height: 350px !important;  
+        }
+    }
+</style>
+<h1 id="关于本站">关于本站</h1>
+<!-- <div id="heatmap" style="
+  height: 200px;
+  padding: 2px;
+  text-align: center;
+  "
+></div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+<script type="text/javascript">
+  var chartDom = document.getElementById('heatmap');
+  var myChart = echarts.init(chartDom);
+  window.addEventListener('resize', function() {
+      myChart.resize();
+  });
+  var option;
+
+  
+  
+  
+  
+  
+  
+  var dataMap = new Map();
+  
+    var key = "2026-08-16";
+    var value = dataMap.get(key);
+    var wordCount =  6662 ;
+    var link = "/post/code-analysis/spdlog-1/";
+    var title = "日志库spdlog（一）";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2026-07-26";
+    var value = dataMap.get(key);
+    var wordCount =  2695 ;
+    var link = "/post/code-analysis/log.c/";
+    var title = "极简日志库log.c";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2026-01-01";
+    var value = dataMap.get(key);
+    var wordCount =  5849 ;
+    var link = "/post/year/2025/";
+    var title = "2025 总在路上";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2025-06-30";
+    var value = dataMap.get(key);
+    var wordCount =  9250 ;
+    var link = "/post/year/2025-mid/";
+    var title = "读研往事";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2024-12-10";
+    var value = dataMap.get(key);
+    var wordCount =  4988 ;
+    var link = "/post/year/2024/";
+    var title = "2024 拥抱变化";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2024-10-21";
+    var value = dataMap.get(key);
+    var wordCount =  1422 ;
+    var link = "/post/cpp/function-bind/";
+    var title = "C++: functional";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2024-08-27";
+    var value = dataMap.get(key);
+    var wordCount =  1646 ;
+    var link = "/post/failure/two-failed-interviews/";
+    var title = "记两次失败的面试";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2024-08-06";
+    var value = dataMap.get(key);
+    var wordCount =  830 ;
+    var link = "/post/travel/nanchang/";
+    var title = "再会南昌";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2024-02-20";
+    var value = dataMap.get(key);
+    var wordCount =  8415 ;
+    var link = "/post/csapp/bomb/";
+    var title = "CSAPP：bomb lab";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2023-12-26";
+    var value = dataMap.get(key);
+    var wordCount =  1156 ;
+    var link = "/post/os/6.s081-os-scheduling/";
+    var title = "6.S081：xv6 进程调度";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2023-12-25";
+    var value = dataMap.get(key);
+    var wordCount =  2492 ;
+    var link = "/post/os/6.s081-os-interrupt/";
+    var title = "6.S081：xv6 中断与驱动";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2023-12-23";
+    var value = dataMap.get(key);
+    var wordCount =  1284 ;
+    var link = "/post/os/6.s081-os-trap/";
+    var title = "6.S081：xv6 trap过程";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2023-12-20";
+    var value = dataMap.get(key);
+    var wordCount =  1560 ;
+    var link = "/post/os/6.s081-os-start/";
+    var title = "6.S081：xv6 启动过程";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2023-07-10";
+    var value = dataMap.get(key);
+    var wordCount =  26546 ;
+    var link = "/post/os/6.s081-lab/";
+    var title = "6.S081：实验";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "2023-07-08";
+    var value = dataMap.get(key);
+    var wordCount =  1551 ;
+    var link = "/post/tool/gdb/";
+    var title = "GDB命令";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "1970-01-01";
+    var value = dataMap.get(key);
+    var wordCount =  1234 ;
+    var link = "/post/test/shortcodestest/";
+    var title = "短代码测试";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }
+    var key = "1970-01-01";
+    var value = dataMap.get(key);
+    var wordCount =  505 ;
+    var link = "/post/test/syntaxtest/";
+    var title = "Markdown Syntax Guide";
+    
+    if (value == null) {
+      dataMap.set(key, [{wordCount, link, title}]);
+    } else {
+      value.push({wordCount, link, title});
+    }var data = [];
+  
+  for (const [key, value] of dataMap.entries()) {
+    var sum = 0;
+    for (const v of value) {
+      sum += v.wordCount;
+    }
+    data.push([key, (sum / 1000).toFixed(1)]);
+  }
+  
+  var startDate = new Date();
+  var year_Mill = startDate.setFullYear((startDate.getFullYear() - 1));
+  var startDate = +new Date(year_Mill);
+  var endDate = +new Date();
+
+  var dayTime = 3600 * 24 * 1000;
+  startDate = echarts.format.formatTime('yyyy-MM-dd', startDate);
+  endDate = echarts.format.formatTime('yyyy-MM-dd', endDate);
+
+  
+  function heatmap_width(months){             
+    var startDate = new Date();
+    var mill = startDate.setMonth((startDate.getMonth() - months));
+    var endDate = +new Date();
+    startDate = +new Date(mill);
+
+    endDate = echarts.format.formatTime('yyyy-MM-dd', endDate);
+    startDate = echarts.format.formatTime('yyyy-MM-dd', startDate);
+
+    var showmonth = [];
+    showmonth.push([
+        startDate,
+        endDate
+    ]);
+    return showmonth
+  };
+
+  function getRangeArr() {
+    const windowWidth = window.innerWidth;
+    if (windowWidth >= 600) {
+      return heatmap_width(12);
+    } else if (windowWidth >= 400) {
+      return heatmap_width(9);
+    } else {
+      return heatmap_width(6);
+    }
+  }
+
+  function getHeatmapTheme() {
+    var isDark = document.body.classList.contains('dark-mode');
+    if (isDark) {
+      return {
+        text: '#e3e3e3',
+        emptyCell: '#161B22',
+        border: '#000000',
+        range: ['#0E4429', '#39D353'],
+        tooltipLink: '#000000'
+      };
+    }
+    return {
+      text: '#2f3136',
+      emptyCell: '#66745f',
+      border: '#f8f5ee',
+      range: ['#c2e699', '#006837'],
+      tooltipLink: '#2f3136'
+    };
+  }
+
+  function renderHeatmap() {
+  var theme = getHeatmapTheme();
+  option = {
+    title: {
+        top: 0,
+        left: 'center',
+        text: '博客热力图',
+        textStyle: { 
+          color: theme.text,
+          fontFamily: 'lxgw wenkai screen'
+        }
+    },
+    tooltip: {
+      hideDelay: 1000,
+      enterable: true,
+      formatter: function (p) {
+        const date = p.data[0];
+        const posts = dataMap.get(date);
+        var content = `${date}`;
+        for (const [i, post] of posts.entries()) {
+            content += "<br>";
+            var link = post.link;
+            var title = post.title;
+            var wordCount = (post.wordCount / 1000).toFixed(1);
+            content += `<a style="color: ${theme.tooltipLink}; font-family: lxgw wenkai screen;" href="${link}" target="_blank">${title} | ${wordCount} k</a>`
+        }
+        return content;
+      }
+    },
+    visualMap: {
+        min: 0,
+        max: 15,
+        type: 'continuous',
+        orient: 'horizontal',
+        left: 'center',
+        top: 30,  
+        inRange: {   
+          
+          color: theme.range
+        },
+        splitNumber: 10,
+        text: ['More', 'Less'],
+        textStyle: {
+          color: theme.text,
+          fontFamily: 'lxgw wenkai screen',
+          borderJoin: 'round',
+          borderCap: 'round',
+        },
+        itemWidth: 10,
+        itemHeight: 200,
+        showLabel: true,
+        itemGap: 20,
+    },
+    calendar: {
+        top: 80,
+        left: 20,
+        right: 4,
+        cellSize: ['auto', 'auto'],
+        range: getRangeArr(),
+        itemStyle: {
+            color: theme.emptyCell,
+            borderWidth: 1.5,
+            borderColor: theme.border,
+        },
+        dayLabel: {
+          color: theme.text,
+          
+          
+          fontFamily: 'lxgw wenkai screen',
+          nameMap: ['', '一', '', '三', '', '五', ''],
+        },
+        yearLabel: { show: false },
+        
+        splitLine: {
+          lineStyle: {
+            color: 'rgba(0, 0, 0, 0.0)',
+            
+            
+            
+            
+          }
+        }
+    },
+    series: {
+        type: 'heatmap',
+        coordinateSystem: 'calendar',
+        data: data,
+    }
+  };
+  myChart.setOption(option);
+  }
+
+  renderHeatmap();
+  myChart.on('click', function(params) {
+    if (params.componentType === 'series') {
+      
+      const post = dataMap.get(params.data[0])[0];
+      const link = window.location.origin + post.link;
+      window.open(link, '_blank').focus();
+    }
+});
+  var themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle !== null) {
+    themeToggle.addEventListener('click', function() {
+      window.setTimeout(renderHeatmap, 0);
+    });
+  }
+</script> 
+ -->
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css">
+
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"></script>
+
+<script src="https://unpkg.com/cal-heatmap/dist/plugins/CalendarLabel.min.js"></script>
+
+<div id="cal-heatmap" style="text-align: center !important"></div>
+
+<script type="text/javascript">
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+    var data = {
+        "pages": [
+            
+                {
+                    "title": "2025 总在路上",
+                    "date": "2026-01-01",
+                    "year": "2026",
+                    "month": "01",
+                    "day": "01",
+                    "word_count": "5849",
+                    "link": "\/post\/year\/2025\/"
+                },
+                
+                {
+                    "title": "极简日志库log.c",
+                    "date": "2026-07-26",
+                    "year": "2026",
+                    "month": "07",
+                    "day": "26",
+                    "word_count": "2695",
+                    "link": "\/post\/code-analysis\/log.c\/"
+                },
+                
+                {
+                    "title": "日志库spdlog（一）",
+                    "date": "2026-08-16",
+                    "year": "2026",
+                    "month": "08",
+                    "day": "16",
+                    "word_count": "6662",
+                    "link": "\/post\/code-analysis\/spdlog-1\/"
+                }
+                
+        ]
+    };
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        let months = 11;
+        
+        let blogInfo = data;
+        let cal = null;
+
+        function getHeatmapTheme() {
+            const isDark = document.body.classList.contains("dark-mode");
+            return {
+                name: isDark ? "dark" : "light",
+                range: isDark
+                    ? ['#0e4429', '#006D32', '#26a641', '#39d353']
+                    : ['#c2e699', '#78c679', '#31a354', '#006837'],
+            };
+        }
+
+        
+        function handleClick(event, timestamp, value) {
+            
+            var date = new Date(timestamp).toISOString().substring(0, 10);
+            const selectedPost = blogInfo.pages.find(page => {
+                
+                const pageDate = page.date.substring(0, 10); 
+                return pageDate === date;
+            });
+            
+            
+            if (selectedPost) {
+                window.location.href = selectedPost.link;
+            }
+            return
+        }
+
+        function renderHeatmap() {
+            const container = document.getElementById("cal-heatmap");
+            if (!container) return;
+            container.innerHTML = "";
+
+            
+            cal = new CalHeatmap();
+            cal.on('click', handleClick);
+
+            
+            const today = new Date();
+            
+            let startDate = new Date(today.setMonth(today.getMonth() - months));
+            const heatmapTheme = getHeatmapTheme();
+            const size = 12;
+
+            
+            cal.paint({
+                
+                theme: heatmapTheme.name,
+                
+                range: months + 1,
+                
+                scale: {
+                    color: {
+                        type: 'threshold',
+                        
+                        range: heatmapTheme.range,
+                        domain: [1000, 2000, 4000, 8000],
+                    },
+                },
+                
+                domain: {
+                    
+                    type: 'month',
+                    
+                    gutter: 5,
+                    
+                    position: 'right',
+                    
+                    text: null,
+                    
+                    
+                },
+                
+                subDomain: {
+                    
+                    
+                    type: 'ghDay',
+                    
+                    radius: 6,
+                    
+                    width: size,
+                    height: size,
+                    
+                    gutter: 5,
+                    color: "#66745f",
+                },
+                
+                date: {
+                    
+                    start: startDate,
+                    
+                    locale: {
+                        weekStart: 1
+                    },
+                },
+                
+                data: {
+                    
+                    source: blogInfo.pages, x: "date", y: item => {
+                        return parseInt(item.word_count);
+                    }, groupY: 'sum'
+                },
+            },
+                
+                [[
+                    
+                    Tooltip,
+                    {
+                        
+                        text: function (date, value, dayjsDate) {
+                            const currentPost = blogInfo.pages.filter(page => page.date === dayjsDate.format('YYYY-MM-DD'));
+                            const postTitle = currentPost.length > 0 ? currentPost[0].title : '';  
+                            const wordCount = currentPost.length > 0 ? currentPost[0].word_count : 0;  
+                            if (postTitle === '') {
+                                return dayjsDate.format('YYYY-MM-DD');
+                            }
+                            return (
+                                postTitle +
+                                ' | ' +
+                                (wordCount > 0 ? `${wordCount} 字` : '') +
+                                ' ' +
+                                dayjsDate.format('YYYY-MM-DD')
+                            );
+                        }
+                    },
+                ],
+                [
+                    
+                    CalendarLabel,
+                    {
+                        
+                        position: 'left',
+                        
+                        text: () => ["一", "", "三", "", "五", "", "日"],
+                        
+                        textAlign: 'middle',
+                        
+                        radius: 5
+                    },
+                ],
+
+                ]);
+        }
+
+        renderHeatmap();
+        const themeToggle = document.getElementById("theme-toggle");
+        if (themeToggle !== null) {
+            themeToggle.addEventListener("click", function() {
+                window.setTimeout(renderHeatmap, 0);
+            });
+        }
+    });
+
+
+</script>
+
+<style>
+    .ch-container {
+        display: inline-block;
+    }
+
+    body:not(.dark-mode) #cal-heatmap {
+        color: #2f3136;
+        --ch-subdomain-bg-color: #66745f;
+        --ch-domain-bg-color: transparent;
+        --ch-text-color: #2f3136;
+        --ch-domain-text-color: #2f3136;
+    }
+
+    #cal-heatmap {
+        overflow-x: auto;
+        white-space: nowrap;
+        scroll-behavior: smooth;
+         
+
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+
+        -webkit-text-size-adjust: 100%;
+
+         
+        &::-webkit-scrollbar {
+            width: 11px;
+            height: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: rgba(255, 255, 255, 0.87);
+            border-radius: 2em !important;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #999999;
+            border-radius: 2em;
+        }
+
+        &::-webkit-scrollbar-corner {
+            background-color: transparent;
+        }
+    }
+    .dark-mode #cal-heatmap {
+        color: #e3e3e3;
+    }
+
+    .dark-mode #cal-heatmap::-webkit-scrollbar-track {
+        background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .dark-mode #cal-heatmap::-webkit-scrollbar-thumb {
+        background-color: #555555;
+    }
+
+    @media (max-width: 1023px) {
+    #cal-heatmap {
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+</style>
+
+<ul>
+<li><code>所有文章</code>加起来约 
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+78,085 字
+
+
+ 
+  
+
+相当于一本 《小王子》
+</li>
+</ul>
+<h1 id="友链">友链</h1>
+
+<a target="_blank" rel="noreferrer" href="https://maisblog.cn/" title="Mike" class="friendurl">
+    <div class="frienddiv">
+        <div class="frienddivleft">
+            <img class="myfriend" src="https://www.maisblog.cn/usr/uploads/manually/avatar.png" alt="Mike" />
+        </div>
+        <div class="frienddivright">
+            <div class="friendname">Mike</div>
+            <div class="friendinfo">麦的视界</div>
+        </div>
+    </div>
+</a>
+
+
+<style>
+.friendurl {
+  display: block;
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.myfriend {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50%;
+  border: 1px solid rgba(64, 53, 36, 0.12);
+  padding: 2px;
+  box-shadow: 0 4px 14px rgba(83, 67, 38, 0.14);
+  margin-top: 14px !important;
+  margin-left: 14px !important;
+  background-color: #fffdf8;
+  object-fit: cover;
+}
+
+.frienddiv {
+  height: 92px;
+  margin-top: 10px;
+  width: 100%;
+  display: inline-block !important;
+  border: 1px solid rgba(64, 53, 36, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 10px 28px rgba(83, 67, 38, 0.08);
+  color: #2f3136;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.frienddiv:hover {
+  background: #fffdf8;
+  box-shadow: 0 16px 34px rgba(83, 67, 38, 0.13);
+  transform: translateY(-2px);
+}
+
+.dark-mode .frienddiv {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: #16191d;
+  box-shadow: none;
+  color: #E3E3E3;
+}
+
+.dark-mode .frienddiv:hover {
+  background: #2d333b;
+  box-shadow: none;
+}
+
+.frienddiv:hover .frienddivleft img {
+  transition: 0.9s !important;
+  -webkit-transition: 0.9s !important;
+  -moz-transition: 0.9s !important;
+  -o-transition: 0.9s !important;
+  -ms-transition: 0.9s !important;
+  transform: rotate(360deg) !important;
+  -webkit-transform: rotate(360deg) !important;
+  -moz-transform: rotate(360deg) !important;
+  -o-transform: rotate(360deg) !important;
+  -ms-transform: rotate(360deg) !important;
+}
+
+.frienddivleft {
+  width: 92px;
+  float: left;
+}
+
+.frienddivleft {
+  margin-right: 2px;
+}
+
+.frienddivright {
+  margin-top: 18px;
+  margin-right: 18px;
+}
+
+.friendname {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.friendinfo {
+  color: #706b61;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.dark-mode .friendinfo {
+  color: rgba(227, 227, 227, 0.72);
+}
+
+
+</style>
+
+<!-- 
+<a target="_blank" rel="noreferrer" href="https://ynj23.github.io/Blog/" title="nj" class="friendurl">
+    <div class="frienddiv">
+        <div class="frienddivleft">
+            <img class="myfriend" src="https://ynj23.github.io/Blog/img/avatar_hu5009685387467227868.png" alt="nj" />
+        </div>
+        <div class="frienddivright">
+            <div class="friendname">nj</div>
+            <div class="friendinfo">nj</div>
+        </div>
+    </div>
+</a>
+
+
+<style>
+.friendurl {
+  display: block;
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.myfriend {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50%;
+  border: 1px solid rgba(64, 53, 36, 0.12);
+  padding: 2px;
+  box-shadow: 0 4px 14px rgba(83, 67, 38, 0.14);
+  margin-top: 14px !important;
+  margin-left: 14px !important;
+  background-color: #fffdf8;
+  object-fit: cover;
+}
+
+.frienddiv {
+  height: 92px;
+  margin-top: 10px;
+  width: 100%;
+  display: inline-block !important;
+  border: 1px solid rgba(64, 53, 36, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 10px 28px rgba(83, 67, 38, 0.08);
+  color: #2f3136;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.frienddiv:hover {
+  background: #fffdf8;
+  box-shadow: 0 16px 34px rgba(83, 67, 38, 0.13);
+  transform: translateY(-2px);
+}
+
+.dark-mode .frienddiv {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: #16191d;
+  box-shadow: none;
+  color: #E3E3E3;
+}
+
+.dark-mode .frienddiv:hover {
+  background: #2d333b;
+  box-shadow: none;
+}
+
+.frienddiv:hover .frienddivleft img {
+  transition: 0.9s !important;
+  -webkit-transition: 0.9s !important;
+  -moz-transition: 0.9s !important;
+  -o-transition: 0.9s !important;
+  -ms-transition: 0.9s !important;
+  transform: rotate(360deg) !important;
+  -webkit-transform: rotate(360deg) !important;
+  -moz-transform: rotate(360deg) !important;
+  -o-transform: rotate(360deg) !important;
+  -ms-transform: rotate(360deg) !important;
+}
+
+.frienddivleft {
+  width: 92px;
+  float: left;
+}
+
+.frienddivleft {
+  margin-right: 2px;
+}
+
+.frienddivright {
+  margin-top: 18px;
+  margin-right: 18px;
+}
+
+.friendname {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.friendinfo {
+  color: #706b61;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.dark-mode .friendinfo {
+  color: rgba(227, 227, 227, 0.72);
+}
+
+
+</style>
+ -->
+
+        </div>
+    </div>
+   
+</div>
+
+<style>
+    li a {
+        color: #92c3eb !important;
+        border-bottom: 1px solid;
+    }
+</style>
+<script>
+    (function() {
+        "use strict";
+
+        const card = document.getElementById("heartbeat-card");
+        if (card === null) {
+            return;
+        }
+
+        const bpmEl = document.getElementById("heartbeat-bpm");
+        const endpoint = card.getAttribute("data-endpoint");
+        const SYNC_INTERVAL = 20000;
+        let syncTimer = null;
+
+        function setState(state, bpm) {
+            card.dataset.state = state;
+            if (bpmEl !== null) {
+                bpmEl.textContent = bpm;
+            }
+        }
+
+        if (!endpoint) {
+            setState("error", "--");
+            return;
+        }
+
+        function syncHeartbeat() {
+            fetch(endpoint, {
+                method: "GET",
+                cache: "no-store",
+            })
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error("HTTP " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(function(data) {
+                    if (!data.ok) {
+                        throw new Error(data.error || "bad_response");
+                    }
+                    const online = data.online === true;
+                    const state = online ? "online" : "offline";
+                    const heartbeat = data.heartbeat || {};
+                    const bpm = heartbeat.bpm || heartbeat.heart_rate || "--";
+                    setState(state, String(bpm));
+                })
+                .catch(function() {
+                    setState("error", "--");
+                });
+        }
+
+        function startSync() {
+            if (syncTimer !== null) {
+                return;
+            }
+            syncHeartbeat();
+            syncTimer = setInterval(syncHeartbeat, SYNC_INTERVAL);
+        }
+
+        function stopSync() {
+            if (syncTimer === null) {
+                return;
+            }
+            clearInterval(syncTimer);
+            syncTimer = null;
+        }
+
+        document.addEventListener("visibilitychange", function() {
+            if (document.visibilityState === "visible") {
+                startSync();
+                return;
+            }
+            stopSync();
+        });
+
+        window.addEventListener("pagehide", stopSync);
+
+        startSync();
+    })();
+</script>
+
+        </main>
+        <div id="card-transition-overlay" class="card-transition-overlay"></div><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2026 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img');
+
+  (function() {
+    const overlay = document.getElementById("card-transition-overlay");
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isNavigating = false;
+
+    function shouldHandleLink(link, event) {
+      if (!link || !overlay) return false;
+      if (isNavigating || event.defaultPrevented) return false;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+      if (link.closest(".myCard")) return false;
+      if (link.closest("[data-no-page-transition]")) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+
+      const href = link.getAttribute("href");
+      if (!href) return false;
+      if (href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+
+      let targetUrl = null;
+      try {
+        targetUrl = new URL(href, window.location.href);
+      } catch (err) {
+        return false;
+      }
+
+      if (targetUrl.origin !== window.location.origin) return false;
+      if (targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search &&
+          targetUrl.hash.length > 0) return false;
+      if (targetUrl.href === window.location.href) return false;
+
+      return true;
+    }
+
+    function navigateWithOverlay(href) {
+      if (isNavigating) return;
+      isNavigating = true;
+      document.body.style.pointerEvents = "none";
+      overlay.classList.add("card-transition-overlay--active");
+      const delay = prefersReducedMotion ? 0 : 360;
+      window.setTimeout(function() {
+        window.location.href = href;
+      }, delay);
+    }
+
+    document.addEventListener("click", function(event) {
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      navigateWithOverlay(link.href);
+    }, true);
+
+    window.addEventListener("pageshow", function() {
+      isNavigating = false;
+      document.body.style.pointerEvents = "";
+      if (overlay) overlay.classList.remove("card-transition-overlay--active");
+    });
+  })();
+</script>
+
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1972 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>日志库spdlog（一） | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="源码面前，了无秘密"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/post/code-analysis/spdlog-1/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.15f1383c93bee016a21e6324ae71b77bea3c4a9185e333144641ec5df722db89.css">
+
+    
+    <meta property="og:title" content="日志库spdlog（一）" />
+<meta property="og:description" content="源码面前，了无秘密" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/post/code-analysis/spdlog-1/" /><meta property="og:image" content="https://o-a-p.github.io/img/Code-Analysis/spdlog.png" /><meta property="og:image" content="https://o-a-p.github.io/img/Code-Analysis/spdlog.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2026-08-16T18:00:23+08:00" />
+<meta property="article:modified_time" content="2026-08-16T18:00:23+08:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://o-a-p.github.io/img/Code-Analysis/spdlog.png" /><meta name="twitter:title" content="日志库spdlog（一）"/>
+<meta name="twitter:description" content="源码面前，了无秘密"/>
+
+    
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body class="dark-mode"><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#" aria-label="Switch color theme">
+                <svg class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path class="theme-icon__moon" fill="currentColor"
+                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <g class="theme-icon__sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.querySelector('.navbar');
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        if (!navbar || !burger || !menu) return;
+
+        var animating = false;
+        var opened = false;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var MOBILE_QUERY = '(max-width: 1087px)';
+
+        function isMobileMenu() {
+            return window.matchMedia(MOBILE_QUERY).matches;
+        }
+
+        function clearMenuInlineStyle() {
+            menu.style.height = '';
+            menu.style.opacity = '';
+            menu.style.transform = '';
+            menu.style.overflow = '';
+            menu.style.transition = '';
+        }
+
+        function resetToDesktop() {
+            animating = false;
+            opened = false;
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+            clearMenuInlineStyle();
+        }
+
+        function openMenu() {
+            if (animating || opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = true;
+            animating = true;
+            burger.classList.add('is-active');
+            menu.classList.add('is-active');
+            burger.setAttribute('aria-expanded', 'true');
+
+            if (reduceMotion) {
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+            menu.offsetHeight;
+
+            var targetHeight = menu.scrollHeight;
+            menu.style.transition = 'height 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms ease';
+            menu.style.height = targetHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+
+            window.setTimeout(function() {
+                menu.style.height = 'auto';
+                menu.style.overflow = 'visible';
+                animating = false;
+            }, 280);
+        }
+
+        function closeMenu() {
+            if (animating || !opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = false;
+            animating = true;
+            burger.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+
+            if (reduceMotion) {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = menu.scrollHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+            menu.offsetHeight;
+
+            menu.style.transition = 'height 230ms cubic-bezier(0.4, 0, 1, 1), opacity 160ms ease, transform 180ms ease';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function() {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+            }, 240);
+        }
+
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (opened) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!isMobileMenu() || !opened) return;
+            if (navbar.contains(e.target)) return;
+            closeMenu();
+        });
+
+        menu.addEventListener('click', function(e) {
+            var link = e.target.closest('.navbar-item');
+            if (!link || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isMobileMenu()) {
+                resetToDesktop();
+            }
+        });
+    });
+
+    
+    
+    
+    (function() {
+        "use strict";
+
+        var root = document.documentElement;
+        var body = document.body;
+        var themeToggle = document.getElementById("theme-toggle");
+        var isTransitioning = false;
+        var effectsPaused = false;
+        var currentTheme = readStoredTheme();
+
+        if (themeToggle === null) return;
+
+        function readStoredTheme() {
+            try {
+                var storedTheme = localStorage.getItem("theme");
+                if (storedTheme === "dark" || storedTheme === "light") {
+                    return storedTheme;
+                }
+            } catch (error) {
+                
+            }
+            return "dark";
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (error) {
+                
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            body.classList.toggle("dark-mode", theme === "dark");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            );
+            storeTheme(theme);
+            window.dispatchEvent(new CustomEvent("theme-change", {
+                detail: { theme: theme }
+            }));
+        }
+
+        function getRevealOrigin(event) {
+            var bounds = themeToggle.getBoundingClientRect();
+            var origin = {
+                x: bounds.left + bounds.width / 2,
+                y: bounds.top + bounds.height / 2
+            };
+
+            
+            
+            if (event.clientX !== 0 || event.clientY !== 0) {
+                origin.x = event.clientX;
+                origin.y = event.clientY;
+            }
+            return origin;
+        }
+
+        function getRevealGeometry(origin) {
+            var farthestX = Math.max(origin.x, window.innerWidth - origin.x);
+            var farthestY = Math.max(origin.y, window.innerHeight - origin.y);
+            var radius = Math.hypot(farthestX, farthestY);
+
+            return {
+                radius: radius,
+                
+                duration: Math.max(650, Math.min(1100, radius / 1.5))
+            };
+        }
+
+        function setToggleBusy(active) {
+            isTransitioning = active;
+            if (active) {
+                themeToggle.setAttribute("aria-disabled", "true");
+            } else {
+                themeToggle.removeAttribute("aria-disabled");
+            }
+        }
+
+        function setEffectsPaused(paused) {
+            if (effectsPaused === paused) return;
+            effectsPaused = paused;
+            window.dispatchEvent(new CustomEvent(
+                paused ? "theme-transition-start" : "theme-transition-end"
+            ));
+        }
+
+        function finishTransition() {
+            if (!isTransitioning) return;
+            root.classList.remove("theme-transition-active");
+            setEffectsPaused(false);
+            setToggleBusy(false);
+        }
+
+        function startThemeTransition(nextTheme, event) {
+            var origin = getRevealOrigin(event);
+            var geometry = getRevealGeometry(origin);
+            var fromClip = "circle(0px at " + origin.x + "px " + origin.y + "px)";
+            var toClip = "circle(" + geometry.radius + "px at "
+                + origin.x + "px " + origin.y + "px)";
+            var preflightClip = "circle(" + Math.max(geometry.radius - 1, 0) + "px at "
+                + origin.x + "px " + origin.y + "px)";
+
+            setEffectsPaused(true);
+            root.classList.add("theme-transition-active");
+
+            var transition;
+            try {
+                transition = document.startViewTransition(function() {
+                    applyTheme(nextTheme);
+                });
+            } catch (error) {
+                applyTheme(nextTheme);
+                finishTransition();
+                return;
+            }
+
+            transition.ready.then(function() {
+                try {
+                    root.animate(
+                        [
+                            {
+                                opacity: 0.001,
+                                clipPath: toClip
+                            },
+                            {
+                                opacity: 0.001,
+                                clipPath: preflightClip
+                            }
+                        ],
+                        {
+                            duration: 34,
+                            easing: "linear",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+
+                    root.animate(
+                        {
+                            opacity: [1, 1],
+                            clipPath: [fromClip, toClip]
+                        },
+                        {
+                            delay: 34,
+                            duration: geometry.duration,
+                            easing: "linear",
+                            fill: "forwards",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+                } catch (error) {
+                    if (typeof transition.skipTransition === "function") {
+                        transition.skipTransition();
+                    }
+                }
+            }, finishTransition);
+
+            transition.finished.then(finishTransition, finishTransition);
+        }
+
+        function switchTheme(nextTheme, event) {
+            var reduceMotion = window.matchMedia
+                && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (isTransitioning) return;
+            if (typeof document.startViewTransition !== "function" || reduceMotion) {
+                applyTheme(nextTheme);
+                return;
+            }
+
+            setToggleBusy(true);
+            startThemeTransition(nextTheme, event);
+        }
+
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            switchTheme(currentTheme === "light" ? "dark" : "light", event);
+        });
+    })();
+
+
+
+</script>
+
+</header>
+<main>
+<div class="single-container page-enter">
+    <div class="archive">
+        
+        <img src="/img/Code-Analysis/spdlog.png" class="myBigPicture" alt="headPic">
+        <h1 class="title is-1">日志库spdlog（一）</h1>
+        <div class="title subtitle heading is-6">
+            <div class="author-info columns is-vcentered">
+                <div class="column">
+                    <div class="columns is-vcentered is-mobile">
+                        
+                        <div class="column is-narrow">
+                            <img src="/img/author/head.jpg" class="author-image">
+                        </div>
+                        
+                        <div class="column">
+                            <p>OAP</p>
+                            <p><time>August 16, 2026</time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-categories-container">
+                    <a class="hover-underline-animation" href="/categories/spdlog">spdlog</a>, <a class="hover-underline-animation" href="/categories/code-analysis">Code Analysis</a>
+                </div>
+            </div>
+        </div>
+        <div class="content article-content">
+            
+            <div class="toc-container">
+                
+    <div class="post-toc">
+        
+            <aside>
+                <button id="tocButton" type="button" aria-expanded="false" aria-controls="hide"><span id="contents">CONTENT</span></button>
+                <div id="hide"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#项目简介">项目简介</a></li>
+    <li><a href="#基本使用">基本使用</a>
+      <ul>
+        <li><a href="#引入">引入</a></li>
+        <li><a href="#使用">使用</a></li>
+      </ul>
+    </li>
+    <li><a href="#架构">架构</a>
+      <ul>
+        <li><a href="#registry">registry</a></li>
+        <li><a href="#logger">logger</a>
+          <ul>
+            <li><a href="#一级转发">一级转发</a></li>
+            <li><a href="#二级转发仅非格式化">二级转发（仅非格式化）</a></li>
+            <li><a href="#三级转发">三级转发</a></li>
+            <li><a href="#log_it_">log_it_</a></li>
+          </ul>
+        </li>
+        <li><a href="#sink">sink</a></li>
+        <li><a href="#formatter">formatter</a></li>
+        <li><a href="#flag_formatter">flag_formatter</a></li>
+      </ul>
+    </li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav></div>
+            </aside>
+        
+    </div><script>
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('tocButton');
+    const tocBody = document.getElementById('hide');
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!tocBody) return;
+
+    if (button) {
+        const mobile = window.matchMedia("(max-width: 768px)");
+        function syncExpandedState() {
+            button.setAttribute("aria-expanded", String(window.getComputedStyle(tocBody).display !== "none"));
+        }
+        syncExpandedState();
+        mobile.addEventListener("change", syncExpandedState);
+        button.addEventListener('click', function() {
+            const container = tocBody.closest(".toc-container");
+            if (!container) return;
+            const isOpen = window.getComputedStyle(tocBody).display === "none";
+            container.classList.toggle("is-expanded", isOpen);
+            container.classList.toggle("is-collapsed", !isOpen);
+            button.setAttribute("aria-expanded", String(isOpen));
+        });
+    }
+
+    const tocLinks = Array.from(tocBody.querySelectorAll('a[href^="#"]'));
+    tocLinks.forEach(link => {
+        if (!link.title) {
+            link.title = link.textContent.trim();
+        }
+    });
+    const headingTargets = tocLinks
+        .map(link => {
+            const id = decodeURIComponent(link.getAttribute('href').slice(1));
+            const el = document.getElementById(id);
+            return el ? { link, el } : null;
+        })
+        .filter(Boolean);
+    let lastActiveLink = null;
+    let currentActiveLinks = [];
+    let isProgrammaticScroll = false;
+    let scrollSettleTimer = null;
+    const SCROLL_SETTLE_MS = 180;
+
+    function getScrollOffset() {
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+        return Math.max(72, Math.round(navbarHeight + 16));
+    }
+
+    function keepTocLinkVisible(link) {
+        const scroller = link.closest('.toc-container');
+        if (!scroller || window.getComputedStyle(scroller).position === "static") return;
+        const linkRect = link.getBoundingClientRect();
+        const boxRect = scroller.getBoundingClientRect();
+        const topGap = linkRect.top - boxRect.top;
+        const bottomGap = boxRect.bottom - linkRect.bottom;
+        if (topGap < 8) {
+            scroller.scrollBy({
+                top: topGap - 12,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        } else if (bottomGap < 8) {
+            scroller.scrollBy({
+                top: 12 - bottomGap,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        }
+    }
+
+    function setActiveLinks(links) {
+        if (links.length === currentActiveLinks.length && links.every((link, index) => link === currentActiveLinks[index])) return;
+        tocLinks.forEach(link => {
+            link.classList.remove("toc-active", "toc-active-parent");
+            link.removeAttribute("aria-current");
+        });
+        links.forEach(link => {
+            link.classList.add("toc-active");
+        });
+        const first = links[0];
+        if (first) {
+            first.setAttribute("aria-current", "location");
+            if (lastActiveLink !== first) keepTocLinkVisible(first);
+        }
+        lastActiveLink = first;
+        currentActiveLinks = links;
+    }
+
+    function updateActive(forceUpdate) {
+        if (isProgrammaticScroll && !forceUpdate) return;
+        if (!headingTargets.length) return;
+        const top = getScrollOffset();
+        const bottom = window.innerHeight;
+        const body = document.querySelector(".article-body");
+        const articleEnd = body ? body.getBoundingClientRect().bottom : Infinity;
+        
+        
+        const positions = headingTargets.map(target => target.el.getBoundingClientRect().top);
+        const links = headingTargets.filter((target, index) => {
+            const end = index + 1 < positions.length ? positions[index + 1] : articleEnd;
+            return positions[index] < bottom && end > top;
+        }).map(target => target.link);
+        setActiveLinks(links);
+    }
+
+    function armScrollSettleTimer() {
+        if (!isProgrammaticScroll) return;
+        if (scrollSettleTimer) {
+            clearTimeout(scrollSettleTimer);
+        }
+        scrollSettleTimer = setTimeout(function() {
+            isProgrammaticScroll = false;
+            scrollSettleTimer = null;
+            updateActive(true);
+        }, SCROLL_SETTLE_MS);
+    }
+
+    updateActive(true);
+
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+            const id = decodeURIComponent(href.slice(1));
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            const offset = getScrollOffset();
+            const top = window.pageYOffset + target.getBoundingClientRect().top - offset;
+            isProgrammaticScroll = !prefersReducedMotion;
+            if (scrollSettleTimer) {
+                clearTimeout(scrollSettleTimer);
+                scrollSettleTimer = null;
+            }
+            window.scrollTo({
+                top: Math.max(0, top),
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+            if (history.pushState) {
+                history.pushState(null, '', href);
+            } else {
+                window.location.hash = href;
+            }
+            setActiveLinks([link]);
+            armScrollSettleTimer();
+        });
+    });
+
+    window.addEventListener("resize", function() { updateActive(); });
+    window.addEventListener("load", function() { updateActive(); });
+    if (document.fonts) document.fonts.ready.then(function() { updateActive(); });
+
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (isProgrammaticScroll) {
+            armScrollSettleTimer();
+            return;
+        }
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            updateActive(true);
+            ticking = false;
+        });
+    });
+});
+</script>
+
+            </div>
+            
+            <div class="article-body">
+                <h1 id="前言">前言</h1>
+
+
+
+<div class="simple-notice simple-notice-tip" >
+    <div class="simple-notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon simple-notice-icon" viewBox="0 0 512 512"><path d="M173.9 439.4L7.5 273c-10-10-10-26.2 0-36.2l36.2-36.2c10-10 26.2-10 36.2 0L192 312.69l240.1-240.1c10-10 26.2-10 36.2 0l36.2 36.21c10 10 10 26.2 0 36.2L210.1 439.4c-10 10-26.2 10-36.2 0z"/></svg></div><p>本系列旨在通过解析开源项目，学习优雅、简洁的实现，讨论其使用场景，覆盖的范围一般不会超过项目的实现，配合代码阅读更佳</p></div>
+
+<h1 id="项目简介">项目简介</h1>
+<p>spdlog是一个C++日志库，支持header-only以及库引入两种方式，在工程实践上广受好评。</p>
+<p>项目链接：
+<a
+    class="github-project-card"
+    href="https://github.com/gabime/spdlog"
+    target="_blank"
+    rel="noreferrer"
+    aria-label="在 GitHub 上查看 gabime/spdlog"
+    data-github-repo="gabime/spdlog"
+    data-github-fetch="true"
+    data-github-custom-title="false"
+    data-github-custom-description="false"
+    data-github-custom-language="false"
+    data-github-custom-stars="false"
+    data-github-custom-forks="false"
+>
+    <span class="github-project-card__header">
+        <span class="github-project-card__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+                <path fill="currentColor" d="M12 .7a11.3 11.3 0 0 0-3.57 22c.57.1.77-.25.77-.55v-2.18c-3.15.69-3.82-1.34-3.82-1.34-.51-1.32-1.26-1.67-1.26-1.67-1.03-.71.08-.7.08-.7 1.14.08 1.74 1.18 1.74 1.18 1.01 1.75 2.65 1.24 3.3.95.1-.74.4-1.24.72-1.53-2.51-.29-5.15-1.27-5.15-5.63 0-1.24.44-2.26 1.17-3.06-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.11 1.17a10.75 10.75 0 0 1 5.67 0c2.16-1.48 3.11-1.17 3.11-1.17.62 1.57.23 2.73.11 3.02.73.8 1.17 1.82 1.17 3.06 0 4.37-2.65 5.33-5.17 5.62.41.36.77 1.06.77 2.14v3.17c0 .3.2.66.78.55A11.3 11.3 0 0 0 12 .7Z"/>
+            </svg>
+        </span>
+        <span class="github-project-card__heading">
+            <span class="github-project-card__eyebrow">GitHub Repository</span>
+            <strong class="github-project-card__title" data-github-field="title">gabime/spdlog</strong>
+        </span>
+    </span>
+
+    <span class="github-project-card__description" data-github-field="description">在 GitHub 上查看该项目。</span>
+
+    <span class="github-project-card__meta">
+        <span class="github-project-card__meta-item is-hidden" data-github-meta="language">
+            <span class="github-project-card__language-dot" aria-hidden="true"></span>
+            <span data-github-field="language"></span>
+        </span>
+        <span class="github-project-card__meta-item is-hidden" data-github-meta="stars" title="Stars">
+            <span aria-hidden="true">★</span>
+            <span data-github-field="stars"></span>
+        </span>
+        <span class="github-project-card__meta-item is-hidden" data-github-meta="forks" title="Forks">
+            <svg class="github-project-card__meta-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/>
+            </svg>
+            <span data-github-field="forks"></span>
+        </span>
+    </span>
+</a><style>
+.github-project-card {
+  display: block;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  margin: 1.4rem 0;
+  padding: 1.25rem 1.35rem 1.2rem;
+  border: 1px solid rgba(48, 62, 75, 0.13);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 96% 0%, rgba(61, 111, 159, 0.1), transparent 34%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(247, 249, 251, 0.8));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(35, 47, 58, 0.04),
+    0 18px 44px -30px rgba(35, 47, 58, 0.42);
+  backdrop-filter: blur(16px) saturate(125%);
+  -webkit-backdrop-filter: blur(16px) saturate(125%);
+  color: #2f3136 !important;
+  text-decoration: none !important;
+  transform: translateZ(0);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.github-project-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 12%;
+  left: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(76, 119, 158, 0.48), transparent);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.github-project-card::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -6rem;
+  right: -4.5rem;
+  width: 11rem;
+  height: 11rem;
+  border-radius: 50%;
+  background: rgba(61, 111, 159, 0.08);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+.github-project-card > span {
+  position: relative;
+  z-index: 1;
+}
+
+.github-project-card:hover {
+  border-color: rgba(61, 111, 159, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    0 2px 4px rgba(35, 47, 58, 0.05),
+    0 24px 50px -28px rgba(35, 47, 58, 0.48);
+  color: #2f3136 !important;
+  transform: translateY(-3px);
+}
+
+.github-project-card:focus-visible {
+  outline: 2px solid rgba(61, 111, 159, 0.68);
+  outline-offset: 4px;
+}
+
+.github-project-card__header {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.github-project-card__mark {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 2.55rem;
+  height: 2.55rem;
+  margin-right: 0.9rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(48, 62, 75, 0.1);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(232, 237, 242, 0.82));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 7px 16px -11px rgba(47, 49, 54, 0.8);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.github-project-card__mark svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.github-project-card:hover .github-project-card__mark {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 10px 20px -12px rgba(47, 49, 54, 0.9);
+  transform: translateY(-1px);
+}
+
+.github-project-card__heading {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.github-project-card__eyebrow {
+  margin-bottom: 0.16rem;
+  color: #647383;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.github-project-card__title {
+  overflow: hidden;
+  color: #2f3136 !important;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.github-project-card__description {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 92%;
+  margin: 1rem 0 0;
+  color: #5f5b54;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.github-project-card__meta {
+  display: flex;
+  min-height: 1.55rem;
+  margin-top: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  color: #706b61;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.github-project-card__meta-item {
+  display: inline-flex;
+  min-height: 1.55rem;
+  padding: 0.12rem 0.55rem;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid rgba(48, 62, 75, 0.09);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.github-project-card__meta-item.is-hidden {
+  display: none;
+}
+
+.github-project-card__meta-icon {
+  display: block;
+  width: 0.8rem;
+  height: 0.8rem;
+  flex: 0 0 auto;
+}
+
+.github-project-card__language-dot {
+  width: 0.52rem;
+  height: 0.52rem;
+  border-radius: 50%;
+  background: #5d9cec;
+  box-shadow: 0 0 0 2px rgba(61, 111, 159, 0.13);
+}
+
+.dark-mode .github-project-card {
+  border-color: rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(circle at 96% 0%, rgba(83, 135, 184, 0.13), transparent 34%),
+    linear-gradient(145deg, rgba(26, 29, 34, 0.96), rgba(15, 17, 20, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.22),
+    0 22px 48px -30px rgba(0, 0, 0, 0.92);
+  color: #e3e3e3 !important;
+}
+
+.dark-mode .github-project-card::before {
+  background: linear-gradient(90deg, transparent, rgba(100, 151, 199, 0.5), transparent);
+  opacity: 0.6;
+}
+
+.dark-mode .github-project-card::after {
+  background: rgba(83, 135, 184, 0.07);
+}
+
+.dark-mode .github-project-card:hover {
+  border-color: rgba(100, 151, 199, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.24),
+    0 28px 54px -30px rgba(0, 0, 0, 0.98);
+  color: #e3e3e3 !important;
+}
+
+.dark-mode .github-project-card__mark {
+  border-color: rgba(255, 255, 255, 0.09);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 9px 20px -12px rgba(0, 0, 0, 0.95);
+}
+
+.dark-mode .github-project-card:hover .github-project-card__mark {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 12px 24px -12px rgba(0, 0, 0, 1);
+}
+
+.dark-mode .github-project-card__eyebrow {
+  color: rgba(153, 180, 204, 0.78);
+}
+
+.dark-mode .github-project-card__meta {
+  color: rgba(227, 227, 227, 0.66);
+}
+
+.dark-mode .github-project-card__meta-item {
+  border-color: rgba(255, 255, 255, 0.075);
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+.dark-mode .github-project-card__title {
+  color: #f5f5f5 !important;
+}
+
+.dark-mode .github-project-card__description {
+  color: rgba(227, 227, 227, 0.78);
+}
+
+@media (max-width: 480px) {
+  .github-project-card {
+    padding: 1.1rem;
+    border-radius: 14px;
+  }
+
+  .github-project-card__mark {
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-right: 0.75rem;
+  }
+
+  .github-project-card__title {
+    font-size: 1rem;
+  }
+
+  .github-project-card__description {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .github-project-card,
+  .github-project-card__mark {
+    transition: none;
+  }
+}
+</style>
+
+<script>
+(function() {
+  "use strict";
+
+  if (window.githubProjectCardsInitialized) {
+    return;
+  }
+  window.githubProjectCardsInitialized = true;
+
+  var LANGUAGE_COLORS = {
+    "c": "#6da7d9",
+    "c#": "#4cc56a",
+    "c++": "#f36a9a",
+    "css": "#7d68c9",
+    "dart": "#35c7c5",
+    "go": "#24c4e2",
+    "html": "#f26b4a",
+    "java": "#d28a45",
+    "javascript": "#e6c84f",
+    "kotlin": "#b07cff",
+    "lua": "#5a73d8",
+    "objective-c": "#5e9dff",
+    "php": "#7e86c7",
+    "python": "#4d88c7",
+    "ruby": "#d14c4c",
+    "rust": "#d49a72",
+    "scss": "#d36b9d",
+    "shell": "#70c96a",
+    "swift": "#f36c4f",
+    "typescript": "#4e8fd5",
+    "vue": "#48b98a",
+    "zig": "#f0a65a"
+  };
+  var LANGUAGE_FALLBACK_COLORS = [
+    "#5d9cec",
+    "#7d83ff",
+    "#35b8a0",
+    "#a56de2",
+    "#54b579",
+    "#d46fa5"
+  ];
+
+  function formatCount(value) {
+    try {
+      return new Intl.NumberFormat(undefined, {
+        notation: "compact",
+        maximumFractionDigits: 1
+      }).format(value);
+    } catch (error) {
+      return String(value);
+    }
+  }
+
+  function setField(card, name, value) {
+    var field = card.querySelector('[data-github-field="' + name + '"]');
+    if (field !== null && value !== null && value !== undefined && value !== "") {
+      field.textContent = value;
+    }
+  }
+
+  function showMeta(card, name) {
+    var meta = card.querySelector('[data-github-meta="' + name + '"]');
+    if (meta !== null) {
+      meta.classList.remove("is-hidden");
+    }
+  }
+
+  function getLanguageColor(language) {
+    var normalized = language.trim().toLowerCase();
+    if (Object.prototype.hasOwnProperty.call(LANGUAGE_COLORS, normalized)) {
+      return LANGUAGE_COLORS[normalized];
+    }
+
+    var hash = 0;
+    for (var index = 0; index < normalized.length; index += 1) {
+      hash = ((hash << 5) - hash) + normalized.charCodeAt(index);
+      hash |= 0;
+    }
+    return LANGUAGE_FALLBACK_COLORS[Math.abs(hash) % LANGUAGE_FALLBACK_COLORS.length];
+  }
+
+  function setLanguageColor(card, language) {
+    var dot = card.querySelector(".github-project-card__language-dot");
+    if (dot !== null && language) {
+      dot.style.backgroundColor = getLanguageColor(language);
+    }
+  }
+
+  function applyRepositoryData(card, repository) {
+    if (card.dataset.githubCustomTitle !== "true") {
+      setField(card, "title", repository.full_name);
+    }
+    if (card.dataset.githubCustomDescription !== "true" && repository.description) {
+      setField(card, "description", repository.description);
+    }
+    if (card.dataset.githubCustomLanguage !== "true" && repository.language) {
+      setField(card, "language", repository.language);
+      setLanguageColor(card, repository.language);
+      showMeta(card, "language");
+    }
+    if (card.dataset.githubCustomStars !== "true") {
+      setField(card, "stars", formatCount(repository.stargazers_count));
+      showMeta(card, "stars");
+    }
+    if (card.dataset.githubCustomForks !== "true") {
+      setField(card, "forks", formatCount(repository.forks_count));
+      showMeta(card, "forks");
+    }
+  }
+
+  async function loadRepository(card) {
+    var repo = card.dataset.githubRepo;
+    var parts = repo ? repo.split("/") : [];
+    if (card.dataset.githubFetch === "false" || parts.length !== 2) {
+      return;
+    }
+
+    var cacheKey = "github-project-card:" + repo.toLowerCase();
+    var repository = null;
+
+    try {
+      var cached = window.sessionStorage.getItem(cacheKey);
+      if (cached !== null) {
+        repository = JSON.parse(cached);
+      }
+    } catch (error) {
+      repository = null;
+    }
+
+    try {
+      if (repository === null) {
+        var endpoint = "https://api.github.com/repos/"
+          + encodeURIComponent(parts[0]) + "/" + encodeURIComponent(parts[1]);
+        var response = await fetch(endpoint, {
+          headers: {
+            "Accept": "application/vnd.github+json"
+          }
+        });
+        if (!response.ok) {
+          return;
+        }
+        repository = await response.json();
+        try {
+          window.sessionStorage.setItem(cacheKey, JSON.stringify(repository));
+        } catch (error) {
+          
+        }
+      }
+      applyRepositoryData(card, repository);
+    } catch (error) {
+      
+    }
+  }
+
+  function initializeCards() {
+    var cards = document.querySelectorAll(".github-project-card[data-github-repo]");
+    cards.forEach(function(card) {
+      var language = card.querySelector('[data-github-field="language"]');
+      if (language !== null && language.textContent.trim() !== "") {
+        setLanguageColor(card, language.textContent);
+      }
+      loadRepository(card);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeCards);
+  } else {
+    initializeCards();
+  }
+})();
+</script></p>
+<h1 id="基本使用">基本使用</h1>
+<p>对于较为复杂的库，在学习实现之前，最好从使用开始，spdlog也是如此。</p>
+<h2 id="引入">引入</h2>
+<p>为了简单考虑，在使用时使用header-only方式引入，CMakeLists.txt参考如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cmake" data-lang="cmake"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.15</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="err"></span><span class="nb">project</span><span class="p">(</span><span class="s">my_app</span> <span class="s">LANGUAGES</span> <span class="s">CXX</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="err"></span><span class="nb">add_library</span><span class="p">(</span><span class="s">spdlog_header_only</span> <span class="s">INTERFACE</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="err"></span><span class="nb">target_include_directories</span><span class="p">(</span><span class="s">spdlog_header_only</span> <span class="s">INTERFACE</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="s2">&#34;${CMAKE_CURRENT_SOURCE_DIR}/third_party/spdlog/include&#34;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_EXPORT_COMPILE_COMMANDS</span> <span class="s">ON</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="err"></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">my_app</span> <span class="s">main.cpp</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="err"></span><span class="nb">target_compile_features</span><span class="p">(</span><span class="s">my_app</span> <span class="s">PRIVATE</span> <span class="s">cxx_std_11</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="err"></span><span class="c"># 只影响宏
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c"></span><span class="nb">target_compile_definitions</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="s">my_app</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="s">PRIVATE</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="s">SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="err"></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">my_app</span> <span class="s">PRIVATE</span> <span class="s">spdlog_header_only</span><span class="p">)</span><span class="err">
+</span></span></span></code></pre></div><p>引入方式也很有趣，spdlog提供了两种不同的引入方式，header-only的方式默认所有实现都已在头文件中。</p>
+<p>这时候就应该问第一个问题了：既然都在头文件中，常规来讲，头文件是不编译成库的（当然也有办法），那spdlog是如何实现的呢？
+这里就不得不提到spdlog精巧的设计了，观察其文件命名，很快就可以发现有两种.h文件，一种是常规.h文件，另外一种是以-inc.h结尾的头文件。
+以spdlog.h和spdlog-inc.h为例，我们可以在spdlog.h以及common.h处找到如下代码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// spdlog.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="cp">#ifdef SPDLOG_HEADER_ONLY
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;spdlog-inl.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1">// common.h
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1"></span><span class="cp">#ifdef SPDLOG_COMPILED_LIB
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="cp"></span><span class="p">...</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="cp">#else  </span><span class="c1">// !defined(SPDLOG_COMPILED_LIB)
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1"></span><span class="cp">#define SPDLOG_API
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="cp">#define SPDLOG_HEADER_ONLY
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="cp">#define SPDLOG_INLINE inline
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="cp">#endif  </span><span class="c1">// #ifdef SPDLOG_COMPILED_LIB
+</span></span></span></code></pre></div><p>可以看到，两种引入方式是通过宏<code>SPDLOG_HEADER_ONLY</code>控制的，而宏又间接影响了另外几个宏的定义，进而影响<code>spdlog-inc.h</code>的引入，而该文件正是存放了一些函数的定义，承担了.cpp文件的功能。</p>
+<p>结合这一点，再看看spdlog.cpp，只需要引入必要的头文件，在预处理后，便引入了函数、方法的定义，便可以作为一个编译单元。
+spdlog通过控制<code>SPDLOG_COMPILED_LIB</code>和<code>SPDLOG_HEADER_ONLY</code>两个宏，做到了支持两种导入方式。</p>
+<p>顺带吐槽一下，C++这种上古时代的引入方式真是应该被扫进历史的垃圾堆。</p>
+<h2 id="使用">使用</h2>
+<p>spdlog的使用也相当简单，以如下代码为例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&#34;welcome to spdlog&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1">// fmt的格式化，空的就是表示默认格式
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="c1"></span><span class="n">spdlog</span><span class="o">::</span><span class="n">error</span><span class="p">(</span><span class="s">&#34;Some error message with arg: {}&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1">// :表达格式控制，d是decimal，最小字宽为8，不足的用0填充
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="c1"></span><span class="n">spdlog</span><span class="o">::</span><span class="n">warn</span><span class="p">(</span><span class="s">&#34;Easy padding in numbers like {:08d}&#34;</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="c1">// 0表示参数编号，d是decimal，x是hex，b是oct
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="c1"></span><span class="n">spdlog</span><span class="o">::</span><span class="n">critical</span><span class="p">(</span><span class="s">&#34;Support for int: {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}&#34;</span><span class="p">,</span> <span class="mi">42</span><span class="p">);</span>
+</span></span></code></pre></div><p>对应到输出则是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="o">[</span>2026-08-16 19:00:04.070<span class="o">]</span> <span class="o">[</span>info<span class="o">]</span> welcome to spdlog
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="o">[</span>2026-08-16 19:00:04.071<span class="o">]</span> <span class="o">[</span>error<span class="o">]</span> Some error message with arg: <span class="m">1</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="o">[</span>2026-08-16 19:00:04.071<span class="o">]</span> <span class="o">[</span>warning<span class="o">]</span> Easy padding in numbers like <span class="m">00000012</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="o">[</span>2026-08-16 19:00:04.071<span class="o">]</span> <span class="o">[</span>critical<span class="o">]</span> Support <span class="k">for</span> int: 42<span class="p">;</span>  hex: 2a<span class="p">;</span>  oct: 52<span class="p">;</span> bin: <span class="m">101010</span>
+</span></span></code></pre></div><p>对于前面的日期和时间是系统自带的，成为metadata，后面的输出信息则是用户的输出，也被称为payload。</p>
+<h1 id="架构">架构</h1>
+<p>一层层剥离，我们便可以看到spdlog的构成：
+以上方的spdlog::info和spdlog::error为例，实现分别如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// spdlog.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="kr">inline</span> <span class="kt">void</span> <span class="n">info</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="n">default_logger_raw</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">info</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="kr">inline</span> <span class="kt">void</span> <span class="n">error</span><span class="p">(</span><span class="n">format_string_t</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">Args</span> <span class="o">&amp;&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">default_logger_raw</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1">// spdlog-inc.h
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"></span><span class="n">SPDLOG_INLINE</span> <span class="n">logger</span> <span class="o">*</span><span class="nf">default_logger_raw</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="c1">// 为了更快一点，取的是原生指针
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">details</span><span class="o">::</span><span class="n">registry</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">get_default_raw</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1">// registry-inc.h
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="c1"></span><span class="n">SPDLOG_INLINE</span> <span class="n">logger</span> <span class="o">*</span><span class="n">registry</span><span class="o">::</span><span class="n">get_default_raw</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">default_logger_</span><span class="p">.</span><span class="n">get</span><span class="p">();</span> <span class="p">}</span>
+</span></span></code></pre></div><p>显然，对于基础格式，直接调用一个参数的模板函数即可，而对于多个参数，则需要可变参数的支持。
+在上述两个实现中，我们不难看到，都是调用了全局的默认logger。
+在spdlog中，对象的管理层级大致如下：</p>
+<ol>
+<li>registry: 单例，通过logger的名称为key管理所有logger对象</li>
+<li>logger: 负责处理fmt相关的工作，处理格式化相关，创建一条消息对象</li>
+<li>sink: 负责将一条消息对象转发至配置的文件（stdout、stderr、普通file等等），一个logger也许会有多个sink，以将一条消息输出到不同的目标，当然也是在该层做到最终的输出</li>
+<li>formatter: 帮助sink管理输出前缀格式，也就是日志的metadata</li>
+<li>flag_formatter: 针对处理自定义的metadata格式，也就是pattern</li>
+</ol>
+<p>从上面的分级可以看到spdlog的设计简洁之处，每个对象类型都有自己的职责（单一职责原则），通过一个消息对象传递消息，层层递进。
+在这种架构下，如果代码新增了一个模块，我可以新增logger，来处理不同的日志源；而针对一个logger，我既希望它输出到终端，又希望它输出到文件，就增加sink。当然，如果metadata有变化，应当也增加对应的sink来处理。</p>
+<p>此处应当有一个图。
+<div class="mermaid" style="text-align: center;">
+
+  flowchart LR
+      R@{ shape: rect, label: "registry" }
+      L@{ shape: processes, label: "logger" }
+      S@{ shape: processes, label: "sink" }
+      F@{ shape: rect, label: "formatter" }
+      PF@{ shape: rect, label: "pattern_formatter" }
+      FF@{ shape: processes, label: "flag_formatter" }
+
+      R -->|管理| L
+      L -->|持有| S
+      S -->|持有| F
+      F -->|具体实现| PF
+      PF -->|持有| FF
+
+      R -.-> F
+
+      classDef registryStyle fill:#E0F2FE,stroke:#0284C7,color:#0C4A6E,stroke-width:2px;
+      classDef loggerStyle fill:#EDE9FE,stroke:#7C3AED,color:#4C1D95,stroke-width:2px;
+      classDef sinkStyle fill:#DCFCE7,stroke:#16A34A,color:#14532D,stroke-width:2px;
+      classDef formatterStyle fill:#FFEDD5,stroke:#EA580C,color:#7C2D12,stroke-width:2px;
+      classDef flagStyle fill:#FEF3C7,stroke:#D97706,color:#78350F,stroke-width:2px;
+
+      class R registryStyle;
+      class L loggerStyle;
+      class S sinkStyle;
+      class F,PF formatterStyle;
+      class FF flagStyle;
+
+      linkStyle default stroke:#94A3B8,stroke-width:1.5px;
+
+</div>
+
+
+
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+</script>
+
+
+后续将从一条基本的日志出发，追踪其在各个层级的生命周期。</p>
+<h2 id="registry">registry</h2>
+<p>spdlog的基础管理类，也是经典单例实现，除了管理所有logger，还负责管理全局输出等级，每个logger的输出等级等等。
+在registry被构造时，会顺手构造一个默认的logger，如果用不上更多功能的话，这个default_logger就可以完成几乎所有的功能。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">SPDLOG_INLINE</span> <span class="n">registry</span><span class="o">::</span><span class="n">registry</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="o">:</span> <span class="n">formatter_</span><span class="p">(</span><span class="k">new</span> <span class="n">pattern_formatter</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="c1">// 创建一个sink
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1"></span>    <span class="c1">// 以此为切入点看sink
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1"></span>    <span class="k">auto</span> <span class="n">color_sink</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">sinks</span><span class="o">::</span><span class="n">ansicolor_stdout_sink_mt</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">default_logger_name</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="c1">// 创建一个default logger，空名称，sink被logger控制
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1"></span>    <span class="n">default_logger_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">logger</span><span class="o">&gt;</span><span class="p">(</span><span class="n">default_logger_name</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">color_sink</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">loggers_</span><span class="p">[</span><span class="n">default_logger_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_logger_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="cp">#endif  </span><span class="c1">// SPDLOG_DISABLE_DEFAULT_LOGGER
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>删掉了无用的部分后，让我们只关注logger的创建，这里并没有太多的子类，因为logger的任务很简单，只关注格式化相关的任务。另外，这个logger的名称是匿名的，也只有一个简单的<code>ansicolor_stdout_sink_mt</code>，这里的mt表示是multi-thread，意味着其支持多线程。同样，这里也要提出一个新问题，为什么没有logger_mt呢？因为logger的任务用不上多线程，也没有什么线程不安全的点。</p>
+<p>从上文可以看到，对于常规的spdlog::xxx之类的场景，默认logger就可以完成了。</p>
+<h2 id="logger">logger</h2>
+<p>上文反复说过，logger负责的是格式化的部分，spdlog引入的是fmt库的格式化，格式化的细节语法并不在本文讨论范围中，以后有机会可以再分析下fmt库。</p>
+<p>在上文中，我们说到对于是否带格式化的参数，有两套处理逻辑，分别是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// logger.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1">// 不带格式化信息就走这些
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="kt">void</span> <span class="n">trace</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="n">log</span><span class="p">(</span><span class="n">level</span><span class="o">::</span><span class="n">trace</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="c1">// 带格式化的走下面的
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="kt">void</span> <span class="n">trace</span><span class="p">(</span><span class="n">format_string_t</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">Args</span> <span class="o">&amp;&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="n">log</span><span class="p">(</span><span class="n">level</span><span class="o">::</span><span class="n">trace</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="一级转发">一级转发</h3>
+<p>根据不同参数，trace实例化的也是两套模版来重载，那么对于log，也是如此，也会分出两套出来：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// logger.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1">// 对应不带格式化的模板，这里log也是第一层
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1">// 非格式化一级转发入口，非string类型
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="kt">void</span> <span class="n">log</span><span class="p">(</span><span class="n">level</span><span class="o">::</span><span class="n">level_enum</span> <span class="n">lvl</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="n">log</span><span class="p">(</span><span class="n">source_loc</span><span class="p">{},</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1">// 对应带格式化的模板，即第一层log
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1">// 一级转发入口
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="kt">void</span> <span class="n">log</span><span class="p">(</span><span class="n">level</span><span class="o">::</span><span class="n">level_enum</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">format_string_t</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">Args</span> <span class="o">&amp;&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">log</span><span class="p">(</span><span class="n">source_loc</span><span class="p">{},</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1">// common.h
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">source_loc</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="n">SPDLOG_CONSTEXPR</span> <span class="nf">source_loc</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="n">SPDLOG_CONSTEXPR</span> <span class="nf">source_loc</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename_in</span><span class="p">,</span> <span class="kt">int</span> <span class="n">line_in</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">funcname_in</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        <span class="o">:</span> <span class="n">filename</span><span class="p">{</span><span class="n">filename_in</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">          <span class="n">line</span><span class="p">{</span><span class="n">line_in</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">          <span class="n">funcname</span><span class="p">{</span><span class="n">funcname_in</span><span class="p">}</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="n">SPDLOG_CONSTEXPR</span> <span class="kt">bool</span> <span class="nf">empty</span><span class="p">()</span> <span class="k">const</span> <span class="n">SPDLOG_NOEXCEPT</span> <span class="p">{</span> <span class="k">return</span> <span class="n">line</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="kt">int</span> <span class="n">line</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">funcname</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>这里我们姑且将这个log称之为一级转发，可以看到，参数也是完美对应，这里有个小知识点：forward的使用，但这里就不展开了，值得注意一下。
+我们可以观察到，形式上两者还是较为统一的，可以基本认为msg = fmt + args，后续也是这样处理的。
+另外一个值得注意的点是，source_loc这样一个结构的首次出现，作用是记录一些location信息文件、函名、行号。</p>
+<h3 id="二级转发仅非格式化">二级转发（仅非格式化）</h3>
+<p>这里对于非格式化的二级转发还有两种情况，一种是可以转成string like类型的，一种是不能转的。
+对于可以转的，直接构造消息对象log_msg，到log_it_提前输出即可。
+对于不能转的，才需要处理其输出方式，这里是直接套一个<code>{}</code>，相当于使用底层的fmt库来做</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// logger.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1">// 非格式化的二级转发入口，可以转换string like类型的
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">log</span><span class="p">(</span><span class="n">source_loc</span> <span class="n">loc</span><span class="p">,</span> <span class="n">level</span><span class="o">::</span><span class="n">level_enum</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">string_view_t</span> <span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kt">bool</span> <span class="n">log_enabled</span> <span class="o">=</span> <span class="n">should_log</span><span class="p">(</span><span class="n">lvl</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="kt">bool</span> <span class="n">traceback_enabled</span> <span class="o">=</span> <span class="n">tracer_</span><span class="p">.</span><span class="n">enabled</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">log_enabled</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">traceback_enabled</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="c1">// 如果不需要格式化，直接输出即可
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"></span>    <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="n">log_msg</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">name_</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">log_it_</span><span class="p">(</span><span class="n">log_msg</span><span class="p">,</span> <span class="n">log_enabled</span><span class="p">,</span> <span class="n">traceback_enabled</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1">// 非格式化的二级转发入口，非string类型，比如int、bool之类的
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1">// T cannot be statically converted to format string (including string_view/wstring_view)
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">            <span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_if</span><span class="o">&lt;!</span><span class="n">is_convertible_to_any_format_string</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;&gt;::</span><span class="n">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">                                    <span class="kt">int</span><span class="o">&gt;::</span><span class="n">type</span> <span class="o">=</span> <span class="mi">0</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="kt">void</span> <span class="n">log</span><span class="p">(</span><span class="n">source_loc</span> <span class="n">loc</span><span class="p">,</span> <span class="n">level</span><span class="o">::</span><span class="n">level_enum</span> <span class="n">lvl</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="c1">// 不能转成字符串的，非格式化的转发入口
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="c1"></span>    <span class="c1">// 等价于给普通类型自动套上一个{}，但一定要该类型是可以被格式化的
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="c1"></span>    <span class="c1">// 二级转发入口
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="c1"></span>    <span class="n">log</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="s">&#34;{}&#34;</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>本质上只是方便了一下，不用每次写<code>logger-&gt;log(spdlog::level::info, &quot;{}&quot;, 42);</code>这种东西。</p>
+<h3 id="三级转发">三级转发</h3>
+<p>针对非格式化（非string like类型的）和格式化，都是统一交由该层处理：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// logger.h
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1">// 三级总入口，非格式化、格式化都会统一至此（做了些许简化）
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="kt">void</span> <span class="n">log</span><span class="p">(</span><span class="n">source_loc</span> <span class="n">loc</span><span class="p">,</span> <span class="n">level</span><span class="o">::</span><span class="n">level_enum</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">format_string_t</span><span class="o">&lt;</span><span class="n">Args</span><span class="p">...</span><span class="o">&gt;</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">Args</span> <span class="o">&amp;&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="n">log_</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">fmt</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>三级的log作为统一入口，调用log_来实现格式化，删除冗余代码的结果如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// 专注解决格式化问题
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1">// common implementation for after templated public api has been resolved
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="kt">void</span> <span class="n">log_</span><span class="p">(</span><span class="n">source_loc</span> <span class="n">loc</span><span class="p">,</span> <span class="n">level</span><span class="o">::</span><span class="n">level_enum</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">string_view_t</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">Args</span> <span class="o">&amp;&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// 一条日志逻辑的起点
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">log_enabled</span> <span class="o">=</span> <span class="n">should_log</span><span class="p">(</span><span class="n">lvl</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kt">bool</span> <span class="n">traceback_enabled</span> <span class="o">=</span> <span class="n">tracer_</span><span class="p">.</span><span class="n">enabled</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="c1">// 如果一条日志既没有被记录下来的价值，那当然直接返回
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">log_enabled</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">traceback_enabled</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="c1">// 最终存放数据的buffer
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"></span>    <span class="n">memory_buf_t</span> <span class="n">buf</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="c1">// make_format_args是打包参数，类型擦除，返回一个参数包对象，通常保存引用
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1"></span>    <span class="c1">// vformat_to是输出到指定缓冲区，在这里就是格式化到buf，这里也是格式化开始的阶段
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1"></span>    <span class="n">fmt</span><span class="o">::</span><span class="n">vformat_to</span><span class="p">(</span><span class="n">fmt</span><span class="o">::</span><span class="n">appender</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">fmt</span><span class="o">::</span><span class="n">make_format_args</span><span class="p">(</span><span class="n">args</span><span class="p">...));</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="c1">// 现在，对于某条日志，有loc，有logger名称，有输出等级，有具体信息，最终构成了一条log_msg
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1"></span>    <span class="c1">// 但只有消息正文
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="c1"></span>    <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="n">log_msg</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">name_</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">string_view_t</span><span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">buf</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="c1">// 最终通过这个函数输出
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="c1"></span>    <span class="n">log_it_</span><span class="p">(</span><span class="n">log_msg</span><span class="p">,</span> <span class="n">log_enabled</span><span class="p">,</span> <span class="n">traceback_enabled</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>到<code>fmt::vformat_to</code>这一步，所有的位置参数都被放到了msg中，也就是说构成了一条payload，将payload放入log_msg，则正式开始了层级的传递</p>
+<h3 id="log_it_">log_it_</h3>
+<p>在上文中，非格式化的，可以转成string like的可以直接调用log_it_，而三级转发最终也是到了log_it_，现在可以看看log_it_的实现了：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kt">void</span> <span class="n">logger</span><span class="o">::</span><span class="n">log_it_</span><span class="p">(</span><span class="k">const</span> <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="o">&amp;</span><span class="n">log_msg</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">                                   <span class="kt">bool</span> <span class="n">log_enabled</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">                                   <span class="kt">bool</span> <span class="n">traceback_enabled</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">log_enabled</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="n">sink_it_</span><span class="p">(</span><span class="n">log_msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="c1">// tracer底层是一个ring buffer
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">traceback_enabled</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="n">tracer_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">log_msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="kt">void</span> <span class="n">logger</span><span class="o">::</span><span class="n">sink_it_</span><span class="p">(</span><span class="k">const</span> <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="c1">// 调用每个sink，来做具体的事项
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">sink</span> <span class="p">:</span> <span class="n">sinks_</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="c1">// sink也有自己的日志等级判断
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">sink</span><span class="o">-&gt;</span><span class="n">should_log</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">level</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">            <span class="n">sink</span><span class="o">-&gt;</span><span class="n">log</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span> 
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">should_flush_</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="n">flush_</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>log_it_调用了sink_it_，来批量调用sink-&gt;log以实现日志输出，此时可以观察log_msg这个结构，来看看其作为msg的承载，究竟记录了哪些信息：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// log_msg.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1">// 删除了方法
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">SPDLOG_API</span> <span class="n">log_msg</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="n">string_view_t</span> <span class="n">logger_name</span><span class="p">;</span>  <span class="c1">// 带logger name
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1"></span>    <span class="n">level</span><span class="o">::</span><span class="n">level_enum</span> <span class="n">level</span><span class="p">{</span><span class="n">level</span><span class="o">::</span><span class="n">off</span><span class="p">};</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="n">log_clock</span><span class="o">::</span><span class="n">time_point</span> <span class="n">time</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="n">size_t</span> <span class="n">thread_id</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="c1">// wrapping the formatted text with color (updated by pattern_formatter).
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1"></span>    <span class="k">mutable</span> <span class="n">size_t</span> <span class="n">color_range_start</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">mutable</span> <span class="n">size_t</span> <span class="n">color_range_end</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="c1">// log_msg带着全量的信息到处传递
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"></span>    <span class="n">source_loc</span> <span class="n">source</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="c1">// payload是后一半的信息
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1"></span>    <span class="n">string_view_t</span> <span class="n">payload</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>这些信息都是构造时实时传入的，可以看到，最终还是构成了这么一份payload，这里的string_view_t可以当作标准库中的string_view来理解，本质上还是取的log_中的memory_buf_t中的数据指针（有数据扩容机制，小对象直接放栈上，大对象会放堆上）</p>
+<p>至此，也算看完了logger的基础工作，就是把格式参数塞到格式化字符串里，来产生payload，当然省略了相当多的细节。
+<div class="mermaid" style="text-align: center;">
+
+  flowchart TD
+      A["显式格式化日志<br/>info('value={}', 42)"]
+
+      P["单消息日志<br/>log(level, 'hello')<br/>或 log(level, 42)"]
+
+      B["格式化入口<br/>log(...) → log_()"]
+      Q["添加默认 source_loc<br/>log(source_loc{}, level, msg)"]
+
+      R{"msg 是字符串类型？"}
+
+      S["直接构造 log_msg"]
+
+      N["自动套上 '{}'<br/>转入格式化入口"]
+
+      F["vformat_to 格式化正文"]
+      G["构造 log_msg"]
+
+      I["log_it_(log_msg)"]
+      K["sink_it_(log_msg)<br/>离开 logger 层"]
+
+      A --> B
+
+      P --> Q --> R
+
+      R -->|是| S
+      R -->|否| N --> B
+
+      B --> F --> G
+
+      S --> I
+      G --> I
+
+      I --> K
+
+      classDef formattedStyle fill:#E0F2FE,stroke:#0284C7,color:#0C4A6E,stroke-width:2px;
+      classDef entryStyle fill:#F1F5F9,stroke:#64748B,color:#334155,stroke-width:2px;
+      classDef stringStyle fill:#DCFCE7,stroke:#16A34A,color:#14532D,stroke-width:2px;
+      classDef objectStyle fill:#FEF3C7,stroke:#D97706,color:#78350F,stroke-width:2px;
+      classDef commonStyle fill:#EDE9FE,stroke:#7C3AED,color:#4C1D95,stroke-width:2px;
+      classDef exitStyle fill:#FFEDD5,stroke:#EA580C,color:#7C2D12,stroke-width:2px;
+
+      class A,B,F,G formattedStyle;
+      class P,Q,R entryStyle;
+      class S stringStyle;
+      class N objectStyle;
+      class I commonStyle;
+      class K exitStyle;
+
+      linkStyle default stroke:#94A3B8,stroke-width:1.5px;
+
+</div>
+
+
+</p>
+<h2 id="sink">sink</h2>
+<p>同样，以默认logger的sink为例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// registry-inl.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="n">SPDLOG_INLINE</span> <span class="n">registry</span><span class="o">::</span><span class="n">registry</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="o">:</span> <span class="n">formatter_</span><span class="p">(</span><span class="k">new</span> <span class="n">pattern_formatter</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// 创建一个sink
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"></span>    <span class="c1">// 以此为切入点看sink
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1"></span>    <span class="k">auto</span> <span class="n">color_sink</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">sinks</span><span class="o">::</span><span class="n">ansicolor_stdout_sink_mt</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">default_logger_name</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="c1">// 创建一个default logger，空名称，sink被logger控制
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"></span>    <span class="n">default_logger_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">logger</span><span class="o">&gt;</span><span class="p">(</span><span class="n">default_logger_name</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">color_sink</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">loggers_</span><span class="p">[</span><span class="n">default_logger_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_logger_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1">// ansicolor_sink.h
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1"></span><span class="k">using</span> <span class="n">ansicolor_stdout_sink_mt</span> <span class="o">=</span> <span class="n">ansicolor_stdout_sink</span><span class="o">&lt;</span><span class="n">details</span><span class="o">::</span><span class="n">console_mutex</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">ConsoleMutex</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="k">class</span> <span class="nc">ansicolor_stdout_sink</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ansicolor_sink</span><span class="o">&lt;</span><span class="n">ConsoleMutex</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="k">explicit</span> <span class="n">ansicolor_stdout_sink</span><span class="p">(</span><span class="n">color_mode</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">color_mode</span><span class="o">::</span><span class="n">automatic</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">
+</span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">ConsoleMutex</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="k">class</span> <span class="nc">ansicolor_sink</span> <span class="o">:</span> <span class="k">public</span> <span class="n">sink</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="c1">// 输出目标
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="c1"></span>    <span class="n">FILE</span> <span class="o">*</span><span class="n">target_file_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">
+</span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">    <span class="n">mutex_t</span> <span class="o">&amp;</span><span class="n">mutex_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">    <span class="kt">bool</span> <span class="n">should_do_colors_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">    <span class="c1">// 执行输出的对象
+</span></span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">formatter</span><span class="o">&gt;</span> <span class="n">formatter_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">level</span><span class="o">::</span><span class="n">n_levels</span><span class="o">&gt;</span> <span class="n">colors_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">    <span class="kt">void</span> <span class="nf">set_color_mode_</span><span class="p">(</span><span class="n">color_mode</span> <span class="n">mode</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">    <span class="kt">void</span> <span class="nf">print_ccode_</span><span class="p">(</span><span class="k">const</span> <span class="n">string_view_t</span> <span class="o">&amp;</span><span class="n">color_code</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">    <span class="kt">void</span> <span class="nf">print_range_</span><span class="p">(</span><span class="k">const</span> <span class="n">memory_buf_t</span> <span class="o">&amp;</span><span class="n">formatted</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">start</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string_</span><span class="p">(</span><span class="k">const</span> <span class="n">string_view_t</span> <span class="o">&amp;</span><span class="n">sv</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>省略方法之后，不难看到，这一层记录了输出目标，其他值得注意的只有以下几个：</p>
+<ol>
+<li>formatter_，负责格式化metadata</li>
+<li>print_ccode_，写入颜色控制指令</li>
+<li>print_range_，写入数据</li>
+</ol>
+<p>那么，回到logger的最后一步，我们当然关注sink的log方法做了什么：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">ConsoleMutex</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="n">SPDLOG_INLINE</span> <span class="kt">void</span> <span class="n">ansicolor_sink</span><span class="o">&lt;</span><span class="n">ConsoleMutex</span><span class="o">&gt;::</span><span class="n">log</span><span class="p">(</span><span class="k">const</span> <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="c1">// Wrap the originally formatted message in color codes.
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1"></span>    <span class="c1">// If color is not supported in the terminal, log as is instead.
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex_t</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="n">msg</span><span class="p">.</span><span class="n">color_range_start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="n">msg</span><span class="p">.</span><span class="n">color_range_end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">memory_buf_t</span> <span class="n">formatted</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="c1">// 决定前一段元信息长什么样子
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1"></span>    <span class="n">formatter_</span><span class="o">-&gt;</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">formatted</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="c1">// 将格式化的内存存入
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">should_do_colors_</span> <span class="o">&amp;&amp;</span> <span class="n">msg</span><span class="p">.</span><span class="n">color_range_end</span> <span class="o">&gt;</span> <span class="n">msg</span><span class="p">.</span><span class="n">color_range_start</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="c1">// 一个pattern里只支持一块着色区域，一般而言都是level 
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1"></span>        <span class="c1">// before color range
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1"></span>        <span class="n">print_range_</span><span class="p">(</span><span class="n">formatted</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">color_range_start</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="c1">// in color range
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1"></span>        <span class="n">print_ccode_</span><span class="p">(</span><span class="n">colors_</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">level</span><span class="p">)));</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="n">print_range_</span><span class="p">(</span><span class="n">formatted</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">color_range_start</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">color_range_end</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        <span class="n">print_ccode_</span><span class="p">(</span><span class="n">reset</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="c1">// after color range
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="c1"></span>        <span class="n">print_range_</span><span class="p">(</span><span class="n">formatted</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">color_range_end</span><span class="p">,</span> <span class="n">formatted</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="p">}</span> <span class="k">else</span>  <span class="c1">// no color
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        <span class="n">print_range_</span><span class="p">(</span><span class="n">formatted</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">formatted</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="n">fflush</span><span class="p">(</span><span class="n">target_file_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>根据上述的分析，print_range_、print_ccode_之类的函数只是在做输出，那显然真正的格式化是在<code>formatter_-&gt;format(msg, formatted);</code>中。
+对于常规的ansicolor_sink，其formatter往往是<code>pattern_formatter</code>，于是我们可以继续往下探讨。</p>
+<h2 id="formatter">formatter</h2>
+<p>自然，这里会以pattern_formatter为例，也是整个库的精华所在，pattern_formatter的定义如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// pattern_formatter.h
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">SPDLOG_API</span> <span class="n">pattern_formatter</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">formatter</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="c1">// 包含预设+自定义的formatter
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">details</span><span class="o">::</span><span class="n">flag_formatter</span><span class="o">&gt;&gt;</span> <span class="n">formatters_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="kt">void</span> <span class="nf">format</span><span class="p">(</span><span class="k">const</span> <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span> <span class="n">memory_buf_t</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="kt">void</span> <span class="nf">compile_pattern_</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">pattern</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>最重要的就只有compile_pattern_，这一步会在构造/设置的时候发生，对传入的pattern字符串做处理，以默认情况而言，传入的往往是<code>&quot;%+&quot;</code>，但并不以此为例，为了直观对比其功能，假设传入的pattern是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// [hour minute second zone] [logger name] [level] [thread num] message
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="n">spdlog</span><span class="o">::</span><span class="n">set_pattern</span><span class="p">(</span><span class="s">&#34;[%H:%M:%S %z] [%n] [%^---%L---%$] [thread %t] %v&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1">// pattern_formatter-inl.h
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1"></span><span class="n">SPDLOG_INLINE</span> <span class="kt">void</span> <span class="n">pattern_formatter</span><span class="o">::</span><span class="n">compile_pattern_</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">pattern</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="k">auto</span> <span class="n">end</span> <span class="o">=</span> <span class="n">pattern</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">details</span><span class="o">::</span><span class="n">aggregate_formatter</span><span class="o">&gt;</span> <span class="n">user_chars</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">formatters_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">pattern</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">end</span><span class="p">;</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">it</span> <span class="o">==</span> <span class="sc">&#39;%&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">user_chars</span><span class="p">)</span>  <span class="c1">// append user chars found so far
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1"></span>            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">                <span class="n">formatters_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">user_chars</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">            <span class="c1">// 解决宽度对齐格式的问题
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1"></span>            <span class="k">auto</span> <span class="n">padding</span> <span class="o">=</span> <span class="n">handle_padspec_</span><span class="p">(</span><span class="o">++</span><span class="n">it</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">padding</span><span class="p">.</span><span class="n">enabled</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">                    <span class="c1">// pattern 中指定了宽度，例如 %8l、%-8l、%=8l
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="c1"></span>                    <span class="c1">// 该函数进行基础的
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="c1"></span>                    <span class="n">handle_flag_</span><span class="o">&lt;</span><span class="n">details</span><span class="o">::</span><span class="n">scoped_padder</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">,</span> <span class="n">padding</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">                    <span class="c1">// 没有指定宽度，例如 %l
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="c1"></span>                    <span class="n">handle_flag_</span><span class="o">&lt;</span><span class="n">details</span><span class="o">::</span><span class="n">null_scoped_padder</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">,</span> <span class="n">padding</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">        <span class="p">}</span> <span class="k">else</span>  <span class="c1">// chars not following the % sign should be displayed as is
+</span></span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">            <span class="c1">// 对于普通的字符，就正常加到user_char里面
+</span></span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">user_chars</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">                <span class="c1">// 因为有move，所以有可能为空
+</span></span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="c1"></span>                <span class="n">user_chars</span> <span class="o">=</span> <span class="n">details</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">details</span><span class="o">::</span><span class="n">aggregate_formatter</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">            <span class="n">user_chars</span><span class="o">-&gt;</span><span class="n">add_ch</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">    <span class="c1">// 如果最后是纯文本，也应当处理
+</span></span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">user_chars</span><span class="p">)</span>  <span class="c1">// append raw chars found so far
+</span></span></span><span class="line"><span class="ln">42</span><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">        <span class="n">formatters_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">user_chars</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>对于compile_pattern_，其核心思路是分割不同的规格说明，以<code>[%n]</code>为例，在经过上述函数后，会在formatters_中添加如下几个类型的flag_formatter：</p>
+<ol>
+<li>aggregate_formatter，对应[</li>
+<li>name_formatter，对应%n</li>
+<li>aggregate_formatter，对应]
+这里由于篇幅原因，并不细讲handle_flag_的处理，但也比较简单。</li>
+</ol>
+<p>对于这三个flag_formatter的作用暂时省略，回过头再看看pattern_formatter的format方法的实现：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">f</span> <span class="p">:</span> <span class="n">formatters_</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">f</span><span class="o">-&gt;</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">cached_tm_</span><span class="p">,</span> <span class="n">dest</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>显然是调用各个flag_format的format方法来实现的。
+核心其实只有一个，把log_msg的东西按照规格说明写入到dest里。</p>
+<h2 id="flag_formatter">flag_formatter</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// pattern_formatter-inl.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1">// 以logger的formatter为例
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">ScopedPadder</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="k">class</span> <span class="nc">name_formatter</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">flag_formatter</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="k">explicit</span> <span class="n">name_formatter</span><span class="p">(</span><span class="n">padding_info</span> <span class="n">padinfo</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="o">:</span> <span class="n">flag_formatter</span><span class="p">(</span><span class="n">padinfo</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="kt">void</span> <span class="nf">format</span><span class="p">(</span><span class="k">const</span> <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">tm</span> <span class="o">&amp;</span><span class="p">,</span> <span class="n">memory_buf_t</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="c1">// 在这里构造scopedpadder，专门负责处理缩进之类的事情，这里依据缩进的大小将缩进处理好
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"></span>        <span class="n">ScopedPadder</span> <span class="n">p</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">logger_name</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">padinfo_</span><span class="p">,</span> <span class="n">dest</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="c1">// 这里填充具体的内容
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"></span>        <span class="n">fmt_helper</span><span class="o">::</span><span class="n">append_string_view</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">logger_name</span><span class="p">,</span> <span class="n">dest</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="c1">// 析构ScopedPadder时，负责后半部分的填充和截断
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1">// 普通文本格式化器，原样直出
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="c1">// aggregate user chars to display as is
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">aggregate_formatter</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">flag_formatter</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    <span class="n">aggregate_formatter</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="kt">void</span> <span class="nf">add_ch</span><span class="p">(</span><span class="kt">char</span> <span class="n">ch</span><span class="p">)</span> <span class="p">{</span> <span class="n">str_</span> <span class="o">+=</span> <span class="n">ch</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="c1">// 这里也能看出来
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">format</span><span class="p">(</span><span class="k">const</span> <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">tm</span> <span class="o">&amp;</span><span class="p">,</span> <span class="n">memory_buf_t</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">        <span class="n">fmt_helper</span><span class="o">::</span><span class="n">append_string_view</span><span class="p">(</span><span class="n">str_</span><span class="p">,</span> <span class="n">dest</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">
+</span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>可以看到，到flag_formatter这一层基本就完成了一条日志消息的输出。
+当然这里省略了相当多的细节，例如padding、自定义pattern、色彩输出等等，但结构是足够完整的，我们可以看到一条层次分明的脉络，log_msg在各层之间传递，不同对象各司其职，每个层级都只做一件事情，并且边界清晰。</p>
+<h1 id="小结">小结</h1>
+<p>相较于前一篇的log.c，spdlog无疑是一套更加出色、使用了良好工程实践的日志库，使用了相当多C++特性，没办法在一篇文章全部讲完。</p>
+<p>我想合适的篇幅应当是在三篇文章左右，下一篇应当会谈谈spdlog是如何做到线程安全、异步等，以及使用了哪些值得一提的C++技术，比如模版、RingBuffer、单例之类，最后一篇会做几个小实验，来评估一下其性能优劣。</p>
+
+            </div>
+        </div>
+    </div>
+    <a href="#" id="scrollToTopButton">
+        <svg t="1686753152588" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="3988" width="48" height="48">
+            <path
+                d="M518.5 360.3c-3.2-4.4-9.7-4.4-12.9 0l-178 246c-3.8 5.3 0 12.7 6.5 12.7H381c10.2 0 19.9-4.9 25.9-13.2L512 460.4l105.2 145.4c6 8.3 15.6 13.2 25.9 13.2H690c6.5 0 10.3-7.4 6.5-12.7l-178-246z"
+                p-id="3989" fill="#363636"></path>
+            <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                p-id="3990" fill="#363636"></path>
+        </svg>
+    </a><hr style="border-top: 1px solid #EEEEEE;">
+<div id="comment"></div>
+<script>
+    (function() {
+        "use strict";
+
+        var activeTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        var giscusScript = null;
+        var readyFrame = null;
+        var giscusOrigin = "https://giscus.app";
+
+        function sendGiscusTheme(theme) {
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || iframe !== readyFrame || iframe.contentWindow === null) {
+                return;
+            }
+            iframe.contentWindow.postMessage({
+                giscus: {
+                    setConfig: {
+                        theme: theme
+                    }
+                }
+            }, giscusOrigin);
+        }
+
+        
+        
+        window.addEventListener("message", function(event) {
+            if (event.origin !== giscusOrigin || !event.data || !event.data.giscus) return;
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || event.source !== iframe.contentWindow || readyFrame === iframe) return;
+            readyFrame = iframe;
+            sendGiscusTheme(activeTheme);
+        });
+
+        function updateGiscusTheme(theme) {
+            activeTheme = theme === "light" ? "light" : "dark";
+            if (giscusScript !== null) {
+                giscusScript.setAttribute("data-theme", activeTheme);
+            }
+            sendGiscusTheme(activeTheme);
+        }
+
+        window.addEventListener("theme-change", function(event) {
+            var theme = event.detail && event.detail.theme;
+            updateGiscusTheme(theme);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var comment = document.getElementById("comment");
+            if (comment === null) {
+                return;
+            }
+
+            var giscusAttributes = {
+                "src": "https://giscus.app/client.js",
+                "data-repo": "O-A-P\/O-A-P.github.io",
+                "data-repo-id": "R_kgDOJEfHWQ",
+                "data-category": "Announcements",
+                "data-category-id": "DIC_kwDOJEfHWc4CcDhX",
+                "data-mapping": "og:title",
+                "data-reactions-enabled": "1",
+                "data-emit-metadata": "0",
+                "data-input-position": "bottom",
+                "data-theme": activeTheme,
+                "data-lang": "en",
+                "data-loading": "lazy",
+                "crossorigin": "anonymous"
+            };
+
+            giscusScript = document.createElement("script");
+            Object.entries(giscusAttributes).forEach(function(attribute) {
+                giscusScript.setAttribute(attribute[0], attribute[1]);
+            });
+            comment.appendChild(giscusScript);
+        });
+    })();
+
+</script>
+
+<div class="pp-container">
+        <section class="pre-and-post">
+            <div class="has-text-left">
+                
+                <p>Previous post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/code-analysis/log.c/">极简日志库log.c</a>
+                
+            </div>
+            <div class="has-text-right ">
+                
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<style>
+.page-enter {
+    animation: page-fade-in 0.6s ease-out both;
+}
+@keyframes page-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+</style>
+
+        </main>
+    
+    <aside class="article-minimap" hidden aria-label="文章缩略导航">
+    <div class="article-minimap__track" role="slider" tabindex="0" aria-label="阅读位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-orientation="vertical">
+        <div class="article-minimap__preview single-container" aria-hidden="true" inert></div>
+        <div class="article-minimap__embeds" aria-hidden="true" inert></div>
+        <div class="article-minimap__viewport" aria-hidden="true"></div>
+    </div>
+</aside>
+<script src="/js/article-minimap.js" defer></script>
+
+
+        <div id="card-transition-overlay" class="card-transition-overlay"></div><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2026 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img');
+
+  (function() {
+    const overlay = document.getElementById("card-transition-overlay");
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isNavigating = false;
+
+    function shouldHandleLink(link, event) {
+      if (!link || !overlay) return false;
+      if (isNavigating || event.defaultPrevented) return false;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+      if (link.closest(".myCard")) return false;
+      if (link.closest("[data-no-page-transition]")) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+
+      const href = link.getAttribute("href");
+      if (!href) return false;
+      if (href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+
+      let targetUrl = null;
+      try {
+        targetUrl = new URL(href, window.location.href);
+      } catch (err) {
+        return false;
+      }
+
+      if (targetUrl.origin !== window.location.origin) return false;
+      if (targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search &&
+          targetUrl.hash.length > 0) return false;
+      if (targetUrl.href === window.location.href) return false;
+
+      return true;
+    }
+
+    function navigateWithOverlay(href) {
+      if (isNavigating) return;
+      isNavigating = true;
+      document.body.style.pointerEvents = "none";
+      overlay.classList.add("card-transition-overlay--active");
+      const delay = prefersReducedMotion ? 0 : 360;
+      window.setTimeout(function() {
+        window.location.href = href;
+      }, delay);
+    }
+
+    document.addEventListener("click", function(event) {
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      navigateWithOverlay(link.href);
+    }, true);
+
+    window.addEventListener("pageshow", function() {
+      isNavigating = false;
+      document.body.style.pointerEvents = "";
+      if (overlay) overlay.classList.remove("card-transition-overlay--active");
+    });
+  })();
+</script>
+
+  </footer>
+</body>
+</html>

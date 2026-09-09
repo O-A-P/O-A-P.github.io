@@ -1,0 +1,961 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>6.S081：xv6 中断与驱动 | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="各司其职"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/post/os/6.s081-os-interrupt/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.15f1383c93bee016a21e6324ae71b77bea3c4a9185e333144641ec5df722db89.css">
+
+    
+    <meta property="og:title" content="6.S081：xv6 中断与驱动" />
+<meta property="og:description" content="各司其职" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/post/os/6.s081-os-interrupt/" /><meta property="og:image" content="https://o-a-p.github.io/img/6.S081/interrupt.png" /><meta property="og:image" content="https://o-a-p.github.io/img/6.S081/mit.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-12-25T20:43:45+08:00" />
+<meta property="article:modified_time" content="2023-12-25T20:43:45+08:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://o-a-p.github.io/img/6.S081/interrupt.png" /><meta name="twitter:title" content="6.S081：xv6 中断与驱动"/>
+<meta name="twitter:description" content="各司其职"/>
+
+    
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body class="dark-mode"><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#" aria-label="Switch color theme">
+                <svg class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path class="theme-icon__moon" fill="currentColor"
+                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <g class="theme-icon__sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.querySelector('.navbar');
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        if (!navbar || !burger || !menu) return;
+
+        var animating = false;
+        var opened = false;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var MOBILE_QUERY = '(max-width: 1087px)';
+
+        function isMobileMenu() {
+            return window.matchMedia(MOBILE_QUERY).matches;
+        }
+
+        function clearMenuInlineStyle() {
+            menu.style.height = '';
+            menu.style.opacity = '';
+            menu.style.transform = '';
+            menu.style.overflow = '';
+            menu.style.transition = '';
+        }
+
+        function resetToDesktop() {
+            animating = false;
+            opened = false;
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+            clearMenuInlineStyle();
+        }
+
+        function openMenu() {
+            if (animating || opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = true;
+            animating = true;
+            burger.classList.add('is-active');
+            menu.classList.add('is-active');
+            burger.setAttribute('aria-expanded', 'true');
+
+            if (reduceMotion) {
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+            menu.offsetHeight;
+
+            var targetHeight = menu.scrollHeight;
+            menu.style.transition = 'height 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms ease';
+            menu.style.height = targetHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+
+            window.setTimeout(function() {
+                menu.style.height = 'auto';
+                menu.style.overflow = 'visible';
+                animating = false;
+            }, 280);
+        }
+
+        function closeMenu() {
+            if (animating || !opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = false;
+            animating = true;
+            burger.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+
+            if (reduceMotion) {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = menu.scrollHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+            menu.offsetHeight;
+
+            menu.style.transition = 'height 230ms cubic-bezier(0.4, 0, 1, 1), opacity 160ms ease, transform 180ms ease';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function() {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+            }, 240);
+        }
+
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (opened) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!isMobileMenu() || !opened) return;
+            if (navbar.contains(e.target)) return;
+            closeMenu();
+        });
+
+        menu.addEventListener('click', function(e) {
+            var link = e.target.closest('.navbar-item');
+            if (!link || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isMobileMenu()) {
+                resetToDesktop();
+            }
+        });
+    });
+
+    
+    
+    
+    (function() {
+        "use strict";
+
+        var root = document.documentElement;
+        var body = document.body;
+        var themeToggle = document.getElementById("theme-toggle");
+        var isTransitioning = false;
+        var effectsPaused = false;
+        var currentTheme = readStoredTheme();
+
+        if (themeToggle === null) return;
+
+        function readStoredTheme() {
+            try {
+                var storedTheme = localStorage.getItem("theme");
+                if (storedTheme === "dark" || storedTheme === "light") {
+                    return storedTheme;
+                }
+            } catch (error) {
+                
+            }
+            return "dark";
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (error) {
+                
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            body.classList.toggle("dark-mode", theme === "dark");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            );
+            storeTheme(theme);
+            window.dispatchEvent(new CustomEvent("theme-change", {
+                detail: { theme: theme }
+            }));
+        }
+
+        function getRevealOrigin(event) {
+            var bounds = themeToggle.getBoundingClientRect();
+            var origin = {
+                x: bounds.left + bounds.width / 2,
+                y: bounds.top + bounds.height / 2
+            };
+
+            
+            
+            if (event.clientX !== 0 || event.clientY !== 0) {
+                origin.x = event.clientX;
+                origin.y = event.clientY;
+            }
+            return origin;
+        }
+
+        function getRevealGeometry(origin) {
+            var farthestX = Math.max(origin.x, window.innerWidth - origin.x);
+            var farthestY = Math.max(origin.y, window.innerHeight - origin.y);
+            var radius = Math.hypot(farthestX, farthestY);
+
+            return {
+                radius: radius,
+                
+                duration: Math.max(650, Math.min(1100, radius / 1.5))
+            };
+        }
+
+        function setToggleBusy(active) {
+            isTransitioning = active;
+            if (active) {
+                themeToggle.setAttribute("aria-disabled", "true");
+            } else {
+                themeToggle.removeAttribute("aria-disabled");
+            }
+        }
+
+        function setEffectsPaused(paused) {
+            if (effectsPaused === paused) return;
+            effectsPaused = paused;
+            window.dispatchEvent(new CustomEvent(
+                paused ? "theme-transition-start" : "theme-transition-end"
+            ));
+        }
+
+        function finishTransition() {
+            if (!isTransitioning) return;
+            root.classList.remove("theme-transition-active");
+            setEffectsPaused(false);
+            setToggleBusy(false);
+        }
+
+        function startThemeTransition(nextTheme, event) {
+            var origin = getRevealOrigin(event);
+            var geometry = getRevealGeometry(origin);
+            var fromClip = "circle(0px at " + origin.x + "px " + origin.y + "px)";
+            var toClip = "circle(" + geometry.radius + "px at "
+                + origin.x + "px " + origin.y + "px)";
+            var preflightClip = "circle(" + Math.max(geometry.radius - 1, 0) + "px at "
+                + origin.x + "px " + origin.y + "px)";
+
+            setEffectsPaused(true);
+            root.classList.add("theme-transition-active");
+
+            var transition;
+            try {
+                transition = document.startViewTransition(function() {
+                    applyTheme(nextTheme);
+                });
+            } catch (error) {
+                applyTheme(nextTheme);
+                finishTransition();
+                return;
+            }
+
+            transition.ready.then(function() {
+                try {
+                    root.animate(
+                        [
+                            {
+                                opacity: 0.001,
+                                clipPath: toClip
+                            },
+                            {
+                                opacity: 0.001,
+                                clipPath: preflightClip
+                            }
+                        ],
+                        {
+                            duration: 34,
+                            easing: "linear",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+
+                    root.animate(
+                        {
+                            opacity: [1, 1],
+                            clipPath: [fromClip, toClip]
+                        },
+                        {
+                            delay: 34,
+                            duration: geometry.duration,
+                            easing: "linear",
+                            fill: "forwards",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+                } catch (error) {
+                    if (typeof transition.skipTransition === "function") {
+                        transition.skipTransition();
+                    }
+                }
+            }, finishTransition);
+
+            transition.finished.then(finishTransition, finishTransition);
+        }
+
+        function switchTheme(nextTheme, event) {
+            var reduceMotion = window.matchMedia
+                && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (isTransitioning) return;
+            if (typeof document.startViewTransition !== "function" || reduceMotion) {
+                applyTheme(nextTheme);
+                return;
+            }
+
+            setToggleBusy(true);
+            startThemeTransition(nextTheme, event);
+        }
+
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            switchTheme(currentTheme === "light" ? "dark" : "light", event);
+        });
+    })();
+
+
+
+</script>
+
+</header>
+<main>
+<div class="single-container page-enter">
+    <div class="archive">
+        
+        <img src="/img/6.S081/interrupt.png" class="myBigPicture" alt="headPic">
+        <h1 class="title is-1">6.S081：xv6 中断与驱动</h1>
+        <div class="title subtitle heading is-6">
+            <div class="author-info columns is-vcentered">
+                <div class="column">
+                    <div class="columns is-vcentered is-mobile">
+                        
+                        <div class="column is-narrow">
+                            <img src="/img/author/head.jpg" class="author-image">
+                        </div>
+                        
+                        <div class="column">
+                            <p>OAP</p>
+                            <p><time>December 25, 2023</time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-categories-container">
+                    <a class="hover-underline-animation" href="/categories/os">OS</a>, <a class="hover-underline-animation" href="/categories/6.s081">6.S081</a>
+                </div>
+            </div>
+        </div>
+        <div class="content article-content">
+            
+            <div class="toc-container">
+                
+    <div class="post-toc">
+        
+            <aside>
+                <button id="tocButton" type="button" aria-expanded="false" aria-controls="hide"><span id="contents">CONTENT</span></button>
+                <div id="hide"><nav id="TableOfContents"></nav></div>
+            </aside>
+        
+    </div><script>
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('tocButton');
+    const tocBody = document.getElementById('hide');
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!tocBody) return;
+
+    if (button) {
+        const mobile = window.matchMedia("(max-width: 768px)");
+        function syncExpandedState() {
+            button.setAttribute("aria-expanded", String(window.getComputedStyle(tocBody).display !== "none"));
+        }
+        syncExpandedState();
+        mobile.addEventListener("change", syncExpandedState);
+        button.addEventListener('click', function() {
+            const container = tocBody.closest(".toc-container");
+            if (!container) return;
+            const isOpen = window.getComputedStyle(tocBody).display === "none";
+            container.classList.toggle("is-expanded", isOpen);
+            container.classList.toggle("is-collapsed", !isOpen);
+            button.setAttribute("aria-expanded", String(isOpen));
+        });
+    }
+
+    const tocLinks = Array.from(tocBody.querySelectorAll('a[href^="#"]'));
+    tocLinks.forEach(link => {
+        if (!link.title) {
+            link.title = link.textContent.trim();
+        }
+    });
+    const headingTargets = tocLinks
+        .map(link => {
+            const id = decodeURIComponent(link.getAttribute('href').slice(1));
+            const el = document.getElementById(id);
+            return el ? { link, el } : null;
+        })
+        .filter(Boolean);
+    let lastActiveLink = null;
+    let currentActiveLinks = [];
+    let isProgrammaticScroll = false;
+    let scrollSettleTimer = null;
+    const SCROLL_SETTLE_MS = 180;
+
+    function getScrollOffset() {
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+        return Math.max(72, Math.round(navbarHeight + 16));
+    }
+
+    function keepTocLinkVisible(link) {
+        const scroller = link.closest('.toc-container');
+        if (!scroller || window.getComputedStyle(scroller).position === "static") return;
+        const linkRect = link.getBoundingClientRect();
+        const boxRect = scroller.getBoundingClientRect();
+        const topGap = linkRect.top - boxRect.top;
+        const bottomGap = boxRect.bottom - linkRect.bottom;
+        if (topGap < 8) {
+            scroller.scrollBy({
+                top: topGap - 12,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        } else if (bottomGap < 8) {
+            scroller.scrollBy({
+                top: 12 - bottomGap,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        }
+    }
+
+    function setActiveLinks(links) {
+        if (links.length === currentActiveLinks.length && links.every((link, index) => link === currentActiveLinks[index])) return;
+        tocLinks.forEach(link => {
+            link.classList.remove("toc-active", "toc-active-parent");
+            link.removeAttribute("aria-current");
+        });
+        links.forEach(link => {
+            link.classList.add("toc-active");
+        });
+        const first = links[0];
+        if (first) {
+            first.setAttribute("aria-current", "location");
+            if (lastActiveLink !== first) keepTocLinkVisible(first);
+        }
+        lastActiveLink = first;
+        currentActiveLinks = links;
+    }
+
+    function updateActive(forceUpdate) {
+        if (isProgrammaticScroll && !forceUpdate) return;
+        if (!headingTargets.length) return;
+        const top = getScrollOffset();
+        const bottom = window.innerHeight;
+        const body = document.querySelector(".article-body");
+        const articleEnd = body ? body.getBoundingClientRect().bottom : Infinity;
+        
+        
+        const positions = headingTargets.map(target => target.el.getBoundingClientRect().top);
+        const links = headingTargets.filter((target, index) => {
+            const end = index + 1 < positions.length ? positions[index + 1] : articleEnd;
+            return positions[index] < bottom && end > top;
+        }).map(target => target.link);
+        setActiveLinks(links);
+    }
+
+    function armScrollSettleTimer() {
+        if (!isProgrammaticScroll) return;
+        if (scrollSettleTimer) {
+            clearTimeout(scrollSettleTimer);
+        }
+        scrollSettleTimer = setTimeout(function() {
+            isProgrammaticScroll = false;
+            scrollSettleTimer = null;
+            updateActive(true);
+        }, SCROLL_SETTLE_MS);
+    }
+
+    updateActive(true);
+
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+            const id = decodeURIComponent(href.slice(1));
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            const offset = getScrollOffset();
+            const top = window.pageYOffset + target.getBoundingClientRect().top - offset;
+            isProgrammaticScroll = !prefersReducedMotion;
+            if (scrollSettleTimer) {
+                clearTimeout(scrollSettleTimer);
+                scrollSettleTimer = null;
+            }
+            window.scrollTo({
+                top: Math.max(0, top),
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+            if (history.pushState) {
+                history.pushState(null, '', href);
+            } else {
+                window.location.hash = href;
+            }
+            setActiveLinks([link]);
+            armScrollSettleTimer();
+        });
+    });
+
+    window.addEventListener("resize", function() { updateActive(); });
+    window.addEventListener("load", function() { updateActive(); });
+    if (document.fonts) document.fonts.ready.then(function() { updateActive(); });
+
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (isProgrammaticScroll) {
+            armScrollSettleTimer();
+            return;
+        }
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            updateActive(true);
+            ticking = false;
+        });
+    });
+});
+</script>
+
+            </div>
+            
+            <div class="article-body">
+                
+
+
+<div class="notice notice-tip" >
+    <div class="notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon notice-icon" viewBox="0 0 512 512"><path d="M504 256a248 248 0 11-496 0 248 248 0 01496 0zM227 387l184-184c7-6 7-16 0-22l-22-23c-7-6-17-6-23 0L216 308l-70-70c-6-6-16-6-23 0l-22 23c-7 6-7 16 0 22l104 104c6 7 16 7 22 0z"/></svg></div><p>2024-12-22 update
+时隔一年，偶然看到一个相当好的<a href="https://www.zhihu.com/question/23561375/answer/25345790" target="_blank" rel="noopener">回答</a>：</p>
+<p>内核就是一个由interrupt驱动的程序。这个interrupt可以是一个系统调用（x86下，很多OS的系统调用是靠software interrupt实现的），可以是一个用户程序产生的异常，也可以是一个硬件产生的事件中断。
+于是你的问题解决了：一个用户程序运行的时候，Linux就在内存里呆着，等着一个中断的到来。在这个中断的处理过程中，来做“调度”。
+而一般的时分系统里，都会有个timer interrupt每隔一段时间到来，也就是楼上说的“时间片”。</p></div>
+
+
+
+
+<div class="simple-notice simple-notice-note" >
+    <div class="simple-notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon simple-notice-icon" viewBox="0 0 192 512"><path d="M176 432c0 44.11-35.89 80-80 80s-80-35.89-80-80 35.89-80 80-80 80 35.89 80 80zM25.26 25.2l13.6 272A24 24 0 0062.83 320h66.34a24 24 0 0023.97-22.8l13.6-272A24 24 0 00142.77 0H49.23a24 24 0 00-23.97 25.2z"/></svg></div><p>驱动是针对硬件的软件，中断是为了实现操作系统必要功能的方式。</p></div>
+
+<p>xv6介绍Interrupt的时候是借由数据键盘读取，屏幕显示来执行的，其中键盘和屏幕作为硬件输入输出设备是和<code>uart芯片</code>相连的，因此xv6软件中的读写是针对uart芯片驱动而言的，对于该芯片，xv6使用console这层抽象作为软件驱动（这里的console即使相当于把键盘和显示器分别作为输入输出设备的虚拟控制台而言的驱动），console的底层是uart驱动，两者相互配合完成读写、中断工作。
+这里要分清楚<code>什么是软件部分，什么是硬件部分</code>，两者之间的交互关系又是如何。而这一部分的内容比较琐碎，因此分条列举：</p>
+<ol>
+<li>
+<p>设备寄存器被映射到了内存地址，对这部分内存的读写会反映到设备上，这就是前面page table中kernel page table做的事情，当然也要与真正的硬件做一些配合</p>
+</li>
+<li>
+<p>driver包含了两个part</p>
+<ol>
+<li>top part，工作在内核环境下，负责软件主动的一些操作，例如该如何读（read），如何写（write），具体过程如下：
+<ul>
+<li>read-&gt;sys_read-&gt;fileread-&gt;devsw[].read（指定设备的read）-&gt;<code>consoleread</code>（从内核缓存中读数据到用户空间，此处为cons.buf），此时就有个问题：谁把数据放到内核缓存中的？</li>
+<li>wirte-&gt;sys_write-&gt;filewrite-&gt;devsw[].write-&gt;<code>consolewrite</code>（从用户空间读取数据到内核空间）-&gt;uartputc（放到内核写缓存，此处为uart_tx_buf）-&gt;uartstart（启动uart硬件）</li>
+</ul>
+</li>
+<li>bottom part对于操作系统而言是被动的，当硬件完成任务后会借由<code>PLIC</code>（Platform-Level Interrupt Controller，根据优先级来分发路由中断）来向CPU发起中断请求，而CPU则会调用硬件驱动部分（console.c和uart.c）中的中断处理程序来进行一部分的中断处理。</li>
+</ol>
+<p>当然中断不是唯一选项，对于一些变化速度比较快的设备还是<code>轮询（polling）</code>的策略比较好，当然目前的一些设备也有两者兼而有之的</p>
+</li>
+<li>
+<p>这些外设是如何初始化的？实际上从软件的视角来看，<code>只能够直接沟通到UART硬件（芯片）</code>，该硬件是直接连接到键盘和显示器的，也就是所谓的console，因此我们不仅需要UART的驱动（uart.c）也需要console的驱动（console.c）</p>
+<ol>
+<li>在consoleinit()里调用uartinit()来初始化硬件，因为<code>能够直接配置的硬件只有uart芯片</code>。并且配置了console这个抽象硬件所对应的读写函数，此后所有针对console这个设备的读写都会被定位至特定的函数。</li>
+<li>在uartinit()中打开两个中断：<code>transmit and receive interrupts</code>. 其中传输完成中断代表uart硬件已经完成了向外输出数据的任务，而receive中断则代表CPU需要处理外部数据</li>
+</ol>
+</li>
+<li>
+<p>用户通过键盘（此时键盘是抽象的console的一部分）输入到console驱动读取并回显的过程：</p>
+<ol>
+<li>键盘输入，通过uart芯片接收并发起一个中断，陷入操作系统，进入<code>trap过程</code></li>
+<li>trampoline正常一套，进入usertrap函数</li>
+<li>判断是外部中断引起的trap，此时通过<code>devintr()</code>函数对中断进行处理</li>
+<li>通过<code>plic_claim</code>查询是哪个设备产生的中断</li>
+<li>随后进入对应的处理流程进行处理，在此是<code>uartintr()</code>函数（因为是uart硬件中断，这里处理函数理应叫这个名字）</li>
+<li>由于uart硬件发生中断有两种可能性（传输完成或者接收，也就是上面所说的两个中断）
+<ul>
+<li>需要从外部接收的情况则会从约定好的内存位置读取数据（即从外部寄存器读取），并交由专门的函数（consoleintr）进行处理，consoleintr负责将数据放到内核缓存，回显（具体的回显则是操作系统输出到屏幕上）和特殊字符处理</li>
+<li>对于传输完成的情况（uart硬件完成了上次的传输任务，uart很空闲），则继续调用uartstart将buffer的数据传输出去</li>
+</ul>
+</li>
+<li>在consoleintr()中则是处理特殊字符，并将正确的字符放到输入缓存中，并且回显该字符到屏幕上，最后如果到达了一整行就唤醒之前在consoleread()中<code>sleep</code>的进程，来让之前睡眠的进程处理这些数据</li>
+</ol>
+</li>
+<li>
+<p>针对设备的read系统调用则是会通过consoleread来进行处理，如果读buffer是空的，则需要sleep等待后面键盘输入将其唤醒，否则就从内核buffer复制到用户buffer</p>
+</li>
+<li>
+<p>软件的数据如果需要打印到屏幕上（或者说向抽象的console写数据）则是通过以下过程：</p>
+<ol>
+<li><code>write系统调用</code></li>
+<li>因为在操作系统中所有外部设备都被视为文件，因此write会调用filewrite，而filewrite则会根据文件描述符（fd）来使用文件配套的函数（如果是正常文件就正常读写，如果<code>是设备文件就用指定的读写函数</code>，可见上面的3.1）</li>
+<li>在该情况下，此时运行到了consolewrite函数，该函数从用户空间copyin数据，并通过uartputc将其传递给buffer里，然后启动uartstart</li>
+<li>uartstart则是直接将其写入寄存器，由uart硬件传递给正确的硬件</li>
+</ol>
+</li>
+<li>
+<p>PLIC处理中断的具体流程：</p>
+<ol>
+<li>某个CPU运行<code>plic_claim</code>来获取一个中断来接收，而该中断则不会被其他CPU所处理</li>
+<li>处理完成之后调用<code>plic_complete</code>来标识已经完成了该中断</li>
+</ol>
+</li>
+</ol>
+
+            </div>
+        </div>
+    </div>
+    <a href="#" id="scrollToTopButton">
+        <svg t="1686753152588" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="3988" width="48" height="48">
+            <path
+                d="M518.5 360.3c-3.2-4.4-9.7-4.4-12.9 0l-178 246c-3.8 5.3 0 12.7 6.5 12.7H381c10.2 0 19.9-4.9 25.9-13.2L512 460.4l105.2 145.4c6 8.3 15.6 13.2 25.9 13.2H690c6.5 0 10.3-7.4 6.5-12.7l-178-246z"
+                p-id="3989" fill="#363636"></path>
+            <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                p-id="3990" fill="#363636"></path>
+        </svg>
+    </a><hr style="border-top: 1px solid #EEEEEE;">
+<div id="comment"></div>
+<script>
+    (function() {
+        "use strict";
+
+        var activeTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        var giscusScript = null;
+        var readyFrame = null;
+        var giscusOrigin = "https://giscus.app";
+
+        function sendGiscusTheme(theme) {
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || iframe !== readyFrame || iframe.contentWindow === null) {
+                return;
+            }
+            iframe.contentWindow.postMessage({
+                giscus: {
+                    setConfig: {
+                        theme: theme
+                    }
+                }
+            }, giscusOrigin);
+        }
+
+        
+        
+        window.addEventListener("message", function(event) {
+            if (event.origin !== giscusOrigin || !event.data || !event.data.giscus) return;
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || event.source !== iframe.contentWindow || readyFrame === iframe) return;
+            readyFrame = iframe;
+            sendGiscusTheme(activeTheme);
+        });
+
+        function updateGiscusTheme(theme) {
+            activeTheme = theme === "light" ? "light" : "dark";
+            if (giscusScript !== null) {
+                giscusScript.setAttribute("data-theme", activeTheme);
+            }
+            sendGiscusTheme(activeTheme);
+        }
+
+        window.addEventListener("theme-change", function(event) {
+            var theme = event.detail && event.detail.theme;
+            updateGiscusTheme(theme);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var comment = document.getElementById("comment");
+            if (comment === null) {
+                return;
+            }
+
+            var giscusAttributes = {
+                "src": "https://giscus.app/client.js",
+                "data-repo": "O-A-P\/O-A-P.github.io",
+                "data-repo-id": "R_kgDOJEfHWQ",
+                "data-category": "Announcements",
+                "data-category-id": "DIC_kwDOJEfHWc4CcDhX",
+                "data-mapping": "og:title",
+                "data-reactions-enabled": "1",
+                "data-emit-metadata": "0",
+                "data-input-position": "bottom",
+                "data-theme": activeTheme,
+                "data-lang": "en",
+                "data-loading": "lazy",
+                "crossorigin": "anonymous"
+            };
+
+            giscusScript = document.createElement("script");
+            Object.entries(giscusAttributes).forEach(function(attribute) {
+                giscusScript.setAttribute(attribute[0], attribute[1]);
+            });
+            comment.appendChild(giscusScript);
+        });
+    })();
+
+</script>
+
+<div class="pp-container">
+        <section class="pre-and-post">
+            <div class="has-text-left">
+                
+                <p>Previous post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/os/6.s081-os-trap/">6.S081：xv6 trap过程</a>
+                
+            </div>
+            <div class="has-text-right ">
+                
+                <p>Next post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/os/6.s081-os-scheduling/">6.S081：xv6 进程调度</a>
+                
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<style>
+.page-enter {
+    animation: page-fade-in 0.6s ease-out both;
+}
+@keyframes page-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+</style>
+
+        </main>
+    
+    <aside class="article-minimap" hidden aria-label="文章缩略导航">
+    <div class="article-minimap__track" role="slider" tabindex="0" aria-label="阅读位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-orientation="vertical">
+        <div class="article-minimap__preview single-container" aria-hidden="true" inert></div>
+        <div class="article-minimap__embeds" aria-hidden="true" inert></div>
+        <div class="article-minimap__viewport" aria-hidden="true"></div>
+    </div>
+</aside>
+<script src="/js/article-minimap.js" defer></script>
+
+
+        <div id="card-transition-overlay" class="card-transition-overlay"></div><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2026 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div>
+
+    <script src="/js/copy-to-clipboard.js"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img');
+
+  (function() {
+    const overlay = document.getElementById("card-transition-overlay");
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isNavigating = false;
+
+    function shouldHandleLink(link, event) {
+      if (!link || !overlay) return false;
+      if (isNavigating || event.defaultPrevented) return false;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+      if (link.closest(".myCard")) return false;
+      if (link.closest("[data-no-page-transition]")) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+
+      const href = link.getAttribute("href");
+      if (!href) return false;
+      if (href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+
+      let targetUrl = null;
+      try {
+        targetUrl = new URL(href, window.location.href);
+      } catch (err) {
+        return false;
+      }
+
+      if (targetUrl.origin !== window.location.origin) return false;
+      if (targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search &&
+          targetUrl.hash.length > 0) return false;
+      if (targetUrl.href === window.location.href) return false;
+
+      return true;
+    }
+
+    function navigateWithOverlay(href) {
+      if (isNavigating) return;
+      isNavigating = true;
+      document.body.style.pointerEvents = "none";
+      overlay.classList.add("card-transition-overlay--active");
+      const delay = prefersReducedMotion ? 0 : 360;
+      window.setTimeout(function() {
+        window.location.href = href;
+      }, delay);
+    }
+
+    document.addEventListener("click", function(event) {
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      navigateWithOverlay(link.href);
+    }, true);
+
+    window.addEventListener("pageshow", function() {
+      isNavigating = false;
+      document.body.style.pointerEvents = "";
+      if (overlay) overlay.classList.remove("card-transition-overlay--active");
+    });
+  })();
+</script>
+
+  </footer>
+</body>
+</html>
