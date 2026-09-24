@@ -1,0 +1,1314 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>日志库spdlog（三） | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="源码面前，了无秘密"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/post/code-analysis/spdlog-3/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.5400bec6c0e3c878680e4c6c0e8af53014b27fcd4b2336655bc08c2586a0996c.css">
+
+    
+    <meta property="og:title" content="日志库spdlog（三）" />
+<meta property="og:description" content="源码面前，了无秘密" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/post/code-analysis/spdlog-3/" /><meta property="og:image" content="https://o-a-p.github.io/img/Code-Analysis/spdlog.png" /><meta property="og:image" content="https://o-a-p.github.io/img/Code-Analysis/spdlog.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2026-09-14T23:49:23+08:00" />
+<meta property="article:modified_time" content="2026-09-14T23:49:23+08:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://o-a-p.github.io/img/Code-Analysis/spdlog.png" /><meta name="twitter:title" content="日志库spdlog（三）"/>
+<meta name="twitter:description" content="源码面前，了无秘密"/>
+
+    
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body class="dark-mode"><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#" aria-label="Switch color theme">
+                <svg class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path class="theme-icon__moon" fill="currentColor"
+                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <g class="theme-icon__sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.querySelector('.navbar');
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        if (!navbar || !burger || !menu) return;
+
+        var animating = false;
+        var opened = false;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var MOBILE_QUERY = '(max-width: 1087px)';
+
+        function isMobileMenu() {
+            return window.matchMedia(MOBILE_QUERY).matches;
+        }
+
+        function clearMenuInlineStyle() {
+            menu.style.height = '';
+            menu.style.opacity = '';
+            menu.style.transform = '';
+            menu.style.overflow = '';
+            menu.style.transition = '';
+        }
+
+        function resetToDesktop() {
+            animating = false;
+            opened = false;
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+            clearMenuInlineStyle();
+        }
+
+        function openMenu() {
+            if (animating || opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = true;
+            animating = true;
+            burger.classList.add('is-active');
+            menu.classList.add('is-active');
+            burger.setAttribute('aria-expanded', 'true');
+
+            if (reduceMotion) {
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+            menu.offsetHeight;
+
+            var targetHeight = menu.scrollHeight;
+            menu.style.transition = 'height 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms ease';
+            menu.style.height = targetHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+
+            window.setTimeout(function() {
+                menu.style.height = 'auto';
+                menu.style.overflow = 'visible';
+                animating = false;
+            }, 280);
+        }
+
+        function closeMenu() {
+            if (animating || !opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = false;
+            animating = true;
+            burger.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+
+            if (reduceMotion) {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = menu.scrollHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+            menu.offsetHeight;
+
+            menu.style.transition = 'height 230ms cubic-bezier(0.4, 0, 1, 1), opacity 160ms ease, transform 180ms ease';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function() {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+            }, 240);
+        }
+
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (opened) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!isMobileMenu() || !opened) return;
+            if (navbar.contains(e.target)) return;
+            closeMenu();
+        });
+
+        menu.addEventListener('click', function(e) {
+            var link = e.target.closest('.navbar-item');
+            if (!link || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isMobileMenu()) {
+                resetToDesktop();
+            }
+        });
+    });
+
+    
+    
+    
+    (function() {
+        "use strict";
+
+        var root = document.documentElement;
+        var body = document.body;
+        var themeToggle = document.getElementById("theme-toggle");
+        var isTransitioning = false;
+        var effectsPaused = false;
+        var currentTheme = readStoredTheme();
+
+        if (themeToggle === null) return;
+
+        function readStoredTheme() {
+            try {
+                var storedTheme = localStorage.getItem("theme");
+                if (storedTheme === "dark" || storedTheme === "light") {
+                    return storedTheme;
+                }
+            } catch (error) {
+                
+            }
+            return "dark";
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (error) {
+                
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            body.classList.toggle("dark-mode", theme === "dark");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            );
+            storeTheme(theme);
+            window.dispatchEvent(new CustomEvent("theme-change", {
+                detail: { theme: theme }
+            }));
+        }
+
+        function getRevealOrigin(event) {
+            var bounds = themeToggle.getBoundingClientRect();
+            var origin = {
+                x: bounds.left + bounds.width / 2,
+                y: bounds.top + bounds.height / 2
+            };
+
+            
+            
+            if (event.clientX !== 0 || event.clientY !== 0) {
+                origin.x = event.clientX;
+                origin.y = event.clientY;
+            }
+            return origin;
+        }
+
+        function getRevealGeometry(origin) {
+            var farthestX = Math.max(origin.x, window.innerWidth - origin.x);
+            var farthestY = Math.max(origin.y, window.innerHeight - origin.y);
+            var radius = Math.hypot(farthestX, farthestY);
+
+            return {
+                radius: radius,
+                
+                duration: Math.max(650, Math.min(1100, radius / 1.5))
+            };
+        }
+
+        function setToggleBusy(active) {
+            isTransitioning = active;
+            if (active) {
+                themeToggle.setAttribute("aria-disabled", "true");
+            } else {
+                themeToggle.removeAttribute("aria-disabled");
+            }
+        }
+
+        function setEffectsPaused(paused) {
+            if (effectsPaused === paused) return;
+            effectsPaused = paused;
+            window.dispatchEvent(new CustomEvent(
+                paused ? "theme-transition-start" : "theme-transition-end"
+            ));
+        }
+
+        function finishTransition() {
+            if (!isTransitioning) return;
+            root.classList.remove("theme-transition-active");
+            setEffectsPaused(false);
+            setToggleBusy(false);
+        }
+
+        function startThemeTransition(nextTheme, event) {
+            var origin = getRevealOrigin(event);
+            var geometry = getRevealGeometry(origin);
+            var fromClip = "circle(0px at " + origin.x + "px " + origin.y + "px)";
+            var toClip = "circle(" + geometry.radius + "px at "
+                + origin.x + "px " + origin.y + "px)";
+            var preflightClip = "circle(" + Math.max(geometry.radius - 1, 0) + "px at "
+                + origin.x + "px " + origin.y + "px)";
+
+            setEffectsPaused(true);
+            root.classList.add("theme-transition-active");
+
+            var transition;
+            try {
+                transition = document.startViewTransition(function() {
+                    applyTheme(nextTheme);
+                });
+            } catch (error) {
+                applyTheme(nextTheme);
+                finishTransition();
+                return;
+            }
+
+            transition.ready.then(function() {
+                try {
+                    root.animate(
+                        [
+                            {
+                                opacity: 0.001,
+                                clipPath: toClip
+                            },
+                            {
+                                opacity: 0.001,
+                                clipPath: preflightClip
+                            }
+                        ],
+                        {
+                            duration: 34,
+                            easing: "linear",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+
+                    root.animate(
+                        {
+                            opacity: [1, 1],
+                            clipPath: [fromClip, toClip]
+                        },
+                        {
+                            delay: 34,
+                            duration: geometry.duration,
+                            easing: "linear",
+                            fill: "forwards",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+                } catch (error) {
+                    if (typeof transition.skipTransition === "function") {
+                        transition.skipTransition();
+                    }
+                }
+            }, finishTransition);
+
+            transition.finished.then(finishTransition, finishTransition);
+        }
+
+        function switchTheme(nextTheme, event) {
+            var reduceMotion = window.matchMedia
+                && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (isTransitioning) return;
+            if (typeof document.startViewTransition !== "function" || reduceMotion) {
+                applyTheme(nextTheme);
+                return;
+            }
+
+            setToggleBusy(true);
+            startThemeTransition(nextTheme, event);
+        }
+
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            switchTheme(currentTheme === "light" ? "dark" : "light", event);
+        });
+    })();
+
+
+
+</script>
+
+</header>
+<main>
+<div class="single-container page-enter">
+    <div class="archive">
+        
+        <img src="/img/Code-Analysis/spdlog.png" class="myBigPicture" alt="headPic">
+        <h1 class="title is-1">日志库spdlog（三）</h1>
+        <div class="title subtitle heading is-6">
+            <div class="author-info columns is-vcentered">
+                <div class="column">
+                    <div class="columns is-vcentered is-mobile">
+                        
+                        <div class="column is-narrow">
+                            <img src="/img/author/head.jpg" class="author-image">
+                        </div>
+                        
+                        <div class="column">
+                            <p>OAP</p>
+                            <p><time>September 14, 2026</time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-categories-container">
+                    <a class="hover-underline-animation" href="/categories/spdlog">spdlog</a>, <a class="hover-underline-animation" href="/categories/code-analysis">Code Analysis</a>
+                </div>
+            </div>
+        </div>
+        <div class="content article-content">
+            
+            <div class="toc-container">
+                
+    <div class="post-toc">
+        
+            <aside>
+                <button id="tocButton" type="button" aria-expanded="false" aria-controls="hide"><span id="contents">CONTENT</span></button>
+                <div id="hide"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前文">前文</a></li>
+    <li><a href="#stopwatch">stopwatch</a></li>
+    <li><a href="#宏">宏</a></li>
+    <li><a href="#兼容模板">兼容模板</a></li>
+    <li><a href="#enable_shared_from_this">enable_shared_from_this</a></li>
+    <li><a href="#多态clone惯用法">多态clone惯用法</a></li>
+    <li><a href="#sfinae">SFINAE</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </aside>
+        
+    </div><script>
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('tocButton');
+    const tocBody = document.getElementById('hide');
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!tocBody) return;
+
+    if (button) {
+        const mobile = window.matchMedia("(max-width: 768px)");
+        function syncExpandedState() {
+            button.setAttribute("aria-expanded", String(window.getComputedStyle(tocBody).display !== "none"));
+        }
+        syncExpandedState();
+        mobile.addEventListener("change", syncExpandedState);
+        button.addEventListener('click', function() {
+            const container = tocBody.closest(".toc-container");
+            if (!container) return;
+            const isOpen = window.getComputedStyle(tocBody).display === "none";
+            container.classList.toggle("is-expanded", isOpen);
+            container.classList.toggle("is-collapsed", !isOpen);
+            button.setAttribute("aria-expanded", String(isOpen));
+        });
+    }
+
+    const tocLinks = Array.from(tocBody.querySelectorAll('a[href^="#"]'));
+    tocLinks.forEach(link => {
+        if (!link.title) {
+            link.title = link.textContent.trim();
+        }
+    });
+    const headingTargets = tocLinks
+        .map(link => {
+            const id = decodeURIComponent(link.getAttribute('href').slice(1));
+            const el = document.getElementById(id);
+            return el ? { link, el } : null;
+        })
+        .filter(Boolean);
+    let lastActiveLink = null;
+    let currentActiveLinks = [];
+    let isProgrammaticScroll = false;
+    let scrollSettleTimer = null;
+    const SCROLL_SETTLE_MS = 180;
+
+    function getScrollOffset() {
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+        return Math.max(72, Math.round(navbarHeight + 16));
+    }
+
+    function keepTocLinkVisible(link) {
+        const scroller = link.closest('.toc-container');
+        if (!scroller || window.getComputedStyle(scroller).position === "static") return;
+        const linkRect = link.getBoundingClientRect();
+        const boxRect = scroller.getBoundingClientRect();
+        const topGap = linkRect.top - boxRect.top;
+        const bottomGap = boxRect.bottom - linkRect.bottom;
+        if (topGap < 8) {
+            scroller.scrollBy({
+                top: topGap - 12,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        } else if (bottomGap < 8) {
+            scroller.scrollBy({
+                top: 12 - bottomGap,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        }
+    }
+
+    function setActiveLinks(links) {
+        if (links.length === currentActiveLinks.length && links.every((link, index) => link === currentActiveLinks[index])) return;
+        tocLinks.forEach(link => {
+            link.classList.remove("toc-active", "toc-active-parent");
+            link.removeAttribute("aria-current");
+        });
+        links.forEach(link => {
+            link.classList.add("toc-active");
+        });
+        const first = links[0];
+        if (first) {
+            first.setAttribute("aria-current", "location");
+            if (lastActiveLink !== first) keepTocLinkVisible(first);
+        }
+        lastActiveLink = first;
+        currentActiveLinks = links;
+    }
+
+    function updateActive(forceUpdate) {
+        if (isProgrammaticScroll && !forceUpdate) return;
+        if (!headingTargets.length) return;
+        const top = getScrollOffset();
+        const bottom = window.innerHeight;
+        const body = document.querySelector(".article-body");
+        const articleEnd = body ? body.getBoundingClientRect().bottom : Infinity;
+        
+        
+        const positions = headingTargets.map(target => target.el.getBoundingClientRect().top);
+        const links = headingTargets.filter((target, index) => {
+            const end = index + 1 < positions.length ? positions[index + 1] : articleEnd;
+            return positions[index] < bottom && end > top;
+        }).map(target => target.link);
+        setActiveLinks(links);
+    }
+
+    function armScrollSettleTimer() {
+        if (!isProgrammaticScroll) return;
+        if (scrollSettleTimer) {
+            clearTimeout(scrollSettleTimer);
+        }
+        scrollSettleTimer = setTimeout(function() {
+            isProgrammaticScroll = false;
+            scrollSettleTimer = null;
+            updateActive(true);
+        }, SCROLL_SETTLE_MS);
+    }
+
+    updateActive(true);
+
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+            const id = decodeURIComponent(href.slice(1));
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            const offset = getScrollOffset();
+            const top = window.pageYOffset + target.getBoundingClientRect().top - offset;
+            isProgrammaticScroll = !prefersReducedMotion;
+            if (scrollSettleTimer) {
+                clearTimeout(scrollSettleTimer);
+                scrollSettleTimer = null;
+            }
+            window.scrollTo({
+                top: Math.max(0, top),
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+            if (history.pushState) {
+                history.pushState(null, '', href);
+            } else {
+                window.location.hash = href;
+            }
+            setActiveLinks([link]);
+            armScrollSettleTimer();
+        });
+    });
+
+    window.addEventListener("resize", function() { updateActive(); });
+    window.addEventListener("load", function() { updateActive(); });
+    if (document.fonts) document.fonts.ready.then(function() { updateActive(); });
+
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (isProgrammaticScroll) {
+            armScrollSettleTimer();
+            return;
+        }
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            updateActive(true);
+            ticking = false;
+        });
+    });
+});
+</script>
+
+            </div>
+            
+            <div class="article-body">
+                <h1 id="前文">前文</h1>
+<p>
+<a
+    class="post-card"
+    href="/post/code-analysis/spdlog-1/"
+    aria-label="阅读文章：日志库spdlog（一）"
+>
+    <span class="post-card__content">
+        <span class="post-card__heading">
+            <strong class="post-card__title">日志库spdlog（一）</strong>
+            <span class="post-card__arrow" aria-hidden="true">→</span>
+        </span>
+        <span class="post-card__summary">源码面前，了无秘密</span>
+
+        <span class="post-card__meta">
+            <time datetime="2026-08-16">
+                2026-08-16
+            </time>
+            <span class="post-card__categories">spdlog · Code Analysis</span>
+        </span>
+    </span>
+    <span class="post-card__thumbnail" aria-hidden="true">
+        <img src="/img/Code-Analysis/spdlog.png" alt="" loading="lazy" decoding="async">
+    </span>
+</a><style>
+.post-card {
+  display: flex;
+  width: 100%;
+  margin: 1.25rem 0;
+  padding: 0.95rem;
+  align-items: center;
+  gap: 1.05rem;
+  border: 1px solid rgba(64, 53, 36, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: 0 10px 28px rgba(83, 67, 38, 0.06);
+  color: #2f3136 !important;
+  text-decoration: none !important;
+  transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.post-card:hover {
+  border-color: rgba(61, 111, 159, 0.24);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 12px 30px rgba(83, 67, 38, 0.09);
+  color: #2f3136 !important;
+}
+
+.post-card:focus-visible {
+  outline: 2px solid rgba(61, 111, 159, 0.68);
+  outline-offset: 4px;
+}
+
+.post-card__content {
+  display: block;
+  min-width: 0;
+  flex: 1;
+  padding: 0.05rem 0.15rem;
+}
+
+.post-card__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.post-card__title {
+  display: block;
+  color: #2f3136 !important;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.post-card__arrow {
+  flex: 0 0 auto;
+  color: rgba(61, 111, 159, 0.72);
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: transform 0.18s ease;
+}
+
+.post-card:hover .post-card__arrow {
+  transform: translateX(2px);
+}
+
+.post-card__summary {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 0.35rem;
+  color: #5f5b54;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.post-card__meta {
+  display: flex;
+  min-width: 0;
+  margin-top: 0.55rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0;
+  color: #706b61;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+}
+
+.post-card__categories {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-card__categories::before {
+  content: "·";
+  margin: 0 0.55rem;
+}
+
+.post-card__thumbnail {
+  display: block;
+  overflow: hidden;
+  width: 104px;
+  aspect-ratio: 4 / 3;
+  flex: 0 0 104px;
+  border: 1px solid rgba(64, 53, 36, 0.08);
+  border-radius: 7px;
+  background: #f4efe5;
+}
+
+.post-card__thumbnail img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.post-card:hover .post-card__thumbnail img {
+  transform: scale(1.025);
+}
+
+.dark-mode .post-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(22, 25, 29, 0.9);
+  box-shadow: none;
+  color: #e3e3e3 !important;
+}
+
+.dark-mode .post-card:hover {
+  border-color: rgba(146, 195, 235, 0.18);
+  background: #181b1f;
+  color: #e3e3e3 !important;
+}
+
+.dark-mode .post-card__meta {
+  color: rgba(227, 227, 227, 0.66);
+}
+
+.dark-mode .post-card__title {
+  color: #e3e3e3 !important;
+}
+
+.dark-mode .post-card__summary {
+  color: rgba(227, 227, 227, 0.78);
+}
+
+.dark-mode .post-card__arrow {
+  color: #92c3eb;
+}
+
+.dark-mode .post-card__thumbnail {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: #0f1113;
+}
+
+@media (max-width: 600px) {
+  .post-card {
+    padding: 0.8rem;
+    gap: 0.8rem;
+  }
+
+  .post-card__title {
+    font-size: 1rem;
+  }
+
+  .post-card__summary {
+    -webkit-line-clamp: 1;
+  }
+
+  .post-card__thumbnail {
+    width: 78px;
+    flex-basis: 78px;
+  }
+}
+</style>
+
+正如前文所说，本文将聚焦于spdlog在并发方面的工作，同时提点一下值得一提的技术。</p>
+<h1 id="stopwatch">stopwatch</h1>
+<p>大家都应该经历过要为某一段代码计时的情况，通常来说会写出以下代码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1">// ===== 要计时的代码 =====
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="k">auto</span> <span class="n">end</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="k">auto</span> <span class="n">duration</span> <span class="o">=</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">microseconds</span><span class="o">&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;耗时: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">duration</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; us</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span></span></span></code></pre></div><p>但如果有多段要计时的代码，就不得不重复写这些代码，spdlog里就有个很有意思的工具类<code>stopwatch</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">class</span> <span class="nc">stopwatch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">using</span> <span class="n">clock</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">time_point</span><span class="o">&lt;</span><span class="n">clock</span><span class="o">&gt;</span> <span class="n">start_tp_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="n">stopwatch</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="o">:</span> <span class="n">start_tp_</span><span class="p">{</span><span class="n">clock</span><span class="o">::</span><span class="n">now</span><span class="p">()}</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">elapsed</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">clock</span><span class="o">::</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_tp_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span> <span class="n">elapsed_ms</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">clock</span><span class="o">::</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_tp_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="kt">void</span> <span class="nf">reset</span><span class="p">()</span> <span class="p">{</span> <span class="n">start_tp_</span> <span class="o">=</span> <span class="n">clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="p">};</span></span></span></code></pre></div><p>只需要创建一个类，然后通过reset就可以重复使用，实在是太过精妙。</p>
+<h1 id="宏">宏</h1>
+<p>spdlog里大量使用了宏，因为这个库要足够通用，在不同的平台、针对不同的C++版本都要进行适配，这里有几个有意思的用法：</p>
+<ol>
+<li>兼容不同版本的fmt
+众所周知，fmt库在C++20被吸收到了标准库里，所以针对不同的C++版本，可以使用来指定使用不同的库：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="cp">#ifdef SPDLOG_USE_STD_FORMAT
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="cp"></span>    <span class="n">std</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="cp">#else
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="cp"></span>    <span class="n">fmt</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="cp">#endif</span></span></span></code></pre></div><p>另一个则是语法的适配，比如<code>make_unique</code>在C++14才被引入：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="cp">#if __cplusplus &gt;= 201402L  </span><span class="c1">// C++14 and beyond
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_if_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="cp">#else
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="cp"></span><span class="k">template</span> <span class="o">&lt;</span><span class="kt">bool</span> <span class="n">B</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span> <span class="o">=</span> <span class="kt">void</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="k">using</span> <span class="n">enable_if_t</span> <span class="o">=</span> <span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_if</span><span class="o">&lt;</span><span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;::</span><span class="n">type</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">make_unique</span><span class="p">(</span><span class="n">Args</span> <span class="o">&amp;&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="k">static_assert</span><span class="p">(</span><span class="o">!</span><span class="n">std</span><span class="o">::</span><span class="n">is_array</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">,</span> <span class="s">&#34;arrays not supported&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">T</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...));</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="cp">#endif</span></span></span></code></pre></div><p>这里甚至自己捏了一个。</p>
+<ol start="2">
+<li>批量控制宏的开关
+比如现在我想使用库的方式链接spdlog，那显然有些操作就不能再用了，比如inline，此时就必须依赖宏在中间隔离一层：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="cp">#ifdef SPDLOG_COMPILED_LIB
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="cp">#undef SPDLOG_HEADER_ONLY
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="cp">#if defined(SPDLOG_SHARED_LIB)
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="cp">#if defined(_WIN32)
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="cp">#ifdef spdlog_EXPORTS
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="cp">#define SPDLOG_API __declspec(dllexport)
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="cp">#else  </span><span class="c1">// !spdlog_EXPORTS
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="c1"></span><span class="cp">#define SPDLOG_API __declspec(dllimport)
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="cp">#else  </span><span class="c1">// !defined(_WIN32)
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"></span><span class="cp">#define SPDLOG_API __attribute__((visibility(&#34;default&#34;)))
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="cp">#else  </span><span class="c1">// !defined(SPDLOG_SHARED_LIB)
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="c1"></span><span class="cp">#define SPDLOG_API
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="cp">#define SPDLOG_INLINE
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="cp">#else  </span><span class="c1">// !defined(SPDLOG_COMPILED_LIB)
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1"></span><span class="cp">#define SPDLOG_API
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="cp">#define SPDLOG_HEADER_ONLY
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="cp">#define SPDLOG_INLINE inline
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="cp">#endif  </span><span class="c1">// #ifdef SPDLOG_COMPILED_LIB
+</span></span></span></code></pre></div><h1 id="兼容模板">兼容模板</h1>
+<p>对于单线程的情况，如果实在不需要锁，那此时甚至没必要传入一个有效的锁给sink，否则会有性能损耗。
+sink说到底只是需要一个可以lock、unlock的东西（实际上是lock_guard需要），那么可以提供给他，并不会有什么性能损耗：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">struct</span> <span class="nc">null_mutex</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kt">void</span> <span class="nf">lock</span><span class="p">()</span> <span class="k">const</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="kt">void</span> <span class="nf">unlock</span><span class="p">()</span> <span class="k">const</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">};</span></span></span></code></pre></div><p>这里可以顺带提一嘴lock_guard，其实无非就是把lock写在构造，把unlock放在析构：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">_Mutex</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="k">class</span> <span class="nc">_LIBCPP_SCOPED_LOCKABLE</span> <span class="n">lock_guard</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  <span class="k">typedef</span> <span class="n">_Mutex</span> <span class="n">mutex_type</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  <span class="n">mutex_type</span><span class="o">&amp;</span> <span class="n">__m_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">  <span class="na">[[__nodiscard__]]</span> <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="k">explicit</span> <span class="n">lock_guard</span><span class="p">(</span><span class="n">mutex_type</span><span class="o">&amp;</span> <span class="n">__m</span><span class="p">)</span> <span class="n">_LIBCPP_ACQUIRE_CAPABILITY</span><span class="p">(</span><span class="n">__m</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">      <span class="o">:</span> <span class="n">__m_</span><span class="p">(</span><span class="n">__m</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">__m_</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl">  <span class="na">[[__nodiscard__]]</span> <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="n">lock_guard</span><span class="p">(</span><span class="n">mutex_type</span><span class="o">&amp;</span> <span class="n">__m</span><span class="p">,</span> <span class="n">adopt_lock_t</span><span class="p">)</span> <span class="n">_LIBCPP_REQUIRES_CAPABILITY</span><span class="p">(</span><span class="n">__m</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">      <span class="o">:</span> <span class="n">__m_</span><span class="p">(</span><span class="n">__m</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">  <span class="n">_LIBCPP_RELEASE_CAPABILITY</span> <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="o">~</span><span class="n">lock_guard</span><span class="p">()</span> <span class="p">{</span> <span class="n">__m_</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">
+</span></span><span class="line"><span class="ln">19</span><span class="cl">  <span class="n">lock_guard</span><span class="p">(</span><span class="n">lock_guard</span> <span class="k">const</span><span class="o">&amp;</span><span class="p">)</span>            <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">  <span class="n">lock_guard</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">lock_guard</span> <span class="k">const</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="p">};</span></span></span></code></pre></div><p>省略看不懂的东西之后，我想不难理解其中含义，毕竟标准库大部分还是符合C++语法的，只是少部分用了魔法操作。</p>
+<h1 id="enable_shared_from_this">enable_shared_from_this</h1>
+<p>常规而言，无法在类内创建一个自身的shared_ptr，因为不知道外面的调用者是否是通过shared_ptr调用，如果随意创建，则会导致double free。
+好在标准库提供了enable_shared_from_this这样一个工具（CRTP的经典应用），只要继承该类模板，就可以安全的在类内创建shared_ptr。
+spdlog当然也有使用，这里就不再重复贴了。</p>
+<p>不难想象，这里的实现是任何通过make_shared创建的对象都会检查是否有继承enable_shared_from_this。
+如果继承了，那显然就要设置一些额外的数据到enable_shared_from_this那一部分，比如，一个weak_ptr。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">_Tp</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="k">class</span> <span class="nc">enable_shared_from_this</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  <span class="k">mutable</span> <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">_Tp</span><span class="o">&gt;</span> <span class="n">__weak_this_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="n">_LIBCPP_CONSTEXPR</span> <span class="n">enable_shared_from_this</span><span class="p">()</span> <span class="n">_NOEXCEPT</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="nf">enable_shared_from_this</span><span class="p">(</span><span class="n">enable_shared_from_this</span> <span class="k">const</span><span class="o">&amp;</span><span class="p">)</span> <span class="n">_NOEXCEPT</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">  <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="n">enable_shared_from_this</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">enable_shared_from_this</span> <span class="k">const</span><span class="o">&amp;</span><span class="p">)</span> <span class="n">_NOEXCEPT</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="o">~</span><span class="n">enable_shared_from_this</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">  <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">_Tp</span><span class="o">&gt;</span> <span class="n">shared_from_this</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">_Tp</span><span class="o">&gt;</span><span class="p">(</span><span class="n">__weak_this_</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">  <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">_Tp</span> <span class="k">const</span><span class="o">&gt;</span> <span class="n">shared_from_this</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">_Tp</span><span class="o">&gt;</span><span class="p">(</span><span class="n">__weak_this_</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="cp">#if _LIBCPP_STD_VER &gt;= 17
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="cp"></span>  <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">_Tp</span><span class="o">&gt;</span> <span class="n">weak_from_this</span><span class="p">()</span> <span class="n">_NOEXCEPT</span> <span class="p">{</span> <span class="k">return</span> <span class="n">__weak_this_</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl">  <span class="n">_LIBCPP_HIDE_FROM_ABI</span> <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">_Tp</span><span class="o">&gt;</span> <span class="n">weak_from_this</span><span class="p">()</span> <span class="k">const</span> <span class="n">_NOEXCEPT</span> <span class="p">{</span> <span class="k">return</span> <span class="n">__weak_this_</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="cp">#endif </span><span class="c1">// _LIBCPP_STD_VER &gt;= 17
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">  <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">_Up</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">  <span class="k">friend</span> <span class="k">class</span> <span class="nc">shared_ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="p">};</span></span></span></code></pre></div><p>也没有什么特别看不懂的东西，只有基础的C++语法，当然CRTP这个东西本身就比较tricky。</p>
+<h1 id="多态clone惯用法">多态clone惯用法</h1>
+<p>如果有一个基类衍生出巨多派生类，并且你要存这些派生类的实例，此时你大概会想要以指针/引用的方式存储其基类：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">formatter</span><span class="o">&gt;</span> <span class="n">formatter_</span><span class="p">;</span></span></span></code></pre></div><p>此时如果需要复制呢？显然一方面没办法通过基类来复制，这样只会复制基类的部分，也没办法获取真实类型。
+所以就有了clone惯用法，比如，基类定义clone方法，再由子类重写该方法，便可以依赖多态的特性，比较舒适地复制：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// formatter.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1">// 纯接口类
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">formatter</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">virtual</span> <span class="o">~</span><span class="n">formatter</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="c1">// 后续都走这个来做format，将msg内容格式化到dest中
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1"></span>    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">format</span><span class="p">(</span><span class="k">const</span> <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span> <span class="n">memory_buf_t</span> <span class="o">&amp;</span><span class="n">dest</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">formatter</span><span class="o">&gt;</span> <span class="n">clone</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1">// pattern_fromatter-inl.h
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">formatter</span><span class="o">&gt;</span> <span class="n">pattern_formatter</span><span class="o">::</span><span class="n">clone</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">custom_flags</span> <span class="n">cloned_custom_formatters</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">it</span> <span class="p">:</span> <span class="n">custom_handlers_</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="n">cloned_custom_formatters</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">]</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="k">auto</span> <span class="n">cloned</span> <span class="o">=</span> <span class="n">details</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">pattern_formatter</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pattern_</span><span class="p">,</span> <span class="n">pattern_time_type_</span><span class="p">,</span> <span class="n">eol_</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">                                                          <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">cloned_custom_formatters</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="n">cloned</span><span class="o">-&gt;</span><span class="n">need_localtime</span><span class="p">(</span><span class="n">need_localtime_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="cp">#if defined(__GNUC__) &amp;&amp; __GNUC__ &lt; 5
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="cp"></span>    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">cloned</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="cp">#else
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="cp"></span>    <span class="k">return</span> <span class="n">cloned</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="cp"></span><span class="p">}</span></span></span></code></pre></div><h1 id="sfinae">SFINAE</h1>
+<p>在log的转发处，有这么一个函数：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// 非格式化的二级转发入口，非string类型
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1">// T cannot be statically converted to format string (including string_view/wstring_view)
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">            <span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_if</span><span class="o">&lt;!</span><span class="n">is_convertible_to_any_format_string</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;&gt;::</span><span class="n">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">                                    <span class="kt">int</span><span class="o">&gt;::</span><span class="n">type</span> <span class="o">=</span> <span class="mi">0</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="kt">void</span> <span class="n">log</span><span class="p">(</span><span class="n">source_loc</span> <span class="n">loc</span><span class="p">,</span> <span class="n">level</span><span class="o">::</span><span class="n">level_enum</span> <span class="n">lvl</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="c1">// 不能转成字符串的，非格式化的转发入口
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="c1"></span>    <span class="c1">// 等价于给普通类型自动套上一个{}
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1"></span>    <span class="c1">// 二级转发入口
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1"></span>    <span class="n">log</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="s">&#34;{}&#34;</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>这里有一段东西初看十分迷惑：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">typename</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_if</span><span class="o">&lt;!</span><span class="n">is_convertible_to_any_format_string</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;&gt;::</span><span class="n">value</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">type</span> <span class="o">=</span> <span class="mi">0</span></span></span></code></pre></div><p>其实这里用到了一个模板技巧：<code>Substitution Failure Is Not An Error</code>，说人话就是模版匹配失败并不报错，而是将其淘汰，即不满足要求，就不要选。
+而<code>enable_if</code>则是std提供的工具，前面一个非类型参数为true时，可以拿到type，类型为第二个类型参数。
+这个功能常被用于匹配类型，比如现在我的模板函数需要一个是整数的类型，那我可以这么写：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_if_t</span><span class="o">&lt;</span><span class="n">is_intergral_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="mi">0</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">func</span><span class="p">(</span><span class="n">T</span> <span class="n">arg1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></div><p>可以简单理解下，这里第二个参数=0是为了给一个默认值，别人调用func就可以只塞第一个参数，由于第二个非类型参数没用到，所以名称都可以省略。
+<code>enable_if、is_intergral</code>的实现有兴趣也可以看看，简单的模版偏特化。
+而<code>enable_if_t、is_intergral_v</code>则是简单的语法糖，避免像上面一样写<code>::type</code>或<code>::value</code>
+假设一个非整数类型调用了该函数，那么enable_if_t什么都返回不了，参数没有类型，故此匹配失败。</p>
+<p>而后的<code>is_convertible_to_any_format_string</code>也是一个比较魔法的操作：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="k">struct</span> <span class="nc">is_convertible_to_any_format_string</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">integral_constant</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">                             <span class="n">is_convertible_to_basic_format_string</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">char</span><span class="o">&gt;::</span><span class="n">value</span> <span class="o">||</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">                                 <span class="n">is_convertible_to_basic_format_string</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">wchar_t</span><span class="o">&gt;::</span><span class="n">value</span><span class="o">&gt;</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Char</span> <span class="o">=</span> <span class="kt">char</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="k">struct</span> <span class="nc">is_convertible_to_basic_format_string</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">integral_constant</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">                             <span class="n">std</span><span class="o">::</span><span class="n">is_convertible</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">fmt</span><span class="o">::</span><span class="n">basic_string_view</span><span class="o">&lt;</span><span class="n">Char</span><span class="o">&gt;&gt;::</span><span class="n">value</span> <span class="o">||</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">                                 <span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">remove_cvref_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">fmt_runtime_string</span><span class="o">&lt;</span><span class="n">Char</span><span class="o">&gt;&gt;::</span><span class="n">value</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">};</span></span></span></code></pre></div><p>这里就愈发晦涩了，不过也可以简单理解。
+我们要判断一个类型参数，尽可能满足value、type那一套，此时又不想写一大串偏特化，就可以继承integral_constant，其内部定义了value，值为后者，定义了type，类型为T（其实还有个value_type，但这里没用到，不提也罢）。
+例如，传入一个char：</p>
+<ol>
+<li>显然<code>std::is_convertible&lt;T, fmt::basic_string_view&lt;Char&gt;&gt;::value</code>为true</li>
+<li>那么<code>is_convertible_to_basic_format_string&lt;T, char&gt;::value</code>为true</li>
+<li>有<code>is_convertible_to_any_format_string&lt;const T &amp;&gt;::value</code>为true</li>
+<li><code>std::enable_if&lt;!is_convertible_to_any_format_string&lt;const T &amp;&gt;::value, int&gt;::type</code>就不存在了，类型参数不能不存在，所以匹配失败</li>
+</ol>
+<p>其实这一坨就是对类型参数的约束，某个类型满足要求可以，不满足要求就绝对不行。
+C++20对模板匹配语法也有增强，提出了一个concept的东西，就是可以便捷声明类型需要满足的约束条件。</p>
+<h1 id="总结">总结</h1>
+<p>该库大部分的代码都是在做各种兼容，兼容平台、兼容C++版本、兼容引入方式等等，其工程实践十分值得一学。
+这三篇分析未必足够完备，但对spdlog库的分析至此告一段落。
+我相信哪怕不看这些文章，对着源码耐心看看，这个库也并不难理解，没有太多神秘之处。
+在现在的条件下，我想实在没有任何阻力阻止你去学习一份优秀的源码。
+以前还可以说这里我实在看不懂，被卡住了，但现在哪怕免费的AI也能给你答疑解惑。
+笔者也是边看边学，读到不懂的地方就问问AI。</p>
+<p>身处这种变革的时代，既幸运又不幸，也不知道还能写几年代码😭。
+下课！</p>
+
+            </div>
+        </div>
+    </div>
+    <a href="#" id="scrollToTopButton">
+        <svg t="1686753152588" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="3988" width="48" height="48">
+            <path
+                d="M518.5 360.3c-3.2-4.4-9.7-4.4-12.9 0l-178 246c-3.8 5.3 0 12.7 6.5 12.7H381c10.2 0 19.9-4.9 25.9-13.2L512 460.4l105.2 145.4c6 8.3 15.6 13.2 25.9 13.2H690c6.5 0 10.3-7.4 6.5-12.7l-178-246z"
+                p-id="3989" fill="#363636"></path>
+            <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                p-id="3990" fill="#363636"></path>
+        </svg>
+    </a><hr style="border-top: 1px solid #EEEEEE;">
+<div id="comment"></div>
+<script>
+    (function() {
+        "use strict";
+
+        var activeTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        var giscusScript = null;
+        var readyFrame = null;
+        var giscusOrigin = "https://giscus.app";
+
+        function sendGiscusTheme(theme) {
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || iframe !== readyFrame || iframe.contentWindow === null) {
+                return;
+            }
+            iframe.contentWindow.postMessage({
+                giscus: {
+                    setConfig: {
+                        theme: theme
+                    }
+                }
+            }, giscusOrigin);
+        }
+
+        
+        
+        window.addEventListener("message", function(event) {
+            if (event.origin !== giscusOrigin || !event.data || !event.data.giscus) return;
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || event.source !== iframe.contentWindow || readyFrame === iframe) return;
+            readyFrame = iframe;
+            sendGiscusTheme(activeTheme);
+        });
+
+        function updateGiscusTheme(theme) {
+            activeTheme = theme === "light" ? "light" : "dark";
+            if (giscusScript !== null) {
+                giscusScript.setAttribute("data-theme", activeTheme);
+            }
+            sendGiscusTheme(activeTheme);
+        }
+
+        window.addEventListener("theme-change", function(event) {
+            var theme = event.detail && event.detail.theme;
+            updateGiscusTheme(theme);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var comment = document.getElementById("comment");
+            if (comment === null) {
+                return;
+            }
+
+            var giscusAttributes = {
+                "src": "https://giscus.app/client.js",
+                "data-repo": "O-A-P\/O-A-P.github.io",
+                "data-repo-id": "R_kgDOJEfHWQ",
+                "data-category": "Announcements",
+                "data-category-id": "DIC_kwDOJEfHWc4CcDhX",
+                "data-mapping": "og:title",
+                "data-reactions-enabled": "1",
+                "data-emit-metadata": "0",
+                "data-input-position": "bottom",
+                "data-theme": activeTheme,
+                "data-lang": "en",
+                "data-loading": "lazy",
+                "crossorigin": "anonymous"
+            };
+
+            giscusScript = document.createElement("script");
+            Object.entries(giscusAttributes).forEach(function(attribute) {
+                giscusScript.setAttribute(attribute[0], attribute[1]);
+            });
+            comment.appendChild(giscusScript);
+        });
+    })();
+
+</script>
+
+<div class="pp-container">
+        <section class="pre-and-post">
+            <div class="has-text-left">
+                
+                <p>Previous post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/code-analysis/spdlog-2/">日志库spdlog（二）</a>
+                
+            </div>
+            <div class="has-text-right ">
+                
+                <p>Next post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/cmu15445/project0/">Project0: C&#43;&#43; Primer</a>
+                
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<style>
+.page-enter {
+    animation: page-fade-in 0.6s ease-out both;
+}
+@keyframes page-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+</style>
+
+        </main>
+    
+    <aside class="article-minimap" hidden aria-label="文章缩略导航">
+    <div class="article-minimap__track" role="slider" tabindex="0" aria-label="阅读位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-orientation="vertical">
+        <div class="article-minimap__preview single-container" aria-hidden="true" inert></div>
+        <div class="article-minimap__embeds" aria-hidden="true" inert></div>
+        <div class="article-minimap__viewport" aria-hidden="true"></div>
+    </div>
+</aside>
+<script src="/js/article-minimap.js" defer></script>
+
+
+        <div id="card-transition-overlay" class="card-transition-overlay"></div><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2026 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div><script src="/js/copy-to-clipboard.js?v=b03da288555be11559ba55eaf0055f160e096df92d7b023ff08f2d567e70072d"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img');
+
+  (function() {
+    const overlay = document.getElementById("card-transition-overlay");
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isNavigating = false;
+
+    function shouldHandleLink(link, event) {
+      if (!link || !overlay) return false;
+      if (isNavigating || event.defaultPrevented) return false;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+      if (link.closest(".myCard")) return false;
+      if (link.closest("[data-no-page-transition]")) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+
+      const href = link.getAttribute("href");
+      if (!href) return false;
+      if (href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+
+      let targetUrl = null;
+      try {
+        targetUrl = new URL(href, window.location.href);
+      } catch (err) {
+        return false;
+      }
+
+      if (targetUrl.origin !== window.location.origin) return false;
+      if (targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search &&
+          targetUrl.hash.length > 0) return false;
+      if (targetUrl.href === window.location.href) return false;
+
+      return true;
+    }
+
+    function navigateWithOverlay(href) {
+      if (isNavigating) return;
+      isNavigating = true;
+      document.body.style.pointerEvents = "none";
+      overlay.classList.add("card-transition-overlay--active");
+      const delay = prefersReducedMotion ? 0 : 360;
+      window.setTimeout(function() {
+        window.location.href = href;
+      }, delay);
+    }
+
+    document.addEventListener("click", function(event) {
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      navigateWithOverlay(link.href);
+    }, true);
+
+    window.addEventListener("pageshow", function() {
+      isNavigating = false;
+      document.body.style.pointerEvents = "";
+      if (overlay) overlay.classList.remove("card-transition-overlay--active");
+    });
+  })();
+</script>
+
+  </footer>
+</body>
+</html>

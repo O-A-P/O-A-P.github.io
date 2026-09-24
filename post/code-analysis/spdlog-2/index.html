@@ -1,0 +1,1449 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>日志库spdlog（二） | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="源码面前，了无秘密"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/post/code-analysis/spdlog-2/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.5400bec6c0e3c878680e4c6c0e8af53014b27fcd4b2336655bc08c2586a0996c.css">
+
+    
+    <meta property="og:title" content="日志库spdlog（二）" />
+<meta property="og:description" content="源码面前，了无秘密" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/post/code-analysis/spdlog-2/" /><meta property="og:image" content="https://o-a-p.github.io/img/Code-Analysis/spdlog.png" /><meta property="og:image" content="https://o-a-p.github.io/img/Code-Analysis/spdlog.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2026-09-13T21:41:23+08:00" />
+<meta property="article:modified_time" content="2026-09-13T21:41:23+08:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://o-a-p.github.io/img/Code-Analysis/spdlog.png" /><meta name="twitter:title" content="日志库spdlog（二）"/>
+<meta name="twitter:description" content="源码面前，了无秘密"/>
+
+    
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body class="dark-mode"><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#" aria-label="Switch color theme">
+                <svg class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path class="theme-icon__moon" fill="currentColor"
+                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <g class="theme-icon__sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.querySelector('.navbar');
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        if (!navbar || !burger || !menu) return;
+
+        var animating = false;
+        var opened = false;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var MOBILE_QUERY = '(max-width: 1087px)';
+
+        function isMobileMenu() {
+            return window.matchMedia(MOBILE_QUERY).matches;
+        }
+
+        function clearMenuInlineStyle() {
+            menu.style.height = '';
+            menu.style.opacity = '';
+            menu.style.transform = '';
+            menu.style.overflow = '';
+            menu.style.transition = '';
+        }
+
+        function resetToDesktop() {
+            animating = false;
+            opened = false;
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+            clearMenuInlineStyle();
+        }
+
+        function openMenu() {
+            if (animating || opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = true;
+            animating = true;
+            burger.classList.add('is-active');
+            menu.classList.add('is-active');
+            burger.setAttribute('aria-expanded', 'true');
+
+            if (reduceMotion) {
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+            menu.offsetHeight;
+
+            var targetHeight = menu.scrollHeight;
+            menu.style.transition = 'height 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms ease';
+            menu.style.height = targetHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+
+            window.setTimeout(function() {
+                menu.style.height = 'auto';
+                menu.style.overflow = 'visible';
+                animating = false;
+            }, 280);
+        }
+
+        function closeMenu() {
+            if (animating || !opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = false;
+            animating = true;
+            burger.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+
+            if (reduceMotion) {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = menu.scrollHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+            menu.offsetHeight;
+
+            menu.style.transition = 'height 230ms cubic-bezier(0.4, 0, 1, 1), opacity 160ms ease, transform 180ms ease';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function() {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+            }, 240);
+        }
+
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (opened) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!isMobileMenu() || !opened) return;
+            if (navbar.contains(e.target)) return;
+            closeMenu();
+        });
+
+        menu.addEventListener('click', function(e) {
+            var link = e.target.closest('.navbar-item');
+            if (!link || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isMobileMenu()) {
+                resetToDesktop();
+            }
+        });
+    });
+
+    
+    
+    
+    (function() {
+        "use strict";
+
+        var root = document.documentElement;
+        var body = document.body;
+        var themeToggle = document.getElementById("theme-toggle");
+        var isTransitioning = false;
+        var effectsPaused = false;
+        var currentTheme = readStoredTheme();
+
+        if (themeToggle === null) return;
+
+        function readStoredTheme() {
+            try {
+                var storedTheme = localStorage.getItem("theme");
+                if (storedTheme === "dark" || storedTheme === "light") {
+                    return storedTheme;
+                }
+            } catch (error) {
+                
+            }
+            return "dark";
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (error) {
+                
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            body.classList.toggle("dark-mode", theme === "dark");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            );
+            storeTheme(theme);
+            window.dispatchEvent(new CustomEvent("theme-change", {
+                detail: { theme: theme }
+            }));
+        }
+
+        function getRevealOrigin(event) {
+            var bounds = themeToggle.getBoundingClientRect();
+            var origin = {
+                x: bounds.left + bounds.width / 2,
+                y: bounds.top + bounds.height / 2
+            };
+
+            
+            
+            if (event.clientX !== 0 || event.clientY !== 0) {
+                origin.x = event.clientX;
+                origin.y = event.clientY;
+            }
+            return origin;
+        }
+
+        function getRevealGeometry(origin) {
+            var farthestX = Math.max(origin.x, window.innerWidth - origin.x);
+            var farthestY = Math.max(origin.y, window.innerHeight - origin.y);
+            var radius = Math.hypot(farthestX, farthestY);
+
+            return {
+                radius: radius,
+                
+                duration: Math.max(650, Math.min(1100, radius / 1.5))
+            };
+        }
+
+        function setToggleBusy(active) {
+            isTransitioning = active;
+            if (active) {
+                themeToggle.setAttribute("aria-disabled", "true");
+            } else {
+                themeToggle.removeAttribute("aria-disabled");
+            }
+        }
+
+        function setEffectsPaused(paused) {
+            if (effectsPaused === paused) return;
+            effectsPaused = paused;
+            window.dispatchEvent(new CustomEvent(
+                paused ? "theme-transition-start" : "theme-transition-end"
+            ));
+        }
+
+        function finishTransition() {
+            if (!isTransitioning) return;
+            root.classList.remove("theme-transition-active");
+            setEffectsPaused(false);
+            setToggleBusy(false);
+        }
+
+        function startThemeTransition(nextTheme, event) {
+            var origin = getRevealOrigin(event);
+            var geometry = getRevealGeometry(origin);
+            var fromClip = "circle(0px at " + origin.x + "px " + origin.y + "px)";
+            var toClip = "circle(" + geometry.radius + "px at "
+                + origin.x + "px " + origin.y + "px)";
+            var preflightClip = "circle(" + Math.max(geometry.radius - 1, 0) + "px at "
+                + origin.x + "px " + origin.y + "px)";
+
+            setEffectsPaused(true);
+            root.classList.add("theme-transition-active");
+
+            var transition;
+            try {
+                transition = document.startViewTransition(function() {
+                    applyTheme(nextTheme);
+                });
+            } catch (error) {
+                applyTheme(nextTheme);
+                finishTransition();
+                return;
+            }
+
+            transition.ready.then(function() {
+                try {
+                    root.animate(
+                        [
+                            {
+                                opacity: 0.001,
+                                clipPath: toClip
+                            },
+                            {
+                                opacity: 0.001,
+                                clipPath: preflightClip
+                            }
+                        ],
+                        {
+                            duration: 34,
+                            easing: "linear",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+
+                    root.animate(
+                        {
+                            opacity: [1, 1],
+                            clipPath: [fromClip, toClip]
+                        },
+                        {
+                            delay: 34,
+                            duration: geometry.duration,
+                            easing: "linear",
+                            fill: "forwards",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+                } catch (error) {
+                    if (typeof transition.skipTransition === "function") {
+                        transition.skipTransition();
+                    }
+                }
+            }, finishTransition);
+
+            transition.finished.then(finishTransition, finishTransition);
+        }
+
+        function switchTheme(nextTheme, event) {
+            var reduceMotion = window.matchMedia
+                && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (isTransitioning) return;
+            if (typeof document.startViewTransition !== "function" || reduceMotion) {
+                applyTheme(nextTheme);
+                return;
+            }
+
+            setToggleBusy(true);
+            startThemeTransition(nextTheme, event);
+        }
+
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            switchTheme(currentTheme === "light" ? "dark" : "light", event);
+        });
+    })();
+
+
+
+</script>
+
+</header>
+<main>
+<div class="single-container page-enter">
+    <div class="archive">
+        
+        <img src="/img/Code-Analysis/spdlog.png" class="myBigPicture" alt="headPic">
+        <h1 class="title is-1">日志库spdlog（二）</h1>
+        <div class="title subtitle heading is-6">
+            <div class="author-info columns is-vcentered">
+                <div class="column">
+                    <div class="columns is-vcentered is-mobile">
+                        
+                        <div class="column is-narrow">
+                            <img src="/img/author/head.jpg" class="author-image">
+                        </div>
+                        
+                        <div class="column">
+                            <p>OAP</p>
+                            <p><time>September 13, 2026</time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-categories-container">
+                    <a class="hover-underline-animation" href="/categories/spdlog">spdlog</a>, <a class="hover-underline-animation" href="/categories/code-analysis">Code Analysis</a>
+                </div>
+            </div>
+        </div>
+        <div class="content article-content">
+            
+            <div class="toc-container">
+                
+    <div class="post-toc">
+        
+            <aside>
+                <button id="tocButton" type="button" aria-expanded="false" aria-controls="hide"><span id="contents">CONTENT</span></button>
+                <div id="hide"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前文">前文</a></li>
+    <li><a href="#线程安全">线程安全</a>
+      <ul>
+        <li><a href="#registry层">registry层</a></li>
+        <li><a href="#logger层">logger层</a></li>
+        <li><a href="#sink层">sink层</a></li>
+        <li><a href="#小结">小结</a></li>
+      </ul>
+    </li>
+    <li><a href="#异步">异步</a>
+      <ul>
+        <li><a href="#线程池">线程池</a></li>
+        <li><a href="#async_logger">async_logger</a></li>
+        <li><a href="#post_log">post_log</a></li>
+        <li><a href="#mpmc_blocking_queue">mpmc_blocking_queue</a></li>
+        <li><a href="#circular_q">circular_q</a></li>
+        <li><a href="#小结-1">小结</a></li>
+      </ul>
+    </li>
+    <li><a href="#benchmark">benchmark</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </aside>
+        
+    </div><script>
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('tocButton');
+    const tocBody = document.getElementById('hide');
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!tocBody) return;
+
+    if (button) {
+        const mobile = window.matchMedia("(max-width: 768px)");
+        function syncExpandedState() {
+            button.setAttribute("aria-expanded", String(window.getComputedStyle(tocBody).display !== "none"));
+        }
+        syncExpandedState();
+        mobile.addEventListener("change", syncExpandedState);
+        button.addEventListener('click', function() {
+            const container = tocBody.closest(".toc-container");
+            if (!container) return;
+            const isOpen = window.getComputedStyle(tocBody).display === "none";
+            container.classList.toggle("is-expanded", isOpen);
+            container.classList.toggle("is-collapsed", !isOpen);
+            button.setAttribute("aria-expanded", String(isOpen));
+        });
+    }
+
+    const tocLinks = Array.from(tocBody.querySelectorAll('a[href^="#"]'));
+    tocLinks.forEach(link => {
+        if (!link.title) {
+            link.title = link.textContent.trim();
+        }
+    });
+    const headingTargets = tocLinks
+        .map(link => {
+            const id = decodeURIComponent(link.getAttribute('href').slice(1));
+            const el = document.getElementById(id);
+            return el ? { link, el } : null;
+        })
+        .filter(Boolean);
+    let lastActiveLink = null;
+    let currentActiveLinks = [];
+    let isProgrammaticScroll = false;
+    let scrollSettleTimer = null;
+    const SCROLL_SETTLE_MS = 180;
+
+    function getScrollOffset() {
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+        return Math.max(72, Math.round(navbarHeight + 16));
+    }
+
+    function keepTocLinkVisible(link) {
+        const scroller = link.closest('.toc-container');
+        if (!scroller || window.getComputedStyle(scroller).position === "static") return;
+        const linkRect = link.getBoundingClientRect();
+        const boxRect = scroller.getBoundingClientRect();
+        const topGap = linkRect.top - boxRect.top;
+        const bottomGap = boxRect.bottom - linkRect.bottom;
+        if (topGap < 8) {
+            scroller.scrollBy({
+                top: topGap - 12,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        } else if (bottomGap < 8) {
+            scroller.scrollBy({
+                top: 12 - bottomGap,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        }
+    }
+
+    function setActiveLinks(links) {
+        if (links.length === currentActiveLinks.length && links.every((link, index) => link === currentActiveLinks[index])) return;
+        tocLinks.forEach(link => {
+            link.classList.remove("toc-active", "toc-active-parent");
+            link.removeAttribute("aria-current");
+        });
+        links.forEach(link => {
+            link.classList.add("toc-active");
+        });
+        const first = links[0];
+        if (first) {
+            first.setAttribute("aria-current", "location");
+            if (lastActiveLink !== first) keepTocLinkVisible(first);
+        }
+        lastActiveLink = first;
+        currentActiveLinks = links;
+    }
+
+    function updateActive(forceUpdate) {
+        if (isProgrammaticScroll && !forceUpdate) return;
+        if (!headingTargets.length) return;
+        const top = getScrollOffset();
+        const bottom = window.innerHeight;
+        const body = document.querySelector(".article-body");
+        const articleEnd = body ? body.getBoundingClientRect().bottom : Infinity;
+        
+        
+        const positions = headingTargets.map(target => target.el.getBoundingClientRect().top);
+        const links = headingTargets.filter((target, index) => {
+            const end = index + 1 < positions.length ? positions[index + 1] : articleEnd;
+            return positions[index] < bottom && end > top;
+        }).map(target => target.link);
+        setActiveLinks(links);
+    }
+
+    function armScrollSettleTimer() {
+        if (!isProgrammaticScroll) return;
+        if (scrollSettleTimer) {
+            clearTimeout(scrollSettleTimer);
+        }
+        scrollSettleTimer = setTimeout(function() {
+            isProgrammaticScroll = false;
+            scrollSettleTimer = null;
+            updateActive(true);
+        }, SCROLL_SETTLE_MS);
+    }
+
+    updateActive(true);
+
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+            const id = decodeURIComponent(href.slice(1));
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            const offset = getScrollOffset();
+            const top = window.pageYOffset + target.getBoundingClientRect().top - offset;
+            isProgrammaticScroll = !prefersReducedMotion;
+            if (scrollSettleTimer) {
+                clearTimeout(scrollSettleTimer);
+                scrollSettleTimer = null;
+            }
+            window.scrollTo({
+                top: Math.max(0, top),
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+            if (history.pushState) {
+                history.pushState(null, '', href);
+            } else {
+                window.location.hash = href;
+            }
+            setActiveLinks([link]);
+            armScrollSettleTimer();
+        });
+    });
+
+    window.addEventListener("resize", function() { updateActive(); });
+    window.addEventListener("load", function() { updateActive(); });
+    if (document.fonts) document.fonts.ready.then(function() { updateActive(); });
+
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (isProgrammaticScroll) {
+            armScrollSettleTimer();
+            return;
+        }
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            updateActive(true);
+            ticking = false;
+        });
+    });
+});
+</script>
+
+            </div>
+            
+            <div class="article-body">
+                <h1 id="前文">前文</h1>
+<p>
+<a
+    class="post-card"
+    href="/post/code-analysis/spdlog-1/"
+    aria-label="阅读文章：日志库spdlog（一）"
+>
+    <span class="post-card__content">
+        <span class="post-card__heading">
+            <strong class="post-card__title">日志库spdlog（一）</strong>
+            <span class="post-card__arrow" aria-hidden="true">→</span>
+        </span>
+        <span class="post-card__summary">源码面前，了无秘密</span>
+
+        <span class="post-card__meta">
+            <time datetime="2026-08-16">
+                2026-08-16
+            </time>
+            <span class="post-card__categories">spdlog · Code Analysis</span>
+        </span>
+    </span>
+    <span class="post-card__thumbnail" aria-hidden="true">
+        <img src="/img/Code-Analysis/spdlog.png" alt="" loading="lazy" decoding="async">
+    </span>
+</a><style>
+.post-card {
+  display: flex;
+  width: 100%;
+  margin: 1.25rem 0;
+  padding: 0.95rem;
+  align-items: center;
+  gap: 1.05rem;
+  border: 1px solid rgba(64, 53, 36, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: 0 10px 28px rgba(83, 67, 38, 0.06);
+  color: #2f3136 !important;
+  text-decoration: none !important;
+  transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.post-card:hover {
+  border-color: rgba(61, 111, 159, 0.24);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 12px 30px rgba(83, 67, 38, 0.09);
+  color: #2f3136 !important;
+}
+
+.post-card:focus-visible {
+  outline: 2px solid rgba(61, 111, 159, 0.68);
+  outline-offset: 4px;
+}
+
+.post-card__content {
+  display: block;
+  min-width: 0;
+  flex: 1;
+  padding: 0.05rem 0.15rem;
+}
+
+.post-card__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.post-card__title {
+  display: block;
+  color: #2f3136 !important;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.post-card__arrow {
+  flex: 0 0 auto;
+  color: rgba(61, 111, 159, 0.72);
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: transform 0.18s ease;
+}
+
+.post-card:hover .post-card__arrow {
+  transform: translateX(2px);
+}
+
+.post-card__summary {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: 0.35rem;
+  color: #5f5b54;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.post-card__meta {
+  display: flex;
+  min-width: 0;
+  margin-top: 0.55rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0;
+  color: #706b61;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+}
+
+.post-card__categories {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-card__categories::before {
+  content: "·";
+  margin: 0 0.55rem;
+}
+
+.post-card__thumbnail {
+  display: block;
+  overflow: hidden;
+  width: 104px;
+  aspect-ratio: 4 / 3;
+  flex: 0 0 104px;
+  border: 1px solid rgba(64, 53, 36, 0.08);
+  border-radius: 7px;
+  background: #f4efe5;
+}
+
+.post-card__thumbnail img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.post-card:hover .post-card__thumbnail img {
+  transform: scale(1.025);
+}
+
+.dark-mode .post-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(22, 25, 29, 0.9);
+  box-shadow: none;
+  color: #e3e3e3 !important;
+}
+
+.dark-mode .post-card:hover {
+  border-color: rgba(146, 195, 235, 0.18);
+  background: #181b1f;
+  color: #e3e3e3 !important;
+}
+
+.dark-mode .post-card__meta {
+  color: rgba(227, 227, 227, 0.66);
+}
+
+.dark-mode .post-card__title {
+  color: #e3e3e3 !important;
+}
+
+.dark-mode .post-card__summary {
+  color: rgba(227, 227, 227, 0.78);
+}
+
+.dark-mode .post-card__arrow {
+  color: #92c3eb;
+}
+
+.dark-mode .post-card__thumbnail {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: #0f1113;
+}
+
+@media (max-width: 600px) {
+  .post-card {
+    padding: 0.8rem;
+    gap: 0.8rem;
+  }
+
+  .post-card__title {
+    font-size: 1rem;
+  }
+
+  .post-card__summary {
+    -webkit-line-clamp: 1;
+  }
+
+  .post-card__thumbnail {
+    width: 78px;
+    flex-basis: 78px;
+  }
+}
+</style>
+
+正如前文所说，本文将聚焦于spdlog在并发方面的工作，同时提点一下值得一提的技术。</p>
+<h1 id="线程安全">线程安全</h1>
+<p>C++支持多线程编程，既然支持并发（并发或者并行是有区别的，但常规而言并发用的更多，读者明白就好），那spdlog库就天然存在重入数据竞争的问题。
+比如，在registry层，存储一个name to logger的映射，此时如果并发写入，显然会有UB。
+再比如，如果多个线程同时对一个logger写入日志，那此时如果没有保护，显然输出会乱掉。</p>
+<p>spdlog为了支持并发，几乎在每一层都放了mutex来保护数据。</p>
+<h2 id="registry层">registry层</h2>
+<p>registry层主要有三个锁，如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">logger_map_mutex_</span><span class="p">,</span> <span class="n">flusher_mutex_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">recursive_mutex</span> <span class="n">tp_mutex_</span><span class="p">;</span></span></span></code></pre></div><p>前两个锁结合代码都很好理解：前者用于保护name to logger结构，后者用于保护定时会写的结构（支持定时刷盘，多线程实现）。
+在对logger执行操作时，此时不希望logger被更改，应当上锁，以达到快照功能：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">SPDLOG_INLINE</span> <span class="kt">void</span> <span class="n">registry</span><span class="o">::</span><span class="n">set_level</span><span class="p">(</span><span class="n">level</span><span class="o">::</span><span class="n">level_enum</span> <span class="n">log_level</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="c1">// 如果要设置日志等级，此时就不允许其他线程修改logger
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">logger_map_mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">l</span> <span class="p">:</span> <span class="n">loggers_</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="n">l</span><span class="p">.</span><span class="n">second</span><span class="o">-&gt;</span><span class="n">set_level</span><span class="p">(</span><span class="n">log_level</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="n">global_log_level_</span> <span class="o">=</span> <span class="n">log_level</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>最后一个则是用到了<code>std::recursive_mutex</code>，这是C++的可重入锁，也就是说可以被多个owner持有，内部存在计数，被锁上多少次就要被解锁多少次。
+其作用暂且按下不表，等将异步时再说明。</p>
+<h2 id="logger层">logger层</h2>
+<p>logger负责整合sink，实际上的并发安全是由sink保证的。当然这里logger初始化的时候会有些风险，显然你不应该在两个线程内同时去初始化同一个logger</p>
+<h2 id="sink层">sink层</h2>
+<p>该层负责真正写入时的并发安全，但sink基类却没有锁，这就比较奇怪了，回过头我们再看看两种sink的实现：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// ansicolor_sink.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">ConsoleMutex</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="k">class</span> <span class="nc">ansicolor_sink</span> <span class="o">:</span> <span class="k">public</span> <span class="n">sink</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">using</span> <span class="n">mutex_t</span> <span class="o">=</span> <span class="k">typename</span> <span class="n">ConsoleMutex</span><span class="o">::</span><span class="n">mutex_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="n">mutex_t</span> <span class="o">&amp;</span><span class="n">mutex_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">using</span> <span class="n">ansicolor_stdout_sink_mt</span> <span class="o">=</span> <span class="n">ansicolor_stdout_sink</span><span class="o">&lt;</span><span class="n">details</span><span class="o">::</span><span class="n">console_mutex</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="k">using</span> <span class="n">ansicolor_stdout_sink_st</span> <span class="o">=</span> <span class="n">ansicolor_stdout_sink</span><span class="o">&lt;</span><span class="n">details</span><span class="o">::</span><span class="n">console_nullmutex</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1">// basic_file_sink.h
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Mutex</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="k">class</span> <span class="nc">basic_file_sink</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base_sink</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="k">using</span> <span class="n">basic_file_sink_mt</span> <span class="o">=</span> <span class="n">basic_file_sink</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="k">using</span> <span class="n">basic_file_sink_st</span> <span class="o">=</span> <span class="n">basic_file_sink</span><span class="o">&lt;</span><span class="n">details</span><span class="o">::</span><span class="n">null_mutex</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="c1">// base_sink.h
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Mutex</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="k">class</span> <span class="nc">SPDLOG_API</span> <span class="nl">base_sink</span> <span class="p">:</span> <span class="k">public</span> <span class="n">sink</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="n">Mutex</span> <span class="n">mutex_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="p">};</span></span></span></code></pre></div><p>对于不同的sink，都会定义一个mutex，以此实现多线程下的写入安全。
+在使用部分，则是在log、flush等多处使用，保证临界区写入安全。
+对于一个sink，提供了_mt _st两类后缀类型实例，传入了正常的mutex锁以及只实现了lock、unlock两个空方法的结构，有兴趣可以看看。
+这样对于任意一个类型的sink，不必两种类型都实现一遍，空方法编译器是会优化掉的。</p>
+<h2 id="小结">小结</h2>
+<p>spdlog在并发上做的很严谨，正如上文所说，锁对性能也有一定影响，锁基本也只加在了需要的地方。
+显然，针对单线程场景，我们使用single thread类型的sink，针对多线程场景，则使用multi thread类型的，便捷切换，直接改个mt即可，你大概率也不会有任何心智负担。</p>
+<h1 id="异步">异步</h1>
+<p>从之前的分析中可以看到，一套日志输出还是比较繁琐的，层级多，而且还需要主线程老老实实等待每一步做完，性能显然不佳。
+对于这个问题，spdlog也提供了异步的解决方案，这里就是线程池。
+以该程序为例</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kt">void</span> <span class="nf">async_logging_example</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="c1">// 业务线程只负责把日志放入队列；后台线程负责真正写文件。
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span>    <span class="k">constexpr</span> <span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">queue_size</span> <span class="o">=</span> <span class="mi">8192</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">constexpr</span> <span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">backend_threads</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// 线程池任务队列大小和线程数量
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"></span>    <span class="n">spdlog</span><span class="o">::</span><span class="n">init_thread_pool</span><span class="p">(</span><span class="n">queue_size</span><span class="p">,</span> <span class="n">backend_threads</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="k">auto</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">spdlog</span><span class="o">::</span><span class="n">create_async</span><span class="o">&lt;</span><span class="n">spdlog</span><span class="o">::</span><span class="n">sinks</span><span class="o">::</span><span class="n">basic_file_sink_mt</span><span class="o">&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="s">&#34;async_file&#34;</span><span class="p">,</span> <span class="s">&#34;logs/async-log.txt&#34;</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">logger</span><span class="o">-&gt;</span><span class="n">set_pattern</span><span class="p">(</span><span class="s">&#34;[%H:%M:%S.%e] [%n] [thread %t] %v&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">producer_count</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">messages_per_producer</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="o">&gt;</span> <span class="n">producers</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="n">producers</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">producer_count</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">producer_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">producer_id</span> <span class="o">&lt;</span> <span class="n">producer_count</span><span class="p">;</span> <span class="o">++</span><span class="n">producer_id</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="n">producers</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">([</span><span class="n">logger</span><span class="p">,</span> <span class="n">producer_id</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">message_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">message_id</span> <span class="o">&lt;</span> <span class="n">messages_per_producer</span><span class="p">;</span> <span class="o">++</span><span class="n">message_id</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">                <span class="n">logger</span><span class="o">-&gt;</span><span class="n">info</span><span class="p">(</span><span class="s">&#34;producer={}, message={}&#34;</span><span class="p">,</span> <span class="n">producer_id</span><span class="p">,</span> <span class="n">message_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">producer</span><span class="p">:</span> <span class="n">producers</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">        <span class="n">producer</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">
+</span></span><span class="line"><span class="ln">29</span><span class="cl">    <span class="n">logger</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>我们分析上述每一步，大体上就能理解spdlog是如何通过异步来提高性能的。</p>
+<h2 id="线程池">线程池</h2>
+<p>第一步就是初始化一个线程池，上面设定了任务队列的大小（在这里称呼为消息队列比较准确），以及线程数量。
+线程池的构造函数如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// thread_pool-inl.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="n">SPDLOG_INLINE</span> <span class="n">thread_pool</span><span class="o">::</span><span class="n">thread_pool</span><span class="p">(</span><span class="n">size_t</span> <span class="n">q_max_items</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">                                       <span class="n">size_t</span> <span class="n">threads_n</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">                                       <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">on_thread_start</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">                                       <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">on_thread_stop</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="o">:</span> <span class="n">q_</span><span class="p">(</span><span class="n">q_max_items</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">threads_n</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">threads_n</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="n">throw_spdlog_ex</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">            <span class="s">&#34;thread_pool(): invalid threads_n param (valid &#34;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">            <span class="s">&#34;range is 1-1000)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">threads_n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="c1">// 套用匿名函数创建线程
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="c1"></span>        <span class="c1">// 还用function塞俩回调进去了
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1"></span>        <span class="n">threads_</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">([</span><span class="k">this</span><span class="p">,</span> <span class="n">on_thread_start</span><span class="p">,</span> <span class="n">on_thread_stop</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">            <span class="n">on_thread_start</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">            <span class="k">this</span><span class="o">-&gt;</span><span class="n">thread_pool</span><span class="o">::</span><span class="n">worker_loop_</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">            <span class="n">on_thread_stop</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="kt">void</span> <span class="n">SPDLOG_INLINE</span> <span class="n">thread_pool</span><span class="o">::</span><span class="n">worker_loop_</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="c1">// 核心处理loop
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="n">process_next_msg_</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">
+</span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="c1">// process next message in the queue
+</span></span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="c1">// returns true if this thread should still be active (while no terminated msg was received)
+</span></span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">SPDLOG_INLINE</span> <span class="n">thread_pool</span><span class="o">::</span><span class="n">process_next_msg_</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">    <span class="c1">// 从消息队列中取出一个消息
+</span></span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="c1"></span>    <span class="n">async_msg</span> <span class="n">incoming_async_msg</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">    <span class="n">q_</span><span class="p">.</span><span class="n">dequeue</span><span class="p">(</span><span class="n">incoming_async_msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">
+</span></span><span class="line"><span class="ln">36</span><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="n">incoming_async_msg</span><span class="p">.</span><span class="n">msg_type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">        <span class="c1">// 再根据msg type来做具体的行为
+</span></span></span><span class="line"><span class="ln">38</span><span class="cl"><span class="c1"></span>        <span class="k">case</span> <span class="n">async_msg_type</span><span class="o">::</span><span class="nl">log</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">            <span class="n">incoming_async_msg</span><span class="p">.</span><span class="n">worker_ptr</span><span class="o">-&gt;</span><span class="n">backend_sink_it_</span><span class="p">(</span><span class="n">incoming_async_msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">        <span class="k">case</span> <span class="n">async_msg_type</span><span class="o">::</span><span class="nl">flush</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">            <span class="n">incoming_async_msg</span><span class="p">.</span><span class="n">worker_ptr</span><span class="o">-&gt;</span><span class="n">backend_flush_</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">
+</span></span><span class="line"><span class="ln">47</span><span class="cl">        <span class="k">case</span> <span class="n">async_msg_type</span><span class="o">::</span><span class="nl">terminate</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">
+</span></span><span class="line"><span class="ln">51</span><span class="cl">        <span class="k">default</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">52</span><span class="cl">            <span class="n">assert</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">54</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">55</span><span class="cl">
+</span></span><span class="line"><span class="ln">56</span><span class="cl">    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">57</span><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>至上而下分析到这里，我们也有了一些异步的运行猜想了：</p>
+<ol>
+<li>业务线程创建async_msg，投递到消息队列里：<code>thread_pool::post_log</code></li>
+<li>再由每个线程来处理消息，根据不同的消息类型，反过来调用消息类型里所携带的logger指针继续我们的sink调用</li>
+</ol>
+<h2 id="async_logger">async_logger</h2>
+<p>回看示例程序，在创建logger时，使用的是<code>spdlog::create_async</code>这个函数：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// async.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="k">template</span> <span class="o">&lt;</span><span class="n">async_overflow_policy</span> <span class="n">OverflowPolicy</span> <span class="o">=</span> <span class="n">async_overflow_policy</span><span class="o">::</span><span class="n">block</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="k">struct</span> <span class="nc">async_factory_impl</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Sink</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">SinkArgs</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">async_logger</span><span class="o">&gt;</span> <span class="n">create</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">logger_name</span><span class="p">,</span> <span class="n">SinkArgs</span> <span class="o">&amp;&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="c1">// ...
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1"></span>        <span class="k">auto</span> <span class="n">new_logger</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">async_logger</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger_name</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">sink</span><span class="p">),</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">                                                         <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">tp</span><span class="p">),</span> <span class="n">OverflowPolicy</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="n">registry_inst</span><span class="p">.</span><span class="n">initialize_logger</span><span class="p">(</span><span class="n">new_logger</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="c1">// ...
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">new_logger</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="k">using</span> <span class="n">async_factory</span> <span class="o">=</span> <span class="n">async_factory_impl</span><span class="o">&lt;</span><span class="n">async_overflow_policy</span><span class="o">::</span><span class="n">block</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="k">using</span> <span class="n">async_factory_nonblock</span> <span class="o">=</span> <span class="n">async_factory_impl</span><span class="o">&lt;</span><span class="n">async_overflow_policy</span><span class="o">::</span><span class="n">overrun_oldest</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Sink</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">SinkArgs</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">logger</span><span class="o">&gt;</span> <span class="n">create_async</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">logger_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">                                                    <span class="n">SinkArgs</span> <span class="o">&amp;&amp;</span><span class="p">...</span><span class="n">sink_args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="k">return</span> <span class="n">async_factory</span><span class="o">::</span><span class="n">create</span><span class="o">&lt;</span><span class="n">Sink</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger_name</span><span class="p">),</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">                                       <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">SinkArgs</span><span class="o">&gt;</span><span class="p">(</span><span class="n">sink_args</span><span class="p">)...);</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>返回的logger类型也是<code>async_logger</code>，我们不禁要问，和普通的logger有什么不同呢，这才是真正的关键：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="kt">void</span> <span class="n">async_logger</span><span class="o">::</span><span class="n">sink_it_</span><span class="p">(</span><span class="k">const</span> <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">SPDLOG_TRY</span><span class="p">{</span><span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="n">pool_ptr</span> <span class="o">=</span> <span class="n">thread_pool_</span><span class="p">.</span><span class="n">lock</span><span class="p">()){</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="n">pool_ptr</span> <span class="o">-&gt;</span> <span class="n">post_log</span><span class="p">(</span><span class="n">shared_from_this</span><span class="p">(),</span> <span class="n">msg</span><span class="p">,</span> <span class="n">overflow_policy_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="n">throw_spdlog_ex</span><span class="p">(</span><span class="s">&#34;async log: thread pool doesn&#39;t exist anymore&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>显而易见，重写了sink_it_方法！通过<code>weak_ptr</code>拿到线程池，并调用上文提到的<code>post_log</code>，把一个普通的msg（复用的同一套格式化、创建msg的逻辑）转换成async_msg。</p>
+<h2 id="post_log">post_log</h2>
+<p>又回到了线程池的实现中，post_log的实现如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// thread_pool-inl.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">SPDLOG_INLINE</span> <span class="n">thread_pool</span><span class="o">::</span><span class="n">post_log</span><span class="p">(</span><span class="n">async_logger_ptr</span> <span class="o">&amp;&amp;</span><span class="n">worker_ptr</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">                                         <span class="k">const</span> <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">                                         <span class="n">async_overflow_policy</span> <span class="n">overflow_policy</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="n">async_msg</span> <span class="nf">async_m</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">worker_ptr</span><span class="p">),</span> <span class="n">async_msg_type</span><span class="o">::</span><span class="n">log</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="n">post_async_msg_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">async_m</span><span class="p">),</span> <span class="n">overflow_policy</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="kt">void</span> <span class="n">SPDLOG_INLINE</span> <span class="n">thread_pool</span><span class="o">::</span><span class="n">post_async_msg_</span><span class="p">(</span><span class="n">async_msg</span> <span class="o">&amp;&amp;</span><span class="n">new_msg</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">                                                <span class="n">async_overflow_policy</span> <span class="n">overflow_policy</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">overflow_policy</span> <span class="o">==</span> <span class="n">async_overflow_policy</span><span class="o">::</span><span class="n">block</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="n">q_</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">new_msg</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">overflow_policy</span> <span class="o">==</span> <span class="n">async_overflow_policy</span><span class="o">::</span><span class="n">overrun_oldest</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="n">q_</span><span class="p">.</span><span class="n">enqueue_nowait</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">new_msg</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="n">assert</span><span class="p">(</span><span class="n">overflow_policy</span> <span class="o">==</span> <span class="n">async_overflow_policy</span><span class="o">::</span><span class="n">discard_new</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="n">q_</span><span class="p">.</span><span class="n">enqueue_if_have_room</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">new_msg</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>刚刚一直有意地忽略了policy这个概念，显然只要是队列，就会有满的时候，我们需要通过不同的策略来对其进行处理，这里就是通过调用<code>q_</code>的不同方法来进行处理。
+spdlog提供了三种不同的策略来处理队列满的情况：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">enum</span> <span class="k">class</span> <span class="nc">async_overflow_policy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">block</span><span class="p">,</span>           <span class="c1">// Block until message can be enqueued
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="c1"></span>    <span class="n">overrun_oldest</span><span class="p">,</span>  <span class="c1">// Discard oldest message in the queue if full when trying to
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1"></span>                     <span class="c1">// add new item.
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="c1"></span>    <span class="n">discard_new</span>      <span class="c1">// Discard new message if the queue is full when trying to add new item.
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="c1"></span><span class="p">};</span></span></span></code></pre></div><p>另外值得一提的是，这里通过普通的<code>log_msg</code>创建了<code>async_msg</code>，不妨也可以看看async_msg和log_msg有什么不同：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// thread_pool-inl.h
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">async_msg</span> <span class="o">:</span> <span class="n">log_msg_buffer</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="n">async_msg_type</span> <span class="n">msg_type</span><span class="p">{</span><span class="n">async_msg_type</span><span class="o">::</span><span class="n">log</span><span class="p">};</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="n">async_logger_ptr</span> <span class="n">worker_ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1">// log_msg_buffer
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">SPDLOG_API</span> <span class="nl">log_msg_buffer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">log_msg</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">memory_buf_t</span> <span class="n">buffer</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="kt">void</span> <span class="nf">append_source</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="kt">void</span> <span class="nf">update_string_views</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"></span><span class="p">};</span></span></span></code></pre></div><p>这里很有意思，<code>log_msg</code>里所拥有的其实是视图，因为是同步，所以能保证数据源一直在栈上。
+但在这种异步的场景就行不通了，所以有了<code>log_msg_buffer</code>来深拷贝一波真实数据。</p>
+<p>再来一个问题，为什么这里会存<code>async_logger_ptr worker_ptr;</code>？
+因为上面的<code>sink_it_</code>只是提交到消息队列里，并没有真正的落盘，真实落盘还是需要<code>async_logger</code>来辅助。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kt">void</span> <span class="n">async_logger</span><span class="o">::</span><span class="n">backend_sink_it_</span><span class="p">(</span><span class="k">const</span> <span class="n">details</span><span class="o">::</span><span class="n">log_msg</span> <span class="o">&amp;</span><span class="n">incoming_log_msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">sink</span> <span class="p">:</span> <span class="n">sinks_</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">sink</span><span class="o">-&gt;</span><span class="n">should_log</span><span class="p">(</span><span class="n">incoming_log_msg</span><span class="p">.</span><span class="n">level</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">            <span class="n">SPDLOG_TRY</span> <span class="p">{</span> <span class="n">sink</span><span class="o">-&gt;</span><span class="n">log</span><span class="p">(</span><span class="n">incoming_log_msg</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">            <span class="n">SPDLOG_LOGGER_CATCH</span><span class="p">(</span><span class="n">incoming_log_msg</span><span class="p">.</span><span class="n">source</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">should_flush_</span><span class="p">(</span><span class="n">incoming_log_msg</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="n">backend_flush_</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>这就和我们之前看到的普通logger的行为是一样的了。在提交时，只是完成了logger创建msg的任务，还没有完成写入落盘的任务。</p>
+<h2 id="mpmc_blocking_queue">mpmc_blocking_queue</h2>
+<p>最后一块内容就是消息队列的实现。
+这里的mpmc是<code>multi-producer、multi-consumer</code>的含义。
+由于这个线程池的任务高度一致，所以这里也没有任务队列这一说（普通线程池缓存函数对象）。
+那么这里线程同步的任务肯定是由<code>mpmc_blocking_queue</code>来实现：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="k">class</span> <span class="nc">mpmc_blocking_queue</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">using</span> <span class="n">item_type</span> <span class="o">=</span> <span class="n">T</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// try to enqueue and block if no room left
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">enqueue</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;&amp;</span><span class="n">item</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">queue_mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">            <span class="c1">// 这里需要等待
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1"></span>            <span class="n">pop_cv_</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">q_</span><span class="p">.</span><span class="n">full</span><span class="p">();</span> <span class="p">});</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">            <span class="n">q_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">item</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="n">push_cv_</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="c1">// enqueue immediately. overrun oldest message in the queue if no room left.
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">enqueue_nowait</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;&amp;</span><span class="n">item</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">queue_mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">            <span class="n">q_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">item</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="n">push_cv_</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="kt">void</span> <span class="nf">enqueue_if_have_room</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;&amp;</span><span class="n">item</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">        <span class="kt">bool</span> <span class="n">pushed</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">queue_mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">q_</span><span class="p">.</span><span class="n">full</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">                <span class="n">q_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">item</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">                <span class="n">pushed</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">
+</span></span><span class="line"><span class="ln">35</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">pushed</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">            <span class="n">push_cv_</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">            <span class="o">++</span><span class="n">discard_counter_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">
+</span></span><span class="line"><span class="ln">42</span><span class="cl">    <span class="c1">// blocking dequeue without a timeout.
+</span></span></span><span class="line"><span class="ln">43</span><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">dequeue</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">popped_item</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">queue_mutex_</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">            <span class="n">push_cv_</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">q_</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span> <span class="p">});</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">            <span class="n">popped_item</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">q_</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">            <span class="n">q_</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">        <span class="n">pop_cv_</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">52</span><span class="cl">
+</span></span><span class="line"><span class="ln">53</span><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="ln">54</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">queue_mutex_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">55</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">condition_variable</span> <span class="n">push_cv_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">56</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">condition_variable</span> <span class="n">pop_cv_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">57</span><span class="cl">    <span class="n">circular_q</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">q_</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">58</span><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">atomic</span><span class="o">&lt;</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">discard_counter_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="ln">59</span><span class="cl"><span class="p">};</span></span></span></code></pre></div><p>这显然就是一个常规的线程安全的消息队列，<code>circular_q</code>暂且按下不表，可以看到有三种方式的enqueue，对应着上面说的三种不同policy：阻塞、覆盖、丢弃。
+其实借助了两个条件变量，例如阻塞场景下，等待着队列非空才会将新msg入队列，同时调用<code>push_cv_</code>来通知所有等待的线程有消息可以消费。
+这也是条件变量用于线程同步的精妙所在，锁用于保护数据成员，而条件变量则可以借助锁来做到多线程之间的同步，减少CPU消耗。</p>
+<h2 id="circular_q">circular_q</h2>
+<p>为了减少篇幅，这里就不贴具体实现，无非是一个简单的环状数组，需要注意以下几点：</p>
+<ol>
+<li>多放一个位置，用于标识full的状态；</li>
+<li>一切操作后都要+1对max_size来取模</li>
+</ol>
+<h2 id="小结-1">小结</h2>
+<p>至此，我们可以看到spdlog是如何支持异步的，又是如何做到并发安全的。
+其中所用到的知识也并没有任何黑魔法，没有跳出C++语法的范畴，其中有许多不错的技巧值得一提。
+想想还是将其放在下一章好了，下一节做个简短的实验，来直观感受一下异步和同步之间的区别。</p>
+<h1 id="benchmark">benchmark</h1>
+<p>考虑这样一个场景：同样对单文件输出1kw条日志，内容完全相同，一个同步，一个异步，异步使用线程池队列大小为65536，线程数量为1（通过同一个sink写同一个文件，没必要开俩线程）
+所得结果如下：
+
+  <img loading="lazy" decoding="async" src="/img/Code-Analysis/spdlog2.png" alt="">
+</p>
+<p>其中caller-path是异步提交消息过程，end-to-end其实是后台线程写入过程。</p>
+<p>同步的性能居然比异步要强，这怎么可能呢？
+其实是合理的，回想一下同步和异步的过程：只要写入文件的消耗比创建深拷贝、提交到任务队列等所消耗的时间更少，那同步注定比异步快。</p>
+<p>这里不禁要问，那异步绕这么大一圈，有什么意义呢？
+其实是有的，上述场景其实不太好，设想这样一个场景，一个多线程程序，N个线程同时写一个文件，如果此时还是同步，那所有人都会抢锁，业务代码甚至会被卡死。
+此时合理的做法就是异步提交，业务线程只负责投递消息，由线程池来处理无效的锁等待、IO等待等过程。
+
+  <img loading="lazy" decoding="async" src="/img/Code-Analysis/spdlog3.png" alt="">
+</p>
+<p>可以看到，提交的速度快了不是一星半点。</p>
+<p>这里的性能测试不太严谨，只是测测最简单的场景。
+但不难发现，不要盲目使用异步，只有确定业务代码需要异步后才可以上，否则只是空谈。</p>
+<h1 id="总结">总结</h1>
+<p>工作太消耗精力，居然卡了大半个月，好在最后benchmark部分让codex抬了一手，不然更是懒得去细看怎么写benchmark。
+我想这一篇写下来最大的感触就是写并发、异步程序实在是不容易，不仅要考虑锁的粒度，还要考虑数据的生命周期。
+另外一个则是异步也未必比同步快，最大的优势就是不用管忙等待，对于性能敏感的业务代码而言，异步仍旧是上上之选。
+日志也并非太重要的数据，所以异步场景下为了不阻塞，甚至允许覆盖/丢弃，当然这里也要考虑清楚你的应用场景，万一线上出了个bug，刚好丢了重要日志，那就彻底麻了。</p>
+<p>下一篇会谈谈各个技术点，也是我的舒适区，开搞！</p>
+
+            </div>
+        </div>
+    </div>
+    <a href="#" id="scrollToTopButton">
+        <svg t="1686753152588" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="3988" width="48" height="48">
+            <path
+                d="M518.5 360.3c-3.2-4.4-9.7-4.4-12.9 0l-178 246c-3.8 5.3 0 12.7 6.5 12.7H381c10.2 0 19.9-4.9 25.9-13.2L512 460.4l105.2 145.4c6 8.3 15.6 13.2 25.9 13.2H690c6.5 0 10.3-7.4 6.5-12.7l-178-246z"
+                p-id="3989" fill="#363636"></path>
+            <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                p-id="3990" fill="#363636"></path>
+        </svg>
+    </a><hr style="border-top: 1px solid #EEEEEE;">
+<div id="comment"></div>
+<script>
+    (function() {
+        "use strict";
+
+        var activeTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        var giscusScript = null;
+        var readyFrame = null;
+        var giscusOrigin = "https://giscus.app";
+
+        function sendGiscusTheme(theme) {
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || iframe !== readyFrame || iframe.contentWindow === null) {
+                return;
+            }
+            iframe.contentWindow.postMessage({
+                giscus: {
+                    setConfig: {
+                        theme: theme
+                    }
+                }
+            }, giscusOrigin);
+        }
+
+        
+        
+        window.addEventListener("message", function(event) {
+            if (event.origin !== giscusOrigin || !event.data || !event.data.giscus) return;
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || event.source !== iframe.contentWindow || readyFrame === iframe) return;
+            readyFrame = iframe;
+            sendGiscusTheme(activeTheme);
+        });
+
+        function updateGiscusTheme(theme) {
+            activeTheme = theme === "light" ? "light" : "dark";
+            if (giscusScript !== null) {
+                giscusScript.setAttribute("data-theme", activeTheme);
+            }
+            sendGiscusTheme(activeTheme);
+        }
+
+        window.addEventListener("theme-change", function(event) {
+            var theme = event.detail && event.detail.theme;
+            updateGiscusTheme(theme);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var comment = document.getElementById("comment");
+            if (comment === null) {
+                return;
+            }
+
+            var giscusAttributes = {
+                "src": "https://giscus.app/client.js",
+                "data-repo": "O-A-P\/O-A-P.github.io",
+                "data-repo-id": "R_kgDOJEfHWQ",
+                "data-category": "Announcements",
+                "data-category-id": "DIC_kwDOJEfHWc4CcDhX",
+                "data-mapping": "og:title",
+                "data-reactions-enabled": "1",
+                "data-emit-metadata": "0",
+                "data-input-position": "bottom",
+                "data-theme": activeTheme,
+                "data-lang": "en",
+                "data-loading": "lazy",
+                "crossorigin": "anonymous"
+            };
+
+            giscusScript = document.createElement("script");
+            Object.entries(giscusAttributes).forEach(function(attribute) {
+                giscusScript.setAttribute(attribute[0], attribute[1]);
+            });
+            comment.appendChild(giscusScript);
+        });
+    })();
+
+</script>
+
+<div class="pp-container">
+        <section class="pre-and-post">
+            <div class="has-text-left">
+                
+                <p>Previous post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/code-analysis/spdlog-1/">日志库spdlog（一）</a>
+                
+            </div>
+            <div class="has-text-right ">
+                
+                <p>Next post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/code-analysis/spdlog-3/">日志库spdlog（三）</a>
+                
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<style>
+.page-enter {
+    animation: page-fade-in 0.6s ease-out both;
+}
+@keyframes page-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+</style>
+
+        </main>
+    
+    <aside class="article-minimap" hidden aria-label="文章缩略导航">
+    <div class="article-minimap__track" role="slider" tabindex="0" aria-label="阅读位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-orientation="vertical">
+        <div class="article-minimap__preview single-container" aria-hidden="true" inert></div>
+        <div class="article-minimap__embeds" aria-hidden="true" inert></div>
+        <div class="article-minimap__viewport" aria-hidden="true"></div>
+    </div>
+</aside>
+<script src="/js/article-minimap.js" defer></script>
+
+
+        <div id="card-transition-overlay" class="card-transition-overlay"></div><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2026 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div><script src="/js/copy-to-clipboard.js?v=b03da288555be11559ba55eaf0055f160e096df92d7b023ff08f2d567e70072d"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img');
+
+  (function() {
+    const overlay = document.getElementById("card-transition-overlay");
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isNavigating = false;
+
+    function shouldHandleLink(link, event) {
+      if (!link || !overlay) return false;
+      if (isNavigating || event.defaultPrevented) return false;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+      if (link.closest(".myCard")) return false;
+      if (link.closest("[data-no-page-transition]")) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+
+      const href = link.getAttribute("href");
+      if (!href) return false;
+      if (href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+
+      let targetUrl = null;
+      try {
+        targetUrl = new URL(href, window.location.href);
+      } catch (err) {
+        return false;
+      }
+
+      if (targetUrl.origin !== window.location.origin) return false;
+      if (targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search &&
+          targetUrl.hash.length > 0) return false;
+      if (targetUrl.href === window.location.href) return false;
+
+      return true;
+    }
+
+    function navigateWithOverlay(href) {
+      if (isNavigating) return;
+      isNavigating = true;
+      document.body.style.pointerEvents = "none";
+      overlay.classList.add("card-transition-overlay--active");
+      const delay = prefersReducedMotion ? 0 : 360;
+      window.setTimeout(function() {
+        window.location.href = href;
+      }, delay);
+    }
+
+    document.addEventListener("click", function(event) {
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      navigateWithOverlay(link.href);
+    }, true);
+
+    window.addEventListener("pageshow", function() {
+      isNavigating = false;
+      document.body.style.pointerEvents = "";
+      if (overlay) overlay.classList.remove("card-transition-overlay--active");
+    });
+  })();
+</script>
+
+  </footer>
+</body>
+</html>
