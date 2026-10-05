@@ -1,0 +1,3700 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>About me | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="代码、文字，还有生活里的片刻。"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/about/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.5999875c207344d4989199573f80fecaba4855412f9c039400fb8346f06ace44.css">
+
+    
+    <meta property="og:title" content="About me" />
+<meta property="og:description" content="代码、文字，还有生活里的片刻。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/about/" /><meta property="article:section" content="" />
+<meta property="article:published_time" content="2023-12-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-12-25T00:00:00+00:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="About me"/>
+<meta name="twitter:description" content="代码、文字，还有生活里的片刻。"/>
+
+    
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body class="dark-mode"><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#" aria-label="Switch color theme">
+                <svg class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path class="theme-icon__moon" fill="currentColor"
+                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <g class="theme-icon__sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/friends" class="navbar-item">Friends</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.querySelector('.navbar');
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        if (!navbar || !burger || !menu) return;
+
+        var animating = false;
+        var opened = false;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var MOBILE_QUERY = '(max-width: 1087px)';
+
+        function isMobileMenu() {
+            return window.matchMedia(MOBILE_QUERY).matches;
+        }
+
+        function clearMenuInlineStyle() {
+            menu.style.height = '';
+            menu.style.opacity = '';
+            menu.style.transform = '';
+            menu.style.overflow = '';
+            menu.style.transition = '';
+        }
+
+        function resetToDesktop() {
+            animating = false;
+            opened = false;
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+            clearMenuInlineStyle();
+        }
+
+        function openMenu() {
+            if (animating || opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = true;
+            animating = true;
+            burger.classList.add('is-active');
+            menu.classList.add('is-active');
+            burger.setAttribute('aria-expanded', 'true');
+
+            if (reduceMotion) {
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+            menu.offsetHeight;
+
+            var targetHeight = menu.scrollHeight;
+            menu.style.transition = 'height 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms ease';
+            menu.style.height = targetHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+
+            window.setTimeout(function() {
+                menu.style.height = 'auto';
+                menu.style.overflow = 'visible';
+                animating = false;
+            }, 280);
+        }
+
+        function closeMenu() {
+            if (animating || !opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = false;
+            animating = true;
+            burger.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+
+            if (reduceMotion) {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = menu.scrollHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+            menu.offsetHeight;
+
+            menu.style.transition = 'height 230ms cubic-bezier(0.4, 0, 1, 1), opacity 160ms ease, transform 180ms ease';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function() {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+            }, 240);
+        }
+
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (opened) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!isMobileMenu() || !opened) return;
+            if (navbar.contains(e.target)) return;
+            closeMenu();
+        });
+
+        menu.addEventListener('click', function(e) {
+            var link = e.target.closest('.navbar-item');
+            if (!link || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isMobileMenu()) {
+                resetToDesktop();
+            }
+        });
+    });
+
+    
+    
+    
+    (function() {
+        "use strict";
+
+        var root = document.documentElement;
+        var body = document.body;
+        var themeToggle = document.getElementById("theme-toggle");
+        var isTransitioning = false;
+        var effectsPaused = false;
+        var currentTheme = readStoredTheme();
+
+        if (themeToggle === null) return;
+
+        function readStoredTheme() {
+            try {
+                var storedTheme = localStorage.getItem("theme");
+                if (storedTheme === "dark" || storedTheme === "light") {
+                    return storedTheme;
+                }
+            } catch (error) {
+                
+            }
+            return "dark";
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (error) {
+                
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            body.classList.toggle("dark-mode", theme === "dark");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            );
+            storeTheme(theme);
+            window.dispatchEvent(new CustomEvent("theme-change", {
+                detail: { theme: theme }
+            }));
+        }
+
+        function getRevealOrigin(event) {
+            var bounds = themeToggle.getBoundingClientRect();
+            var origin = {
+                x: bounds.left + bounds.width / 2,
+                y: bounds.top + bounds.height / 2
+            };
+
+            
+            
+            if (event.clientX !== 0 || event.clientY !== 0) {
+                origin.x = event.clientX;
+                origin.y = event.clientY;
+            }
+            return origin;
+        }
+
+        function getRevealGeometry(origin) {
+            var farthestX = Math.max(origin.x, window.innerWidth - origin.x);
+            var farthestY = Math.max(origin.y, window.innerHeight - origin.y);
+            var radius = Math.hypot(farthestX, farthestY);
+
+            return {
+                radius: radius,
+                
+                duration: Math.max(650, Math.min(1100, radius / 1.5))
+            };
+        }
+
+        function setToggleBusy(active) {
+            isTransitioning = active;
+            if (active) {
+                themeToggle.setAttribute("aria-disabled", "true");
+            } else {
+                themeToggle.removeAttribute("aria-disabled");
+            }
+        }
+
+        function setEffectsPaused(paused) {
+            if (effectsPaused === paused) return;
+            effectsPaused = paused;
+            window.dispatchEvent(new CustomEvent(
+                paused ? "theme-transition-start" : "theme-transition-end"
+            ));
+        }
+
+        function finishTransition() {
+            if (!isTransitioning) return;
+            root.classList.remove("theme-transition-active");
+            setEffectsPaused(false);
+            setToggleBusy(false);
+        }
+
+        function startThemeTransition(nextTheme, event) {
+            var origin = getRevealOrigin(event);
+            var geometry = getRevealGeometry(origin);
+            var fromClip = "circle(0px at " + origin.x + "px " + origin.y + "px)";
+            var toClip = "circle(" + geometry.radius + "px at "
+                + origin.x + "px " + origin.y + "px)";
+            var preflightClip = "circle(" + Math.max(geometry.radius - 1, 0) + "px at "
+                + origin.x + "px " + origin.y + "px)";
+
+            setEffectsPaused(true);
+            root.classList.add("theme-transition-active");
+
+            var transition;
+            try {
+                transition = document.startViewTransition(function() {
+                    applyTheme(nextTheme);
+                });
+            } catch (error) {
+                applyTheme(nextTheme);
+                finishTransition();
+                return;
+            }
+
+            transition.ready.then(function() {
+                try {
+                    root.animate(
+                        [
+                            {
+                                opacity: 0.001,
+                                clipPath: toClip
+                            },
+                            {
+                                opacity: 0.001,
+                                clipPath: preflightClip
+                            }
+                        ],
+                        {
+                            duration: 34,
+                            easing: "linear",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+
+                    root.animate(
+                        {
+                            opacity: [1, 1],
+                            clipPath: [fromClip, toClip]
+                        },
+                        {
+                            delay: 34,
+                            duration: geometry.duration,
+                            easing: "linear",
+                            fill: "forwards",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+                } catch (error) {
+                    if (typeof transition.skipTransition === "function") {
+                        transition.skipTransition();
+                    }
+                }
+            }, finishTransition);
+
+            transition.finished.then(finishTransition, finishTransition);
+        }
+
+        function switchTheme(nextTheme, event) {
+            var reduceMotion = window.matchMedia
+                && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (isTransitioning) return;
+            if (typeof document.startViewTransition !== "function" || reduceMotion) {
+                applyTheme(nextTheme);
+                return;
+            }
+
+            setToggleBusy(true);
+            startThemeTransition(nextTheme, event);
+        }
+
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            switchTheme(currentTheme === "light" ? "dark" : "light", event);
+        });
+    })();
+
+
+
+</script>
+
+</header>
+<main>
+<div class="container">
+    <div class="section">
+        <div class="content">
+            <h1>About me</h1>
+        </div>
+    </div>
+</div>
+<div class="about-page">
+    <span class="about-folder-rear" aria-hidden="true">
+        <span class="about-folder__back">
+            <img src="/img/about-folder.png" alt="" width="1024" height="1024">
+        </span>
+    </span>
+    <button class="about-folder" type="button" aria-label="展开 About 卡片" aria-expanded="false" aria-controls="about-cards" hidden>
+        
+        <span class="about-folder__front" aria-hidden="true">
+            <span class="about-folder__sticker">
+                <svg class="about-folder__face" viewBox="0 0 64 64" width="88" height="88" fill="none">
+                    <defs>
+                        <linearGradient id="about-face-fill" x1="17" y1="8" x2="43" y2="59" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#ffe975"/>
+                            <stop offset="1" stop-color="#ffbb36"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="30" cy="33" r="27" fill="url(#about-face-fill)" stroke="#fff9e7" stroke-width="2.5"/>
+                    <path d="M15 15q5-2 10 0m9 0q5-1 10 2" stroke="#94611f" stroke-width="2" stroke-linecap="round"/>
+                    <ellipse cx="22" cy="28" rx="8.5" ry="10" fill="#fffdf5"/>
+                    <ellipse cx="40" cy="28" rx="8.5" ry="10" fill="#fffdf5"/>
+                    <circle class="about-folder__pupil" cx="22" cy="28" r="3.5" fill="#593a20"/>
+                    <circle class="about-folder__pupil" cx="40" cy="28" r="3.5" fill="#593a20"/>
+                    <path d="M17 42q14 5 28-1c-2 17-24 19-28 1Z" fill="#734523"/>
+                    <path d="M19 43q12 4 24-1l-2 6q-10 3-20 0Z" fill="#fffdf5"/>
+                    <path d="M51 3c-2 5-8 12-7 17 1 9 13 9 14 0 1-5-5-12-7-17Z" fill="#62d7f5" stroke="#f2fcff" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M48 16q-2 4 0 6" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+                </svg>
+            </span>
+            <span class="about-folder__holo">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
+                    <path d="m12 2 2.8 7.2L22 12l-7.2 2.8L12 22l-2.8-7.2L2 12l7.2-2.8Z"/>
+                </svg>
+                <span>about me</span>
+            </span>
+        </span>
+    </button>
+    <div class="about-grid" id="about-cards">
+        <section class="about-card about-card--activity" aria-label="博客更新足迹">
+            <span class="about-card__glow" aria-hidden="true"></span>
+            <div class="about-card__body">
+                <div class="about-card__badge about-card__badge--avatar">
+                    <img src="/img/author/head.jpg" alt="OAP 的博客头像" width="64" height="64">
+                </div>
+                <div class="about-card__detail">
+                    
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+<div class="about-heatmap" role="group" aria-label="近 26 周博客更新，列为周，行从周一到周日">
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-13 · 没有更新" title="2026-04-13 · 没有更新" data-activity-tip="2026-04-13 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-14 · 没有更新" title="2026-04-14 · 没有更新" data-activity-tip="2026-04-14 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-15 · 没有更新" title="2026-04-15 · 没有更新" data-activity-tip="2026-04-15 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-16 · 没有更新" title="2026-04-16 · 没有更新" data-activity-tip="2026-04-16 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-17 · 没有更新" title="2026-04-17 · 没有更新" data-activity-tip="2026-04-17 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-18 · 没有更新" title="2026-04-18 · 没有更新" data-activity-tip="2026-04-18 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-19 · 没有更新" title="2026-04-19 · 没有更新" data-activity-tip="2026-04-19 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-20 · 没有更新" title="2026-04-20 · 没有更新" data-activity-tip="2026-04-20 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-21 · 没有更新" title="2026-04-21 · 没有更新" data-activity-tip="2026-04-21 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-22 · 没有更新" title="2026-04-22 · 没有更新" data-activity-tip="2026-04-22 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-23 · 没有更新" title="2026-04-23 · 没有更新" data-activity-tip="2026-04-23 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-24 · 没有更新" title="2026-04-24 · 没有更新" data-activity-tip="2026-04-24 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-25 · 没有更新" title="2026-04-25 · 没有更新" data-activity-tip="2026-04-25 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-26 · 没有更新" title="2026-04-26 · 没有更新" data-activity-tip="2026-04-26 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-27 · 没有更新" title="2026-04-27 · 没有更新" data-activity-tip="2026-04-27 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-28 · 没有更新" title="2026-04-28 · 没有更新" data-activity-tip="2026-04-28 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-29 · 没有更新" title="2026-04-29 · 没有更新" data-activity-tip="2026-04-29 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-04-30 · 没有更新" title="2026-04-30 · 没有更新" data-activity-tip="2026-04-30 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-01 · 没有更新" title="2026-05-01 · 没有更新" data-activity-tip="2026-05-01 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-02 · 没有更新" title="2026-05-02 · 没有更新" data-activity-tip="2026-05-02 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-03 · 没有更新" title="2026-05-03 · 没有更新" data-activity-tip="2026-05-03 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-04 · 没有更新" title="2026-05-04 · 没有更新" data-activity-tip="2026-05-04 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-05 · 没有更新" title="2026-05-05 · 没有更新" data-activity-tip="2026-05-05 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-06 · 没有更新" title="2026-05-06 · 没有更新" data-activity-tip="2026-05-06 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-07 · 没有更新" title="2026-05-07 · 没有更新" data-activity-tip="2026-05-07 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-08 · 没有更新" title="2026-05-08 · 没有更新" data-activity-tip="2026-05-08 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-09 · 没有更新" title="2026-05-09 · 没有更新" data-activity-tip="2026-05-09 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-10 · 没有更新" title="2026-05-10 · 没有更新" data-activity-tip="2026-05-10 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-11 · 没有更新" title="2026-05-11 · 没有更新" data-activity-tip="2026-05-11 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-12 · 没有更新" title="2026-05-12 · 没有更新" data-activity-tip="2026-05-12 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-13 · 没有更新" title="2026-05-13 · 没有更新" data-activity-tip="2026-05-13 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-14 · 没有更新" title="2026-05-14 · 没有更新" data-activity-tip="2026-05-14 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-15 · 没有更新" title="2026-05-15 · 没有更新" data-activity-tip="2026-05-15 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-16 · 没有更新" title="2026-05-16 · 没有更新" data-activity-tip="2026-05-16 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-17 · 没有更新" title="2026-05-17 · 没有更新" data-activity-tip="2026-05-17 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-18 · 没有更新" title="2026-05-18 · 没有更新" data-activity-tip="2026-05-18 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-19 · 没有更新" title="2026-05-19 · 没有更新" data-activity-tip="2026-05-19 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-20 · 没有更新" title="2026-05-20 · 没有更新" data-activity-tip="2026-05-20 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-21 · 没有更新" title="2026-05-21 · 没有更新" data-activity-tip="2026-05-21 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-22 · 没有更新" title="2026-05-22 · 没有更新" data-activity-tip="2026-05-22 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-23 · 没有更新" title="2026-05-23 · 没有更新" data-activity-tip="2026-05-23 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-24 · 没有更新" title="2026-05-24 · 没有更新" data-activity-tip="2026-05-24 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-25 · 没有更新" title="2026-05-25 · 没有更新" data-activity-tip="2026-05-25 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-26 · 没有更新" title="2026-05-26 · 没有更新" data-activity-tip="2026-05-26 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-27 · 没有更新" title="2026-05-27 · 没有更新" data-activity-tip="2026-05-27 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-28 · 没有更新" title="2026-05-28 · 没有更新" data-activity-tip="2026-05-28 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-29 · 没有更新" title="2026-05-29 · 没有更新" data-activity-tip="2026-05-29 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-30 · 没有更新" title="2026-05-30 · 没有更新" data-activity-tip="2026-05-30 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-05-31 · 没有更新" title="2026-05-31 · 没有更新" data-activity-tip="2026-05-31 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-01 · 没有更新" title="2026-06-01 · 没有更新" data-activity-tip="2026-06-01 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-02 · 没有更新" title="2026-06-02 · 没有更新" data-activity-tip="2026-06-02 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-03 · 没有更新" title="2026-06-03 · 没有更新" data-activity-tip="2026-06-03 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-04 · 没有更新" title="2026-06-04 · 没有更新" data-activity-tip="2026-06-04 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-05 · 没有更新" title="2026-06-05 · 没有更新" data-activity-tip="2026-06-05 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-06 · 没有更新" title="2026-06-06 · 没有更新" data-activity-tip="2026-06-06 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-07 · 没有更新" title="2026-06-07 · 没有更新" data-activity-tip="2026-06-07 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-08 · 没有更新" title="2026-06-08 · 没有更新" data-activity-tip="2026-06-08 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-09 · 没有更新" title="2026-06-09 · 没有更新" data-activity-tip="2026-06-09 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-10 · 没有更新" title="2026-06-10 · 没有更新" data-activity-tip="2026-06-10 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-11 · 没有更新" title="2026-06-11 · 没有更新" data-activity-tip="2026-06-11 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-12 · 没有更新" title="2026-06-12 · 没有更新" data-activity-tip="2026-06-12 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-13 · 没有更新" title="2026-06-13 · 没有更新" data-activity-tip="2026-06-13 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-14 · 没有更新" title="2026-06-14 · 没有更新" data-activity-tip="2026-06-14 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-15 · 没有更新" title="2026-06-15 · 没有更新" data-activity-tip="2026-06-15 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-16 · 没有更新" title="2026-06-16 · 没有更新" data-activity-tip="2026-06-16 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-17 · 没有更新" title="2026-06-17 · 没有更新" data-activity-tip="2026-06-17 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-18 · 没有更新" title="2026-06-18 · 没有更新" data-activity-tip="2026-06-18 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-19 · 没有更新" title="2026-06-19 · 没有更新" data-activity-tip="2026-06-19 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-20 · 没有更新" title="2026-06-20 · 没有更新" data-activity-tip="2026-06-20 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-21 · 没有更新" title="2026-06-21 · 没有更新" data-activity-tip="2026-06-21 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-22 · 没有更新" title="2026-06-22 · 没有更新" data-activity-tip="2026-06-22 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-23 · 没有更新" title="2026-06-23 · 没有更新" data-activity-tip="2026-06-23 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-24 · 没有更新" title="2026-06-24 · 没有更新" data-activity-tip="2026-06-24 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-25 · 没有更新" title="2026-06-25 · 没有更新" data-activity-tip="2026-06-25 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-26 · 没有更新" title="2026-06-26 · 没有更新" data-activity-tip="2026-06-26 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-27 · 没有更新" title="2026-06-27 · 没有更新" data-activity-tip="2026-06-27 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-28 · 没有更新" title="2026-06-28 · 没有更新" data-activity-tip="2026-06-28 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-29 · 没有更新" title="2026-06-29 · 没有更新" data-activity-tip="2026-06-29 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-06-30 · 没有更新" title="2026-06-30 · 没有更新" data-activity-tip="2026-06-30 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-01 · 没有更新" title="2026-07-01 · 没有更新" data-activity-tip="2026-07-01 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-02 · 没有更新" title="2026-07-02 · 没有更新" data-activity-tip="2026-07-02 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-03 · 没有更新" title="2026-07-03 · 没有更新" data-activity-tip="2026-07-03 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-04 · 没有更新" title="2026-07-04 · 没有更新" data-activity-tip="2026-07-04 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-05 · 没有更新" title="2026-07-05 · 没有更新" data-activity-tip="2026-07-05 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-06 · 没有更新" title="2026-07-06 · 没有更新" data-activity-tip="2026-07-06 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-07 · 没有更新" title="2026-07-07 · 没有更新" data-activity-tip="2026-07-07 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-08 · 没有更新" title="2026-07-08 · 没有更新" data-activity-tip="2026-07-08 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-09 · 没有更新" title="2026-07-09 · 没有更新" data-activity-tip="2026-07-09 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-10 · 没有更新" title="2026-07-10 · 没有更新" data-activity-tip="2026-07-10 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-11 · 没有更新" title="2026-07-11 · 没有更新" data-activity-tip="2026-07-11 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-12 · 没有更新" title="2026-07-12 · 没有更新" data-activity-tip="2026-07-12 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-13 · 没有更新" title="2026-07-13 · 没有更新" data-activity-tip="2026-07-13 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-14 · 没有更新" title="2026-07-14 · 没有更新" data-activity-tip="2026-07-14 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-15 · 没有更新" title="2026-07-15 · 没有更新" data-activity-tip="2026-07-15 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-16 · 没有更新" title="2026-07-16 · 没有更新" data-activity-tip="2026-07-16 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-17 · 没有更新" title="2026-07-17 · 没有更新" data-activity-tip="2026-07-17 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-18 · 没有更新" title="2026-07-18 · 没有更新" data-activity-tip="2026-07-18 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-19 · 没有更新" title="2026-07-19 · 没有更新" data-activity-tip="2026-07-19 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-20 · 没有更新" title="2026-07-20 · 没有更新" data-activity-tip="2026-07-20 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-21 · 没有更新" title="2026-07-21 · 没有更新" data-activity-tip="2026-07-21 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-22 · 没有更新" title="2026-07-22 · 没有更新" data-activity-tip="2026-07-22 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-23 · 没有更新" title="2026-07-23 · 没有更新" data-activity-tip="2026-07-23 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-24 · 没有更新" title="2026-07-24 · 没有更新" data-activity-tip="2026-07-24 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-25 · 没有更新" title="2026-07-25 · 没有更新" data-activity-tip="2026-07-25 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            
+        
+        
+        
+            
+            
+            
+            
+            
+        
+        
+            
+            <a class="about-heatmap__day about-heatmap__day--2" href="/post/code-analysis/log.c/" title="2026-07-26 · 1 篇更新
+极简日志库log.c" aria-label="2026-07-26 · 1 篇更新
+极简日志库log.c" data-activity-tip="2026-07-26 · 1 篇更新
+极简日志库log.c"></a>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-27 · 没有更新" title="2026-07-27 · 没有更新" data-activity-tip="2026-07-27 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-28 · 没有更新" title="2026-07-28 · 没有更新" data-activity-tip="2026-07-28 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-29 · 没有更新" title="2026-07-29 · 没有更新" data-activity-tip="2026-07-29 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-30 · 没有更新" title="2026-07-30 · 没有更新" data-activity-tip="2026-07-30 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-07-31 · 没有更新" title="2026-07-31 · 没有更新" data-activity-tip="2026-07-31 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-01 · 没有更新" title="2026-08-01 · 没有更新" data-activity-tip="2026-08-01 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-02 · 没有更新" title="2026-08-02 · 没有更新" data-activity-tip="2026-08-02 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-03 · 没有更新" title="2026-08-03 · 没有更新" data-activity-tip="2026-08-03 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-04 · 没有更新" title="2026-08-04 · 没有更新" data-activity-tip="2026-08-04 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-05 · 没有更新" title="2026-08-05 · 没有更新" data-activity-tip="2026-08-05 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-06 · 没有更新" title="2026-08-06 · 没有更新" data-activity-tip="2026-08-06 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-07 · 没有更新" title="2026-08-07 · 没有更新" data-activity-tip="2026-08-07 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-08 · 没有更新" title="2026-08-08 · 没有更新" data-activity-tip="2026-08-08 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-09 · 没有更新" title="2026-08-09 · 没有更新" data-activity-tip="2026-08-09 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-10 · 没有更新" title="2026-08-10 · 没有更新" data-activity-tip="2026-08-10 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-11 · 没有更新" title="2026-08-11 · 没有更新" data-activity-tip="2026-08-11 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-12 · 没有更新" title="2026-08-12 · 没有更新" data-activity-tip="2026-08-12 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-13 · 没有更新" title="2026-08-13 · 没有更新" data-activity-tip="2026-08-13 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-14 · 没有更新" title="2026-08-14 · 没有更新" data-activity-tip="2026-08-14 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-15 · 没有更新" title="2026-08-15 · 没有更新" data-activity-tip="2026-08-15 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            
+        
+        
+        
+            
+            
+            
+            
+            
+        
+        
+            
+            <a class="about-heatmap__day about-heatmap__day--4" href="/post/code-analysis/spdlog-1/" title="2026-08-16 · 1 篇更新
+日志库spdlog（一）" aria-label="2026-08-16 · 1 篇更新
+日志库spdlog（一）" data-activity-tip="2026-08-16 · 1 篇更新
+日志库spdlog（一）"></a>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-17 · 没有更新" title="2026-08-17 · 没有更新" data-activity-tip="2026-08-17 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-18 · 没有更新" title="2026-08-18 · 没有更新" data-activity-tip="2026-08-18 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-19 · 没有更新" title="2026-08-19 · 没有更新" data-activity-tip="2026-08-19 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-20 · 没有更新" title="2026-08-20 · 没有更新" data-activity-tip="2026-08-20 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-21 · 没有更新" title="2026-08-21 · 没有更新" data-activity-tip="2026-08-21 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-22 · 没有更新" title="2026-08-22 · 没有更新" data-activity-tip="2026-08-22 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-23 · 没有更新" title="2026-08-23 · 没有更新" data-activity-tip="2026-08-23 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-24 · 没有更新" title="2026-08-24 · 没有更新" data-activity-tip="2026-08-24 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-25 · 没有更新" title="2026-08-25 · 没有更新" data-activity-tip="2026-08-25 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-26 · 没有更新" title="2026-08-26 · 没有更新" data-activity-tip="2026-08-26 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-27 · 没有更新" title="2026-08-27 · 没有更新" data-activity-tip="2026-08-27 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-28 · 没有更新" title="2026-08-28 · 没有更新" data-activity-tip="2026-08-28 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-29 · 没有更新" title="2026-08-29 · 没有更新" data-activity-tip="2026-08-29 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-30 · 没有更新" title="2026-08-30 · 没有更新" data-activity-tip="2026-08-30 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-08-31 · 没有更新" title="2026-08-31 · 没有更新" data-activity-tip="2026-08-31 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-01 · 没有更新" title="2026-09-01 · 没有更新" data-activity-tip="2026-09-01 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-02 · 没有更新" title="2026-09-02 · 没有更新" data-activity-tip="2026-09-02 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-03 · 没有更新" title="2026-09-03 · 没有更新" data-activity-tip="2026-09-03 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-04 · 没有更新" title="2026-09-04 · 没有更新" data-activity-tip="2026-09-04 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-05 · 没有更新" title="2026-09-05 · 没有更新" data-activity-tip="2026-09-05 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-06 · 没有更新" title="2026-09-06 · 没有更新" data-activity-tip="2026-09-06 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-07 · 没有更新" title="2026-09-07 · 没有更新" data-activity-tip="2026-09-07 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-08 · 没有更新" title="2026-09-08 · 没有更新" data-activity-tip="2026-09-08 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-09 · 没有更新" title="2026-09-09 · 没有更新" data-activity-tip="2026-09-09 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-10 · 没有更新" title="2026-09-10 · 没有更新" data-activity-tip="2026-09-10 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-11 · 没有更新" title="2026-09-11 · 没有更新" data-activity-tip="2026-09-11 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-12 · 没有更新" title="2026-09-12 · 没有更新" data-activity-tip="2026-09-12 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            
+        
+        
+        
+            
+            
+            
+            
+            
+        
+        
+            
+            <a class="about-heatmap__day about-heatmap__day--3" href="/post/code-analysis/spdlog-2/" title="2026-09-13 · 1 篇更新
+日志库spdlog（二）" aria-label="2026-09-13 · 1 篇更新
+日志库spdlog（二）" data-activity-tip="2026-09-13 · 1 篇更新
+日志库spdlog（二）"></a>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            
+        
+        
+        
+            
+            
+            
+            
+            
+        
+        
+            
+            <a class="about-heatmap__day about-heatmap__day--3" href="/post/code-analysis/spdlog-3/" title="2026-09-14 · 1 篇更新
+日志库spdlog（三）" aria-label="2026-09-14 · 1 篇更新
+日志库spdlog（三）" data-activity-tip="2026-09-14 · 1 篇更新
+日志库spdlog（三）"></a>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-15 · 没有更新" title="2026-09-15 · 没有更新" data-activity-tip="2026-09-15 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-16 · 没有更新" title="2026-09-16 · 没有更新" data-activity-tip="2026-09-16 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-17 · 没有更新" title="2026-09-17 · 没有更新" data-activity-tip="2026-09-17 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-18 · 没有更新" title="2026-09-18 · 没有更新" data-activity-tip="2026-09-18 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-19 · 没有更新" title="2026-09-19 · 没有更新" data-activity-tip="2026-09-19 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-20 · 没有更新" title="2026-09-20 · 没有更新" data-activity-tip="2026-09-20 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-21 · 没有更新" title="2026-09-21 · 没有更新" data-activity-tip="2026-09-21 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-22 · 没有更新" title="2026-09-22 · 没有更新" data-activity-tip="2026-09-22 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-23 · 没有更新" title="2026-09-23 · 没有更新" data-activity-tip="2026-09-23 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+            
+            
+        
+        
+        
+            
+            
+            
+            
+            
+        
+        
+            
+            <a class="about-heatmap__day about-heatmap__day--2" href="/post/cmu15445/project0/" title="2026-09-24 · 1 篇更新
+15445: C&#43;&#43; Primer" aria-label="2026-09-24 · 1 篇更新
+15445: C&#43;&#43; Primer" data-activity-tip="2026-09-24 · 1 篇更新
+15445: C&#43;&#43; Primer"></a>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-25 · 没有更新" title="2026-09-25 · 没有更新" data-activity-tip="2026-09-25 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-26 · 没有更新" title="2026-09-26 · 没有更新" data-activity-tip="2026-09-26 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-27 · 没有更新" title="2026-09-27 · 没有更新" data-activity-tip="2026-09-27 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-28 · 没有更新" title="2026-09-28 · 没有更新" data-activity-tip="2026-09-28 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-29 · 没有更新" title="2026-09-29 · 没有更新" data-activity-tip="2026-09-29 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-09-30 · 没有更新" title="2026-09-30 · 没有更新" data-activity-tip="2026-09-30 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-10-01 · 没有更新" title="2026-10-01 · 没有更新" data-activity-tip="2026-10-01 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-10-02 · 没有更新" title="2026-10-02 · 没有更新" data-activity-tip="2026-10-02 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-10-03 · 没有更新" title="2026-10-03 · 没有更新" data-activity-tip="2026-10-03 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-10-04 · 没有更新" title="2026-10-04 · 没有更新" data-activity-tip="2026-10-04 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--0" role="img" aria-label="2026-10-05 · 没有更新" title="2026-10-05 · 没有更新" data-activity-tip="2026-10-05 · 没有更新"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--future" aria-hidden="true"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--future" aria-hidden="true"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--future" aria-hidden="true"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--future" aria-hidden="true"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--future" aria-hidden="true"></span>
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <span class="about-heatmap__day about-heatmap__day--future" aria-hidden="true"></span>
+        
+    
+</div>
+
+                </div>
+            </div>
+            <a class="about-card__action" href="/post/"><span>Blog</span>
+<svg class="about-card__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 12 12 4M4 4h8v8" />
+</svg>
+
+</a>
+        </section>
+
+        <section class="about-card about-card--location" aria-labelledby="about-location-title">
+            
+                <img class="about-card__map" src="/img/about-map.png" alt="" aria-hidden="true" width="1400" height="1400" loading="lazy" decoding="async">
+
+            
+            <span class="about-card__glow" aria-hidden="true"></span>
+            <div class="about-card__body">
+                <div class="about-card__badge">
+<svg class="about-card__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 1.8a8 8 0 0 0-8 8c0 5.7 8 12.4 8 12.4s8-6.7 8-12.4a8 8 0 0 0-8-8Z" />
+    <circle cx="12" cy="9.5" r="2.8" fill="#fff" />
+</svg>
+
+</div>
+                <div class="about-card__detail">
+                    <h2 id="about-location-title">我偶尔会在这里刷新</h2>
+                    <p>Shenzhen, China</p>
+                </div>
+            </div>
+            <a class="about-card__action" href="https://www.openstreetmap.org/?mlat=22.5385464&amp;mlon=113.8623753#map=15/22.5385464/113.8623753" target="_blank" rel="noopener noreferrer"><span>Location</span>
+<svg class="about-card__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 12 12 4M4 4h8v8" />
+</svg>
+
+</a>
+        </section>
+
+        <section class="about-card about-card--spotify" aria-labelledby="about-spotify-title">
+            <span class="about-card__glow" aria-hidden="true"></span>
+            <div class="about-card__body">
+                <div class="about-card__badge">
+<svg class="about-card__icon" viewBox="16 16 32 32" fill="currentColor" aria-hidden="true">
+    <path d="M40.85 30.35C36.05 27.5 28.0252 27.2 23.45 28.6252C23.1019 28.7346 22.7245 28.7013 22.401 28.5325C22.0775 28.3637 21.8342 28.0733 21.7248 27.7252C21.6154 27.3771 21.6487 26.9997 21.8175 26.6762C21.9863 26.3527 22.2767 26.1094 22.6248 26C27.95 24.4248 36.7248 24.7252 42.2748 28.0252C42.5986 28.2181 42.8346 28.5296 42.9326 28.8935C43.0307 29.2575 42.9831 29.6453 42.8 29.9748C42.5678 30.2522 42.247 30.441 41.8918 30.5094C41.5365 30.5777 41.1686 30.5214 40.85 30.35M40.7 34.55C40.6226 34.6795 40.5201 34.7923 40.3985 34.8816C40.2768 34.9708 40.1385 35.0348 39.9918 35.0698C39.845 35.1048 39.6927 35.11 39.5438 35.0852C39.395 35.0603 39.2527 35.0059 39.1252 34.9252C35.0752 32.45 28.9248 31.7 24.2 33.2C24.0563 33.2476 23.9046 33.266 23.7537 33.2543C23.6029 33.2425 23.4558 33.2008 23.3212 33.1316C23.1867 33.0624 23.0672 32.9671 22.9699 32.8511C22.8726 32.7352 22.7994 32.6011 22.7545 32.4566C22.7096 32.312 22.694 32.16 22.7086 32.0094C22.7231 31.8587 22.7676 31.7125 22.8393 31.5792C22.911 31.446 23.0086 31.3283 23.1263 31.2332C23.244 31.1381 23.3795 31.0674 23.5248 31.0252C29 29.3748 35.75 30.2 40.4 33.05C40.5206 33.1267 40.6245 33.227 40.7053 33.3449C40.7861 33.4627 40.8423 33.5958 40.8703 33.7359C40.8983 33.8761 40.8977 34.0205 40.8684 34.1604C40.8392 34.3003 40.7819 34.4328 40.7 34.55M38.9 38.6752C38.8395 38.7824 38.7574 38.8758 38.659 38.9497C38.5606 39.0236 38.4479 39.0763 38.3281 39.1045C38.2083 39.1326 38.084 39.1357 37.9629 39.1135C37.8419 39.0912 37.7268 39.0441 37.6248 38.9752C34.1 36.8004 29.6748 36.35 24.4248 37.5504C24.3066 37.5799 24.1838 37.5859 24.0633 37.568C23.9428 37.5501 23.827 37.5086 23.7225 37.4459C23.618 37.3832 23.5269 37.3006 23.4544 37.2027C23.3819 37.1048 23.3294 36.9936 23.2998 36.8754C23.2703 36.7572 23.2643 36.6344 23.2822 36.5139C23.3001 36.3934 23.3416 36.2776 23.4043 36.1731C23.467 36.0686 23.5496 35.9775 23.6475 35.905C23.7454 35.8325 23.8566 35.7799 23.9748 35.7504C29.6748 34.4748 34.6252 35 38.5252 37.4C38.6377 37.4547 38.7376 37.5323 38.8184 37.6278C38.8993 37.7233 38.9593 37.8347 38.9946 37.9547C39.0299 38.0747 39.0398 38.2008 39.0236 38.3249C39.0073 38.449 38.9654 38.5683 38.9004 38.6752M32 17C29.0333 17 26.1332 17.8797 23.6665 19.528C21.1997 21.1762 19.2771 23.5189 18.1418 26.2597C17.0065 29.0006 16.7094 32.0166 17.2882 34.9264C17.867 37.8361 19.2956 40.5088 21.3934 42.6066C23.4912 44.7044 26.1639 46.133 29.0736 46.7118C31.9834 47.2906 34.9994 46.9935 37.7403 45.8582C40.4811 44.7229 42.8238 42.8003 44.472 40.3335C46.1203 37.8668 47 34.9667 47 32C46.9985 28.0222 45.4177 24.2078 42.605 21.395C39.7922 18.5823 35.9778 17.0015 32 17V17Z" />
+</svg>
+
+</div>
+                <div class="about-card__detail">
+                    <h2 id="about-spotify-title">Spotify</h2>
+                </div>
+            </div>
+            <a class="about-card__action" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer"><span>Listen</span>
+<svg class="about-card__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 12 12 4M4 4h8v8" />
+</svg>
+
+</a>
+        </section>
+
+        
+            <section class="about-card about-card--resume" aria-labelledby="about-resume-title">
+                <span class="about-card__glow" aria-hidden="true"></span>
+                <div class="about-card__body">
+                    <div class="about-card__badge">
+<svg class="about-card__icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="5" y="3" width="22" height="26" rx="4" fill="currentColor" fill-opacity="0.08" />
+    <circle cx="12" cy="10.5" r="2.5" fill="currentColor" fill-opacity="0.16" />
+    <path d="M8.5 18a3.5 3.5 0 0 1 7 0M19.5 9h3M19.5 13h3M19.5 17h3M9 23h14" />
+</svg>
+
+</div>
+                    <div class="about-card__detail">
+                        <h2 id="about-resume-title">Resume</h2>
+                    </div>
+                </div>
+                
+                    <button class="about-card__action" type="button" data-resume-unavailable><span aria-live="polite">View</span>
+<svg class="about-card__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 12 12 4M4 4h8v8" />
+</svg>
+
+</button>
+                
+            </section>
+
+        <section class="about-card about-card--photo" aria-labelledby="about-photo-title">
+            
+
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+        
+    
+
+
+    <img class="about-card__photo" src="/about/photos/2023-03-10%20%E6%B9%96%E5%8C%97%E7%9C%81%E5%8D%9A%E7%89%A9%E9%A6%86_huf459ccb852d271e146f02bc7fbe4a0f2_0_fd868bc0c12a5be2145a0601525a89a7.webp" data-photos="[&#34;/about/photos/2023-03-10%20%E6%B9%96%E5%8C%97%E7%9C%81%E5%8D%9A%E7%89%A9%E9%A6%86_huf459ccb852d271e146f02bc7fbe4a0f2_0_fd868bc0c12a5be2145a0601525a89a7.webp&#34;,&#34;/about/photos/2023-03-25%20%E4%B8%9C%E6%B9%96%E4%B8%91%E4%B8%9C%E8%A5%BF_hue6d1bfd3725d8267cd892782b18f0dc2_0_fee7a8d4f45577b65f8cd0d71fdf48ad.webp&#34;,&#34;/about/photos/2023-03-25%20%E4%B8%9C%E6%B9%96%E5%A5%87%E5%A6%99%E5%A4%9C_hu840e50ba345b9c79fe41af8a9a1fe9c8_0_fcf8a6e9ef28938bbb508ad8cb7ec4fa.webp&#34;,&#34;/about/photos/2023-04-01%20%E9%95%BF%E6%98%A5%E8%A7%82_hu6184c9e8298fa32117807e2a5819c6cd_0_f06a0026f21e7de55b790e97fa4ec2ef.webp&#34;,&#34;/about/photos/2023-04-01%20%E9%95%BF%E6%98%A5%E8%A7%82%E5%86%85%E4%B8%80%E8%A7%92_hu166352fe8a8e9e29bb4fd1a1656c13ab_0_d2ad3ad78976699e06ab7084d4cbb236.webp&#34;,&#34;/about/photos/2023-04-29%20%E6%A9%98%E6%A1%91%E5%9C%A8%E4%BF%A1%E6%81%AF%E6%A5%BC_hue4b17cf112ed51d3469a4ee03ad24623_0_12d3b87b434a9794c76f3231eb893b6c.webp&#34;,&#34;/about/photos/2023-08-24%20%E7%A5%9E%E5%86%9C%E6%9E%B6%E5%9B%9E%E5%AE%B6%E5%85%AC%E5%AF%93%E4%B8%8D%E7%9F%A5%E5%90%8D%E5%B0%8F%E6%B2%B3_hu807659853e7d771516b2dd74595a031e_0_09ee41f035b8a88d1e650c4e70f0b33c.webp&#34;,&#34;/about/photos/2023-10-15%20%E6%AD%A6%E6%B1%89%E4%B8%8D%E7%9F%A5%E5%90%8D%E5%B1%B1%E7%9B%98%E5%B1%B1%E5%85%AC%E8%B7%AF_hu90421ecfa48e714573c96b4550aa305d_0_15e71e2c83b01ee4237755a1d4a91740.webp&#34;,&#34;/about/photos/2023-10-29%20%E6%B1%9F%E6%B1%89%E8%B7%AF%E4%B8%AD%E5%9B%BD%E9%BB%84%E9%87%91_hu93e9f2b986edce5616141aedaee1d06c_0_2cf39329ac5cbc050932c0ff02211587.webp&#34;,&#34;/about/photos/2023-12-07%20%E5%AE%9D%E9%80%9A%E5%AF%BA_hue169b9903075ae3896261528ceee7fc3_0_1141d0161c07541a559c8ae029cb7719.webp&#34;,&#34;/about/photos/2023-12-08%20%E9%BB%84%E9%B9%A4%E6%A5%BC_hub371ed2bd421533ca00c5e638fe7d063_0_17ccae25e4f3eed76ba5f51f167ee7be.webp&#34;,&#34;/about/photos/2024-04-26%20%E5%AD%A6%E9%99%A2%E9%97%A8%E5%8F%A3%E7%8B%B8%E8%8A%B1%E9%AA%9A%E7%8C%AB_hub15dfd83a2df7bf9e94638100648d8a2_0_239c263030aca890fa72775b5924ecef.webp&#34;,&#34;/about/photos/2024-05-06%20%E5%A4%A7%E8%8A%AC%E6%B2%B9%E7%94%BB%E6%9D%91%E8%B5%B5%E5%B0%8F%E5%8B%87%E5%B7%A5%E4%BD%9C%E5%AE%A4_hufc19247a2423be93e4015b03b9a74845_0_80e32bddd08030e420bdbcdc11601c6d.webp&#34;,&#34;/about/photos/2024-05-06%20%E5%AE%9C%E5%AE%B6%E4%B8%AD%E6%8C%87_hu062bfd07c31d305863017de8c133424d_0_aefdb9f466484eb21e2907ac88afb910.webp&#34;,&#34;/about/photos/2024-05-07%20%E5%A6%82%E5%9B%BE_hudfd4df9ec73ed09a30fbc9161d46a0ba_0_55f571bc760e10349c2866d4a91b16d4.webp&#34;,&#34;/about/photos/2024-05-07%20%E6%B7%B1%E5%9C%B3%E5%BD%93%E4%BB%A3%E8%89%BA%E6%9C%AF%E4%B8%8E%E5%9F%8E%E5%B8%82%E8%A7%84%E5%88%92%E9%A6%86_hub7c17e53b2e575fa42d0bdc99b479e75_0_67b9b13fa9cf9e66234510d9e3762300.webp&#34;,&#34;/about/photos/2024-05-08%20%E5%AE%9C%E5%AE%B6%E9%B2%A8%E9%B1%BC_hu2b3ef5e146f53703a7feff93086b3396_0_fa908e311d16e5b2ba10daff5c7d0a8a.webp&#34;,&#34;/about/photos/2024-07-12%20%E4%BA%8C%E5%85%AB%E5%A4%A7%E6%9D%A0%E7%83%A7%E7%83%A4_hu3b89a8126bb35c40bad90e88fe9ac967_0_aecc669030256463f348f7d9338354db.webp&#34;,&#34;/about/photos/2024-07-21%20%E5%B1%B1%E5%A7%86%E5%A4%9A%E8%82%89%E4%B9%90%E9%AB%98_hu139ea3ad58c33e00c51306365c3cdf04_0_77246e23468001429e577206b961bec4.webp&#34;,&#34;/about/photos/2024-08-04%20%E6%B1%9F%E8%A5%BF%E7%BE%8E%E6%9C%AF%E9%A6%86%E4%B8%8D%E7%9F%A5%E5%90%8D%E8%89%BA%E6%9C%AF%E5%93%81_hu03da6a7a636626abe8730746cfaed3ae_0_de6c1e3c09785253b993743240949f71.webp&#34;,&#34;/about/photos/2024-08-11%202024Robomaster%E6%80%BB%E5%86%B3%E8%B5%9B_hu38a5f8f4ba8a4838260141ed5d0a51e4_0_f65a1a4bb7bfb0562420c305475df1ef.webp&#34;,&#34;/about/photos/2024-08-11%20%E6%98%A5%E7%AC%8B%E5%A4%A7%E5%8E%A6%E4%B8%8E%E9%A3%9E%E6%9C%BA_hu9f1790b1d052e545b86789a6a4f1aa53_0_9e4e6854757b21dc5dcaab1a78144327.webp&#34;,&#34;/about/photos/2024-08-11%20%E6%B7%B1%E5%9C%B3%E4%BA%BA%E6%89%8D%E5%85%AC%E5%9B%AD_huc6f387bca0924212eb9f1251dc33c8db_0_447a666dc750af114ba1a4ed8537bc7d.webp&#34;,&#34;/about/photos/2024-09-27%20%E7%83%88%E7%81%AB%E7%83%A7%E7%83%A4_hu56fd5edf46c61ce8ed34cbc5c5d95902_0_fdb7db8ff3f2a3c753e21913e30f5cf8.webp&#34;,&#34;/about/photos/2024-11-02%20%E5%8F%B0%E4%B8%9C_huc57ef98bc829966b498ce37a97138119_0_5ad1b10b744e76bd7455a74572ade7da.webp&#34;,&#34;/about/photos/2024-11-03%20%E4%BF%A1%E5%8F%B7%E5%B1%B1%E5%85%AC%E5%9B%AD%E6%97%A5%E8%90%BD_huf6839401bff8a4313c1df1983478c44b_0_8b289c7fe4c481a1c8916e74a017790f.webp&#34;,&#34;/about/photos/2024-11-03%20%E9%9D%92%E5%B2%9B%E4%B8%8D%E7%9F%A5%E5%90%8D%E5%BB%BA%E7%AD%91_hu4a20647dcbab4e9f7e8a7d6baee14045_0_1edfad96ef874fd9d7d33d3fb4b334c5.webp&#34;,&#34;/about/photos/2024-11-03%20%E9%9D%92%E5%B2%9B%E6%95%99%E5%A0%82_huc1310c134b41517782c9a429e7215841_0_c4a34027864aadea9b07089e6d018197.webp&#34;,&#34;/about/photos/2024-11-30%20%E6%9F%B4_hucb78929978b1b215990c3847a666cf1c_0_2edc3d42ea70e4fc9eac198a0ff9f0fe.webp&#34;,&#34;/about/photos/2025-01-11%20%E8%8A%B1_hu1ea3b4626ef45d0c80cadd258aa1b7b1_0_4631d2262ef34bdc4c409785e5e013ae.webp&#34;,&#34;/about/photos/2025-05-17%20snake_hu635e7095b15678f4f21ba2cb23b0267a_0_2d00305104ef9629ba7096b3bb37a3b9.webp&#34;,&#34;/about/photos/2025-06-19%20%E9%A9%AC%E6%9D%A5%E8%A5%BF%E4%BA%9A%E6%B5%B7%E8%BE%B9_hue5bd6b0eed5aa07ffdb77616647cfb38_0_13a020cee138797b4f666d92d4fac5d4.webp&#34;,&#34;/about/photos/2025-10-02%20%E4%B8%AD%E5%B1%B1%E5%85%AC%E5%9B%AD_hufa3e0debd0c55be0017a7ecb642a9823_0_4fd3e3843def6c6d13aa2a859b03601c.webp&#34;,&#34;/about/photos/2025-11-15%20%E6%81%B6%E9%AD%94%E6%9E%9C%E5%AE%9E_hu21d8762517ff08a63904388791e34ec8_0_e1b9e7abd84331ae0237b7195c2be6af.webp&#34;,&#34;/about/photos/2025-11-16%20%E6%B5%B7%E5%8F%A3%E4%B8%8D%E7%9F%A5%E5%90%8D%E6%99%AF%E7%82%B9_hu8fa79450078fa51b5aea72f115e4b8d5_0_1c2d5d88777507ce5187e15e9040c05d.webp&#34;,&#34;/about/photos/2025-12-27%20%E8%8B%97%E9%92%9F%E5%BE%84_hu2c1d144e1e98092c0ada51302b6d1013_0_7c277aac822cca2b77f3ad3777028967.webp&#34;,&#34;/about/photos/2026-03-22%20%E5%8D%97%E4%BA%AC%E5%8D%9A%E7%89%A9%E9%99%A2%E9%9B%95%E5%A1%91_hubcdb6b28104e557340d4f79749739b00_0_7f115b67a28e58a256d3c04957c6460a.webp&#34;,&#34;/about/photos/2026-03-22%20%E6%98%8E%E5%AD%9D%E9%99%B5_hu275fcdaf8ae40f286553a255b7936ee6_0_59f232986fd71f472ae99d818a80ba65.webp&#34;]" alt="" aria-hidden="true" width="520" height="504" loading="lazy" decoding="async">
+    <span class="about-card__photo-shade" aria-hidden="true"></span>
+
+
+            <span class="about-card__glow" aria-hidden="true"></span>
+            <div class="about-card__body">
+                <div class="about-card__detail">
+                    <h2 id="about-photo-title">相册</h2>
+                    <p>一些路过的风景</p>
+                </div>
+            </div>
+            <a class="about-card__action" href="/photo/"><span>Photos</span>
+<svg class="about-card__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 12 12 4M4 4h8v8" />
+</svg>
+
+</a>
+        </section>
+
+        
+            
+        
+            
+                <section class="about-card about-card--mail" aria-labelledby="about-mail-title">
+                    <span class="about-card__glow" aria-hidden="true"></span>
+                    <div class="about-card__body">
+                        <div class="about-card__badge">
+<svg class="about-card__icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path fill="#4285f4" d="M1.636 21h3.819V11.727L0 7.636v11.728C0 20.269.732 21 1.636 21Z" />
+    <path fill="#34a853" d="M18.545 21h3.819A1.636 1.636 0 0 0 24 19.364V7.636l-5.455 4.091Z" />
+    <path fill="#fbbc04" d="M18.545 4.636v7.091L24 7.636V5.455c0-2.024-2.31-3.178-3.927-1.964Z" />
+    <path fill="#ea4335" d="M5.455 11.727V4.636L12 9.545l6.545-4.909v7.091L12 16.636Z" />
+    <path fill="#c5221f" d="M0 5.455v2.181l5.455 4.091V4.636L3.927 3.491C2.31 2.277 0 3.431 0 5.455Z" />
+</svg>
+
+</div>
+                        <div class="about-card__detail">
+                            <h2 id="about-mail-title">Say hello</h2>
+                        </div>
+                    </div>
+                    <a class="about-card__action" href="mailto:zhangzihaozzzzzz@gmail.com"><span>Mail</span>
+<svg class="about-card__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 12 12 4M4 4h8v8" />
+</svg>
+
+</a>
+                </section>
+            
+        
+    </div>
+    
+</div>
+<script src="/js/about.js?v=ec71095bf7a5da56b059230285d9949940b0c38aa456f7c4662831e9de7727a9" defer></script>
+
+        </main>
+        <div id="card-transition-overlay" class="card-transition-overlay"></div><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2026 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div><script src="/js/copy-to-clipboard.js?v=b03da288555be11559ba55eaf0055f160e096df92d7b023ff08f2d567e70072d"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img');
+
+  (function() {
+    const overlay = document.getElementById("card-transition-overlay");
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isNavigating = false;
+
+    function shouldHandleLink(link, event) {
+      if (!link || !overlay) return false;
+      if (isNavigating || event.defaultPrevented) return false;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+      if (link.closest(".myCard")) return false;
+      if (link.closest("[data-no-page-transition]")) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+
+      const href = link.getAttribute("href");
+      if (!href) return false;
+      if (href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+
+      let targetUrl = null;
+      try {
+        targetUrl = new URL(href, window.location.href);
+      } catch (err) {
+        return false;
+      }
+
+      if (targetUrl.origin !== window.location.origin) return false;
+      if (targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search &&
+          targetUrl.hash.length > 0) return false;
+      if (targetUrl.href === window.location.href) return false;
+
+      return true;
+    }
+
+    function navigateWithOverlay(href) {
+      if (isNavigating) return;
+      isNavigating = true;
+      document.body.style.pointerEvents = "none";
+      overlay.classList.add("card-transition-overlay--active");
+      const delay = prefersReducedMotion ? 0 : 360;
+      window.setTimeout(function() {
+        window.location.href = href;
+      }, delay);
+    }
+
+    document.addEventListener("click", function(event) {
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      navigateWithOverlay(link.href);
+    }, true);
+
+    window.addEventListener("pageshow", function() {
+      isNavigating = false;
+      document.body.style.pointerEvents = "";
+      if (overlay) overlay.classList.remove("card-transition-overlay--active");
+    });
+  })();
+</script>
+
+  </footer>
+</body>
+</html>
