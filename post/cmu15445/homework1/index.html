@@ -1,0 +1,992 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>15445: SQL | 超级码里奥</title>
+    
+    <link rel="icon" href="https://o-a-p.github.io/img/author/RoundCornerHead.png" />
+    <meta name="description"
+        content="CMU15445 Fall 2025"> 
+
+    <link rel="canonical" href="https://o-a-p.github.io/post/cmu15445/homework1/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    
+    <link rel="stylesheet" href="https://o-a-p.github.io/scss/style.min.7bb4aca0ea49f529e2c388f00e899464d1a23b8e158e62b98ad4cfc9a642a247.css">
+
+    
+    <meta property="og:title" content="15445: SQL" />
+<meta property="og:description" content="CMU15445 Fall 2025" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://o-a-p.github.io/post/cmu15445/homework1/" /><meta property="og:image" content="https://o-a-p.github.io/img/CMU15445/cover2.png" /><meta property="og:image" content="https://o-a-p.github.io/img/CMU15445/cover.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2026-11-21T22:09:59+08:00" />
+<meta property="article:modified_time" content="2026-11-21T22:09:59+08:00" /><meta property="og:site_name" content="超级码里奥" />
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://o-a-p.github.io/img/CMU15445/cover2.png" /><meta name="twitter:title" content="15445: SQL"/>
+<meta name="twitter:description" content="CMU15445 Fall 2025"/>
+
+    
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    
+    
+    
+    
+    
+</head>
+
+<script> 
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://cdnjs.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap";
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+        document.head.appendChild(customFont);
+    }());
+</script>
+<body class="dark-mode"><nav class="navbar is-light" role="navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" title="home" class="navbar-item">
+                <span class="logo">
+                    <h1>超级码里奥</h1>
+                </span>
+            </a>
+
+            
+            <a id="theme-toggle" class="theme-toggle" href="#" aria-label="Switch color theme">
+                <svg class="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path class="theme-icon__moon" fill="currentColor"
+                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <g class="theme-icon__sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a href="/about" class="navbar-item">About</a>
+                
+                <a href="/post" class="navbar-item">Blog</a>
+                
+                <a href="/categories" class="navbar-item">Categories</a>
+                
+                <a href="/friends" class="navbar-item">Friends</a>
+                
+                <a href="/photo" class="navbar-item">Photo</a>
+                
+            </div>
+
+        </div>
+        <div class="search">
+            <div id="fastSearch">
+                <input id="searchInput" tabindex="0" placeholder="Search..">
+                <ul id="searchResults">
+
+                </ul>
+            </div>
+            <a id="search-btn" style="display: inline-block;" href="# ">
+                <div class="icon-search"><svg class="search-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            </a>
+        </div>
+
+        <script src="/js/fuse.min.js"></script> 
+        <script src="/js/fastsearch.js"></script>
+
+    </div>
+</nav>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.querySelector('.navbar');
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        if (!navbar || !burger || !menu) return;
+
+        var animating = false;
+        var opened = false;
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var MOBILE_QUERY = '(max-width: 1087px)';
+
+        function isMobileMenu() {
+            return window.matchMedia(MOBILE_QUERY).matches;
+        }
+
+        function clearMenuInlineStyle() {
+            menu.style.height = '';
+            menu.style.opacity = '';
+            menu.style.transform = '';
+            menu.style.overflow = '';
+            menu.style.transition = '';
+        }
+
+        function resetToDesktop() {
+            animating = false;
+            opened = false;
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+            clearMenuInlineStyle();
+        }
+
+        function openMenu() {
+            if (animating || opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = true;
+            animating = true;
+            burger.classList.add('is-active');
+            menu.classList.add('is-active');
+            burger.setAttribute('aria-expanded', 'true');
+
+            if (reduceMotion) {
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+            menu.offsetHeight;
+
+            var targetHeight = menu.scrollHeight;
+            menu.style.transition = 'height 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms ease';
+            menu.style.height = targetHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+
+            window.setTimeout(function() {
+                menu.style.height = 'auto';
+                menu.style.overflow = 'visible';
+                animating = false;
+            }, 280);
+        }
+
+        function closeMenu() {
+            if (animating || !opened) return;
+            if (!isMobileMenu()) return;
+
+            opened = false;
+            animating = true;
+            burger.classList.remove('is-active');
+            burger.setAttribute('aria-expanded', 'false');
+
+            if (reduceMotion) {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+                return;
+            }
+
+            menu.style.overflow = 'hidden';
+            menu.style.height = menu.scrollHeight + 'px';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+            menu.offsetHeight;
+
+            menu.style.transition = 'height 230ms cubic-bezier(0.4, 0, 1, 1), opacity 160ms ease, transform 180ms ease';
+            menu.style.height = '0px';
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-8px)';
+
+            window.setTimeout(function() {
+                menu.classList.remove('is-active');
+                clearMenuInlineStyle();
+                animating = false;
+            }, 240);
+        }
+
+        burger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (opened) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!isMobileMenu() || !opened) return;
+            if (navbar.contains(e.target)) return;
+            closeMenu();
+        });
+
+        menu.addEventListener('click', function(e) {
+            var link = e.target.closest('.navbar-item');
+            if (!link || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape' || !opened || !isMobileMenu()) return;
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (!isMobileMenu()) {
+                resetToDesktop();
+            }
+        });
+    });
+
+    
+    
+    
+    (function() {
+        "use strict";
+
+        var root = document.documentElement;
+        var body = document.body;
+        var themeToggle = document.getElementById("theme-toggle");
+        var isTransitioning = false;
+        var effectsPaused = false;
+        var currentTheme = readStoredTheme();
+
+        if (themeToggle === null) return;
+
+        function readStoredTheme() {
+            try {
+                var storedTheme = localStorage.getItem("theme");
+                if (storedTheme === "dark" || storedTheme === "light") {
+                    return storedTheme;
+                }
+            } catch (error) {
+                
+            }
+            return "dark";
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (error) {
+                
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            body.classList.toggle("dark-mode", theme === "dark");
+
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            );
+            storeTheme(theme);
+            window.dispatchEvent(new CustomEvent("theme-change", {
+                detail: { theme: theme }
+            }));
+        }
+
+        function getRevealOrigin(event) {
+            var bounds = themeToggle.getBoundingClientRect();
+            var origin = {
+                x: bounds.left + bounds.width / 2,
+                y: bounds.top + bounds.height / 2
+            };
+
+            
+            
+            if (event.clientX !== 0 || event.clientY !== 0) {
+                origin.x = event.clientX;
+                origin.y = event.clientY;
+            }
+            return origin;
+        }
+
+        function getRevealGeometry(origin) {
+            var farthestX = Math.max(origin.x, window.innerWidth - origin.x);
+            var farthestY = Math.max(origin.y, window.innerHeight - origin.y);
+            var radius = Math.hypot(farthestX, farthestY);
+
+            return {
+                radius: radius,
+                
+                duration: Math.max(650, Math.min(1100, radius / 1.5))
+            };
+        }
+
+        function setToggleBusy(active) {
+            isTransitioning = active;
+            if (active) {
+                themeToggle.setAttribute("aria-disabled", "true");
+            } else {
+                themeToggle.removeAttribute("aria-disabled");
+            }
+        }
+
+        function setEffectsPaused(paused) {
+            if (effectsPaused === paused) return;
+            effectsPaused = paused;
+            window.dispatchEvent(new CustomEvent(
+                paused ? "theme-transition-start" : "theme-transition-end"
+            ));
+        }
+
+        function finishTransition() {
+            if (!isTransitioning) return;
+            root.classList.remove("theme-transition-active");
+            setEffectsPaused(false);
+            setToggleBusy(false);
+        }
+
+        function startThemeTransition(nextTheme, event) {
+            var origin = getRevealOrigin(event);
+            var geometry = getRevealGeometry(origin);
+            var fromClip = "circle(0px at " + origin.x + "px " + origin.y + "px)";
+            var toClip = "circle(" + geometry.radius + "px at "
+                + origin.x + "px " + origin.y + "px)";
+            var preflightClip = "circle(" + Math.max(geometry.radius - 1, 0) + "px at "
+                + origin.x + "px " + origin.y + "px)";
+
+            setEffectsPaused(true);
+            root.classList.add("theme-transition-active");
+
+            var transition;
+            try {
+                transition = document.startViewTransition(function() {
+                    applyTheme(nextTheme);
+                });
+            } catch (error) {
+                applyTheme(nextTheme);
+                finishTransition();
+                return;
+            }
+
+            transition.ready.then(function() {
+                try {
+                    root.animate(
+                        [
+                            {
+                                opacity: 0.001,
+                                clipPath: toClip
+                            },
+                            {
+                                opacity: 0.001,
+                                clipPath: preflightClip
+                            }
+                        ],
+                        {
+                            duration: 34,
+                            easing: "linear",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+
+                    root.animate(
+                        {
+                            opacity: [1, 1],
+                            clipPath: [fromClip, toClip]
+                        },
+                        {
+                            delay: 34,
+                            duration: geometry.duration,
+                            easing: "linear",
+                            fill: "forwards",
+                            pseudoElement: "::view-transition-new(root)"
+                        }
+                    );
+                } catch (error) {
+                    if (typeof transition.skipTransition === "function") {
+                        transition.skipTransition();
+                    }
+                }
+            }, finishTransition);
+
+            transition.finished.then(finishTransition, finishTransition);
+        }
+
+        function switchTheme(nextTheme, event) {
+            var reduceMotion = window.matchMedia
+                && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (isTransitioning) return;
+            if (typeof document.startViewTransition !== "function" || reduceMotion) {
+                applyTheme(nextTheme);
+                return;
+            }
+
+            setToggleBusy(true);
+            startThemeTransition(nextTheme, event);
+        }
+
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            switchTheme(currentTheme === "light" ? "dark" : "light", event);
+        });
+    })();
+
+
+
+</script>
+
+</header>
+<main>
+<div class="single-container page-enter">
+    <div class="archive">
+        
+        <img src="/img/CMU15445/cover2.png" class="myBigPicture" alt="headPic">
+        <h1 class="title is-1">15445: SQL</h1>
+        <div class="title subtitle heading is-6">
+            <div class="author-info columns is-vcentered">
+                <div class="column">
+                    <div class="columns is-vcentered is-mobile">
+                        
+                        <div class="column is-narrow">
+                            <img src="/img/author/head.jpg" class="author-image">
+                        </div>
+                        
+                        <div class="column">
+                            <p>OAP</p>
+                            <p><time>November 21, 2026</time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-categories-container">
+                    <a class="hover-underline-animation" href="/categories/database">Database</a>
+                </div>
+            </div>
+        </div>
+        <div class="content article-content">
+            
+            <div class="toc-container">
+                
+    <div class="post-toc">
+        
+            <aside>
+                <button id="tocButton" type="button" aria-expanded="false" aria-controls="hide"><span id="contents">CONTENT</span></button>
+                <div id="hide"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#q2">Q2</a></li>
+    <li><a href="#q3">Q3</a></li>
+    <li><a href="#q4">Q4</a></li>
+    <li><a href="#q5">Q5</a></li>
+    <li><a href="#q6">Q6</a></li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav></div>
+            </aside>
+        
+    </div><script>
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('tocButton');
+    const tocBody = document.getElementById('hide');
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!tocBody) return;
+
+    if (button) {
+        const mobile = window.matchMedia("(max-width: 768px)");
+        function syncExpandedState() {
+            button.setAttribute("aria-expanded", String(window.getComputedStyle(tocBody).display !== "none"));
+        }
+        syncExpandedState();
+        mobile.addEventListener("change", syncExpandedState);
+        button.addEventListener('click', function() {
+            const container = tocBody.closest(".toc-container");
+            if (!container) return;
+            const isOpen = window.getComputedStyle(tocBody).display === "none";
+            container.classList.toggle("is-expanded", isOpen);
+            container.classList.toggle("is-collapsed", !isOpen);
+            button.setAttribute("aria-expanded", String(isOpen));
+        });
+    }
+
+    const tocLinks = Array.from(tocBody.querySelectorAll('a[href^="#"]'));
+    tocLinks.forEach(link => {
+        if (!link.title) {
+            link.title = link.textContent.trim();
+        }
+    });
+    const headingTargets = tocLinks
+        .map(link => {
+            const id = decodeURIComponent(link.getAttribute('href').slice(1));
+            const el = document.getElementById(id);
+            return el ? { link, el } : null;
+        })
+        .filter(Boolean);
+    let lastActiveLink = null;
+    let currentActiveLinks = [];
+    let isProgrammaticScroll = false;
+    let scrollSettleTimer = null;
+    const SCROLL_SETTLE_MS = 180;
+
+    function getScrollOffset() {
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+        return Math.max(72, Math.round(navbarHeight + 16));
+    }
+
+    function keepTocLinkVisible(link) {
+        const scroller = link.closest('.toc-container');
+        if (!scroller || window.getComputedStyle(scroller).position === "static") return;
+        const linkRect = link.getBoundingClientRect();
+        const boxRect = scroller.getBoundingClientRect();
+        const topGap = linkRect.top - boxRect.top;
+        const bottomGap = boxRect.bottom - linkRect.bottom;
+        if (topGap < 8) {
+            scroller.scrollBy({
+                top: topGap - 12,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        } else if (bottomGap < 8) {
+            scroller.scrollBy({
+                top: 12 - bottomGap,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+        }
+    }
+
+    function setActiveLinks(links) {
+        if (links.length === currentActiveLinks.length && links.every((link, index) => link === currentActiveLinks[index])) return;
+        tocLinks.forEach(link => {
+            link.classList.remove("toc-active", "toc-active-parent");
+            link.removeAttribute("aria-current");
+        });
+        links.forEach(link => {
+            link.classList.add("toc-active");
+        });
+        const first = links[0];
+        if (first) {
+            first.setAttribute("aria-current", "location");
+            if (lastActiveLink !== first) keepTocLinkVisible(first);
+        }
+        lastActiveLink = first;
+        currentActiveLinks = links;
+    }
+
+    function updateActive(forceUpdate) {
+        if (isProgrammaticScroll && !forceUpdate) return;
+        if (!headingTargets.length) return;
+        const top = getScrollOffset();
+        const bottom = window.innerHeight;
+        const body = document.querySelector(".article-body");
+        const articleEnd = body ? body.getBoundingClientRect().bottom : Infinity;
+        
+        
+        const positions = headingTargets.map(target => target.el.getBoundingClientRect().top);
+        const links = headingTargets.filter((target, index) => {
+            const end = index + 1 < positions.length ? positions[index + 1] : articleEnd;
+            return positions[index] < bottom && end > top;
+        }).map(target => target.link);
+        setActiveLinks(links);
+    }
+
+    function armScrollSettleTimer() {
+        if (!isProgrammaticScroll) return;
+        if (scrollSettleTimer) {
+            clearTimeout(scrollSettleTimer);
+        }
+        scrollSettleTimer = setTimeout(function() {
+            isProgrammaticScroll = false;
+            scrollSettleTimer = null;
+            updateActive(true);
+        }, SCROLL_SETTLE_MS);
+    }
+
+    updateActive(true);
+
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+            const id = decodeURIComponent(href.slice(1));
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            const offset = getScrollOffset();
+            const top = window.pageYOffset + target.getBoundingClientRect().top - offset;
+            isProgrammaticScroll = !prefersReducedMotion;
+            if (scrollSettleTimer) {
+                clearTimeout(scrollSettleTimer);
+                scrollSettleTimer = null;
+            }
+            window.scrollTo({
+                top: Math.max(0, top),
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
+            });
+            if (history.pushState) {
+                history.pushState(null, '', href);
+            } else {
+                window.location.hash = href;
+            }
+            setActiveLinks([link]);
+            armScrollSettleTimer();
+        });
+    });
+
+    window.addEventListener("resize", function() { updateActive(); });
+    window.addEventListener("load", function() { updateActive(); });
+    if (document.fonts) document.fonts.ready.then(function() { updateActive(); });
+
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (isProgrammaticScroll) {
+            armScrollSettleTimer();
+            return;
+        }
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            updateActive(true);
+            ticking = false;
+        });
+    });
+});
+</script>
+
+            </div>
+            
+            <div class="article-body">
+                <h1 id="前言">前言</h1>
+<p>抽空又来做15445了，转眼俩月了，我是懒狗😭</p>
+<p><a href="https://15445.courses.cs.cmu.edu/fall2025/homework1/" target="_blank" rel="noopener">https://15445.courses.cs.cmu.edu/fall2025/homework1/</a>，
+这个homework的主题是写一些SQL来回答六个问题，实际上只有五个，第一个是用来测试自动评分系统的，所以会从Q2开始。
+另外就是用的是<code>DuckDB</code>，需要额外安装下。
+下面也不会赘述表结构，有需要的可以自己去看看。</p>
+<h1 id="q2">Q2</h1>
+<p>实际上很简单，找到排名前十的全垒打选手即可，要求是这些选手必须在PA州的学校打过，并且成绩从高到低排序，同分则按first name排序。
+涉及到的表有四个：schools、collegeplaying、appearances、people。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">with</span><span class="w"> </span><span class="n">player_year</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">yearID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">schools</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">collegeplaying</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">schoolID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">schoolID</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="k">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PA&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">player_hr</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">appearances</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">player_year</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">appearances</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">player_year</span><span class="p">.</span><span class="n">playerID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">player_hr_top10</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">HR</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">max_hr_appearance</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">player_hr</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">playerID</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">max_hr_appearance</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">people</span><span class="p">.</span><span class="n">nameFirst</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; (&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">people</span><span class="p">.</span><span class="n">nameGiven</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;) &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">people</span><span class="p">.</span><span class="n">nameLast</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">player_hr_top10</span><span class="p">.</span><span class="n">max_hr_appearance</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">player_hr_top10</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">people</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">player_hr_top10</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">people</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">player_hr_top10</span><span class="p">.</span><span class="n">max_hr_appearance</span><span class="w"> </span><span class="k">desc</span><span class="p">,</span><span class="w"> </span><span class="n">people</span><span class="p">.</span><span class="n">nameFirst</span><span class="w"> </span><span class="k">asc</span><span class="p">;</span></span></span></code></pre></div><p>遵循的步骤也很简单：</p>
+<ol>
+<li>先找到在PA州学校干过的选手</li>
+<li>再从appperances表中确认匹配的选手和全垒打次数</li>
+<li>针对选手来group一下，找到一个选手的最高记录，并且找到前十</li>
+<li>最终对最高记录进行排序，并且从people表中拼凑完整名称，并且按照要求输出</li>
+</ol>
+<h1 id="q3">Q3</h1>
+<p>题目要求找到在1999年之后（&gt; 1999）赢得Gold Golve奖的选手，并且击球比他所在队伍自从1999年（&gt;= 1999）的平均次数还要多。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">with</span><span class="w"> </span><span class="n">player_gold</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">awardsplayers</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">awardID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Gold Glove&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1999</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">player_team</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">lgID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">G_batting</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">appearances</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">player_gold</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">playerID</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">yearID</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1999</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">player_team_grouped</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">G_batting</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">player_team</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">leagues</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">lgID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">lgID</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">G_batting</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">yearID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">player_outstanding</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">player_team_grouped</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">G_batting</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">G_batting</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">appearances</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1999</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">nameGiven</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">yearID</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">distinct_years</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">player_outstanding</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">people</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">nameGiven</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">distinct_years</span><span class="w"> </span><span class="k">desc</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">nameGiven</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span></span></span></code></pre></div><ol>
+<li>找到1999年获得对应奖项的选手</li>
+<li>筛选对应的队伍、年份、击球次数</li>
+<li>分组，并且筛选联盟仍在active</li>
+<li>再筛选一遍，要求比队友击球次数多，这里用到了相关子查询，感觉就是join的简便写法</li>
+<li>组合出符合要求的输出</li>
+</ol>
+<h1 id="q4">Q4</h1>
+<p>要求筛选出所有队伍：一年如果有5个不同选手获奖，并且有经理获奖，看起来要求很简单，但分散的表实在太多，得写很多子查询。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">with</span><span class="w"> </span><span class="n">active_teams</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">teams</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">leagues</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">lgID</span><span class="o">=</span><span class="n">l</span><span class="p">.</span><span class="n">lgID</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="n">player_team</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">active_teams</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">active_teams</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">lgID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">active_teams</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">appearances</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">active_teams</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">active_teams</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">teamID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="n">player_award</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">awardID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">player_team</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">awardsplayers</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">lgID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">lgID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w"></span><span class="n">manager_team</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">lgID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">active_teams</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">managers</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">teamID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w"></span><span class="n">manager_award</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">awardID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">manager_team</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">awardsmanagers</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">lgID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">lgID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w"></span><span class="n">player_award_5</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">playerID</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">counts</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">player_award</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="k">having</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">playerID</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"></span><span class="n">manager_award_1</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">manager_award</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="k">having</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">playerID</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w"></span><span class="n">team_year</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">player_award_5</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">manager_award_1</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">teamID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="n">team_count</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">teams</span><span class="p">.</span><span class="n">lgID</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">league</span><span class="p">,</span><span class="w"> </span><span class="n">teams</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">team_name</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">team_year</span><span class="p">.</span><span class="n">yearID</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">distinct_years</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">team_year</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">teams</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">team_year</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teams</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">team_year</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">teams</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">teams</span><span class="p">.</span><span class="n">lgID</span><span class="p">,</span><span class="w"> </span><span class="n">teams</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">HAVING</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">team_year</span><span class="p">.</span><span class="n">yearID</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">league</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">team_name</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">distinct_years</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">team_count</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">leagues</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">lgID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">league</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">distinct_years</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">team_name</span><span class="w"> </span><span class="k">ASC</span><span class="p">;</span></span></span></code></pre></div><ol>
+<li>找到在活跃联盟的队伍</li>
+<li>对于这些队伍，找到匹配的选手</li>
+<li>筛选这些选手中的获奖选手</li>
+<li>对于这些队伍，找到匹配的经理</li>
+<li>找到这些经理中的获奖经理</li>
+<li>找到这些队伍中，同一年获奖超过5个不同选手的队伍</li>
+<li>找到这些队伍中，同一年获奖超过1个经理的队伍</li>
+<li>找到6、7两步的交集，并且统计队伍满足条件的年份数量</li>
+<li>取联盟名称，并设置题目要求输出，注意排序</li>
+</ol>
+<p>这道题很变态，其实要的东西不难，就是分散在各个表里面，实在是非常绕，当然上面肯定有可以简化的地方，但这里不强求了。</p>
+<h1 id="q5">Q5</h1>
+<p>要求找到名人堂的最早队友，若有多个，则按名称排序，最终筛选出前10的名人堂队友。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">with</span><span class="w"> </span><span class="n">hof_player</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">halloffame</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">inducted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="n">hof_player_team</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">hof_player</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">appearances</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">playerID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="n">hof_player_name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">nameFirst</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; (&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">nameGiven</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;) &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">nameLast</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">hof_player_team</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">people</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">playerID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w"></span><span class="n">appearances_name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">playerID</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">nameFirst</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; (&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">nameGiven</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;) &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">nameLast</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">appearances</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">people</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">playerID</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w"></span><span class="n">all_name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">hof_player_name</span><span class="p">,</span><span class="w"> </span><span class="n">earliest_teammate_name</span><span class="p">,</span><span class="w"> </span><span class="n">earliest_teammate_year</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">hof_player_name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">cross</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">earliest_teammate_name</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">earliest_teammate_year</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">appearances_name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">yearID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">teamID</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">playerID</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">playerID</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">    </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="p">)),</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="n">ranked</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">ROW_NUMBER</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">partition</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">hof_player_name</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">earliest_teammate_year</span><span class="w"> </span><span class="k">asc</span><span class="p">,</span><span class="w"> </span><span class="n">earliest_teammate_name</span><span class="w"> </span><span class="k">asc</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">all_name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">hof_player_name</span><span class="p">,</span><span class="w"> </span><span class="n">earliest_teammate_name</span><span class="p">,</span><span class="w"> </span><span class="n">earliest_teammate_year</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">ranked</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">ranked</span><span class="p">.</span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">hof_player_name</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span></span></span></code></pre></div><ol>
+<li>找到名人堂入选者，并且去重</li>
+<li>找到名人堂入选者加入的队伍以及年份</li>
+<li>再构造一个名称字段</li>
+<li>针对所有选手构造名称字段（感觉和第三步有点重复，写的时候居然没发现）</li>
+<li>使用cross join筛选最早队友，按名称排序，只取一个</li>
+<li>使用窗口函数，得到最早队友的rank值为1</li>
+<li>筛出最终符合要求的10个人</li>
+</ol>
+<h1 id="q6">Q6</h1>
+<p>这道题要求对teams表重新插入24年的所有队伍信息，把franchID作为teamID更新一把，如果失败了，就把attendence设置为-1。
+很少操作insert，所以直接问AI求了一波答案，所以风格更简洁：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">teams</span><span class="w"> </span><span class="p">(</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">lgID</span><span class="p">,</span><span class="w"> </span><span class="n">teamID</span><span class="p">,</span><span class="w"> </span><span class="n">franchID</span><span class="p">,</span><span class="w"> </span><span class="n">divID</span><span class="p">,</span><span class="w"> </span><span class="n">teamRank</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">attendance</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">    </span><span class="n">yearID</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="n">lgID</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">    </span><span class="n">franchID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">teamID</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">    </span><span class="k">NULL</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">franchID</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">    </span><span class="n">divID</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">    </span><span class="n">teamRank</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">    </span><span class="n">name</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">    </span><span class="n">attendance</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">teams</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">yearID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2024</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">CONFLICT</span><span class="w"> </span><span class="p">(</span><span class="n">yearID</span><span class="p">,</span><span class="w"> </span><span class="n">lgID</span><span class="p">,</span><span class="w"> </span><span class="n">teamID</span><span class="p">)</span><span class="w"> </span><span class="k">DO</span><span class="w"> </span><span class="k">UPDATE</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w"></span><span class="k">SET</span><span class="w"> </span><span class="n">attendance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span></span></span></code></pre></div><p>这里要注意，新记录的franchID要设置为空，题目的隐藏条件。</p>
+<h1 id="小结">小结</h1>
+<p>这个作业的目的只是熟悉下语法，为后面写实现做准备，不至于连语法规则都弄不清楚。
+偷懒俩月总算捡起来，我有罪。
+值得一提的是语法本来都忘得七七八八了，这波又回忆起来大半，之前一直分不太清的分组和窗口函数也总算分清楚了。
+SQL语法的方言实在是太恶心了，虽然大部分能兼容，回想起来当年没AI的时候，被MySQL恶心的事情，真是一阵恶寒😭。
+最后，感谢Gemini，至少会说人话，不开会员的回答都比GPT 6.2强，GPT会员过期后直接转投Gemini了！</p>
+
+            </div>
+        </div>
+    </div>
+    <a href="#" id="scrollToTopButton">
+        <svg t="1686753152588" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="3988" width="48" height="48">
+            <path
+                d="M518.5 360.3c-3.2-4.4-9.7-4.4-12.9 0l-178 246c-3.8 5.3 0 12.7 6.5 12.7H381c10.2 0 19.9-4.9 25.9-13.2L512 460.4l105.2 145.4c6 8.3 15.6 13.2 25.9 13.2H690c6.5 0 10.3-7.4 6.5-12.7l-178-246z"
+                p-id="3989" fill="#363636"></path>
+            <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                p-id="3990" fill="#363636"></path>
+        </svg>
+    </a><hr style="border-top: 1px solid #EEEEEE;">
+<div id="comment"></div>
+<script>
+    (function() {
+        "use strict";
+
+        var activeTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+        var giscusScript = null;
+        var readyFrame = null;
+        var giscusOrigin = "https://giscus.app";
+
+        function sendGiscusTheme(theme) {
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || iframe !== readyFrame || iframe.contentWindow === null) {
+                return;
+            }
+            iframe.contentWindow.postMessage({
+                giscus: {
+                    setConfig: {
+                        theme: theme
+                    }
+                }
+            }, giscusOrigin);
+        }
+
+        
+        
+        window.addEventListener("message", function(event) {
+            if (event.origin !== giscusOrigin || !event.data || !event.data.giscus) return;
+            var iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe === null || event.source !== iframe.contentWindow || readyFrame === iframe) return;
+            readyFrame = iframe;
+            sendGiscusTheme(activeTheme);
+        });
+
+        function updateGiscusTheme(theme) {
+            activeTheme = theme === "light" ? "light" : "dark";
+            if (giscusScript !== null) {
+                giscusScript.setAttribute("data-theme", activeTheme);
+            }
+            sendGiscusTheme(activeTheme);
+        }
+
+        window.addEventListener("theme-change", function(event) {
+            var theme = event.detail && event.detail.theme;
+            updateGiscusTheme(theme);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var comment = document.getElementById("comment");
+            if (comment === null) {
+                return;
+            }
+
+            var giscusAttributes = {
+                "src": "https://giscus.app/client.js",
+                "data-repo": "O-A-P\/O-A-P.github.io",
+                "data-repo-id": "R_kgDOJEfHWQ",
+                "data-category": "Announcements",
+                "data-category-id": "DIC_kwDOJEfHWc4CcDhX",
+                "data-mapping": "og:title",
+                "data-reactions-enabled": "1",
+                "data-emit-metadata": "0",
+                "data-input-position": "bottom",
+                "data-theme": activeTheme,
+                "data-lang": "en",
+                "data-loading": "lazy",
+                "crossorigin": "anonymous"
+            };
+
+            giscusScript = document.createElement("script");
+            Object.entries(giscusAttributes).forEach(function(attribute) {
+                giscusScript.setAttribute(attribute[0], attribute[1]);
+            });
+            comment.appendChild(giscusScript);
+        });
+    })();
+
+</script>
+
+<div class="pp-container">
+        <section class="pre-and-post">
+            <div class="has-text-left">
+                
+                <p>Previous post</p>
+                <a class="hover-underline-animation" href="https://o-a-p.github.io/post/cmu15445/project0/">15445: C&#43;&#43; Primer</a>
+                
+            </div>
+            <div class="has-text-right ">
+                
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<style>
+.page-enter {
+    animation: page-fade-in 0.6s ease-out both;
+}
+@keyframes page-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+</style>
+
+        </main>
+    
+    <aside class="article-minimap" hidden aria-label="文章缩略导航">
+    <div class="article-minimap__track" role="slider" tabindex="0" aria-label="阅读位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-orientation="vertical">
+        <div class="article-minimap__preview single-container" aria-hidden="true" inert></div>
+        <div class="article-minimap__embeds" aria-hidden="true" inert></div>
+        <div class="article-minimap__viewport" aria-hidden="true"></div>
+    </div>
+</aside>
+<script src="/js/article-minimap.js" defer></script>
+
+
+        <div id="card-transition-overlay" class="card-transition-overlay"></div><footer class="footer">
+    <div class="content has-text-centered">
+    <span>&copy; 2026 <a href="https://o-a-p.github.io/">超级码里奥</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" target="_blank">Hugo</a> &
+        <a href="https://github.com/hotjuicew/hugo-JuiceBar" target="_blank">JuiceBar </a>modified by
+        <a href="https://github.com/O-A-P/O-A-P.github.io" target="_blank">
+            O-A-P
+        </a>
+         
+    </span>
+    </div><script src="/js/copy-to-clipboard.js?v=b03da288555be11559ba55eaf0055f160e096df92d7b023ff08f2d567e70072d"></script>
+    <script src="//tokinx.github.io/ViewImage/view-image.min.js"></script>
+<script>
+  
+  window.ViewImage && ViewImage.init('.article-content img');
+
+  (function() {
+    const overlay = document.getElementById("card-transition-overlay");
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let isNavigating = false;
+
+    function shouldHandleLink(link, event) {
+      if (!link || !overlay) return false;
+      if (isNavigating || event.defaultPrevented) return false;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+      if (link.closest(".myCard")) return false;
+      if (link.closest("[data-no-page-transition]")) return false;
+      if (link.target && link.target !== "_self") return false;
+      if (link.hasAttribute("download")) return false;
+
+      const href = link.getAttribute("href");
+      if (!href) return false;
+      if (href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return false;
+
+      let targetUrl = null;
+      try {
+        targetUrl = new URL(href, window.location.href);
+      } catch (err) {
+        return false;
+      }
+
+      if (targetUrl.origin !== window.location.origin) return false;
+      if (targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search &&
+          targetUrl.hash.length > 0) return false;
+      if (targetUrl.href === window.location.href) return false;
+
+      return true;
+    }
+
+    function navigateWithOverlay(href) {
+      if (isNavigating) return;
+      isNavigating = true;
+      document.body.style.pointerEvents = "none";
+      overlay.classList.add("card-transition-overlay--active");
+      const delay = prefersReducedMotion ? 0 : 360;
+      window.setTimeout(function() {
+        window.location.href = href;
+      }, delay);
+    }
+
+    document.addEventListener("click", function(event) {
+      const link = event.target.closest("a[href]");
+      if (!shouldHandleLink(link, event)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      navigateWithOverlay(link.href);
+    }, true);
+
+    window.addEventListener("pageshow", function() {
+      isNavigating = false;
+      document.body.style.pointerEvents = "";
+      if (overlay) overlay.classList.remove("card-transition-overlay--active");
+    });
+  })();
+</script>
+
+  </footer>
+</body>
+</html>
